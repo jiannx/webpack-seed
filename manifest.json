@@ -1,0 +1,8 @@
+{
+  "name": "dll",
+  "content": {
+    "./node_modules/jquery/dist/jquery.js": 1,
+    "./node_modules/angular/index.js": 2,
+    "./node_modules/angular/angular.js": 3
+  }
+}
