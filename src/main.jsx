@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class HelloMessage extends React.ReactComponent {
-    handleClick() {
-        console.log('2323');
+    static handleClick(name) {
+        console.log(name);
     }
 
     render() {
