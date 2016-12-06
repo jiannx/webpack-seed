@@ -58,7 +58,7 @@ $ npm run server
 ├─webpack.config.js # webpack的发布配置文件
 ├─webpack.dll.config.js # webpack的dll配置文件
 ├─webpack.dev.config.js # webpack的开发配置文件
-└─src # 当前项目的源码
+└─src_angular # Angular项目的源码
 	├─index.html # 入口html
     ├─app.js # 入口js
 	├─app.config.js # angular实例及配置
