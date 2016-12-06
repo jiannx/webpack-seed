@@ -2,7 +2,6 @@
 var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
-module.exports = [precss, autoprefixer({
-    remove: false,
-    browsers: ['ie >= 8', '> 1% in CN'],
-})];
+module.exports = [autoprefixer({
+    browsers: ['not ie < 8', '> 1%'],
+}), precss];
