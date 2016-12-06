@@ -7,7 +7,7 @@ module.exports = {
 
     module: require('./webpack-config/module.js'),
 
-    plugins: require('./webpack-config/plugins-dev.js'),
+    plugins: require('./webpack-config/plugins.js')('dev'),
 
     externals: require('./webpack-config/externals.js'),
 

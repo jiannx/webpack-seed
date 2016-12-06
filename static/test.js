@@ -1,1 +1,1 @@
-// this js just for tes
+// 该文件夹包含一些不需要打包的静态资源，将发布时将直接拷贝到build/static目录下

@@ -4,7 +4,7 @@ externals用来将某个全局变量“伪装”成某个js模块的exports, 当
  */
 
 module.exports = {
-    // angular: 'window.angular',
-    // $: 'window.$',
-    // jQuery: 'window.$',
+    angular: 'window.angular',
+    $: 'window.$',
+    jQuery: 'window.$',
 };

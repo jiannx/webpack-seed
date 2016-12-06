@@ -1,12 +1,3 @@
-import app from 'app.config';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import config from 'app.config';
 
-// 样式引入
-require('./scss/bootstrap.scss');
-require('./scss/app.scss');
-
-// 组件引入
-
-// 页面模块
-require('./main.jsx');
+console.log(config.title + 'start success');

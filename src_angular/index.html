@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>single page web application</title>
+    <link href="./vendor/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!--[if lt IE 9]>
+    <![endif]-->
+    <!--[if lt IE 8]>
+        <h3>您的浏览器版本过低</h3>
+    <![endif]-->
+    <div class="body-box">
+        <div class="nav-top">
+            <div class="logo"></div>
+            <div class="title">XX管理系统</div>
+        </div>
+        <div class="nav-menu metismenu">
+            <ul class="metismenu" id='menu'>
+                <li ng-class="{active: $state.includes('auth')}">
+                    <a>权限管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="auth.account-add" ui-sref-active="active">账户开通</a>
+                        </li>
+                        <li>
+                            <a ui-sref="auth.account-list" ui-sref-active="active">账户列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('user')}">
+                    <a>用户管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="user.teacher" ui-sref-active="active">教师管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="user.student" ui-sref-active="active">学生管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="user.service" ui-sref-active="active">客服管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('course')}">
+                    <a>课程管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="course.list" ui-sref-active="active">课程列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('operation')}">
+                    <a>运营管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="operation.banner" ui-sref-active="active">运营位管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="operation.target" ui-sref-active="active">指标管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="operation.tag" ui-sref-active="active">好友标签管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="operation.code" ui-sref-active="active">兑换码管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="operation.message" ui-sref-active="active">活动消息管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="operation.integral" ui-sref-active="active">积分管理</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('order')}">
+                    <a>订单管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="order.course" ui-sref-active="active">课程订单</a>
+                        </li>
+                        <li>
+                            <a ui-sref="order.recharge" ui-sref-active="active">充值订单</a>
+                        </li>
+                        <li>
+                            <a ui-sref="order.mind" ui-sref-active="active">心意订单</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ng-class="{active: $state.includes('settlement')}">
+                    <a>结算管理<i class="fa arrow"></i></a>
+                    <ul class="second">
+                        <li>
+                            <a ui-sref="settlement.course" ui-sref-active="active">课程结算</a>
+                        </li>
+                        <li>
+                            <a ui-sref="settlement.gold" ui-sref-active="active">金币管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="settlement.overage" ui-sref-active="active">余额管理</a>
+                        </li>
+                        <li>
+                            <a ui-sref="settlement.chart" ui-sref-active="active">营收报表</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content" ui-view>
+        </div>
+        <div class="footer">
+            XX公司版权所有&nbsp;&nbsp;©&nbsp;2016&nbsp;&nbsp;&nbsp;浙ICP备00000000号
+        </div>
+    </div>
+    <script src="./vendor/jquery/jquery.min.js"></script>
+    <script src="./vendor/angular/angular.js"></script>
+    <script src="./vendor/layer/layer.js"></script>
+    <script src="./vendor/metisMenu/metisMenu.min.js"></script>
+    <script>
+    $(function() {
+        $('#menu').metisMenu();
+    });
+    </script>
+</body>
+
+</html>

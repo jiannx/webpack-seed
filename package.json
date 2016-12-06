@@ -1,5 +1,5 @@
 {
-  "name": "react-seed",
+  "name": "web-seed",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,7 +7,6 @@
     "build": "node npm-scripts/before-build.script.js && webpack --progress --colors --bail",
     "dev": "node npm-scripts/before-build.script.js && webpack --progress --colors --config ./webpack.dev.config.js",
     "watch": "node npm-scripts/before-build.script.js && webpack --progress --colors --watch --config ./webpack.dev.config.js",
-    "start": "webpack-dev-server --inline --progress --compress --devtool eval --content-base build/",
     "profile": "node npm-scripts/before-build.script.js && webpack --colors --profile --display-modules",
     "dll": "node npm-scripts/before-build-dll.script.js && webpack --progress --colors --config ./webpack.dll.config.js",
     "server": "node ./webpack.server.js",

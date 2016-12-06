@@ -1,13 +1,7 @@
-// dll打包
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
 var dirs = require('./webpack-config/base.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-// 需要打包到dll的库
-var vendors = [
-    'jquery', 'angular'
-];
 
 module.exports = {
     output: {
@@ -16,7 +10,7 @@ module.exports = {
         library: '[name]',
     },
     entry: {
-        dll: vendors,
+        dll: dirs.dlls,
     },
     resolve: require('./webpack-config/resolve.js'),
     module: require('./webpack-config/module.js'),
@@ -34,5 +28,4 @@ module.exports = {
         }),
         new ExtractTextPlugin('[name].css'),
     ],
-    // postcss: require('./webpack-config/postcss.js'),
 };
