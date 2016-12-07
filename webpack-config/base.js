@@ -18,6 +18,7 @@ dirs.vendorDir = path.resolve(dirs.rootDir, './vendor'); // 存放所有不能�
 dirs.dllDir = path.resolve(dirs.rootDir, '.tmp/dll'); // 存放由各种不常改变的js/css打包而来的dll
 dirs.buildDir = path.resolve(dirs.rootDir, './build'); // 生成文件目录
 dirs.staticDir = path.resolve(dirs.rootDir, './static'); // 静态文件目录，一些不需要打包的静态资源
+dirs.serverStaticDir = path.resolve(dirs.rootDir, '../netease_qs/static'); // 后端的静态目录，gulp发布时将拷贝到该目录
 
 // 库目录配置 不需要解析的文件
 dirs.path = {

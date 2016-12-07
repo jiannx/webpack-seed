@@ -23,6 +23,7 @@
     "import/no-extraneous-dependencies": 0,
     "prefer-const": 0,
     "react/jsx-indent": 0,
+    "quote-props": 0,
 
     "no-console": 0,
     "no-var": 0,
