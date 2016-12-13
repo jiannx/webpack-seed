@@ -14,15 +14,20 @@
     <!--[if lt IE 8]>
         <h3>您的浏览器版本过低</h3>
     <![endif]-->
-    <div class="body-box">
+    <div class="body-box" ng-controller="appCtrl as vm">
         <div class="nav-top">
             <div class="logo"></div>
-            <div class="title">XX管理系统</div>
+            <div class="title">MMT</div>
+            <div class="right-box">
+                <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;欢迎您，XXX&nbsp;&nbsp;
+                <a>安全退出</a>
+                <a>修改密码</a>
+            </div>
         </div>
         <div class="nav-menu metismenu">
-            <ul class="metismenu" id='menu'>
+            <ul class="metismenu first" id='menu'>
                 <li ng-class="{active: $state.includes('auth')}">
-                    <a>权限管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-shield icon" aria-hidden="true"></i>&nbsp;&nbsp;权限管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
                             <a ui-sref="auth.account-add" ui-sref-active="active">账户开通</a>
@@ -33,7 +38,7 @@
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('user')}">
-                    <a>用户管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-users icon" aria-hidden="true"></i>&nbsp;&nbsp;用户管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
                             <a ui-sref="user.teacher" ui-sref-active="active">教师管理</a>
@@ -47,7 +52,7 @@
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('course')}">
-                    <a>课程管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-book icon" aria-hidden="true"></i>&nbsp;&nbsp;课程管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
                             <a ui-sref="course.list" ui-sref-active="active">课程列表</a>
@@ -55,7 +60,7 @@
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('operation')}">
-                    <a>运营管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-cube icon" aria-hidden="true"></i>&nbsp;&nbsp;运营管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
                             <a ui-sref="operation.banner" ui-sref-active="active">运营位管理</a>
@@ -78,13 +83,19 @@
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('order')}">
-                    <a>订单管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-file-text-o icon" aria-hidden="true"></i>&nbsp;&nbsp;订单管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
-                            <a ui-sref="order.course" ui-sref-active="active">课程订单</a>
+                            <a ui-sref="order.course-advance" ui-sref-active="active">课程订单-预付</a>
                         </li>
                         <li>
-                            <a ui-sref="order.recharge" ui-sref-active="active">充值订单</a>
+                            <a ui-sref="order.course-next" ui-sref-active="active">课程订单-次付</a>
+                        </li>
+                        <li>
+                            <a ui-sref="order.recharge-gold" ui-sref-active="active">金币充值订单</a>
+                        </li>
+                        <li>
+                            <a ui-sref="order.recharge-monney" ui-sref-active="active">余额充值订单</a>
                         </li>
                         <li>
                             <a ui-sref="order.mind" ui-sref-active="active">心意订单</a>
@@ -92,7 +103,7 @@
                     </ul>
                 </li>
                 <li ng-class="{active: $state.includes('settlement')}">
-                    <a>结算管理<i class="fa arrow"></i></a>
+                    <a><i class="fa fa-jpy icon" aria-hidden="true"></i>&nbsp;&nbsp;结算管理<i class="fa arrow"></i></a>
                     <ul class="second">
                         <li>
                             <a ui-sref="settlement.course" ui-sref-active="active">课程结算</a>
@@ -110,11 +121,16 @@
                 </li>
             </ul>
         </div>
-        <div class="content" ui-view>
+        <div class="content">
+            <div class="loaction">
+                <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+            </div>
+            <div style="width: 100%; height: 100%" ui-view>
+            </div>
         </div>
-        <div class="footer">
+        <!--         <div class="footer">
             XX公司版权所有&nbsp;&nbsp;©&nbsp;2016&nbsp;&nbsp;&nbsp;浙ICP备00000000号
-        </div>
+        </div> -->
     </div>
     <script src="./vendor/jquery/jquery.min.js"></script>
     <script src="./vendor/angular/angular.js"></script>

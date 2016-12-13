@@ -1,1 +1,48 @@
-<div>登陆</div>
+<div class="login" ng-controller="loginCtrl">
+    <div class="login-box animated fadeIn">
+        <div class="logo"></div>
+        <div class="title">妈妈托管理系统</div>
+        <form class="form-horizontal" style="width: 350px;">
+            <div class="form-group">
+                <label class="col-xs-3 control-label">用户名:</label>
+                <div class="col-xs-9">
+                    <div class="input-icon">
+                        <i class="fa fa-user-o"></i>
+                    </div>
+                    <input type="text" class="form-control" ng-change="onInputChange()" ng-model="loginData.username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">密码:</label>
+                <div class="col-xs-9">
+                    <div class="input-icon">
+                        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" class="form-control" ng-change="onInputChange()" ng-model="loginData.password">
+                </div>
+            </div>
+            <div class="form-group" ng-if="needCheckCode">
+                <label class="col-xs-3 control-label">验证码:</label>
+                <div class="col-xs-5">
+                    <div class="input-icon">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                    </div>
+                    <input type="text" class="form-control" ng-change="onInputChange()" ng-model="loginData.code">
+                </div>
+                <div class="col-xs-4">
+                </div>
+            </div>
+            <div class="form-group" ng-show="errorMessage != ''">
+                <div class="col-xs-offset-3 col-xs-6">
+                    <p class="text-danger">{{errorMessage}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9">
+                    <button type="button" class="btn btn-success btn-block" ng-click="onLoginIn()">登陆</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="login-bottom"></div>
+</div>

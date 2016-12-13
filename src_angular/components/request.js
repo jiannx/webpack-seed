@@ -1,21 +1,23 @@
 import app from 'app.config';
 
 app.service('request', ($http, $state, $stateParams, $cookies, uiloading, uidialog) => {
-    const isProd = false; // 是否发布
     // 接口定义
     this._urls = {
         // '' : { method: 'post', url: ''},
     };
+    const isProd = false; // 是否发布
 
     let errorAlert = null; // 错误弹框
     let loginAlert = null; // 登陆弹框
 
     // 请求错误信息显示
     function showError(errorInfo) {
-        errorAlert && errorAlert.close();
+        if (errorAlert) {
+            errorAlert.close();
+        }
         errorAlert = uidialog.alert(errorInfo);
     }
-
+    // 是否登陆验证
     function checkLogin(resData) {
         if (isProd && (resData.status === 203 || resData.status === '203' || !$cookies.get('user_name'))) {
             if (!loginAlert) {
@@ -54,19 +56,6 @@ app.service('request', ($http, $state, $stateParams, $cookies, uiloading, uidial
                 httpOpt.data = data;
             }
 
-            if (GetCookie('user_name') == null) {
-                uiloading.hide();
-                if (!loginAlert) {
-                    loginAlert = uidialog.open({
-                        template: '未登陆，<a href="/auth/openid/login">跳转到登陆页面</a>',
-                        hasClose: false,
-                        size: { width: 350, height: 140 },
-                    });
-                }
-                return;
-            }
-
-
             $http(httpOpt).then(function successCall(resData) {
                 uiloading.hide();
                 if (!checkLogin(resData)) {
@@ -94,7 +83,7 @@ app.service('request', ($http, $state, $stateParams, $cookies, uiloading, uidial
             });
         };
     }
-    for (var key in this._urls) {
+    for (let key in this._urls) {
         this[key] = new Req(this._urls[key]).d;
     }
     this.test = function() {

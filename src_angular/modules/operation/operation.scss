@@ -1,0 +1,10 @@
+.operation-tag {
+  padding: 7px 5px 7px 10px;
+  i {
+    color: gray;
+    cursor: pointer;
+    &:hover{
+        color: #333333;
+    }
+  }
+}

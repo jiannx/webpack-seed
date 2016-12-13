@@ -1,1 +1,14 @@
 @import "bootstrap/_bootstrap";
+form {
+  label {
+    font-weight: normal;
+  }
+}
+
+.form-group-line {
+  padding-right: 15px;
+  input {
+    width: 100px !important;
+  }
+}
+

@@ -1,4 +1,5 @@
 import app from 'app.config';
+import './operation.scss';
 
 // 运营管理模块
 app.config(($stateProvider) => {

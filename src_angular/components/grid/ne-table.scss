@@ -1,0 +1,168 @@
+﻿@charset "utf-8";
+$c-green: #0091ea;
+$ui-grid-row-height: 36px;
+$ui-grid-bottom-h: 40px;
+$ui-grid-header-c: #F6F6F6;
+$ui-grid-header-h: 36px;
+$ui-grid-border-c: #F0F0F0;
+//列表
+.ui-grid {
+  width: 100%;
+  height: 100%;
+  padding-top: $ui-grid-header-h;
+  background-color: #ffffff;
+  position: relative;
+  font-size: 12px;
+  border: 1px solid $ui-grid-border-c;
+  box-sizing: border-box;
+  &:before {
+    display: block;
+    width: 100%;
+    height: $ui-grid-header-h;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $ui-grid-header-c;
+    content: '';
+  }
+  &.with-bottom {
+    padding-bottom: $ui-grid-bottom-h;
+    .ui-grid-bottom{
+      display: block;
+    }
+  }
+  .ui-grid-header {
+    width: 100%;
+    height: $ui-grid-header-h;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: $ui-grid-header-h;
+    .ui-grid-header-cell {
+      height: 100%;
+      text-align: center;
+      float: left;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .ui-grid-up {
+      position: relative;
+      &:after {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 45%;
+        border-right: 4px solid transparent;
+        border-left: 4px solid transparent;
+        border-bottom: 4px dashed;
+        content: "";
+      }
+    }
+    .ui-grid-down {
+      @extend .ui-grid-up;
+      &:after {
+        border-bottom: 0;
+        border-top: 4px dashed;
+      }
+    }
+  }
+  //当该行需要添加checkBox时，添加该样式
+  .ui-grid-hasCheck {
+    padding-left: 80px;
+  }
+  .ui-grid-check {
+    position: absolute;
+    width: 80px;
+    height: 100%;
+    padding: 5px 0 0 20px;
+    left: 0;
+    top: 0;
+    .checkAll {
+      top: 8px
+    }
+    .divAll {
+      position: absolute;
+      right: 15px;
+      top: 0
+    }
+    input {
+      position: absolute;
+      left: 20px;
+    }
+  }
+  .ui-grid-bottom {
+    width: 100%;
+    height: $ui-grid-bottom-h;
+    background-color: #F6F7FB;
+    border-top: 1px solid #eee;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 10px;
+    display: none;
+    .ui-grid-bottom-info {
+      float: left;
+      line-height: $ui-grid-bottom-h;
+    }
+    .ui-grid-bottom-page {
+      height: 30px;
+      margin-top: 5px;
+      float: right;
+      // border: 1px solid #DDDDDD;
+      // background-color:white;
+      a.page {
+        display: inline-block;
+        line-height: 30px;
+        padding: 0 5px;
+        min-width: 20px;
+        text-align: center;
+        color: gray;
+        height: 100%;
+        cursor: pointer;
+        // border-left: 1px solid #DDDDDD;
+        &:first-child {
+          border-left: 0px;
+        }
+        &.sel {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .ui-grid-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    .ui-grid-row {
+      width: 100%;
+      height: $ui-grid-row-height;
+      line-height: $ui-grid-row-height;
+      background-color: #ffffff;
+      position: relative;
+      border-top: 1px solid #eee;
+      transition: 0.1s;
+      .ui-grid-row-cell {
+        height: 100%;
+        text-align: center;
+        float: left;
+        cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        background-color: lighten($c-green, 30%);
+      }
+    }
+    .ui-grid-row-select {
+      background-color: lighten($c-green, 5%);
+      color: #ffffff;
+      &:hover {
+        background-color: lighten($c-green, 5%);
+      }
+      a {
+        color: white;
+      }
+    }
+  }
+}

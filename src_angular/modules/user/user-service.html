@@ -1,1 +1,23 @@
-<div>客服管理</div>
+<div class="grid-box" id="grid" ng-controller="accountListCtrl">
+    <div class="tool-bar">
+        <form class="form-inline" role="form">
+            <div class="form-group form-group-line">
+                <label>姓名：</label>
+                <input type="text" class="form-control input-sm">
+            </div>
+            <div class="form-group form-group-line">
+                <label>手机号：</label>
+                <input type="text" class="form-control input-sm">
+            </div>
+            <div class="form-group form-group-line">
+                <label>所在城市：</label>
+                <select class="form-control input-sm" style="width: 100px;">
+                    <option>1</option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> 搜索</button>
+            &nbsp;
+            <button type="button" class="btn btn-success btn-sm"><i class="fa fa-repeat"></i> 重置</button>
+        </form>
+    </div>
+</div>

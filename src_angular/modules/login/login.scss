@@ -1,0 +1,51 @@
+.login {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  background-color: #1D8BD8;
+  .login-box {
+    width: 400px;
+    // height: 200px;
+    // background-color: red;
+    margin: 80px auto auto auto;
+    color: white;
+    .title {
+      font-size: 24px;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .logo {
+      margin: auto;
+      width: 200px;
+      height: 200px;
+    }
+    .form-group {
+      position: relative;
+      .input-icon {
+        position: absolute;
+        left: 20px;
+        top: 6px;
+      }
+    }
+    input {
+      border: none;
+      outline: none;
+      padding-left: 35px;
+      background-color: #A0CEEF;
+    }
+    button.btn-success {
+      background-color: #66D354;
+    }
+  }
+  .login-bottom {
+    width: 100%;
+    height: 50px;
+    background-color: #0F64A5;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}

@@ -6,18 +6,32 @@ app.config(($stateProvider) => {
             url: '/order',
             abstract: true
         })
-        // 课程订单
-        .state('order.course', {
-            url: '/course',
+        // 课程订单 预付
+        .state('order.course-advance', {
+            url: '/course/advance',
             views: {
-                '@': { template: require('./order-course.html') }
+                '@': { template: require('./order-course-advance.html') }
+            }
+        })
+        // 课程订单 次付
+        .state('order.course-next', {
+            url: '/course/next',
+            views: {
+                '@': { template: require('./order-course-next.html') }
+            }
+        })
+        // 充值订单 金币
+        .state('order.recharge-gold', {
+            url: '/recharge/gold',
+            views: {
+                '@': { template: require('./order-recharge-gold.html') }
             }
         })
         // 充值订单
-        .state('order.recharge', {
-            url: '/recharge',
+        .state('order.recharge-monney', {
+            url: '/recharge/monney',
             views: {
-                '@': { template: require('./order-recharge.html') }
+                '@': { template: require('./order-recharge-monney.html') }
             }
         })
         // 心意订单

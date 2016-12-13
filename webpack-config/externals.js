@@ -7,4 +7,5 @@ module.exports = {
     angular: 'window.angular',
     $: 'window.$',
     jQuery: 'window.$',
+    layer: 'window.layer',
 };
