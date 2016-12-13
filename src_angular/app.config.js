@@ -1,3 +1,6 @@
+/*
+app实例模块，定义app
+*/
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 

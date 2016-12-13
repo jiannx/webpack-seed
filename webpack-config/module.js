@@ -10,9 +10,7 @@ module.exports = {
         loader: 'eslint-loader',
     }],
     // 不需要解析的文件
-    noParse: [
-        // dirs.path.react
-    ],
+    noParse: dirs.noParse,
     // 加载器配置
     loaders: [{
             test: /\.css$/,

@@ -36,7 +36,7 @@ var definePluginDev = new webpack.DefinePlugin({
     IS_PRODUCTION: false,
 });
 var definePluginProduction = new webpack.DefinePlugin({
-    IS_PRODUCTION: false,
+    IS_PRODUCTION: true,
     // react 发布版本
     'process.env': {
         NODE_ENV: JSON.stringify('production')
@@ -64,7 +64,7 @@ plugins = [
     }),
     new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: 'src/index.html',
+        template: path.resolve(dirs.srcRootDir, 'index.html'),
     }),
     new CopyWebpackPlugin([
         { context: dirs.vendorDir, from: '**/*', to: path.resolve(dirs.buildDir, 'vendor') },

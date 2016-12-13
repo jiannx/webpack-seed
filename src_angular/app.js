@@ -1,34 +1,28 @@
 import app from 'app.config';
-import appService from './app.service';
-import appCtrl from './app.ctrl';
-
+import './app.service';
+import './app.ctrl';
 // 样式引入
-require('./scss/bootstrap.scss');
-require('./scss/app.scss');
-require('./scss/animate.css');
-
-
+import './scss/bootstrap.scss';
+import './scss/app.scss';
+import './scss/animate.css';
 // 组件引入
-require('./components/grid/ne-table.js');
-
+import './components/grid/ne-table';
 // 页面模块
-require('./modules/login/login.js'); // 登陆
-require('./modules/home/home.js'); // 首页
-require('./modules/auth/auth.js'); // 权限管理
-require('./modules/user/user.js'); // 用户管理
-require('./modules/course/course.js'); // 课程管理
-require('./modules/operation/operation.js'); // 运营管理
-require('./modules/order/order.js'); // 订单管理
-require('./modules/settlement/settlement.js'); // 结算管理
+import './modules/login/login'; // 登陆
+import './modules/home/home'; // 首页
+import './modules/auth/auth'; // 权限管理
+import './modules/user/user'; // 用户管理
+import './modules/course/course'; // 课程管理
+import './modules/operation/operation'; // 运营管理
+import './modules/order/order'; // 订单管理
+import './modules/settlement/settlement'; // 结算管理
 
-app.run(function($rootScope, $state, $stateParams) {
+app.run(function($rootScope, $state, $stateParams, appService) {
         $rootScope.$state = $state;
         $rootScope.$stateParams = $stateParams;
-        let name = 'start success';
+        let name = 'App start success!';
         console.info(`${name}`);
     })
     .config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/home');
-    })
-    .controller('appCtrl', appCtrl)
-    .service('appService', appService);
+    });
