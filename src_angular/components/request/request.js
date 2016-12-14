@@ -12,11 +12,12 @@ request.do(req, data, successCall, errorCall, cfg, param)
 request.do('demo', { id: 0 }, (data) => {});
 // 完整调用 包含错误回调，配置，及接口返回参数
 request.do({ method: 'get', url: '/api/demo', timeout: 10000 }, { id: 0 }, (data, res, param) => {}, (data, res, param) => {}, {}, {});
+// 函数形式调用
+request.api.demo(data, successCall, errorCall, cfg, param);
  */
-
 import layer from 'layer'; // 引入弹出窗，进行错误提示
 import app from 'app.config';
-import api from '../app.api'; // 接口定义引入
+import api from '../../app.api'; // 接口定义引入
 
 // 默认配置
 const defaultCfg = {
@@ -26,18 +27,19 @@ const defaultCfg = {
 
 // 登陆验证
 const checkLogin = function() {
+    let isLogin = true;
     // layer.open({
     //     content: '请先登陆，<a href="/auth/openid/login">跳转到登陆页面</a>',
     //     btn: [],
     //     scrollbar: false,
     //     closeBtn: 0
     // });
-    return true;
+    return isLogin;
 };
 
 // angular http处理数据
 const angularGetData = function(http, req, data, successCall, errorCall) {
-    const httpOpt = {
+    let httpOpt = {
         method: null,
         url: null,
         timeout: 60000,
@@ -62,11 +64,16 @@ const angularGetData = function(http, req, data, successCall, errorCall) {
 class Request {
     constructor($http) {
         this.$http = $http;
-        this.name = '2323';
-        this.layerCount = 0;
+        this.loadingCount = 0;
         this.loadingLayer = null;
         this.errorLayer = null;
         console.log('create request service success!');
+        this.api = {};
+        for (let key of Object.keys(api)) {
+            this.api[key] = (data, successCall, errorCall, cfg, param) => {
+                this.do(api[key], data, successCall, errorCall, cfg, param);
+            };
+        }
     }
 
     // 获取数据
@@ -103,15 +110,16 @@ class Request {
 
     // 添加等待状态
     addLoading() {
-        this.layerCount += 1;
-        layer.close(this.loadingLayer);
-        this.loadingLayer = layer.load(1);
+        if (this.loadingCount === 0) {
+            this.loadingLayer = layer.load(1);
+        }
+        this.loadingCount += 1;
     }
 
     // 移除等待状态
     removeLoading() {
-        this.layerCount -= 1;
-        if (this.layerCount === 0) {
+        this.loadingCount -= 1;
+        if (this.loadingCount === 0) {
             layer.close(this.loadingLayer);
         }
     }
@@ -121,8 +129,13 @@ class Request {
         layer.close(this.errorLayer);
         this.errorLayer = layer.alert('数据请求失败，请重试。', { icon: 0 });
     }
+
+    // 查看所有接口
+    list() {
+        console.log(api);
+    }
 }
 
 Request.$injector = ['$http'];
 
-export default app.service('request', Request).name;
+app.service('request', Request);

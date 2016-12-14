@@ -8,7 +8,7 @@ new WebpackDevServer(webpack(config), {
     historyApiFallback: true,
     proxy: {
         '/api': {
-            target: dirs.server.host + ':' + dirs.server.port,
+            target: dirs.server.proxy,
             secure: false,
             changeOrigin: true
         }
