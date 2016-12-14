@@ -1,6 +1,6 @@
 /*
 接口请求定义
-req：请求接口
+req：请求接口，参照$http参数
 data： 请求参数
 successCall：请求成功回调
 errorCall： 请求错误回调
@@ -47,11 +47,11 @@ const angularGetData = function(http, req, data, successCall, errorCall) {
             'Content-Type': 'text/plain;charset=UTF-8'
         }
     };
-    // 如果需要配置timeout，header等其他参数，在req中配置，参照$http参数
     Object.assign(httpOpt, req);
-    if (req.method === 'get' || req.method === 'GET') {
+
+    if (req.method.toUpperCase() === 'GET') {
         httpOpt.params = data;
-    } else if (req.method === 'post' || req.method === 'POST') {
+    } else if (req.method.toUpperCase() === 'POST') {
         httpOpt.data = data;
     }
     http(httpOpt).then((res) => {
@@ -67,7 +67,6 @@ class Request {
         this.loadingCount = 0;
         this.loadingLayer = null;
         this.errorLayer = null;
-        console.log('create request service success!');
         this.api = {};
         for (let key of Object.keys(api)) {
             this.api[key] = (data, successCall, errorCall, cfg, param) => {
