@@ -37,6 +37,7 @@ dirs.externals = {
     jQuery: 'window.$',
     layer: 'window.layer',
     moment: 'window.moment',
+    'angular-ui-router': true
 };
 
 // dev server 配置

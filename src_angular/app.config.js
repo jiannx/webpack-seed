@@ -1,9 +1,8 @@
 /*
-app实例模块，定义app
+angular实例，定义app
 */
 import angular from 'angular';
-import uirouter from 'angular-ui-router';
 
 export default angular.module('app', [
-    uirouter,
+    'ui.router',
 ]);

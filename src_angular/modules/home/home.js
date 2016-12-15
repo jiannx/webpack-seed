@@ -9,6 +9,6 @@ app.config(($stateProvider) => {
         });
 }).service('homeService', () => {
     this.name = 'homeService';
-}).controller('homeCtrl', ($scope) => {
+}).controller('homeCtrl', ($scope, neDialog) => {
     $scope.name = 'home';
 });
