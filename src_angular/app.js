@@ -20,8 +20,17 @@ import './modules/settlement/settlement'; // 结算管理
 app.run(($rootScope, $state, $stateParams) => {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    // 初始化项目的一些数据
+    $rootScope.appData = {
+        isInited: false
+    };
     let name = 'App start success!';
     console.info(`${name}`);
+
+    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $rootScope.appData.isInited = true;
+        event.preventDefault();
+    });
 }).config(($stateProvider, $urlRouterProvider) => {
     $urlRouterProvider.otherwise('/home');
 });

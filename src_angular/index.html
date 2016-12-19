@@ -10,12 +10,13 @@
 </head>
 
 <body ng-controller="appCtrl as vm">
-    <!--[if lt IE 9]>
-    <![endif]-->
-    <!--[if lt IE 8]>
-        <h3>您的浏览器版本过低</h3>
-    <![endif]-->
-    <div style="width: 100%;height: 100%; position: fixed;background-color: white; z-index: 1000" ng-show="!cfg.isInit"></div>
+    <div class="app-init-mask" ng-if='!appData.isInited'>
+        <!--[if lt IE 9]>
+        <![endif]-->
+        <!--[if lt IE 8]>
+            <h3>您的浏览器版本过低</h3>
+        <![endif]-->
+    </div>
     <div class="body-box">
         <div class="nav-top">
             <div class="logo"></div>

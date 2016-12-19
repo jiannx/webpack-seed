@@ -2,23 +2,22 @@ import app from 'app.config';
 
 const layer = require('layer');
 
-app.controller('accountListCtrl', function($scope, $compile, neGrid) {
+app.controller('accountListCtrl', function($scope, neGrid, neDialog) {
     let grid = null;
     $scope.gridList = [];
     $scope.gridSel = [];
 
-    let html = '<div><button ng-click="layerBtn()">{{name}}</button></div>';
-
-    $scope.layerBtn = function() {
-        $scope.name += 1;
-    };
-    $scope.name = 0;
-
     $scope.testLayer = function() {
-        var index = layer.open({
+        let html = '<div class="ne-dialog"><button ng-click="layerBtn()">{{name}}</button></div>';
+        $scope.name = 0;
+        neDialog.confirm({
             content: html,
-            success: (_dom) => { $compile(_dom)($scope); }
+            scope: $scope
         });
+
+        $scope.layerBtn = function() {
+            $scope.name += 1;
+        };
     };
 
     grid = neGrid.create({

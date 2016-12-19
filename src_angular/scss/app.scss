@@ -14,6 +14,16 @@ body {
   height: 100%;
 }
 
+.app-init-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: white;
+  z-index: 999999;
+}
+
 .body-box {
   width: 100%;
   min-width: 1200px;
