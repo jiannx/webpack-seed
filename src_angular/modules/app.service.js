@@ -3,11 +3,17 @@ import moment from 'moment';
 
 class AppService {
     constructor($rootScope) {
-        // 全局的一些配置，
-        this.cfg = {
-            isInit: false, // 页面初始化完成后置为true，用于遮盖页面
+        // 登陆校验
+        this.checkLogin = function(successCall, faildCall) {
+            let isLogin = true;
+            setTimeout(() => {
+                if (isLogin) {
+                    successCall && successCall();
+                } else {
+                    faildCall && faildCall();
+                }
+            });
         };
-        $rootScope.cfg = this.cfg;
 
         // 时间选择插件配置
         this.dataRangePickerOpt = {
@@ -20,7 +26,7 @@ class AppService {
                 '昨天': [moment().subtract(1, 'days').hour(0).minute(0), moment().subtract(1, 'days').hour(23).minute(59)],
                 '最近7天': [moment().subtract(6, 'days').hour(0).minute(0), moment()],
                 '最近30天': [moment().subtract(29, 'days').hour(0).minute(0), moment()],
-                // 'This Month': [moment().startOf('month'), moment().endOf('month')],
+                '本月': [moment().startOf('month'), moment().endOf('month')],
                 '上个月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
             },
             locale: {

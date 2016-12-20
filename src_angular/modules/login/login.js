@@ -6,9 +6,24 @@ import './login.scss';
 app.config(($stateProvider) => {
     $stateProvider.state('login', {
         url: '/login',
-        template: require('./login.html')
+        abstract: true
+    }).state('login.in', {
+        url: '/in',
+        views: {
+            '@': { template: require('./login.html') }
+        }
+    }).state('login.register', {
+        url: '/register',
+        views: {
+            '@': { template: require('./login.html') }
+        }
+    }).state('login.forget-password', {
+        url: '/forget-password',
+        views: {
+            '@': { template: require('./login.html') }
+        }
     });
-}).controller('loginCtrl', ($scope) => {
+}).controller('loginInCtrl', ($scope) => {
     $scope.needCheckCode = false;
     $scope.errorMessage = '';
 

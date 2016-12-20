@@ -33,10 +33,10 @@ var cleanPlugin = new CleanPlugin([dirs.buildDir], {
 
 // definePlugin 接收字符串插入到代码当中
 var definePluginDev = new webpack.DefinePlugin({
-    IS_PRODUCTION: false,
+    PRODUCTION: false,
 });
 var definePluginProduction = new webpack.DefinePlugin({
-    IS_PRODUCTION: true,
+    PRODUCTION: true,
     // react 发布版本
     'process.env': {
         NODE_ENV: JSON.stringify('production')

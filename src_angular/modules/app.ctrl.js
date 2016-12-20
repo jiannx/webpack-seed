@@ -1,10 +1,10 @@
 import app from 'app.config';
 
 export default class AppCtrl {
-    constructor($http, appService) {
-        appService.cfg.isInit = true;
+    constructor() {
+        this.name = '';
     }
 }
-AppCtrl.$inject = ['$http', 'appService'];
+AppCtrl.$inject = [];
 
 app.controller('appCtrl', AppCtrl);
