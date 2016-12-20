@@ -187,8 +187,8 @@ class Table {
             this.opts.onSelect && this.opts.onSelect(this.getSelect());
         };
         // 排序点击事件
-        let orderType = KEY.orderAsc;
         this.scope.SortAscDesc = (colData, index) => {
+            let orderType = KEY.orderAsc;
             // TODO
             if (typeof colData.sort !== 'string') {
                 console.info('请配置排序字段');
@@ -205,10 +205,30 @@ class Table {
                 others.removeClass('ui-grid-up').removeClass('ui-grid-down');
                 orderType = KEY.orderDesc;
             }
-            let d = {};
-            d[KEY.orderBy] = colData.sort;
-            d[KEY.orderType] = orderType;
-            Object.assign(this.scope.httpData, d);
+            this.scope.httpData[KEY.orderBy] = colData.sort;
+            this.scope.httpData[KEY.orderType] = orderType;
+            this.getData();
+        };
+        // 页面跳转事件
+        this.scope.pageTo = (num) => {
+            if (num === '...') {
+                return;
+            }
+            if (num === '上一页') {
+                this.scope.httpData[KEY.httpCurPage] = this.scope.curPage > 1 ? (this.scope.curPage - 1) : 1;
+            } else if (num === '下一页') {
+                this.scope.httpData[KEY.httpCurPage] = this.scope.curPage < this.scope.pageCount ? (this.scope.curPage + 1) : this.scope.pageCount;
+            } else {
+                this.scope.httpData[KEY.httpCurPage] = num;
+            }
+            this.getData();
+        };
+        // 页面跳转事件
+        this.scope.goClick = () => {
+            if (this.scope.jumpTo > this.scope.pageCount) {
+                this.scope.jumpTo = this.scope.pageCount;
+            }
+            this.scope.httpData[KEY.httpCurPage] = this.scope.jumpTo;
             this.getData();
         };
     }
@@ -243,65 +263,40 @@ class Table {
     }
 
     createBottom() {
-        var that = this;
-        var scope = this.scope;
         var LENGTH = 4;
-        that.$gridBottom.empty();
-        if (!that.opts.page) {
+        this.$gridBottom.empty();
+        if (!this.opts.page) {
             return;
         }
-
-        scope.isShow = !that.opts.onlyInfoPage;
+        this.scope.isShow = !this.opts.onlyInfoPage;
         let $page = $('<div class="ui-grid-bottom-page" ng-show="isShow" ></div>');
         $page.append('<a class="page" ng-click="pageTo(\'上一页\')">上一页</a>');
 
-        scope.pageList = [];
-        let sNum = scope.curPage - LENGTH;
-        let eNum = scope.curPage + LENGTH;
+        this.scope.pageList = [];
+        let sNum = this.scope.curPage - LENGTH;
+        let eNum = this.scope.curPage + LENGTH;
         sNum = sNum < 1 ? 1 : sNum;
-        eNum = eNum > scope.pageCount ? scope.pageCount : eNum;
+        eNum = eNum > this.scope.pageCount ? this.scope.pageCount : eNum;
         for (let i = sNum; i <= eNum; i += 1) {
-            scope.pageList.push(i);
+            this.scope.pageList.push(i);
         }
         if (sNum >= 2) {
             if (sNum > 2) {
-                scope.pageList.unshift('...');
+                this.scope.pageList.unshift('...');
             }
-            scope.pageList.unshift(1);
+            this.scope.pageList.unshift(1);
         }
-        if (eNum <= (scope.pageCount - 2)) {
-            if (eNum < (scope.pageCount - 2)) {
-                scope.pageList.push('...');
+        if (eNum <= (this.scope.pageCount - 2)) {
+            if (eNum < (this.scope.pageCount - 2)) {
+                this.scope.pageList.push('...');
             }
-            scope.pageList.push(scope.pageCount);
+            this.scope.pageList.push(this.scope.pageCount);
         }
         $page.append('<a class="page" ng-repeat="num in pageList track by $index" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a>');
         $page.append('<a class="page" ng-click="pageTo(\'下一页\')">下一页</a>');
-        that.$gridBottom.append("<div class='ui-grid-bottom-info'>共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>");
-        that.$gridBottom.append($page);
-        scope.pageTo = function(num) {
-            if (num === '...') {
-                return;
-            }
-            if (num === '上一页') {
-                scope.httpData[KEY.httpCurPage] = scope.curPage > 1 ? (scope.curPage - 1) : 1;
-            } else if (num === '下一页') {
-                scope.httpData[KEY.httpCurPage] = scope.curPage < scope.pageCount ? (scope.curPage + 1) : scope.pageCount;
-            } else {
-                scope.httpData[KEY.httpCurPage] = num;
-            }
-            that.getData();
-        };
-        // 页面跳转事件
-        scope.goClick = function() {
-            if (scope.jumpTo > scope.pageCount) {
-                scope.jumpTo = scope.pageCount;
-            }
-            scope.httpData[KEY.httpCurPage] = scope.jumpTo;
-            that.getData();
-        };
-
-        this.$compile(that.$gridBottom)(scope);
+        this.$gridBottom.append("<div class='ui-grid-bottom-info'>共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>");
+        this.$gridBottom.append($page);
+        this.$compile(this.$gridBottom)(this.scope);
     }
     getData() {
         var scope = this.scope;
