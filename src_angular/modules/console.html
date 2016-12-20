@@ -8,7 +8,7 @@
             <a>修改密码</a>
         </div>
     </div>
-    <div class="nav-menu metismenu">
+    <div class="nav-menu metismenu" style="display: none;">
         <ul class="metismenu first" id='menu'>
             <li ng-class="{active: $state.includes('auth')}">
                 <a><i class="fa fa-shield icon" aria-hidden="true"></i>&nbsp;&nbsp;权限管理<i class="fa arrow"></i></a>
@@ -106,7 +106,7 @@
         </ul>
     </div>
     <div class="console" ui-view="console">
-        <div style="margin: 20px;">
+        <div style="padding: 20px;">
             <p style="font-size: 24px;">欢迎使用</p>
         </div>
     </div>

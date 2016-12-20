@@ -2,20 +2,24 @@ import app from 'app.config';
 import angular from 'angular';
 import './ne-table.scss';
 
+/*
+传入 http或者data，两个都存在的情况下，忽略http
+ */
+
 const OPTIONS = {
     parent: null, // 父节点 '#divId'
     class: null,
     striped: null, // 隔行变色，TODO待添加
     http: null, // 获取数据的请求 在request中定
     httpData: null, // 请求参数
-    data: null,
+    data: null, // 传入所有数据，通过表格进行分页
     hasCheckBox: true, // 是否有选择框
     scope: null, // 父scope，如果定义，则使用父scope，如果未定义，创建新scope
     isInit: true, // 是否进行初始化，false: 只进行表格创建
     page: true, // 是否包含底部分页信息
     onlyInfoPage: false, // 设置为 true 只显示总数据数，而不显示分页按钮。需要 page=true
     columnDefs: [
-        // { display: '', field: '', isTitle: false, width: '', sort: false }
+        // { display: 'ID', field: 'id', isTitle: false, width: 20, sort: 'id' } // width为number，sort为字符串（需要排序的key）
     ],
     // 加载服务器数据之前的处理程序，可以用来格式化数据。参数：res为从服务器请求到的数据。
     resHandler: function(res) {
@@ -61,6 +65,7 @@ class Table {
         this.scope.rowSelectAll = false;
         this.scope.jumpTo = null;
 
+        this.bindUI();
         this.renderUI();
 
         // 是否创建时直接获取数据
@@ -117,135 +122,79 @@ class Table {
 
     // 列表的ui操作以jq dom操作实现，是否选中以数据双向绑定实现
     refreshGrid() {
-        if (this.isAppend === false) {
-            $(this.opts.parent).append(this.$grid);
-        }
+        this.createList();
+        this.createBottom();
+    }
+    createList() {
         this.$gridList.empty();
-        let scope = this.scope;
-        let that = this;
+        this.scope.rowSelectAll = false;
+        this.scope.rowSelect = [];
+        let equalWidth = ((1 / this.opts.columnDefs.length) * 100) + '%';
 
-        scope.rowSelect = [];
-        if (that.opts.onSelect) {
-            that.opts.onSelect(that.getSelect());
-        }
-        scope.rowSelectAll = false;
-        let cellWidth = ((1 / this.opts.columnDefs.length) * 100) + '%';
+        this.scope.gridData.forEach((rowData, index) => {
+            this.scope.rowSelect[index] = false;
+            let $row = $(`<div class='ui-grid-row' ng-class='{"ui-grid-row-select": rowSelect[${index}]}'></div>`);
+            this.$gridList.append($row);
+            this.opts.columnDefs.forEach((colum) => {
+                let cellWidth = colum.width ? (colum.width + '%') : equalWidth;
+                let $cell = $(`<div class='ui-grid-row-cell' ng-click='rowClick(${index})' style='width: ${cellWidth}'></div>`);
 
-        angular.forEach(scope.gridData, function(rowData, index) {
-            scope.rowSelect[index] = false;
-
-            let $row = $("<div class='ui-grid-row' ng-class='{\"ui-grid-row-select\": rowSelect[" + index + "]}'></div>");
-            that.$gridList.append($row);
-
-            angular.forEach(that.opts.columnDefs, function(colum) {
-                // 如果columnDefs里面没有width未定义则等分列
-                var $cell = null;
-                if (angular.isDefined(colum.width) === false) {
-                    $cell = $("<div class='ui-grid-row-cell' ng-click='rowClick(" + index + ")' style='width: " + cellWidth + "'></div>");
-                } else {
-                    $cell = $("<div class='ui-grid-row-cell' ng-click='rowClick(" + index + ")' style='width:" + colum.width + "%'></div>");
-                }
-                // 如果为字符串，则直接显示
-                if (angular.isString(colum.field)) {
+                if (typeof colum.field === 'string') {
                     $cell.append(rowData[colum.field]);
-                } else if (angular.isFunction(colum.field)) {
-                    $cell.append(colum.field(rowData, scope.data));
+                } else if (typeof colum.field === 'function') {
+                    $cell.append(colum.field(rowData, this.scope.data));
                 }
                 if (angular.isDefined(colum.isTitle) === true) {
                     if (angular.isFunction(colum.isTitle) === true) {
-                        $cell.attr('title', colum.isTitle(rowData, scope.data));
+                        $cell.attr('title', colum.isTitle(rowData, this.scope.data));
                     } else if (colum.isTitle === true) {
                         $cell.attr('title', rowData[colum.field]);
                     }
                 }
                 $row.append($cell);
             });
-            if (that.opts.hasCheckBox === true) {
+            if (this.opts.hasCheckBox === true) {
                 $row.addClass('ui-grid-hasCheck');
                 $row.append("<div class='ui-grid-check'><input type='checkbox' ng-change='checkChange()' ng-model='rowSelect[" + index + "]'></div>");
             }
         });
-        // 单行选择按钮
-        scope.checkChange = function(index) {
-            scope.rowSelect[index] = true;
-            let count = 0;
-            for (let item of scope.rowSelect) {
-                if (item === true) {
-                    count += 1;
-                }
-            }
-            scope.rowSelectAll = (count === scope.rowSelect.length);
-            that.opts.onSelect && that.opts.onSelect(that.getSelect());
-        };
-        // 单行点击事件
-        scope.rowClick = function(index) {
-            if (scope.rowSelectAll) {
-                for (let item of scope.rowSelect) {
-                    item = false;
-                }
-                scope.rowSelect[index] = true;
-                scope.rowSelectAll = false;
-            } else {
-                for (let item of scope.rowSelect) {
-                    item = false;
-                }
-                scope.rowSelect[index] = !scope.rowSelect[index];
-            }
-            that.opts.onSelect && that.opts.onSelect(that.getSelect());
-        };
-        this.$compile(this.$gridList)(scope);
-        this.createBottom();
+        this.$compile(this.$gridList)(this.scope);
     }
 
-    createHeader() {
-        let scope = this.scope;
-        let that = this;
-        this.$header.empty();
-        let cellWidth = ((1 / this.scope.columnDefs.length) * 100) + '%';
-        if (angular.isDefined(this.scope.columnDefs[0].width) === true) { // 判断columnDefs里面是否有width值传
-            this.$header.append('<div class="ui-grid-header-cell" ng-repeat="col in columnDefs" ng-click="SortAscDesc(col,$index)" style="width:{{col.width}}%">{{col.display}}</div>');
-        } else {
-            this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs" ng-click="SortAscDesc(col,$index)" style="width: ${cellWidth}">{{col.display}}</div>`);
-        }
-        // 添加全选按钮
-        if (this.opts.hasCheckBox === true) {
-            this.$header.addClass('ui-grid-hasCheck');
-            this.$header.append("<div class='ui-grid-check'><input type='checkbox' class='checkAll' ng-model='rowSelectAll' ng-change='checkAllChange()'></div>");
-        }
-        // 定时控制表头宽度
-        this.interval = setInterval(function() {
-            if (that.$grid.is(':hidden')) {
-                clearInterval(that.interval);
-                that.close;
-                return;
-            }
-            let w = that.$gridList[0].offsetWidth;
-            if (that.$gridList.find('.ui-grid-row').length > 0) {
-                w = that.$gridList.find('.ui-grid-row').eq(0)[0].offsetWidth;
-            }
-            that.$header.css({
-                width: w
+    bindUI() {
+        // 单行选择按钮
+        this.scope.checkChange = (index) => {
+            this.scope.rowSelect[index] = true;
+            let count = 0;
+            this.scope.rowSelect.forEach((item) => {
+                count += Number(item);
             });
-        }, 500);
+            this.scope.rowSelectAll = (count === this.scope.rowSelect.length);
+            this.opts.onSelect && this.opts.onSelect(this.getSelect());
+        };
+        // 单行点击事件
+        this.scope.rowClick = (index) => {
+            this.scope.rowSelect.forEach((item, i) => {
+                this.scope.rowSelect[i] = (i !== index) ? false : !this.scope.rowSelect[i];
+            });
+            this.scope.rowSelectAll = (this.scope.rowSelect.length === 1) ? this.scope.rowSelect[index] : false;
+            this.opts.onSelect && this.opts.onSelect(this.getSelect());
+        };
 
         // 全选按钮
-        scope.checkAllChange = function() {
-            for (let item of scope.rowSelect) {
-                item = scope.rowSelectAll;
-            }
-            that.opts.onSelect && that.opts.onSelect(that.getSelect());
+        this.scope.checkAllChange = () => {
+            this.scope.rowSelect.fill(this.scope.rowSelectAll);
+            this.opts.onSelect && this.opts.onSelect(this.getSelect());
         };
         // 排序点击事件
         let orderType = KEY.orderAsc;
-        scope.SortAscDesc = function(colData, index) {
-            if (angular.isDefined(colData.sort) === false || colData.sort === false || !that.opts.http) {
+        this.scope.SortAscDesc = (colData, index) => {
+            // TODO
+            if (typeof colData.sort !== 'string') {
+                console.info('请配置排序字段');
                 return;
             }
-            if (angular.isFunction(colData.field) && colData.sort === true) {
-                console.warn('请配置排序字段');
-                return;
-            }
-            let clickHeader = that.$header.find('.ui-grid-header-cell').eq(index);
+            let clickHeader = this.$header.find('.ui-grid-header-cell').eq(index);
             let others = clickHeader.siblings();
             if (clickHeader.hasClass('ui-grid-down')) {
                 clickHeader.removeClass('ui-grid-down').addClass('ui-grid-up');
@@ -257,16 +206,38 @@ class Table {
                 orderType = KEY.orderDesc;
             }
             let d = {};
-            // d[KEY.orderBy] = (angular.isFunction(colData.field) == true) ? colData.sort : colData.field;
-            if (angular.isString(colData.sort)) {
-                d[KEY.orderBy] = colData.sort;
-            } else if (angular.isString(colData.field) && colData.sort === true) {
-                d[KEY.orderBy] = colData.field;
-            }
+            d[KEY.orderBy] = colData.sort;
             d[KEY.orderType] = orderType;
-            angular.extend(scope.httpData, d);
-            that.getData();
+            Object.assign(this.scope.httpData, d);
+            this.getData();
         };
+    }
+
+    createHeader() {
+        this.$header.empty();
+        let equalWidth = ((1 / this.scope.columnDefs.length) * 100) + '%';
+        let cellWidth = (this.scope.columnDefs[0].width) ? '{{col.width}}%' : equalWidth;
+        this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs" ng-click="SortAscDesc(col, $index)" style="width: ${cellWidth}">{{col.display}}</div>`);
+        // 添加全选按钮
+        if (this.opts.hasCheckBox === true) {
+            this.$header.addClass('ui-grid-hasCheck');
+            this.$header.append("<div class='ui-grid-check'><input type='checkbox' class='checkAll' ng-model='rowSelectAll' ng-change='checkAllChange()'></div>");
+        }
+        // 定时控制表头宽度
+        this.interval = setInterval(() => {
+            if (this.$grid.is(':hidden')) {
+                clearInterval(this.interval);
+                this.close;
+                return;
+            }
+            let w = this.$gridList[0].offsetWidth;
+            if (this.$gridList.find('.ui-grid-row').length > 0) {
+                w = this.$gridList.find('.ui-grid-row').eq(0)[0].offsetWidth;
+            }
+            this.$header.css({
+                width: w
+            });
+        }, 500);
 
         this.$compile(this.$header)(this.scope);
     }
@@ -387,7 +358,6 @@ class Table {
         this.scope.httpData = angular.copy(httpData);
         this.getData();
     }
-
 }
 
 
@@ -404,4 +374,4 @@ class NeTable {
 
 NeTable.$injector = ['$rootScope', '$compile', '$controller'];
 
-app.service('neGrid', NeTable);
+app.service('neTable', NeTable);

@@ -4,34 +4,35 @@ import app from 'app.config';
 app.config(($stateProvider) => {
     $stateProvider.state('settlement', {
             url: '/settlement',
+            template: require('../console.html'),
             abstract: true
         })
         // 课程结算
         .state('settlement.course', {
             url: '/course',
             views: {
-                '@': { template: require('./settlement-course.html') }
+                'console': { template: require('./settlement-course.html') }
             }
         })
         // 金币结算
         .state('settlement.gold', {
             url: '/gold',
             views: {
-                '@': { template: require('./settlement-gold.html') }
+                'console': { template: require('./settlement-gold.html') }
             }
         })
         // 余额结算
         .state('settlement.overage', {
             url: '/overage',
             views: {
-                '@': { template: require('./settlement-overage.html') }
+                'console': { template: require('./settlement-overage.html') }
             }
         })
         // 营收报表
         .state('settlement.chart', {
             url: '/chart',
             views: {
-                '@': { template: require('./settlement-chart.html') }
+                'console': { template: require('./settlement-chart.html') }
             }
         });
 }).service('settlementService', () => {
