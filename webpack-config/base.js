@@ -14,7 +14,8 @@ dirs.serverStaticDir = path.resolve(dirs.rootDir, '../netease_qs/static'); // �
 
 // 文件目录配置
 dirs.path = {
-    react: path.resolve(dirs.rootDir, 'node_modules/react/dist/react.min.js')
+    react: path.resolve(dirs.rootDir, 'node_modules/react/dist/react.min.js'),
+    validation: path.resolve(dirs.srcRootDir, 'components/angular-validation/angular-validation.min.js')
 };
 
 // 需要打包到dll的库 TODO
@@ -23,7 +24,9 @@ dirs.dlls = [
 ];
 
 // 打包时不需要解析的文件 TODO 未测试
-dirs.noParse = [];
+dirs.noParse = [
+dirs.path.validation
+];
 
 // 模块别名配置
 dirs.alias = {

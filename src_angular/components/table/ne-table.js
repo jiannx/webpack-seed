@@ -147,7 +147,6 @@ class Table {
         this.$compile = $compile;
         this.$controller = $controller;
         this.opts = $.extend(true, {}, OPTIONS, opts);
-        console.log(this.opts);
         this.id = 'ne-table' + new Date().getTime();
 
         this.scope = this.opts.scope ? this.opts.scope.$new() : $rootScope.$new();
