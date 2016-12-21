@@ -1,36 +1,11 @@
 import app from 'app.config';
 import angular from 'angular';
+import $ from 'jQuery';
 import './ne-table.scss';
-
-/*
-传入 http或者data，两个都存在的情况下，忽略http
- */
-
-const OPTIONS = {
-    parent: null, // 父节点 '#divId'
-    class: null,
-    striped: null, // 隔行变色，TODO待添加
-    http: null, // 获取数据的请求 在request中定
-    httpData: null, // 请求参数
-    data: null, // 传入所有数据，通过表格进行分页
-    hasCheckBox: true, // 是否有选择框
-    scope: null, // 父scope，如果定义，则使用父scope，如果未定义，创建新scope
-    isInit: true, // 是否进行初始化，false: 只进行表格创建
-    page: true, // 是否包含底部分页信息
-    onlyInfoPage: false, // 设置为 true 只显示总数据数，而不显示分页按钮。需要 page=true
-    columnDefs: [
-        // { display: 'ID', field: 'id', isTitle: false, width: 20, sort: 'id' } // width为number，sort为字符串（需要排序的key）
-    ],
-    // 加载服务器数据之前的处理程序，可以用来格式化数据。参数：res为从服务器请求到的数据。
-    resHandler: function(res) {
-        return res;
-    },
-    // 选中行事触发事件  参数：已勾选的列表 selArray
-    onSelect: function() {},
-};
 
 // 项目变更需重新配置以下参数
 const KEY = {
+    // 响应参数定义
     list: 'data',
     curPage: 'page_now',
     pageCount: 'page_total',
@@ -43,16 +18,139 @@ const KEY = {
     orderAsc: 'asc',
 };
 
+const OPTIONS = {
+    parent: null, // 必填。父节点(string) '#divId'
+    // http or data必填一项
+    http: null, // 获取数据的请求 在request中定(string or func)
+    httpData: {}, // 选填。请求参数(object)
+    data: null, // 传入所有数据，通过表格进行分页(object)
+
+    scope: null, // 选填。父scope，如果定义，则使用父scope，如果未定义，创建新scope($scope)
+    isInit: true, // 选填。是否进行数据初始化(bool)
+
+    // 必填。列定义，display列头(string)，field列需要显示的内容(func or string)，isTitle是否添加title属性(bool)，width列宽度(number)，sort排序字段(string)
+    columnDefs: [
+        // { display: 'ID', field: 'id', isTitle: false, width: 20, sort: 'id' }
+    ],
+
+    // 选填 样式定义
+    style: {
+        class: '', // 表格最外层样式(string)
+        rowClass: '', // 单行样式(string)
+        cellClass: '', // 单行中单列样式(string)
+        slidePanelClass: '', // 下拉面板样式(string)
+        slidePanelCellClass: '', // 下拉面板中单列样式(string)
+        striped: '', // 隔行变色，TODO待完善(bool)
+    },
+
+    // 选填。下方滚动面板，当置为true时，slidePanel才有效。请在onRowClick中调用showSlidePanel(index)来显示该面板
+    withSlidePanel: false,
+    slidePanel: {
+        height: '200px', // 面板高度 '100px' (string)
+        field: null, // cell内容创建函数，function(rowData, rowIndex, colIndex) {}
+    },
+    // 选填。每行是否有checkbox
+    withCheckBox: true, // 是否有选择框
+    // 选填。是否包含底部分页信息
+    withPage: true,
+    page: {
+        withInfo: true, // 包含共几页等信息
+        withNumber: true, // 包含分页按钮
+        custom: null // 自定义分页 function(numberBtnsDom, pageInfoDom){ return dom}
+    },
+
+    // 选填。加载服务器数据之前的处理程序，可以用来格式化数据。function(res) {return res;}
+    onResHandler: null,
+    // 选填。选中行事触发事件  function(selArray) {},
+    onSelect: null,
+    // 选填。单行点击事件 function(rowData, rowIndex, slidePanelId, slidePanelCellIds) {}
+    // 回调参数：rowData当前行数据，rowIndex当前行序号，slidePanelId当前行下拉面板id，slidePanelCellIds当前下拉面板中cell id的数组集合
+    onRowClick: null
+};
+/*
+方法
+neTable.create(options)
+close()销毁
+refresh() 表格数据刷新
+getSelect() 获取表格当前选中行
+setHttp() 重设http请求
+setData() 重设表格数据
+setHttpData() 重设httpdata数据
+showSlidePanel(index) 显示下拉面板(index为要显示的行号)
+hideSlidePanel(index) 隐藏下拉面板(index为要隐藏的行号，如果index为空，则隐藏全部)
+
+Demo
+neTable.create({
+    parent: '#log-table',
+    data: {
+        page_now: 1,
+        page_total: 7,
+        records: 100,
+        data: [
+            { id: 1, name: 11 },
+        ]
+    },
+    columnDefs: [
+        { display: 'ID', field: 'id' },
+        { display: 'name', field: 'name' },
+    ]
+});
+neTable.create({
+    parent: '#log-table',
+    http: request.api.getUserList,
+    columnDefs: [
+        { display: 'ID', field: 'id' },
+        { display: 'name', field: 'name' },
+    ]
+});
+let table = neTable.create({
+    parent: '#log-table',
+    scope: $scope,
+    http: request.api.getUserList,
+    httpData: {
+        page_now: 10
+    },
+    withCheckBox: false,
+    withSlidePanel: true,
+    slidePanel: {
+        height: '200px;',
+        field: function(rowData, rowIndex, colIndex){ return rowIndex + ':' + colIndex;}
+    },
+    style: {
+        class: 'table-class'
+    },
+    withPage: true,
+    page: {
+        custom: function(numberBtnsDom, pageInfoDom){ return 'custom buttom page'}
+    },
+
+    columnDefs: [
+        { display: 'ID', field: 'id' },
+        { display: 'name', field: 'name' },
+    ],
+    onResHandler: function(res){
+        return res.data;
+    },
+    onSelect: function(list){
+        let selList = list;
+    },
+    onRowClick: function(rowData, index, slidePanelId, slidePanelCellIds) {
+        this.showSlidePanel(index);
+        //this.hideSlidePanel(index);
+    }
+});
+*/
+
 class Table {
     constructor(opts, $rootScope, $compile, $controller) {
         this.$rootScope = $rootScope;
         this.$compile = $compile;
         this.$controller = $controller;
-        this.opts = Object.assign({}, OPTIONS, opts);
-        this.isAppend = false;
-        this.scope = this.opts.scope ? this.opts.scope.$new() : $rootScope.$new(true);
+        this.opts = $.extend(true, {}, OPTIONS, opts);
+        console.log(this.opts);
+        this.id = 'ne-table' + new Date().getTime();
 
-
+        this.scope = this.opts.scope ? this.opts.scope.$new() : $rootScope.$new();
         this.scope.data = {};
         this.scope.totalCount = 0;
         this.scope.curPage = 1;
@@ -84,37 +182,28 @@ class Table {
     }
 
     renderUI() {
-        var that = this;
-        this.$grid = angular.element("<div class='ui-grid'></div>");
-        this.$header = angular.element("<div class='ui-grid-header'></div>");
-        this.$gridList = angular.element("<div class='ui-grid-list'></div>");
+        this.$grid = $(`<div class="ui-grid ${this.opts.style.class}" id="${this.id}"></div>`);
+        this.$header = $("<div class='ui-grid-header'></div>");
+        this.$gridList = $("<div class='ui-grid-list'></div>");
         this.$grid.append(this.$header).append(this.$gridList);
-        if (this.opts.class) {
-            this.$grid.addClass(this.opts.class);
+        if (this.opts.withPage) {
+            this.$grid.addClass('with-bottom');
+            this.$gridBottom = $("<div class='ui-grid-bottom'></div>");
+            this.$grid.append(this.$gridBottom);
         }
 
         // 如果获取到了父节点，则添加表格，如果未获取到，则在请求之后添加表格
-        let tryCount = 0;
-
-        function tryAdd() {
-            let p = angular.element(that.opts.parent);
+        const tryAdd = (count) => {
+            let p = angular.element(this.opts.parent);
             if (p.length > 0) {
-                p.append(that.$grid);
-                that.isAppend = true;
-            } else if (tryCount > 50) {
+                p.append(this.$grid);
+            } else if (count > 50) {
                 console.warn('neTable创建失败，未找到父节点');
             } else {
-                tryCount += 1;
-                setTimeout(tryAdd, 100);
+                setTimeout(() => { tryAdd(count + 1); }, 100);
             }
-        }
-        tryAdd();
-
-        if (this.opts.page) {
-            this.$grid.addClass('with-bottom');
-            this.$gridBottom = angular.element("<div class='ui-grid-bottom'></div>");
-            this.$grid.append(this.$gridBottom);
-        }
+        };
+        tryAdd(0);
 
         // 只创建表头，等待获取到数据后再创建表格
         this.createHeader();
@@ -133,11 +222,11 @@ class Table {
 
         this.scope.gridData.forEach((rowData, index) => {
             this.scope.rowSelect[index] = false;
-            let $row = $(`<div class='ui-grid-row' ng-class='{"ui-grid-row-select": rowSelect[${index}]}'></div>`);
+            let $row = $(`<div class='ui-grid-row ${this.opts.style.rowClass}' ng-class='{"ui-grid-row-select": rowSelect[${index}]}'></div>`);
             this.$gridList.append($row);
             this.opts.columnDefs.forEach((colum) => {
                 let cellWidth = colum.width ? (colum.width + '%') : equalWidth;
-                let $cell = $(`<div class='ui-grid-row-cell' ng-click='rowClick(${index})' style='width: ${cellWidth}'></div>`);
+                let $cell = $(`<div class='ui-grid-row-cell ${this.opts.style.cellClass}' ng-click='rowClick(${index})' style='width: ${cellWidth}'></div>`);
 
                 if (typeof colum.field === 'string') {
                     $cell.append(rowData[colum.field]);
@@ -153,14 +242,52 @@ class Table {
                 }
                 $row.append($cell);
             });
-            if (this.opts.hasCheckBox === true) {
+            $row.append('<div class="clearfix"></div>');
+
+            if (this.opts.withCheckBox === true) {
                 $row.addClass('ui-grid-hasCheck');
-                $row.append("<div class='ui-grid-check'><input type='checkbox' ng-change='checkChange()' ng-model='rowSelect[" + index + "]'></div>");
+                $row.append(`<div class='ui-grid-check'><input type='checkbox' ng-change='checkChange()' ng-model='rowSelect[${index}]'></div>`);
+            }
+            if (this.opts.withSlidePanel === true) {
+                let $slidePanel = $(`<div class="ui-grid-row-down-panel ${this.opts.style.slidePanelClass}" style="height:${this.opts.slidePanel.height}" id="${this.getSlidePanelId(index)}"></div>`);
+                $row.append($slidePanel);
+                this.opts.columnDefs.forEach((colum, columIndex) => {
+                    let cellWidth = colum.width ? (colum.width + '%') : equalWidth;
+                    let $cell = $(`<div class="ui-grid-row-cell ${this.opts.style.slidePanelCellClass}" style="width: ${cellWidth}" id="${this.getSlidePanelCellId(index, columIndex)}"></div>`);
+                    if (this.opts.slidePanel.field && typeof this.opts.slidePanel.field === 'function') {
+                        $cell.append(this.opts.slidePanel.field(rowData, index, columIndex));
+                    }
+                    $slidePanel.append($cell);
+                });
+                $slidePanel.append('<div class="clearfix"></div>');
             }
         });
         this.$compile(this.$gridList)(this.scope);
     }
-
+    getSlidePanelId(index) {
+        return `${this.id}-slidepanel-${index}`;
+    }
+    getSlidePanelCellId(rowIndex, cellIndex) {
+        return `${this.getSlidePanelId(rowIndex)}-${cellIndex}`;
+    }
+    showSlidePanel(index) {
+        this.scope.gridData.forEach((rowData, i) => {
+            if (i === index) {
+                $(`#${this.getSlidePanelId(i)}`).slideDown();
+            } else {
+                $(`#${this.getSlidePanelId(i)}`).slideUp();
+            }
+        });
+    }
+    hideSlidePanel(index) {
+        if (index) {
+            $(`#${this.getSlidePanelId(index)}`).slideUp();
+        } else {
+            this.scope.gridData.forEach((rowData, i) => {
+                $(`#${this.getSlidePanelId(i)}`).slideUp();
+            });
+        }
+    }
     bindUI() {
         // 单行选择按钮
         this.scope.checkChange = (index) => {
@@ -170,7 +297,7 @@ class Table {
                 count += Number(item);
             });
             this.scope.rowSelectAll = (count === this.scope.rowSelect.length);
-            this.opts.onSelect && this.opts.onSelect(this.getSelect());
+            this.opts.onSelect && this.opts.onSelect.call(this, this.getSelect());
         };
         // 单行点击事件
         this.scope.rowClick = (index) => {
@@ -179,17 +306,21 @@ class Table {
             });
             this.scope.rowSelectAll = (this.scope.rowSelect.length === 1) ? this.scope.rowSelect[index] : false;
             this.opts.onSelect && this.opts.onSelect(this.getSelect());
+            let slidePanelIds = [];
+            this.opts.columnDefs.forEach((colum, columIndex) => {
+                slidePanelIds.push(this.getSlidePanelCellId(index, columIndex));
+            });
+            this.opts.onRowClick && this.opts.onRowClick.call(this, this.scope.gridData[index], index, this.getSlidePanelId(index), slidePanelIds);
         };
 
         // 全选按钮
         this.scope.checkAllChange = () => {
             this.scope.rowSelect.fill(this.scope.rowSelectAll);
-            this.opts.onSelect && this.opts.onSelect(this.getSelect());
+            this.opts.onSelect && this.opts.onSelect.call(this, this.getSelect());
         };
         // 排序点击事件
         this.scope.SortAscDesc = (colData, index) => {
             let orderType = KEY.orderAsc;
-            // TODO
             if (typeof colData.sort !== 'string') {
                 console.info('请配置排序字段');
                 return;
@@ -239,7 +370,7 @@ class Table {
         let cellWidth = (this.scope.columnDefs[0].width) ? '{{col.width}}%' : equalWidth;
         this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs" ng-click="SortAscDesc(col, $index)" style="width: ${cellWidth}">{{col.display}}</div>`);
         // 添加全选按钮
-        if (this.opts.hasCheckBox === true) {
+        if (this.opts.withCheckBox === true) {
             this.$header.addClass('ui-grid-hasCheck');
             this.$header.append("<div class='ui-grid-check'><input type='checkbox' class='checkAll' ng-model='rowSelectAll' ng-change='checkAllChange()'></div>");
         }
@@ -247,7 +378,7 @@ class Table {
         this.interval = setInterval(() => {
             if (this.$grid.is(':hidden')) {
                 clearInterval(this.interval);
-                this.close;
+                this.close();
                 return;
             }
             let w = this.$gridList[0].offsetWidth;
@@ -263,39 +394,47 @@ class Table {
     }
 
     createBottom() {
-        var LENGTH = 4;
-        this.$gridBottom.empty();
-        if (!this.opts.page) {
+        if (!this.opts.withPage) {
             return;
         }
+        let LENGTH = 4;
+        this.$gridBottom.empty();
         this.scope.isShow = !this.opts.onlyInfoPage;
-        let $page = $('<div class="ui-grid-bottom-page" ng-show="isShow" ></div>');
-        $page.append('<a class="page" ng-click="pageTo(\'上一页\')">上一页</a>');
 
-        this.scope.pageList = [];
+        let $numBtns = $('<div class="ui-grid-bottom-page"><a class="page" ng-repeat="num in pageList" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a></div>');
+        let $pageInfo = $('<div class="ui-grid-bottom-info">共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>');
+        this.scope.pageList = ['上一页'];
         let sNum = this.scope.curPage - LENGTH;
         let eNum = this.scope.curPage + LENGTH;
         sNum = sNum < 1 ? 1 : sNum;
         eNum = eNum > this.scope.pageCount ? this.scope.pageCount : eNum;
+        if (sNum >= 2) {
+            this.scope.pageList.push(1);
+            if (sNum > 2) {
+                this.scope.pageList.push('...');
+            }
+        }
         for (let i = sNum; i <= eNum; i += 1) {
             this.scope.pageList.push(i);
         }
-        if (sNum >= 2) {
-            if (sNum > 2) {
-                this.scope.pageList.unshift('...');
-            }
-            this.scope.pageList.unshift(1);
-        }
-        if (eNum <= (this.scope.pageCount - 2)) {
-            if (eNum < (this.scope.pageCount - 2)) {
-                this.scope.pageList.push('...');
-            }
+        if (eNum === (this.scope.pageCount - 1)) {
             this.scope.pageList.push(this.scope.pageCount);
         }
-        $page.append('<a class="page" ng-repeat="num in pageList track by $index" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a>');
-        $page.append('<a class="page" ng-click="pageTo(\'下一页\')">下一页</a>');
-        this.$gridBottom.append("<div class='ui-grid-bottom-info'>共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>");
-        this.$gridBottom.append($page);
+        if (eNum < (this.scope.pageCount - 1)) {
+            this.scope.pageList.push('...');
+            this.scope.pageList.push(this.scope.pageCount);
+        }
+        this.scope.pageList.push('下一页');
+        if (this.opts.page.custom && typeof this.opts.page.custom === 'function') {
+            this.$gridBottom.append(this.opts.page.custom($numBtns, $pageInfo));
+        } else {
+            if (this.opts.page.withInfo) {
+                this.$gridBottom.append($pageInfo);
+            }
+            if (this.opts.page.withNumber) {
+                this.$gridBottom.append($numBtns);
+            }
+        }
         this.$compile(this.$gridBottom)(this.scope);
     }
     getData() {
@@ -303,8 +442,8 @@ class Table {
         var that = this;
 
         scope.http(scope.httpData, function(data) {
-            if (that.opts.resHandler) {
-                scope.data = that.opts.resHandler(data);
+            if (that.opts.onResHandler) {
+                scope.data = that.opts.onResHandler(data);
             } else {
                 scope.data = data;
             }

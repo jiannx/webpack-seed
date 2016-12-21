@@ -27,7 +27,7 @@ $ui-grid-border-c: #F0F0F0;
   }
   &.with-bottom {
     padding-bottom: $ui-grid-bottom-h;
-    .ui-grid-bottom{
+    .ui-grid-bottom {
       display: block;
     }
   }
@@ -135,13 +135,14 @@ $ui-grid-border-c: #F0F0F0;
     overflow-y: auto;
     .ui-grid-row {
       width: 100%;
-      height: $ui-grid-row-height;
+      min-height: $ui-grid-row-height;
       line-height: $ui-grid-row-height;
       background-color: #ffffff;
       position: relative;
       border-top: 1px solid #eee;
       transition: 0.1s;
       .ui-grid-row-cell {
+        // min-height: $ui-grid-row-height;
         height: 100%;
         text-align: center;
         float: left;
@@ -165,4 +166,13 @@ $ui-grid-border-c: #F0F0F0;
       }
     }
   }
+}
+
+.ui-grid-row-down-panel {
+  width: 100%;
+  height: 200px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+  color: black;
 }
