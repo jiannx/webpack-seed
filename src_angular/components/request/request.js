@@ -7,17 +7,18 @@ errorCall： 请求错误回调
 cfg： 配置
 param： 回调带上的参数
 示例：
-request.do(req, data, successCall, errorCall, cfg, param)
+request(req, data, successCall, errorCall, cfg, param)
 // 基础调用
-request.do('demo', { id: 0 }, (data) => {});
+request('demo', { id: 0 }, (data) => {});
 // 完整调用 包含错误回调，配置，及接口返回参数
-request.do({ method: 'get', url: '/api/demo', timeout: 10000 }, { id: 0 }, (data, res, param) => {}, (data, res, param) => {}, {}, {});
+request({ method: 'get', url: '/api/demo', timeout: 10000 }, { id: 0 }, (data, res, param) => {}, (data, res, param) => {}, {}, {});
 // 函数形式调用
-request.api.demo(data, successCall, errorCall, cfg, param);
+request.demo(data, successCall, errorCall, cfg, param);
  */
 import layer from 'layer'; // 引入弹出窗，进行错误提示
 import app from 'app.config';
 import api from '../../app.api'; // 接口定义引入
+
 
 // 默认配置
 const defaultCfg = {
@@ -38,7 +39,7 @@ const checkLogin = function() {
 };
 
 // angular http处理数据
-const angularGetData = function(http, req, data, successCall, errorCall) {
+const getData = function(http, req, data, successCall, errorCall) {
     let httpOpt = {
         method: null,
         url: null,
@@ -61,9 +62,9 @@ const angularGetData = function(http, req, data, successCall, errorCall) {
     });
 };
 
-class Request {
+class NeRequest {
     constructor($http) {
-        this.$http = $http;
+        this.http = $http;
         this.loadingCount = 0;
         this.loadingLayer = null;
         this.errorLayer = null;
@@ -88,7 +89,7 @@ class Request {
         if (cfg.showLoading) {
             this.addLoading();
         }
-        angularGetData(this.$http, req, data, (res) => {
+        getData(this.http, req, data, (res) => {
             if (cfg.showLoading) {
                 this.removeLoading();
             }
@@ -134,7 +135,17 @@ class Request {
         console.log(api);
     }
 }
-
-Request.$injector = ['$http'];
-
-app.service('request', Request);
+app.factory('request', function($http) {
+    let neRequest = new NeRequest($http);
+    let request = function(req, data, successCall, errorCall, cfg, param) {
+        neRequest.do.call(neRequest, req, data, successCall, errorCall, cfg, param);
+    };
+    for (let key of Object.keys(neRequest.api)) {
+        request[key] = neRequest.api[key];
+    }
+    request.api = neRequest.api;
+    request.list = function() {
+        neRequest.list.call(neRequest);
+    };
+    return request;
+});

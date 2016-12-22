@@ -47,6 +47,7 @@ const OPTIONS = {
     withSlidePanel: false,
     slidePanel: {
         height: '200px', // 面板高度 '100px' (string)
+        autoHideOthers: true, // 当显示一个下拉面板时，自动隐藏其他下拉面板
         field: null, // cell内容创建函数，function(rowData, rowIndex, colIndex) {}
     },
     // 选填。每行是否有checkbox
@@ -193,11 +194,13 @@ class Table {
 
         // 如果获取到了父节点，则添加表格，如果未获取到，则在请求之后添加表格
         const tryAdd = (count) => {
-            let p = angular.element(this.opts.parent);
-            if (p.length > 0) {
-                p.append(this.$grid);
-            } else if (count > 50) {
+            if ($(`#${this.id}`).length > 0) {
+                return;
+            }
+            if (count > 50) {
                 console.warn('neTable创建失败，未找到父节点');
+            } else if ($(this.opts.parent).length > 0) {
+                $(this.opts.parent).append(this.$grid);
             } else {
                 setTimeout(() => { tryAdd(count + 1); }, 100);
             }
@@ -270,13 +273,14 @@ class Table {
         return `${this.getSlidePanelId(rowIndex)}-${cellIndex}`;
     }
     showSlidePanel(index) {
-        this.scope.gridData.forEach((rowData, i) => {
-            if (i === index) {
-                $(`#${this.getSlidePanelId(i)}`).slideDown();
-            } else {
-                $(`#${this.getSlidePanelId(i)}`).slideUp();
-            }
-        });
+        $(`#${this.getSlidePanelId(index)}`).slideDown();
+        if (this.opts.slidePanel.autoHideOthers === true) {
+            this.scope.gridData.forEach((rowData, i) => {
+                if (i !== index) {
+                    $(`#${this.getSlidePanelId(i)}`).slideUp();
+                }
+            });
+        }
     }
     hideSlidePanel(index) {
         if (index) {
