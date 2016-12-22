@@ -18,7 +18,106 @@ request.demo(data, successCall, errorCall, cfg, param);
 import layer from 'layer'; // 引入弹出窗，进行错误提示
 import app from 'app.config';
 import api from '../../app.api'; // 接口定义引入
+/*
+request('getList').success((res)=>{});
+request('getList', {}).success((res)=>{}).error(()=>{});
+request('getList', {}).async('getList', {}).async('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
+request('getList', {}).sync('getList', {}).sync('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
+request.get('/api/get/list', {}).success();
+request.post('/api/add', {}).success();
+request({method, url}, {}).success();
+*/
 
+let loadingIndex = null;
+
+const showLoading = function() {
+
+};
+
+const hideLoading = function() {
+
+};
+let HTTP_OPTION = {
+    method: null,
+    url: null,
+    timeout: 60000,
+    headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+    }
+};
+
+class NeReq {
+    constructor($http, req, reqData, cfg, params) {
+        this.http = $http;
+        this.req = req;
+        this.reqData = reqData;
+        this.cfg = cfg;
+        this.params = params;
+        this.didCount = 0;
+        this.didIndex = 0; // the index of which req is done
+        this.reqQueue = []; // {req, type, successCall}
+        this.resQueue = [];
+        this.errorCall = null;
+
+        this.async(req, reqData, cfg, params);
+    }
+    success(successCall) {
+        this.reqQueue[this.reqQueue.length - 1].successCall = successCall;
+        return this;
+    }
+    error(errorCall) {
+        this.errorCall = errorCall;
+        return this;
+    }
+    async(req, reqData, cfg, params) {
+        this.reqQueue.push({ req, reqData, cfg, params, type: 'async', successCall: null });
+        return this;
+    }
+    sync(req, reqData, cfg, params) {
+        this.reqQueue.push({ req, reqData, cfg, params, type: 'sync', successCall: null });
+        return this;
+    }
+    _init(req) {
+        if (typeof req === 'string') {
+
+        } else if (typeof req === 'object') {
+
+        }
+    }
+    _do() {
+        let doing = this.doingIndex;
+        let self = this;
+        // 完成项等于所有接口时，调用success
+        if (this.didCount === this.reqQueue.length) {
+            this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...this.resQueue);
+            return;
+        }
+        for (let i = doing; i < this.reqQueue.length; i += 1) {
+            // 完成项等于进行项时，执行下一个接口
+            if (this.reqQueue[i].type === 'sync' && this.didCount < this.doingIndex) {
+                break;
+            }
+            let lastSuccessResult = null;
+            if ((i - 1) >= 0 && this.reqQueue[i - 1].successCall) {
+                lastSuccessResult = this.reqQueue[i - 1].successCall && this.reqQueue[i - 1].successCall(...this.resQueue);
+            }
+            this.doingIndex += 1;
+            let httpOpt = Object.assign({}, HTTP_OPTION, this.reqQueue[i].req);
+            if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
+                httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
+            } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
+                httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
+            }
+            this.http(this.reqQueue[i]).then((res) => {
+                self.didCount += 1;
+                self.resQueue[i] = res;
+                self._do();
+            }, (res) => {
+                self.errorCall(res);
+            });
+        }
+    }
+}
 
 // 默认配置
 const defaultCfg = {
