@@ -23,102 +23,23 @@ request('getList').success((res)=>{});
 request('getList', {}).success((res)=>{}).error(()=>{});
 request('getList', {}).async('getList', {}).async('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
 request('getList', {}).sync('getList', {}).sync('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
-request.get('/api/get/list', {}).success();
-request.post('/api/add', {}).success();
 request({method, url}, {}).success();
+request({method, url}).data({}).success();
 */
 
 let loadingIndex = null;
 
 const showLoading = function() {
-
+    if (!loadingIndex) {
+        loadingIndex = layer.load(1);
+    }
+    // layer.alert('数据请求失败，请重试。', { icon: 0 });
 };
 
 const hideLoading = function() {
-
+    layer.close(loadingIndex);
+    loadingIndex = null;
 };
-let HTTP_OPTION = {
-    method: null,
-    url: null,
-    timeout: 60000,
-    headers: {
-        'Content-Type': 'text/plain;charset=UTF-8'
-    }
-};
-
-class NeReq {
-    constructor($http, req, reqData, cfg, params) {
-        this.http = $http;
-        this.req = req;
-        this.reqData = reqData;
-        this.cfg = cfg;
-        this.params = params;
-        this.didCount = 0;
-        this.didIndex = 0; // the index of which req is done
-        this.reqQueue = []; // {req, type, successCall}
-        this.resQueue = [];
-        this.errorCall = null;
-
-        this.async(req, reqData, cfg, params);
-    }
-    success(successCall) {
-        this.reqQueue[this.reqQueue.length - 1].successCall = successCall;
-        return this;
-    }
-    error(errorCall) {
-        this.errorCall = errorCall;
-        return this;
-    }
-    async(req, reqData, cfg, params) {
-        this.reqQueue.push({ req, reqData, cfg, params, type: 'async', successCall: null });
-        return this;
-    }
-    sync(req, reqData, cfg, params) {
-        this.reqQueue.push({ req, reqData, cfg, params, type: 'sync', successCall: null });
-        return this;
-    }
-    _init(req) {
-        if (typeof req === 'string') {
-
-        } else if (typeof req === 'object') {
-
-        }
-    }
-    _do() {
-        let doing = this.doingIndex;
-        let self = this;
-        // 完成项等于所有接口时，调用success
-        if (this.didCount === this.reqQueue.length) {
-            this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...this.resQueue);
-            return;
-        }
-        for (let i = doing; i < this.reqQueue.length; i += 1) {
-            // 完成项等于进行项时，执行下一个接口
-            if (this.reqQueue[i].type === 'sync' && this.didCount < this.doingIndex) {
-                break;
-            }
-            let lastSuccessResult = null;
-            if ((i - 1) >= 0 && this.reqQueue[i - 1].successCall) {
-                lastSuccessResult = this.reqQueue[i - 1].successCall && this.reqQueue[i - 1].successCall(...this.resQueue);
-            }
-            this.doingIndex += 1;
-            let httpOpt = Object.assign({}, HTTP_OPTION, this.reqQueue[i].req);
-            if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
-                httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
-            } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
-                httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
-            }
-            this.http(this.reqQueue[i]).then((res) => {
-                self.didCount += 1;
-                self.resQueue[i] = res;
-                self._do();
-            }, (res) => {
-                self.errorCall(res);
-            });
-        }
-    }
-}
-
 // 默认配置
 const defaultCfg = {
     showLoading: true, // 显示等待状态
@@ -137,114 +58,162 @@ const checkLogin = function() {
     return isLogin;
 };
 
-// angular http处理数据
-const getData = function(http, req, data, successCall, errorCall) {
-    let httpOpt = {
-        method: null,
-        url: null,
-        timeout: 60000,
-        headers: {
-            'Content-Type': 'text/plain;charset=UTF-8'
-        }
-    };
-    Object.assign(httpOpt, req);
-
-    if (req.method.toUpperCase() === 'GET') {
-        httpOpt.params = data;
-    } else if (req.method.toUpperCase() === 'POST') {
-        httpOpt.data = data;
+let HTTP_OPTION = {
+    method: null,
+    url: null,
+    timeout: 60000,
+    headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
     }
-    http(httpOpt).then((res) => {
-        successCall(res);
-    }, (res) => {
-        errorCall(res);
-    });
 };
 
 class NeRequest {
-    constructor($http) {
+    constructor($http, req, reqData, successCall, errorCall, cfg) {
         this.http = $http;
-        this.loadingCount = 0;
-        this.loadingLayer = null;
-        this.errorLayer = null;
-        this.api = {};
-        for (let key of Object.keys(api)) {
-            this.api[key] = (data, successCall, errorCall, cfg, param) => {
-                this.do(api[key], data, successCall, errorCall, cfg, param);
-            };
-        }
-    }
+        this.doneCount = 0;
+        this.doingIndex = 0; // the index of which req is done
+        this.reqQueue = []; // {req, type, successCall}
+        this.resQueue = [];
+        this.errorCall = null;
+        req = this._initReq(req);
 
-    // 获取数据
-    do(req, data, successCall, errorCall, cfg, param) {
+        this.async(req, reqData, successCall, errorCall, cfg);
+    }
+    data(reqData) {
+        if (this.doingIndex !== 0 && this.doneCount < this.reqQueue.length) {
+            console.warn(this.reqQueue[this.doingIndex - 1].req.url + ' is doning，can not rewrite reqdata!');
+        } else {
+            this.doneCount = 0;
+            this.doingIndex = 0;
+            this.reqQueue[this.reqQueue.length - 1].reqData = reqData;
+        }
+        return this;
+    }
+    success(successCall) {
+        this.reqQueue[this.reqQueue.length - 1].successCall = successCall;
+        this._do();
+        return this;
+    }
+    error(errorCall) {
+        this.errorCall = errorCall;
+        return this;
+    }
+    async(req, reqData, successCall, errorCall, cfg) {
+        req = this._initReq(req);
+        this.reqQueue.push({ req, reqData, cfg, type: 'async', successCall: null });
+        if (successCall) {
+            this.success(successCall);
+        }
+        return this;
+    }
+    sync(req, reqData, successCall, errorCall, cfg) {
+        req = this._initReq(req);
+        this.reqQueue.push({ req, reqData, cfg, type: 'sync', successCall: null });
+        if (successCall) {
+            this.success(successCall);
+        }
+        return this;
+    }
+    _initReq(req) {
         if (typeof req === 'string') {
+            let _req = req;
             req = api[req];
             if (typeof req === 'undefined') {
-                console.error('Request Error: 未定义接口');
-                return;
+                req = {
+                    url: _req,
+                    method: 'get'
+                };
             }
         }
-        cfg = Object.assign({}, defaultCfg, cfg);
-        if (cfg.showLoading) {
-            this.addLoading();
+        return req;
+    }
+    _do() {
+        let self = this;
+        // 完成所有接口时，调用success
+        if (this.doneCount === this.reqQueue.length) {
+            hideLoading();
+            let data = [];
+            for (let item of this.resQueue) {
+                data.push(item.data);
+            }
+            this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...data, this.resQueue);
+            return;
         }
-        getData(this.http, req, data, (res) => {
-            if (cfg.showLoading) {
-                this.removeLoading();
+        let lastSuccessResult = null;
+        for (let i = this.doingIndex; i < this.reqQueue.length; i += 1) {
+            // 完成项等于进行项时，执行下一个接口
+            if (this.reqQueue[i].type === 'sync' && this.doneCount < this.doingIndex) {
+                break;
             }
-            if (!checkLogin(res)) {
-                return;
+            // 当本次接口为同步请求时，获取前一个successcCall的返回参数作为本次请求的参数，返回参数的优先级大于请求配置时传入的参数（即覆盖原先参数）
+            if (this.reqQueue[i].type === 'sync' && this.doneCount === this.doingIndex) {
+                if ((i - 1) >= 0 && this.reqQueue[i - 1].successCall) {
+                    let data = [];
+                    for (let item of this.resQueue) {
+                        data.push(item.data);
+                    }
+                    lastSuccessResult = this.reqQueue[i - 1].successCall && this.reqQueue[i - 1].successCall(...data, this.resQueue);
+                }
             }
-            successCall && successCall(res.data, param, res);
-        }, (res) => {
-            if (cfg.showLoading) {
-                this.removeLoading();
+            let httpOpt = Object.assign({}, HTTP_OPTION, this.reqQueue[i].req);
+            if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
+                httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
+            } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
+                httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
             }
-            if (cfg.showError) {
-                this.showError(res);
-            }
-            errorCall && errorCall(res.data, param, res);
-        });
-    }
-
-    // 添加等待状态
-    addLoading() {
-        if (this.loadingCount === 0) {
-            this.loadingLayer = layer.load(1);
+            // 执行请求
+            this.doingIndex += 1;
+            showLoading();
+            this.http(httpOpt).then((res) => {
+                self.doneCount += 1;
+                self.resQueue[i] = res;
+                self._do();
+            }, (res) => {
+                self.errorCall && self.errorCall(res);
+            });
         }
-        this.loadingCount += 1;
-    }
-
-    // 移除等待状态
-    removeLoading() {
-        this.loadingCount -= 1;
-        if (this.loadingCount === 0) {
-            layer.close(this.loadingLayer);
-        }
-    }
-
-    // 显示错误弹窗
-    showError(error) {
-        layer.close(this.errorLayer);
-        this.errorLayer = layer.alert('数据请求失败，请重试。', { icon: 0 });
-    }
-
-    // 查看所有接口
-    list() {
-        console.log(api);
     }
 }
+
 app.factory('request', function($http) {
-    let neRequest = new NeRequest($http);
-    let request = function(req, data, successCall, errorCall, cfg, param) {
-        neRequest.do.call(neRequest, req, data, successCall, errorCall, cfg, param);
+    let result = function(req, reqData, successCall, errorCall, cfg) {
+        return new NeRequest($http, req, reqData, successCall, cfg);
     };
-    for (let key of Object.keys(neRequest.api)) {
-        request[key] = neRequest.api[key];
+    result.list = function() {
+        console.log(api);
+    };
+    result.api = {};
+    for (let key of Object.keys(api)) {
+        result.api[key] = function() {};
+        result[key] = function(reqData, successCall, errorCall, cfg) {
+            return new NeRequest($http, key, reqData, successCall, cfg);
+        };
     }
-    request.api = neRequest.api;
-    request.list = function() {
-        neRequest.list.call(neRequest);
-    };
-    return request;
+    // let test1 = new NeReq($http, '/ap/get1', { id: 1 })
+    //     .success(([res1]) => {
+    //         return res1;
+    //     })
+    //     .sync('/ap/get2', { key: 2 })
+    //     .async('/ap/get3')
+    //     .success(([res1, res2, res3]) => {
+    //         console.log(res1);
+    //         console.log(res2);
+    //         console.log(res3);
+    //         return {
+    //             id: 2
+    //         };
+    //     })
+    //     .sync('/ap/get2')
+    //     .success(([res1, res2, res3, res4]) => {
+    //         console.log(res1);
+    //         console.log(res2);
+    //         console.log(res3);
+    //         console.log(res4);
+    //     });
+    // let test2 = result('/ap/get2', { id: 3 }, function() {});
+    // test2.data({ id: 4 });
+    // test2.success();
+    // console.log(test1);
+
+    return result;
 });

@@ -444,7 +444,7 @@ class Table {
         var scope = this.scope;
         var that = this;
 
-        scope.http(scope.httpData, function(data) {
+        scope.http.data(scope.httpData).success(function(data) {
             if (that.opts.onResHandler) {
                 scope.data = that.opts.onResHandler(data);
             } else {
