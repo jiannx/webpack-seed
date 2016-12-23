@@ -72,6 +72,7 @@ class NeRequest {
         this.http = $http;
         this.doneCount = 0;
         this.doingIndex = 0; // the index of which req is done
+        this.errorIndex = null;
         this.reqQueue = []; // {req, type, successCall}
         this.resQueue = [];
         this.errorCall = null;
@@ -83,8 +84,7 @@ class NeRequest {
         if (this.doingIndex !== 0 && this.doneCount < this.reqQueue.length) {
             console.warn(this.reqQueue[this.doingIndex - 1].req.url + ' is doning，can not rewrite reqdata!');
         } else {
-            this.doneCount = 0;
-            this.doingIndex = 0;
+            this.init();
             this.reqQueue[this.reqQueue.length - 1].reqData = reqData;
         }
         return this;
@@ -114,6 +114,11 @@ class NeRequest {
         }
         return this;
     }
+    init() {
+        this.doneCount = 0;
+        this.doingIndex = 0;
+        this.errorIndex = null;
+    }
     _initReq(req) {
         if (typeof req === 'string') {
             let _req = req;
@@ -129,6 +134,17 @@ class NeRequest {
     }
     _do() {
         let self = this;
+        if (this.errorIndex === -1) {
+            return;
+        }
+        // 接口报错情况下，直接进行错误回调
+        if (this.errorIndex !== null) {
+            hideLoading();
+            console.log(this.resQueue[this.errorIndex]);
+            self.errorCall && self.errorCall(this.errorIndex, this.resQueue[this.errorIndex], this.resQueue);
+            this.errorIndex = -1; // 多个请求回调的情况下，当一个接口挂了，其他接口不进行回调
+            return;
+        }
         // 完成所有接口时，调用success
         if (this.doneCount === this.reqQueue.length) {
             hideLoading();
@@ -145,6 +161,7 @@ class NeRequest {
             if (this.reqQueue[i].type === 'sync' && this.doneCount < this.doingIndex) {
                 break;
             }
+
             // 当本次接口为同步请求时，获取前一个successcCall的返回参数作为本次请求的参数，返回参数的优先级大于请求配置时传入的参数（即覆盖原先参数）
             if (this.reqQueue[i].type === 'sync' && this.doneCount === this.doingIndex) {
                 if ((i - 1) >= 0 && this.reqQueue[i - 1].successCall) {
@@ -169,7 +186,10 @@ class NeRequest {
                 self.resQueue[i] = res;
                 self._do();
             }, (res) => {
-                self.errorCall && self.errorCall(res);
+                self.doneCount += 1;
+                self.resQueue[i] = res;
+                self.errorIndex = i;
+                self._do();
             });
         }
     }

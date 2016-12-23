@@ -379,7 +379,7 @@ class Table {
         }
         // 定时控制表头宽度
         this.interval = setInterval(() => {
-            if (this.$grid.is(':hidden')) {
+            if ($(`#${this.id}`).length === 0) {
                 clearInterval(this.interval);
                 this.close();
                 return;
