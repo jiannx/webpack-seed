@@ -25,5 +25,6 @@ app.config(($stateProvider) => {
         }
     });
 }).service('authService', () => {
+    
     this.name = 'authService';
 });
