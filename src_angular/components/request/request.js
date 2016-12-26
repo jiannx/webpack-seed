@@ -29,21 +29,26 @@ request({method, url}).data({}).success();
 
 let loadingIndex = null;
 
+// 显示等待框
 const showLoading = function() {
     if (!loadingIndex) {
         loadingIndex = layer.load(1);
     }
-    // layer.alert('数据请求失败，请重试。', { icon: 0 });
 };
 
+// 隐藏等待框
 const hideLoading = function() {
     layer.close(loadingIndex);
     loadingIndex = null;
 };
-// 默认配置
-const defaultCfg = {
-    showLoading: true, // 显示等待状态
-    showError: true, // 显示错误信息
+
+// 显示接口报错信息
+const showError = function(res) {
+    layer.alert('数据请求失败，请重试。 Code:' + res.status, { icon: 2 });
+};
+
+// 接口请求成功，但是数据错误
+const showDataError = function(res) {
 };
 
 // 登陆验证
@@ -58,17 +63,23 @@ const checkLogin = function() {
     return isLogin;
 };
 
+// 默认配置
+const defaultCfg = {
+    showLoading: true, // 显示等待状态
+    showError: true, // 显示错误信息
+};
+
 let HTTP_OPTION = {
     method: null,
     url: null,
-    timeout: 60000,
+    timeout: 10000,
     headers: {
         'Content-Type': 'text/plain;charset=UTF-8'
     }
 };
 
 class NeRequest {
-    constructor($http, req, reqData, successCall, errorCall, cfg) {
+    constructor(req, reqData, successCall, errorCall, cfg, $http) {
         this.http = $http;
         this.doneCount = 0;
         this.doingIndex = 0; // the index of which req is done
@@ -140,8 +151,8 @@ class NeRequest {
         // 接口报错情况下，直接进行错误回调
         if (this.errorIndex !== null) {
             hideLoading();
-            console.log(this.resQueue[this.errorIndex]);
-            self.errorCall && self.errorCall(this.errorIndex, this.resQueue[this.errorIndex], this.resQueue);
+            showError(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
+            self.errorCall && self.errorCall(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
             this.errorIndex = -1; // 多个请求回调的情况下，当一个接口挂了，其他接口不进行回调
             return;
         }
@@ -152,6 +163,7 @@ class NeRequest {
             for (let item of this.resQueue) {
                 data.push(item.data);
             }
+            showDataError();
             this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...data, this.resQueue);
             return;
         }
@@ -197,7 +209,7 @@ class NeRequest {
 
 app.factory('request', function($http) {
     let result = function(req, reqData, successCall, errorCall, cfg) {
-        return new NeRequest($http, req, reqData, successCall, cfg);
+        return new NeRequest(req, reqData, successCall, errorCall, cfg, $http);
     };
     result.list = function() {
         console.log(api);
