@@ -2,8 +2,8 @@ var path = require('path');
 
 var dirs = {};
 // 定义项目类型  '':最干净的webpack, 'angular':angular单页面网站, 'react':react单页面网站, 'vue':vue单页面网站, 'pages':多页面网站
-// dirs.project = 'angular';
-dirs.project = 'vue';
+dirs.project = 'angular';
+// dirs.project = 'vue';
 
 dirs.rootDir = path.resolve(__dirname, '../'); // 项目根目录
 dirs.srcRootDir = path.resolve(dirs.rootDir, './src_' + dirs.project); // 项目业务代码根目录
