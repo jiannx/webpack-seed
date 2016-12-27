@@ -2,10 +2,11 @@ var path = require('path');
 
 var dirs = {};
 // 定义项目类型  '':最干净的webpack, 'angular':angular单页面网站, 'react':react单页面网站, 'vue':vue单页面网站, 'pages':多页面网站
-dirs.project = 'angular';
+// dirs.project = 'angular';
+dirs.project = 'vue';
 
 dirs.rootDir = path.resolve(__dirname, '../'); // 项目根目录
-dirs.srcRootDir = path.resolve(dirs.rootDir, './src_angular'); // 项目业务代码根目录
+dirs.srcRootDir = path.resolve(dirs.rootDir, './src_' + dirs.project); // 项目业务代码根目录
 dirs.vendorDir = path.resolve(dirs.rootDir, './vendor'); // 存放所有不能用npm管理的第三方库
 dirs.dllDir = path.resolve(dirs.rootDir, '.tmp/dll'); // 存放由各种不常改变的js/css打包而来的dll
 dirs.buildDir = path.resolve(dirs.rootDir, './build'); // 生成文件目录
@@ -25,12 +26,13 @@ dirs.dlls = [
 
 // 打包时不需要解析的文件 TODO 未测试
 dirs.noParse = [
-dirs.path.validation
+    dirs.path.validation
 ];
 
 // 模块别名配置
 dirs.alias = {
     'app.config': path.resolve(dirs.srcRootDir, 'app.config.js'),
+    vue$: 'vue/dist/vue.common.js'
 };
 
 // 全局变量替代require

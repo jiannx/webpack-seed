@@ -40,7 +40,9 @@ var definePluginProduction = new webpack.DefinePlugin({
     // react 发布版本
     'process.env': {
         NODE_ENV: JSON.stringify('production')
-    }
+    },
+    // vue
+    'process.env.NODE_ENV': '"production"'
 });
 
 // js代码压缩
