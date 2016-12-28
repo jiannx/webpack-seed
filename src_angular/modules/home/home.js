@@ -2,13 +2,10 @@ import app from 'app.config';
 
 // 首页
 app.config(($stateProvider) => {
-    $stateProvider.state('home', {
-        url: '/home',
-        template: require('../console.html')
-    }).state('home.index', {
-        url: '/index',
+    $stateProvider.state('index.home', {
+        url: 'home',
         views: {
-            'console': { template: require('./home.html') }
+            'console@index': { template: require('./home.html') }
         }
     });
 });

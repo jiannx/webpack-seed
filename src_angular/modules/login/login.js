@@ -6,25 +6,24 @@ import './login.scss';
 app.config(($stateProvider) => {
     $stateProvider.state('login', {
         url: '/login',
-        template: require('../console.html'),
         abstract: true
     }).state('login.in', {
         url: '/in',
         views: {
-            'console': { template: require('./login.html') }
+            '@': { template: require('./login.html') }
         }
     }).state('login.register', {
         url: '/register',
         views: {
-            'console': { template: require('./login.html') }
+            '@': { template: require('./login.html') }
         }
     }).state('login.forget-password', {
         url: '/forget-password',
         views: {
-            'console': { template: require('./login.html') }
+            '@': { template: require('./login.html') }
         }
     });
-}).controller('loginInCtrl', ($scope) => {
+}).controller('loginInCtrl', ($scope, $state) => {
     $scope.needCheckCode = false;
     $scope.errorMessage = '';
 
@@ -66,5 +65,6 @@ app.config(($stateProvider) => {
             return;
         }
         console.log('do login');
+        $state.go('index');
     };
 });

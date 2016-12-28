@@ -3,51 +3,50 @@ import './operation.scss';
 
 // 运营管理模块
 app.config(($stateProvider) => {
-    $stateProvider.state('operation', {
-            url: '/operation',
-            template: require('../console.html'),
+    $stateProvider.state('index.operation', {
+            url: 'operation',
             abstract: true
         })
         // 运营位
-        .state('operation.banner', {
+        .state('index.operation.banner', {
             url: '/banner',
             views: {
-                'console': { template: require('./operation-banner.html') }
+                'console@index': { template: require('./operation-banner.html') }
             }
         })
         // 指标
-        .state('operation.target', {
+        .state('index.operation.target', {
             url: '/target',
             views: {
-                'console': { template: require('./operation-target.html') }
+                'console@index': { template: require('./operation-target.html') }
             }
         })
         // 标签
-        .state('operation.tag', {
+        .state('index.operation.tag', {
             url: '/tag',
             views: {
-                'console': { template: require('./operation-tag.html') }
+                'console@index': { template: require('./operation-tag.html') }
             }
         })
         // 兑换码
-        .state('operation.code', {
+        .state('index.operation.code', {
             url: '/code',
             views: {
-                'console': { template: require('./operation-code.html') }
+                'console@index': { template: require('./operation-code.html') }
             }
         })
         // 活动消息
-        .state('operation.message', {
+        .state('index.operation.message', {
             url: '/message',
             views: {
-                'console': { template: require('./operation-message.html') }
+                'console@index': { template: require('./operation-message.html') }
             }
         })
         // 积分管理
-        .state('operation.integral', {
+        .state('index.operation.integral', {
             url: '/integral',
             views: {
-                'console': { template: require('./operation-integral.html') }
+                'console@index': { template: require('./operation-integral.html') }
             }
         });
 }).service('operationService', () => {

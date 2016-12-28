@@ -2,7 +2,7 @@ import app from 'app.config';
 import moment from 'moment';
 
 class AppService {
-    constructor($rootScope) {
+    constructor() {
         // 登陆校验
         this.checkLogin = function(successCall, faildCall) {
             let isLogin = true;

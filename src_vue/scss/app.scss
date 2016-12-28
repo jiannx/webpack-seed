@@ -1,0 +1,169 @@
+@charset "utf-8";
+@import "mixins";
+$min-width: 1200px;
+$c-blue: #0d8ae7;
+
+body{
+  
+}
+
+.body {
+  width: 100%;
+  color: #515151;
+}
+
+.content {
+  width: $min-width;
+  margin: auto;
+  position: relative;
+}
+
+$menu-height: 56px;
+.header {
+  width: 100%;
+  height: 210px;
+  border-bottom: 4px solid #0e89e9;
+  .content {
+    height: 100%;
+  }
+  .logo {
+    position: absolute;
+    left: 20px;
+    top: 30px;
+  }
+  .search {
+    width: 460px;
+    height: 50px;
+    background-color: $c-blue;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    padding: 14px 0 10px 380px;
+    font-size: 18px;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    input {
+      border: none;
+      outline: none;
+      height: 46px;
+      width: 360px;
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      font-size: 18px;
+      padding: 0 10px;
+    }
+  }
+  .menu {
+    height: $menu-height;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    ul.nav-bar {
+      display: block;
+      float: left;
+      margin: 0;
+      padding: 0;
+      li {
+        display: block;
+        float: left;
+        a {
+          display: block;
+          height: $menu-height;
+          width: 160px;
+          text-align: center;
+          font-size: 18px;
+          line-height: $menu-height;
+          text-decoration: none;
+          color: #616161;
+          &:hover {
+            color: white;
+            background-color: $c-blue;
+          }
+        }
+        &.sel {
+          a {
+            color: white;
+          }
+          background-color: $c-blue;
+        }
+      }
+    }
+    ul.nav-right {
+      @extend ul.nav-bar;
+      padding-top: 0px;
+      float: right;
+      li {
+        position: relative;
+        display: block;
+        a {
+          position: relative;
+          width: 150px;
+          height: $menu-height - 0;
+          line-height: $menu-height - 0;
+        }
+        a.download {
+          padding-left: 30px;
+          background-image: url('../resource/phone.png');
+          background-repeat: no-repeat;
+          background-position: 20px 14px;
+          &:hover {
+            background-image: url('../resource/phone1.png');
+          }
+        }
+        a.user {
+          padding-left: 60px;
+          .icon {
+            width: 44px;
+            height: 44px;
+            background-color: $c-blue;
+            border-radius: 50%;
+            position: absolute;
+            left: 15px;
+            top: 6px;
+            overflow: hidden;
+          }
+        }
+        &.sel {
+          a.download {
+            background-image: url('../resource/phone1.png');
+          }
+        }
+      }
+      ul.dropdown-menu {
+        border: none;
+        padding: 0;
+        min-width: 150px;
+        border-radius: 0;
+        width: 100%;
+        li {
+          width: 100%;
+          background-color: $c-blue;
+          display: block;
+          position: relative;
+          padding: 0 10px;
+          a {
+            padding: 0;
+            width: 100%;
+            color: white;
+            border-bottom: 1px solid white;
+            &:hover {
+              background-color: transparent;
+            }
+          }
+          &:hover {
+            background-color: darken($c-blue, 5%);
+          }
+          &:last-child {
+            a {
+              border-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

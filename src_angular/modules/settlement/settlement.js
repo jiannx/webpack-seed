@@ -2,37 +2,36 @@ import app from 'app.config';
 
 // 结算管理模块
 app.config(($stateProvider) => {
-    $stateProvider.state('settlement', {
-            url: '/settlement',
-            template: require('../console.html'),
+    $stateProvider.state('index.settlement', {
+            url: 'settlement',
             abstract: true
         })
         // 课程结算
-        .state('settlement.course', {
+        .state('index.settlement.course', {
             url: '/course',
             views: {
-                'console': { template: require('./settlement-course.html') }
+                'console@index': { template: require('./settlement-course.html') }
             }
         })
         // 金币结算
-        .state('settlement.gold', {
+        .state('index.settlement.gold', {
             url: '/gold',
             views: {
-                'console': { template: require('./settlement-gold.html') }
+                'console@index': { template: require('./settlement-gold.html') }
             }
         })
         // 余额结算
-        .state('settlement.overage', {
+        .state('index.settlement.overage', {
             url: '/overage',
             views: {
-                'console': { template: require('./settlement-overage.html') }
+                'console@index': { template: require('./settlement-overage.html') }
             }
         })
         // 营收报表
-        .state('settlement.chart', {
+        .state('index.settlement.chart', {
             url: '/chart',
             views: {
-                'console': { template: require('./settlement-chart.html') }
+                'console@index': { template: require('./settlement-chart.html') }
             }
         });
 }).service('settlementService', () => {

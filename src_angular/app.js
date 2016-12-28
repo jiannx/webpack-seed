@@ -1,13 +1,13 @@
 import app from 'app.config';
 import './modules/app.service';
 import './modules/app.ctrl';
-// // 样式引入
+// 样式引入
 import './scss/bootstrap.scss';
 import './scss/app.scss';
 import './scss/animate.css';
-// // 组件引入
+// 组件引入
 import './components/components';
-// // 页面模块
+// 页面模块
 import './modules/error/error'; // 错误页面
 import './modules/login/login'; // 登陆
 import './modules/home/home'; // 首页
@@ -44,9 +44,14 @@ app.run(($rootScope, $state, $stateParams, appService) => {
 
     });
 
+    // if error, redirect to 404
     $rootScope.$on('$stateChangeError', function() {
         $state.go('404');
     });
 }).config(($stateProvider, $urlRouterProvider) => {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/');
+    $stateProvider.state('index', {
+        url: '/',
+        template: require('./modules/console.html'),
+    });
 });

@@ -3,6 +3,7 @@ import html from './header.html';
 
 const Header = {
     template: html,
+    props: ['sel'],
     data: function() {
         return {
             hello: 'hello word'

@@ -1,8 +1,13 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import home from './modules/home';
+import home from './modules/home/home';
 import './components/header/header';
 import './components/footer/footer';
+
+// 样式引入
+import './scss/bootstrap.scss';
+import './scss/app.scss';
+import './scss/animate.css';
 
 Vue.use(VueRouter);
 

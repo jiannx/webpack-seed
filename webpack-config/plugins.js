@@ -7,6 +7,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); // 生成独立c
 var HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html
 var CleanPlugin = require('clean-webpack-plugin'); // 目录清理
 var NgAnnotatePlugin = require('ng-annotate-webpack-plugin'); // angular混淆编译
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin'); // 动态加载lodash模块
 // var pushPlugin = require('./push.js');
 
 var plugins = [];
@@ -73,6 +74,7 @@ plugins = [
         { context: dirs.staticDir, from: '**/*', to: path.resolve(dirs.buildDir, 'static') },
         { context: dirs.dllDir, from: '**/*', to: path.resolve(dirs.buildDir, 'dll') },
     ]),
+    new LodashModuleReplacementPlugin(),
     // dllReferencePlugin
 ];
 
