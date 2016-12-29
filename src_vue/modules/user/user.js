@@ -1,18 +1,16 @@
-import html from './home.html';
+import html from './user.html';
 
 const page = {
     template: html,
     created: function() {},
     data: function() {
         return {
-            name: 'home',
-            course: new Array(8),
-            active: new Array(4)
+            name: 'user',
         };
     }
 };
 
 export default {
-    path: '/home',
+    path: '/user',
     component: page
 };

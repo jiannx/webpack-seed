@@ -1,19 +1,19 @@
 <div class="header">
     <div class="content">
-        <div class="logo">
+        <router-link class="logo" to="/">
             <img src="../../resource/logo.png">
-        </div>
+        </router-link>
         <div class="search">
             <input type="text" placeholder="搜索你感兴趣的课程名称/教师/专题"><a class="button" href=""><i class="fa fa-search" aria-hidden="true"></i> 搜索</a>
         </div>
         <div class="menu">
             <ul class="nav-bar">
-                <li v-bind:class="{ sel: sel == 'home' }"><a href="">首页</a></li>
-                <li v-bind:class="{ sel: sel == 'discover' }"><a href="">课程发现</a></li>
-                <li v-bind:class="{ sel: sel == 'create' }"><a href="">课程创建</a></li>
+                <li v-bind:class="{ sel: sel == 'home' }"><router-link to="/home">首页</router-link></li>
+                <li v-bind:class="{ sel: sel == 'discover' }"><router-link to="/discover">课程发现</router-link></li>
+                <li v-bind:class="{ sel: sel == 'create' }"><router-link to="/create">课程创建</router-link></li>
             </ul>
             <ul class="nav-right dropdown">
-                <li v-bind:class="{ sel: sel == 'download' }"><a class="download">APP下载</a></li>
+                <li v-bind:class="{ sel: sel == 'download' }"><router-link class="download" to="download">APP下载</router-link></li>
                 <li v-bind:class="{ sel: sel == 'user' }">
                     <a class="user" id="dropdownMenu1" data-toggle="dropdown">
                         <div class="icon"></div> 潘盼盼 <span class="caret"></span>

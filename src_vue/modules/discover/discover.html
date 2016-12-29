@@ -1,0 +1,95 @@
+<div class="body">
+    <ne-header sel="discover"></ne-header>
+    <div class="discover">
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="discover-tab-btn sel">线上课</button>
+                    <button class="discover-tab-btn">线下课</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="discover-filter">
+                        <div class="each-btn">
+                            <img src="../../resource/topic2.png" alt="专题" class="normal" />
+                            <img src="../../resource/topic3.png" alt="专题" class="sel" /> 专题
+                        </div>
+                        <div class="each-btn">
+                            <img src="../../resource/class2.png" alt="专题" class="normal" />
+                            <img src="../../resource/class3.png" alt="专题" class="sel" /> 年级
+                        </div>
+                        <div class="each-btn">
+                            <img src="../../resource/difficulty2.png" alt="专题" class="normal" />
+                            <img src="../../resource/difficulty3.png" alt="专题" class="sel" /> 难易度
+                        </div>
+                        <div class="each-btn">
+                            <img src="../../resource/date2.png" alt="专题" class="normal" />
+                            <img src="../../resource/date3.png" alt="专题" class="sel" /> 上课时间
+                        </div>
+                        <div class="each-btn sel">
+                            <img src="../../resource/place2.png" alt="专题" class="normal" />
+                            <img src="../../resource/place3.png" alt="专题" class="sel" /> 地区
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="discover-filter">
+                        <div class="each-btn filter-btn">
+                            <img src="../../resource/list.png" alt="" class="normal" />
+                            <img src="../../resource/list.png" alt="" class="sel" />
+                        </div>
+                        <a class="clean sel-filter">
+                            三年级 <img src="../../resource/close1.png" alt="" class="normal"><img src="../../resource/close.png" alt="" class="sel">
+                        </a>
+                        <a class="clean sel-filter">
+                            三年级 <img src="../../resource/close1.png" alt="" class="normal"><img src="../../resource/close.png" alt="" class="sel">
+                        </a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="each-course" v-for="item in course">
+                <div class="pic"></div>
+                <h3>标题</h3>
+                <div class="row info-row">
+                    <div class="col-xs-3 color-blue"><img src="../../resource/topic1.png"> 音标</div>
+                    <div class="col-xs-3"><img src="../../resource/difficulty.png"> 一般</div>
+                    <div class="col-xs-6 color-blue"><img src="../../resource/class1.png"> 适用年级</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-xs-12"><img src="../../resource/date.png"> 课程时间</div>
+                </div>
+                <div class="row info-row">
+                    <div class="col-xs-12">
+                        <p>主要解决问题</p>
+                    </div>
+                </div>
+                <div class="location">
+                    <img src="../../resource/place1.png"> &nbsp;浙江省杭州市滨江区
+                </div>
+                <div class="teacher-info">
+                    <div class="icon"></div>
+                    XXX老师
+                    <br/>
+                    <a href="">距开课还剩13小时13分钟</a>
+                </div>
+                <router-link class="btn-big get-detail" to="/discover/detail">查看详情</router-link>
+            </div>
+            <p>
+                共123个课程
+            </p>
+            <nav>
+                <ul class="pagination">
+                    <li><a>&laquo;</a></li>
+                    <li><a>1</a></li>
+                    <li><a>2</a></li>
+                    <li><a>3</a></li>
+                    <li><a>4</a></li>
+                    <li><a>5</a></li>
+                    <li><a>&raquo;</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <ne-footer></ne-footer>
+</div>

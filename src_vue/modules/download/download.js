@@ -1,18 +1,16 @@
-import html from './home.html';
+import html from './download.html';
 
 const page = {
     template: html,
     created: function() {},
     data: function() {
         return {
-            name: 'home',
-            course: new Array(8),
-            active: new Array(4)
+            name: 'download',
         };
     }
 };
 
 export default {
-    path: '/home',
+    path: '/download',
     component: page
 };

@@ -1,0 +1,141 @@
+.discover {
+  width: 100%;
+  button.discover-tab-btn {
+    width: 120px;
+    height: 40px;
+    color: #a9bbc9;
+    border: none;
+    background-color: white;
+    outline: none;
+    border-radius: 0;
+    margin: 30px 0 20px 0;
+    &.sel {
+      color: white;
+      background-color: $c-blue;
+    }
+  }
+  .discover-filter {
+    padding: 15px 0;
+    border: 1px solid #888888;
+    &:last-child {
+      border-top: 0px;
+      padding-bottom: 14px;
+    }
+    .each-btn {
+      height: 40px;
+      line-height: 40px;
+      border-right: 1px solid #888888;
+      float: left;
+      position: relative;
+      padding: 0 20px 0 60px;
+      font-size: 18px;
+      img {
+        position: absolute;
+        left: 15px;
+        top: 5px;
+      }
+      img.normal {}
+      img.sel {
+        display: none;
+      }
+      &.sel {
+        color: $c-blue;
+        img.normal {
+          display: none;
+        }
+        img.sel {
+          display: block;
+        }
+      }
+    }
+    .filter-btn {
+      border: none;
+      padding-right: 0;
+      margin-right: 50px;
+    }
+    a.sel-filter {
+      display: block;
+      float: left;
+      min-width: 100px;
+      background-color: #e0e0e0;
+      padding: 5px 10px;
+      margin: 5px 10px 0 0;
+      position: relative;
+      cursor: pointer;
+      img {
+        width: 15px;
+        position: absolute;
+        right: 10px;
+        top: 7px;
+      }
+      img.sel {
+        display: none;
+      }
+      &:hover {
+        img.normal {
+          display: none;
+        }
+        img.sel {
+          display: block;
+        }
+      }
+    }
+  }
+  .each-course {
+    width: 100%;
+    height: 300px;
+    margin: 30px 0;
+    border: 1px solid #e8e8e8;
+    box-shadow: 1px 1px 8px #e8e8e8;
+    padding-left: 420px;
+    padding-right: 450px;
+    position: relative;
+    .pic {
+      width: 400px;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: gray;
+    }
+    .info-row {
+      padding: 8px 0;
+      .color-blue {
+        color: $c-blue;
+      }
+    }
+    .location {
+      position: absolute;
+      left: 420px;
+      bottom: 20px;
+    }
+    .teacher-info {
+      width: 300px;
+      position: absolute;
+      top: 20px;
+      right: 0;
+      padding-left: 80px;
+      padding-top: 6px;
+      line-height: 24px;
+      color: black;
+      .icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 60px;
+        height: 60px;
+        float: left;
+        border-radius: 50%;
+        background-color: gray;
+      }
+      a {
+        color: #ffc624;
+      }
+    }
+    .get-detail {
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+}

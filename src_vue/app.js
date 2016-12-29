@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import home from './modules/home/home';
+import discover from './modules/discover/discover';
+import create from './modules/create/create';
+import download from './modules/download/download';
+import user from './modules/user/user';
 import './components/header/header';
 import './components/footer/footer';
 
@@ -16,6 +20,10 @@ const routes = [
 ];
 
 routes.push(home);
+routes.push(...discover);
+routes.push(create);
+routes.push(download);
+routes.push(user);
 
 const router = new VueRouter({
     routes

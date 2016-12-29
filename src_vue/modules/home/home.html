@@ -1,5 +1,100 @@
 <div class="body">
     <ne-header sel="home"></ne-header>
-    {{name}}
+    <div class="home-slide-panel">
+    </div>
+    <div class="home-step">
+        <div class="content">
+            <div class="desc">
+                <div class="title">课前</div>
+                <p>
+                    标准化模板帮助教师清晰定位培训课程，明确自己的学生对象，可视化呈现，帮助家长做到精准选择（O2O）和课程。
+                </p>
+            </div>
+            <img src="../../resource/pic1.png" alt="">
+        </div>
+    </div>
+    <div class="home-step home-step-right">
+        <div class="content">
+            <div class="desc">
+                <div class="title">课中</div>
+                <p>
+                    标准化模板帮助教师清晰定位培训课程，明确自己的学生对象，可视化呈现，帮助家长做到精准选择（O2O）和课程。
+                </p>
+            </div>
+            <img src="../../resource/pic2.png" alt="">
+        </div>
+    </div>
+    <div class="home-step">
+        <div class="content">
+            <div class="desc">
+                <div class="title">课后</div>
+                <p>
+                    标准化模板帮助教师清晰定位培训课程，明确自己的学生对象，可视化呈现，帮助家长做到精准选择（O2O）和课程。
+                </p>
+            </div>
+            <img src="../../resource/pic3.png" alt="">
+        </div>
+    </div>
+    <div class="home-recommend">
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="title">
+                        <h2>平台课程推荐</h2>
+                    </div>
+                </div>
+                <div class="col-xs-6 text-right">
+                    <button class="btn more">查看更多</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3" v-for="item in course">
+                    <div class="each-course">
+                        <div class="course-img"></div>
+                        <div class="course-title">课程名称</div>
+                        <span class="course-type">线上</span>
+                        <div class="row course-info-each">
+                            <div class="col-xs-4">专题：音标</div>
+                            <div class="col-xs-8 text-right">
+                                <span class="course-tag">三年级</span>
+                                <span class="course-tag">较难</span>
+                            </div>
+                        </div>
+                        <div class="row course-info-each">
+                            <div class="col-xs-12">周期：2016-12-12 ~ 2016-12-30</div>
+                        </div>
+                        <div class="row course-info-each">
+                            <div class="col-xs-12">
+                                <p>
+                                    主要解决问题
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                <router-link class="btn-big create" to="/">我要创建课程</router-link>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="home-active">
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="title">
+                        <h2>线下活动精彩剪影</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3" v-for="item in active">
+                    <div class="each-active"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <ne-footer></ne-footer>
 </div>
