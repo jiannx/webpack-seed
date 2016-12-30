@@ -41,7 +41,7 @@
     border-bottom: 4px solid $c-blue;
     float: left;
   }
-  button.more {
+  a.more {
     background-color: #f8c301;
     color: white;
     width: 110px;
@@ -107,10 +107,6 @@
       border-radius: 2px;
     }
   }
-  .create {
-    margin: 50px auto;
-  }
-  
 }
 
 .home-active {

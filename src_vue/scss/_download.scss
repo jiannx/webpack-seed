@@ -1,4 +1,17 @@
 .download {
+  span.big {
+    font-size: 34px;
+  }
+  span.small {
+    font-size: 28px;
+  }
+  img.page1 {
+    width: 400px;
+    position: absolute;
+  }
+  img.page2 {
+    @extend img.page1;
+  }
   .big-pic {
     width: 100%;
     height: 732px;
@@ -56,6 +69,78 @@
     }
     a.btn-download2 {
       top: 450px;
+    }
+  }
+  .interactive {
+    width: 100%;
+    height: 860px;
+    .title {
+      width: 330px;
+      height: 120px;
+      position: absolute;
+      left: 320px;
+      top: 120px;
+      span.big {
+        color: #1388e8;
+      }
+      span.small {
+        color: #4fa8ea;
+      }
+    }
+    img.page1 {
+      right: 210px;
+      top: 150px;
+    }
+    img.page2 {
+      right: 0;
+      top: 10px;
+    }
+  }
+  .feedback {
+    width: 100%;
+    height: 860px;
+    background-color: #5284dd;
+    .title {
+      width: 330px;
+      height: 120px;
+      position: absolute;
+      left: 720px;
+      top: 220px;
+      color: white;
+    }
+    img.page1 {
+      left: 300px;
+      top: 130px;
+    }
+    img.page2 {
+      left: 0;
+      top: 30px;
+    }
+  }
+  .last {
+    width: 100%;
+    height: 900px;
+    .title {
+      position: absolute;
+      left: 90px;
+      top: 30px;
+      span.big {
+        color: #1388e8;
+      }
+      span.small {
+        color: #4fa8ea;
+      }
+      &.title2 {
+        left: 800px;
+      }
+    }
+    img.page1 {
+      left: 90px;
+      top: 160px;
+    }
+    img.page2 {
+      left: 800px;
+      top: 160px;
     }
   }
 }

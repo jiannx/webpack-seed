@@ -19,9 +19,9 @@
                         <div class="icon"></div> 潘盼盼 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">我的课程</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">成长变化</a></li>
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">退出登陆</a></li>
+                        <li role="presentation"><router-link role="menuitem" tabindex="-1" to="/user/my">我的课程</router-link></li>
+                        <li role="presentation"><router-link role="menuitem" tabindex="-1" to="/user/growing">成长变化</router-link></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" v-on:click="loginOut">退出登陆</a></li>
                     </ul>
                 </li>
             </ul>

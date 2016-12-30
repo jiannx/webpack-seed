@@ -19,11 +19,11 @@ const routes = [
     { path: '/', redirect: '/home' },
 ];
 
-routes.push(home);
+routes.push(...home);
 routes.push(...discover);
-routes.push(create);
-routes.push(download);
-routes.push(user);
+routes.push(...create);
+routes.push(...download);
+routes.push(...user);
 
 const router = new VueRouter({
     routes

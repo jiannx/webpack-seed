@@ -1,16 +1,16 @@
-import html from './create.html';
+import html from './user-growing.html';
 
 const page = {
     template: html,
     created: function() {},
     data: function() {
         return {
-            name: 'create',
+            name: 'user-growing',
         };
     }
 };
 
-export default [{
-    path: '/create',
+export default {
+    path: '/user/growing',
     component: page
-}];
+};

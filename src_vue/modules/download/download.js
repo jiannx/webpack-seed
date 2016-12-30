@@ -10,7 +10,7 @@ const page = {
     }
 };
 
-export default {
+export default [{
     path: '/download',
     component: page
-};
+}];

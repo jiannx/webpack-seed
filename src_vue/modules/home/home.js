@@ -12,7 +12,7 @@ const page = {
     }
 };
 
-export default {
+export default [{
     path: '/home',
     component: page
-};
+}];

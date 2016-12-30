@@ -4,8 +4,8 @@
         <div class="content">
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="discover-tab-btn sel">线上课</button>
-                    <button class="discover-tab-btn">线下课</button>
+                    <a class="btn btn-tab sel">线上课</a>
+                    <a class="btn btn-tab">线下课</a>
                 </div>
             </div>
             <div class="row">
@@ -38,17 +38,17 @@
                             <img src="../../resource/list.png" alt="" class="normal" />
                             <img src="../../resource/list.png" alt="" class="sel" />
                         </div>
-                        <a class="clean sel-filter">
+                        <a class="btn btn-tag">
                             三年级 <img src="../../resource/close1.png" alt="" class="normal"><img src="../../resource/close.png" alt="" class="sel">
                         </a>
-                        <a class="clean sel-filter">
+                        <a class="btn btn-tag">
                             三年级 <img src="../../resource/close1.png" alt="" class="normal"><img src="../../resource/close.png" alt="" class="sel">
                         </a>
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <div class="each-course" v-for="item in course">
+            <div class="course-block" v-for="item in course">
                 <div class="pic"></div>
                 <h3>标题</h3>
                 <div class="row info-row">
@@ -73,7 +73,7 @@
                     <br/>
                     <a href="">距开课还剩13小时13分钟</a>
                 </div>
-                <router-link class="btn-big get-detail" to="/discover/detail">查看详情</router-link>
+                <router-link class="btn btn-blue btn-big get-detail" to="/discover/detail">查看详情</router-link>
             </div>
             <p>
                 共123个课程

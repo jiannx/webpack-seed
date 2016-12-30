@@ -4,10 +4,11 @@ $min-width: 1200px;
 $c-blue: #0d8ae7;
 @import "home.scss";
 @import "discover.scss";
-@import "course-detail.scss";
 @import "download.scss";
+@import "course.scss";
 body {
   font-family: "Microsoft YaHei", "Lantinghei", "Arial", "黑体", "宋体", sans-serif;
+  color: #515151;
 }
 
 a.clean {
@@ -15,28 +16,89 @@ a.clean {
   text-decoration: none;
 }
 
+a.btn-normal {
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  padding: 0;
+}
+
 a.btn-big {
-  display: block;
-  line-height: 60px;
-  text-align: center;
   width: 280px;
   height: 60px;
+  border-radius: 0;
+  font-size: 24px;
+  line-height: 60px;
+  padding: 0;
+}
+
+a.btn-blue {
+  color: white;
   background-color: $c-blue;
   text-decoration: none;
-  font-size: 24px;
-  color: white;
   @include Transition(0.3s);
   &:hover {
+    color: white;
     background-color: darken($c-blue, 8%);
   }
-  &:focus{
-    outline: 1px solid darken($c-blue, 5%);
+  &:focus {
+    color: white;
   }
 }
 
-.body {
-  width: 100%;
-  color: #515151;
+a.btn-yellow {}
+
+a.btn-tab {
+  width: 120px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  color: #a9bbc9;
+  border: none;
+  background-color: white;
+  outline: none;
+  border-radius: 0;
+  margin: 30px 0 20px 0;
+  &.sel {
+    color: white;
+    background-color: $c-blue;
+  }
+  &:hover {
+    color: #a9bbc9;
+  }
+  &:focus {}
+  &:active {
+    box-shadow: 0 0 0;
+  }
+}
+
+a.btn-tag {
+  min-width: 100px;
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  position: relative;
+  cursor: pointer;
+  text-align: left;
+  color: black;
+  border-radius: 0;
+  img {
+    width: 15px;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+  }
+  img.sel {
+    display: none;
+  }
+  &:hover {
+    img.normal {
+      display: none;
+    }
+    img.sel {
+      display: block;
+    }
+  }
 }
 
 .content {

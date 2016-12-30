@@ -8,6 +8,11 @@ const Header = {
         return {
             hello: 'hello word'
         };
+    },
+    methods: {
+        loginOut: function() {
+            console.log('login out');
+        }
     }
 };
 
