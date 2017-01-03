@@ -1,80 +1,55 @@
-import layer from 'layer'; // 引入弹出窗，进行错误提示
-/*
-new NeRequest('getList').success((res)=>{});
-new NeRequest('getList', {}).success((res)=>{}).error(()=>{});
-new NeRequest('getList', {}).async('getList', {}).async('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
-new NeRequest('getList', {}).sync('getList', {}).sync('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
-new NeRequest({method, url}, {}).success();
-new NeRequest({method, url}).data({}).success();
-new NeRequest({ method: 'get', url: '/api/demo', timeout: 10000 }, { id: 0 }, (data, res, param) => {}, (data, res, param) => {}, {}, {});
-*/
+import layer from 'layer';
+import $ from 'jQuery';
 
 let loadingIndex = null;
 
-// 显示等待框
 const showLoading = function() {
     if (!loadingIndex) {
         loadingIndex = layer.load(1);
     }
 };
 
-// 隐藏等待框
 const hideLoading = function() {
     layer.close(loadingIndex);
     loadingIndex = null;
 };
 
-// 显示接口报错信息
-const showError = function(res) {
-    layer.alert('数据请求失败，请重试。 Code:' + res.status, { icon: 2 });
-};
-
-// 接口请求成功，但是数据错误
-const showDataError = function(res) {};
-
-// 登陆验证
-const checkLogin = function() {
-    let isLogin = true;
-    // layer.open({
-    //     content: '请先登陆，<a href="/auth/openid/login">跳转到登陆页面</a>',
-    //     btn: [],
-    //     scrollbar: false,
-    //     closeBtn: 0
-    // });
-    return isLogin;
-};
-
-// 默认配置
-const defaultCfg = {
-    showLoading: true, // 显示等待状态
-    showError: true, // 显示错误信息
-};
-
-let HTTP_OPTION = {
-    method: null,
-    url: null,
-    timeout: 10000,
-    headers: {
-        'Content-Type': 'text/plain;charset=UTF-8'
-    }
+const DEF_CFG = {
+    showLoading: true
 };
 
 class NeRequest {
+    static set(key, value) {
+        if (key === 'beforeRequset') {
+            NeRequest.beforeRequsetCall = value;
+        }
+        if (key === 'afterSuccessRequset') {
+            NeRequest.afterSuccessRequsetCall = value;
+        }
+        if (key === 'afterErrorRequset') {
+            NeRequest.afterErrorRequsetCall = value;
+        }
+        if (key === 'httpOption') {
+            NeRequest.HTTP_OPTION = value;
+        }
+        if (key === 'type') {
+            NeRequest.type = value;
+        }
+    }
     constructor(req, reqData, successCall, errorCall, cfg, $http) {
-        this.http = $http;
-        this.doneCount = 0;
-        this.doingIndex = 0; // the index of which req is done
-        this.errorIndex = null;
-        this.reqQueue = []; // {req, type, successCall}
+        NeRequest.http = $http;
+        this.doneCount = 0; // the count of req has done
+        this.doingIndex = 0; // the index of which req is doing
+        this.errorIndex = null; // the index of which req is error
+        this.reqQueue = []; // {req, reqData, type, successCall}
         this.resQueue = [];
         this.errorCall = null;
-        req = this._initReq(req);
 
         this.async(req, reqData, successCall, errorCall, cfg);
     }
     data(reqData) {
         if (this.doingIndex !== 0 && this.doneCount < this.reqQueue.length) {
-            console.warn(this.reqQueue[this.doingIndex - 1].req.url + ' is doning，can not rewrite reqdata!');
+            console.warn(this.reqQueue[this.doingIndex - 1].req.url + ' is doning，can not rewrite req data!');
         } else {
             this.init();
             this.reqQueue[this.reqQueue.length - 1].reqData = reqData;
@@ -91,18 +66,22 @@ class NeRequest {
         return this;
     }
     async(req, reqData, successCall, errorCall, cfg) {
-        req = this._initReq(req);
         this.reqQueue.push({ req, reqData, cfg, type: 'async', successCall: null });
         if (successCall) {
             this.success(successCall);
         }
+        if (errorCall) {
+            this.error(errorCall);
+        }
         return this;
     }
     sync(req, reqData, successCall, errorCall, cfg) {
-        req = this._initReq(req);
         this.reqQueue.push({ req, reqData, cfg, type: 'sync', successCall: null });
         if (successCall) {
             this.success(successCall);
+        }
+        if (errorCall) {
+            this.error(errorCall);
         }
         return this;
     }
@@ -110,6 +89,7 @@ class NeRequest {
         this.doneCount = 0;
         this.doingIndex = 0;
         this.errorIndex = null;
+        this.resQueue = [];
     }
     _initReq(req) {
         if (typeof req === 'string') {
@@ -129,8 +109,13 @@ class NeRequest {
         // 接口报错情况下，直接进行错误回调
         if (this.errorIndex !== null) {
             hideLoading();
-            showError(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
-            self.errorCall && self.errorCall(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
+            let isDoSuccess = null;
+            if (NeRequest.afterErrorRequsetCall) {
+                isDoSuccess = NeRequest.afterErrorRequsetCall(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
+            }
+            if (isDoSuccess !== false) {
+                self.errorCall && self.errorCall(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
+            }
             this.errorIndex = -1; // 多个请求回调的情况下，当一个接口挂了，其他接口不进行回调
             return;
         }
@@ -141,11 +126,16 @@ class NeRequest {
             for (let item of this.resQueue) {
                 data.push(item.data);
             }
-            showDataError();
-            this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...data, this.resQueue);
-            return;
+            let isDoSuccess = null;
+            if (NeRequest.afterSuccessRequsetCall) {
+                isDoSuccess = NeRequest.afterSuccessRequsetCall(...data, this.resQueue);
+            }
+            if (isDoSuccess !== false) {
+                this.reqQueue[this.reqQueue.length - 1].successCall && this.reqQueue[this.reqQueue.length - 1].successCall(...data, this.resQueue);
+                return;
+            }
         }
-        let lastSuccessResult = null;
+        let lastReqResult = null;
         for (let i = this.doingIndex; i < this.reqQueue.length; i += 1) {
             // 完成项等于进行项时，执行下一个接口
             if (this.reqQueue[i].type === 'sync' && this.doneCount < this.doingIndex) {
@@ -159,30 +149,74 @@ class NeRequest {
                     for (let item of this.resQueue) {
                         data.push(item.data);
                     }
-                    lastSuccessResult = this.reqQueue[i - 1].successCall && this.reqQueue[i - 1].successCall(...data, this.resQueue);
+                    if (this.reqQueue[i - 1].successCall) {
+                        lastReqResult = this.reqQueue[i - 1].successCall(...data, this.resQueue);
+                    }
                 }
             }
-            let httpOpt = Object.assign({}, HTTP_OPTION, this.reqQueue[i].req);
-            if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
-                httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
-            } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
-                httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastSuccessResult);
+            // 所有接口请求前，调用全局配置函数
+            if (NeRequest.beforeRequsetCall) {
+                let newReq = NeRequest.beforeRequsetCall(this.reqQueue[i]);
+                if (newReq && typeof newReq === 'object') {
+                    this.reqQueue[i] = newReq;
+                }
             }
+            this.reqQueue[i].req = this._initReq(this.reqQueue[i].req);
+            let httpOpt = Object.assign({}, NeRequest.HTTP_OPTION, this.reqQueue[i].req);
+            if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
+                httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastReqResult);
+            } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
+                httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastReqResult);
+            }
+
             // 执行请求
             this.doingIndex += 1;
             showLoading();
-            this.http(httpOpt).then((res) => {
-                self.doneCount += 1;
-                self.resQueue[i] = res;
-                self._do();
-            }, (res) => {
-                self.doneCount += 1;
-                self.resQueue[i] = res;
-                self.errorIndex = i;
-                self._do();
-            });
+            if (NeRequest.type.toUpperCase() === 'ANGULAR') {
+                NeRequest.http(httpOpt).then((res) => {
+                    self.doneCount += 1;
+                    self.resQueue[i] = res;
+                    self._do();
+                }, (res) => {
+                    self.doneCount += 1;
+                    self.resQueue[i] = res;
+                    self.errorIndex = i;
+                    self._do();
+                });
+            } else if (NeRequest.type.toUpperCase() === 'JQUERY') {
+                httpOpt.success = function(res, status, xhr) {
+                    self.doneCount += 1;
+                    self.resQueue[i] = {
+                        data: res,
+                        status: status,
+                        xhr: xhr
+                    };
+                    self._do();
+                };
+                httpOpt.error = function(xhr) {
+                    self.doneCount += 1;
+                    self.resQueue[i] = xhr;
+                    self.errorIndex = i;
+                    self._do();
+                };
+                if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
+                    httpOpt.data = httpOpt.params;
+                } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
+                    httpOpt.data = JSON.stringify(httpOpt.data);
+                }
+                $.ajax(httpOpt);
+            }
         }
     }
 }
+NeRequest.HTTP_OPTION = {
+    method: null,
+    url: null,
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+    }
+};
+NeRequest.type = 'Angular'; // Angular or jQuery
 
 export default NeRequest;

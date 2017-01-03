@@ -1,9 +1,10 @@
 # ES6 Class NeRequest, Angular Factory request
 
 ## 项目介绍
-请求插件，包含 NeRequest的定义及注入到angular中
+同步请及异步请求插件，包含 NeRequest的定义及注入到angular中
 
 ## Angualr中使用与参照NeRequest
+所有接口的统一错误处理
 
 ```
 // Demo
@@ -15,20 +16,27 @@ request.data({id: 0});
 ```
 
 ## NeRequest
-依赖angular，在构造函数中需要传入$http，如需使用其他，请传入其他参数，$.ajax....
+同步请及异步请求插件，默认使用ajax。如果在Angular中使用，请在构造函数中传入$http
 
 ### 基础用法（以下调用均忽略$http参数）
 ```
-new NeRequest($http, req, data, successCall, errorCall, cfg);
+new NeRequest(req, data, successCall, errorCall, cfg, $http);
 /*
 参数：
-$http：angular $http service.
-req：string or object. 如果为字符串，则优先匹配api.js中定义的接口 { getList: {method:'get', url:'/api/get/list'} }；如果未匹配到，则自动创建 {method:'get', url: req} 对象作为参数。如果传入参数为对象 则不做处理（该对象中必须包含method, url。参照Angualr $http参数）
-data: object. 发送到后台的请求数据
-successCall: function. 请求成功回调函数 (resData, [res])
-errorCall: function. 请求失败回调函数
-cfg: object. {showLoading: true, showError: true}
+req：string or object。必填。 如果为字符串，则优先匹配api.js中定义的接口 { getList: {method:'get', url:'/api/get/list'} }；如果未匹配到，则自动创建 {method:'get', url: req} 对象作为参数。如果传入参数为对象 则不做处理（该对象中必须包含method, url。参照Angualr $http参数）
+data: object。选填，默认空对象。 发送到后台的请求数据
+successCall: function。选填，默认空函数。 请求成功回调函数 (resData1, resData2, resData3, ..., [res])
+errorCall: function。选填，默认空函数。 请求失败回调函数 (errorResData, errorIndex, [res])
+cfg: object。选填，默认对象{showLoading: true}。接口一些配置
+$http：angular $http service。选填，如果angular，请传入$http。默认使用$.ajax
 */
+
+// 全局事件配置，一般用于配置一些全局的成功回调及错误回调，例如未登录，错误提示等
+NeRequest.set('type', 'Angular'); // 设置模式，angular or jquery。默认Angular
+NeRequest.set('beforeRequset', function(reqData) {}); // 所有接口请求前调用，参数为当前请求的配置对象，如果该函数返回一个对象，将替换原先接口配置对象
+NeRequest.set('afterSuccessRequset', function(...args) {}); // 所有接口请求完成后调用，如果该函数返回false，将不执行原先的successCall函数
+NeRequest.set('afterErrorRequset', function(...args) {}); // 接口请求出错后调用，如果该函数返回false，将不执行原先的errorCall函数
+NeRequest.set('httpOption', {}); // 接口全局参数配置，例如Angular中：{method: null, url: null, timeout: 10000, headers: {'Content-Type': 'textplain;charset=UTF-8'} }
 
 //demo
 new NeRequest('getList').success((res) => {});
@@ -36,9 +44,9 @@ new NeRequest('/api/get', {id: 1}).success((res) => {});
 new NeRequest('getList', {}, (res) => {});
 new NeRequest('getList', {}).success((res) => {}).error((res) => {});
 new NeRequest({
-  method: 'get',
-  url: '/api/get'
-  }, { id: 1}, (successRes)=>{}, (errorRes)=>{}, {showLoading: true, showError: true});
+    method: 'get',
+    url: '/api/get'
+  }, { id: 1}, (successRes)=>{}, (errorRes)=>{}, {showLoading: true});
 ```
 
 ### 高级用法
