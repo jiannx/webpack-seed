@@ -27,7 +27,7 @@ app.factory('request', function($http) {
     });
     // 错误提示全局配置
     NeRequest.set('afterErrorRequset', function(...args) {
-        layer.alert('数据请求失败，请重试。 Code:' + args[0].status, { icon: 2 });
+        layer.alert(`Error Info: ${args[0].data.data}, Code: ${args[0].status}`, { icon: 2, title: '数据请求失败' });
     });
 
     let result = function(req, reqData, successCall, errorCall, cfg) {

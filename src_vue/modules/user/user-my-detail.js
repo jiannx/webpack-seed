@@ -1,17 +1,16 @@
-import html from './user-my.html';
+import html from './user-my-detail.html';
 
 const page = {
     template: html,
     created: function() {},
     data: function() {
         return {
-            name: 'user-my',
-            course: new Array(10)
+            name: 'user-my-detail',
         };
     }
 };
 
 export default {
-    path: '/user/my',
+    path: '/user/my/detail',
     component: page
 };

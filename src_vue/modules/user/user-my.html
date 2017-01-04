@@ -1,4 +1,53 @@
 <div class="body">
     <ne-header sel="user"></ne-header>
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <a class="btn btn-tab sel">参与的课程</a>
+                <a class="btn btn-tab">创建的课程</a>
+            </div>
+        </div>
+        <div class="course-block" v-for="item in course">
+            <div class="pic"></div>
+            <h3>标题</h3>
+            <div class="row info-row">
+                <div class="col-xs-3 color-blue"><img src="../../resource/topic1.png"> 音标</div>
+                <div class="col-xs-3"><img src="../../resource/difficulty.png"> 一般</div>
+                <div class="col-xs-6 color-blue"><img src="../../resource/class1.png"> 适用年级</div>
+            </div>
+            <div class="row info-row">
+                <div class="col-xs-12"><img src="../../resource/date.png"> 课程时间</div>
+            </div>
+            <div class="row info-row">
+                <div class="col-xs-12">
+                    <p>主要解决问题</p>
+                </div>
+            </div>
+            <div class="location">
+                <img src="../../resource/place1.png"> &nbsp;浙江省杭州市滨江区
+            </div>
+            <div class="teacher-info">
+                <div class="icon"></div>
+                XXX老师
+                <br/>
+                <a href="">距开课还剩13小时13分钟</a>
+            </div>
+            <router-link class="btn btn-blue btn-big get-detail" to="/user/my/detail">查看详情</router-link>
+        </div>
+        <p>
+            共123个课程
+        </p>
+        <nav>
+            <ul class="pagination">
+                <li><a>&laquo;</a></li>
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+                <li><a>5</a></li>
+                <li><a>&raquo;</a></li>
+            </ul>
+        </nav>
+    </div>
     <ne-footer></ne-footer>
 </div>

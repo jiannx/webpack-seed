@@ -1,4 +1,185 @@
-<div class="body">
+<div class="body ">
     <ne-header sel="create"></ne-header>
+    <form class="create">
+        <div class="content">
+            <div class="title">
+                <img src="../../resource/difficulty2.png" />&nbsp;&nbsp;创建课程</div>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-2">选择课程模式：</div>
+                <div class="col-xs-8"><a class="btn btn-sel selected">线上</a><a class="btn btn-sel">线下</a></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程专题：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程名称：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">主要解决问题：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程目标：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程涉及内容：</div>
+                <div class="col-xs-4">
+                    <textarea rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程对未来意义：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">难易度：</div>
+                <div class="col-xs-10"><a class="btn btn-sel selected">简单</a><a class="btn btn-sel">一般</a><a class="btn btn-sel">难</a></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">适用年级：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">上课人数：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">使用教材版本：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">是否邀请嘉宾：</div>
+                <div class="col-xs-1">
+                    <label>
+                        <input type="radio"> 是
+                    </label>
+                </div>
+                <div class="col-xs-1">
+                    <label>
+                        <input type="radio"> 否
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">嘉宾账号：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="title">
+                <img src="../../resource/difficulty2.png" />&nbsp;&nbsp;课程安排</div>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-2">上课日期：</div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">上课时间：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">是否有结业考核：</div>
+                <div class="col-xs-1">
+                    <label>
+                        <input type="radio"> 是
+                    </label>
+                </div>
+                <div class="col-xs-1">
+                    <label>
+                        <input type="radio"> 否
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">结业考核形式：</div>
+                <div class="col-xs-4">
+                    <textarea rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">结业考核时间：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="title">
+                <img src="../../resource/difficulty2.png" />&nbsp;&nbsp;计费标准</div>
+        </div>
+        <div class="content">
+            <div class="row">
+                <div class="col-xs-2">计费标准：</div>
+                <div class="col-xs-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">元/人/次</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">课程总费用：</div>
+                <div class="col-xs-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control">
+                        <span class="input-group-addon">元/人</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2"><span class="text-red">*</span>付费方式：</div>
+                <div class="col-xs-4">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2" style="line-height: 20px;">审核人员与您的沟通时间：</div>
+                <div class="col-xs-4" style="padding-top: 5px;">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">说明：</div>
+                <div class="col-xs-4">
+                    课前全额预付（即用户）
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="row" style="padding-bottom: 100px;">
+                <div class="col-xs-12 col-xs-offset-2">
+                    <a class="btn btn-normal btn-blue">提交</a>
+                </div>
+            </div>
+        </div>
+    </form>
     <ne-footer></ne-footer>
 </div>
