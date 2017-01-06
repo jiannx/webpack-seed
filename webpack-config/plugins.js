@@ -8,6 +8,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html
 var CleanPlugin = require('clean-webpack-plugin'); // 目录清理
 var NgAnnotatePlugin = require('ng-annotate-webpack-plugin'); // angular混淆编译
 var LodashModuleReplacementPlugin = require('lodash-webpack-plugin'); // 动态加载lodash模块
+var WebpackMd5Hash = require('webpack-md5-hash');
 // var pushPlugin = require('./push.js');
 
 var plugins = [];
@@ -60,10 +61,11 @@ var ngAnnotate = new NgAnnotatePlugin({
 
 plugins = [
     providePlugin,
-    new ExtractTextPlugin('[name]-[hash:6].css'),
+    new WebpackMd5Hash(),
+    new ExtractTextPlugin('[name]-[contenthash:8].css'),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'commons',
-        filename: '[name]-[hash:6].js',
+        filename: '[name]-[chunkhash:8].js',
     }),
     new HtmlWebpackPlugin({
         filename: 'index.html',
