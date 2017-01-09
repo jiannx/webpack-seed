@@ -106,9 +106,11 @@ class NeRequest {
         if (this.errorIndex === -1) {
             return;
         }
+        if (NeRequest.doingCount === 0) {
+            hideLoading();
+        }
         // 接口报错情况下，直接进行错误回调
         if (this.errorIndex !== null) {
-            hideLoading();
             let isDoSuccess = null;
             if (NeRequest.afterErrorRequsetCall) {
                 isDoSuccess = NeRequest.afterErrorRequsetCall(this.resQueue[this.errorIndex], this.errorIndex, this.resQueue);
@@ -121,7 +123,6 @@ class NeRequest {
         }
         // 完成所有接口时，调用success
         if (this.doneCount === this.reqQueue.length) {
-            hideLoading();
             let data = [];
             for (let item of this.resQueue) {
                 data.push(item.data);
@@ -171,16 +172,19 @@ class NeRequest {
 
             // 执行请求
             this.doingIndex += 1;
+            NeRequest.doingCount += 1;
             showLoading();
             if (NeRequest.type.toUpperCase() === 'ANGULAR') {
                 NeRequest.http(httpOpt).then((res) => {
                     self.doneCount += 1;
                     self.resQueue[i] = res;
+                    NeRequest.doingCount += -1;
                     self._do();
                 }, (res) => {
                     self.doneCount += 1;
                     self.resQueue[i] = res;
                     self.errorIndex = i;
+                    NeRequest.doingCount += -1;
                     self._do();
                 });
             } else if (NeRequest.type.toUpperCase() === 'JQUERY') {
@@ -212,11 +216,12 @@ class NeRequest {
 NeRequest.HTTP_OPTION = {
     method: null,
     url: null,
-    timeout: 10000,
+    timeout: 60000,
     headers: {
         'Content-Type': 'text/plain;charset=UTF-8'
     }
 };
 NeRequest.type = 'Angular'; // Angular or jQuery
+NeRequest.doingCount = 0;
 
 export default NeRequest;

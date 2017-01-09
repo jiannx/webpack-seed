@@ -18,7 +18,7 @@ neDialog.confirm({
     content: '<div class="ne-dialog">{{name}}</div>',
     scope: $scope,
     controller : 'testCtrl',
-    yes: function(close, index) {
+    yes: function(scope, close, index, dom) {
         $scope.name = 'ne-dialog';
         close();
     },
@@ -34,8 +34,10 @@ class NeDialog {
         this.$compile = $compile;
         this.$controller = $controller;
         this.$rootScope = $rootScope;
+        this.index = null;
         this._def_opt = {
             type: 1,
+            // skin: 'layui-layer-molv',
             btn: ['确定', '取消'], // If the button is not needed, set to null
         };
     }
@@ -44,25 +46,30 @@ class NeDialog {
         let { success, yes, cancel, end, full, min, restore, scope, controller } = opt;
         if (!scope) {
             scope = this.$rootScope.$new();
+        } else {
+            scope = scope.$new();
         }
         opt.success = (layero, index) => {
             if (opt.btn != null) {
                 // layero[0].style.height = 'auto';
             }
-            if (scope) {
-                this.$compile(layero)(scope);
-            }
-            if (controller) {
-                this.$controller(controller, {
-                    $scope: scope,
-                    $element: layero
-                });
-            }
+            setTimeout(() => {
+                if (scope) {
+                    this.$compile(layero)(scope);
+                }
+                if (controller) {
+                    this.$controller(controller, {
+                        $scope: scope,
+                        $element: layero
+                    });
+                }
+            });
+
             success && success(layero, index);
         };
         if (yes && scope) {
             opt.yes = (index, layero) => {
-                scope.$apply(yes(() => { layer.close(index); }, index, layero));
+                scope.$apply(yes(scope, () => { layer.close(index); }, index, layero));
             };
         }
         if (cancel && scope) {
@@ -90,12 +97,20 @@ class NeDialog {
                 scope.$apply(restore());
             };
         }
-        layer.open(opt);
+        this.index = layer.open(opt);
+        return this;
     }
-    close(index) {
-        layer.close(index);
+    close() {
+        this.scope.$destroy();
+        layer.close(this.index);
     }
 }
-NeDialog.$injector = ['$compile', '$controller'];
 
-app.service('neDialog', NeDialog);
+app.factory('neDialog', function($compile, $controller, $rootScope) {
+    let result = {
+        confirm: function(opt) {
+            return new NeDialog($compile, $controller, $rootScope).confirm(opt);
+        }
+    };
+    return result;
+});
