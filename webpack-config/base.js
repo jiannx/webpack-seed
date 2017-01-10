@@ -58,10 +58,10 @@ base.entry = {
     // home: path.resolve(base.srcRootDir, 'home.js')
 };
 
-// 页面配置 直接支持ejs。filename输出文件名；template入口文件；chunks引入的js，对应entry中的key
+// 页面配置 直接支持ejs。filename输出文件名；template入口文件(路径相对于srcRoot)；chunks引入的js，对应entry中的key
 base.htmls = [
-    { filename: 'app.html', template: path.resolve(base.srcRootDir, 'app.html'), chunks: ['app'] },
-    // { filename: 'home.html', template: path.resolve(base.srcRootDir, 'home.html'), chunks: ['home'] }
+    { filename: 'app.html', template: 'app.html', chunks: ['app'] },
+    { filename: 'home.html', template: 'home.html', chunks: ['home'] }
 ];
 
 // 输出目录

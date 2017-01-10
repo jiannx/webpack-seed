@@ -77,7 +77,7 @@ plugins = [
 for (let item of base.htmls) {
     plugins.push(new HtmlWebpackPlugin({
         filename: item.filename,
-        template: item.template,
+        template: path.resolve(base.srcRootDir, item.template),
         chunks: ['commons'].concat(item.chunks)
     }));
 }
