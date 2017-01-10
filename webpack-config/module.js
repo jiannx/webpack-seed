@@ -1,17 +1,14 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var dirs = require('./base.js');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const base = require('./base.js');
 
 module.exports = {
-    // 预加载
     preLoaders: [{
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
-        include: dirs.srcRootDir,
+        include: base.srcRootDir,
         loader: 'eslint-loader',
     }],
-    // 不需要解析的文件
-    noParse: dirs.noParse,
-    // 加载器配置
+    noParse: [], // 不需要解析的文件
     loaders: [{
             test: /\.css$/,
             exclude: /(node_modules|bower_components|bootstrap)/,
@@ -45,7 +42,6 @@ module.exports = {
             test: /\.(png|jpg|gif)$/,
             loader: 'url?limit=1&name=resource/img/[hash].[ext]',
         }, {
-            // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
             test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
             loader: 'file?name=resource/fonts/[name].[ext]',
         },

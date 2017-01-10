@@ -1,20 +1,18 @@
-// 开发组件
-var webpack = require('webpack');
-var path = require('path');
-var dirs = require('./base.js');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin'); // 生成独立css
-var HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html
-var CleanPlugin = require('clean-webpack-plugin'); // 目录清理
-var NgAnnotatePlugin = require('ng-annotate-webpack-plugin'); // angular混淆编译
-var LodashModuleReplacementPlugin = require('lodash-webpack-plugin'); // 动态加载lodash模块
-var WebpackMd5Hash = require('webpack-md5-hash');
-// var pushPlugin = require('./push.js');
+const webpack = require('webpack');
+const path = require('path');
+const base = require('./base.js');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); // 生成独立css
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // 生成html
+const CleanPlugin = require('clean-webpack-plugin'); // 目录清理
+const NgAnnotatePlugin = require('ng-annotate-webpack-plugin'); // angular混淆编译
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin'); // 动态加载lodash模块
+const WebpackMd5Hash = require('webpack-md5-hash');
 
-var plugins = [];
+let plugins = [];
 
 // 当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块
-var providePlugin = new webpack.ProvidePlugin({
+let providePlugin = new webpack.ProvidePlugin({
     // $: 'jquery',
     // jQuery: 'jquery',
     // 'window.jQuery': 'jquery',
@@ -23,65 +21,69 @@ var providePlugin = new webpack.ProvidePlugin({
 });
 
 // dll配置文件引入
-var dllReferencePlugin = new webpack.DllReferencePlugin({
-    context: dirs.rootDir,
+let dllReferencePlugin = new webpack.DllReferencePlugin({
+    context: base.rootDir,
     manifest: require('../manifest.json'),
 });
 
 // 生成文件夹清空
-var cleanPlugin = new CleanPlugin([dirs.buildDir], {
-    root: dirs.rootDir,
+let cleanPlugin = new CleanPlugin([base.buildDir], {
+    root: base.rootDir,
 });
 
 // definePlugin 接收字符串插入到代码当中
-var definePluginDev = new webpack.DefinePlugin({
+let definePluginDev = new webpack.DefinePlugin({
     PRODUCTION: false,
 });
-var definePluginProduction = new webpack.DefinePlugin({
+
+let definePluginProduction = new webpack.DefinePlugin({
     PRODUCTION: true,
-    // react 发布版本
     'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('production') // react 发布版本
     },
-    // vue
-    'process.env.NODE_ENV': '"production"'
+    'process.env.NODE_ENV': '"production"', // vue
 });
 
 // js代码压缩
-var uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
+let uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
     compress: {
         warnings: false,
     },
 });
 
 // angular 代码依赖注入声明
-var ngAnnotate = new NgAnnotatePlugin({
+let ngAnnotate = new NgAnnotatePlugin({
     add: true,
 });
 
 plugins = [
     providePlugin,
     new WebpackMd5Hash(),
-    new ExtractTextPlugin('[name]-[contenthash:8].css'),
+    new ExtractTextPlugin('css/[name]-[contenthash:8].css'),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'commons',
-        filename: '[name]-[chunkhash:8].js',
-    }),
-    new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: path.resolve(dirs.srcRootDir, 'index.html'),
+        filename: 'js/[name]-[chunkhash:8].js',
     }),
     new CopyWebpackPlugin([
-        { context: dirs.vendorDir, from: '**/*', to: path.resolve(dirs.buildDir, 'vendor') },
-        { context: dirs.staticDir, from: '**/*', to: path.resolve(dirs.buildDir, 'static') },
-        { context: dirs.dllDir, from: '**/*', to: path.resolve(dirs.buildDir, 'dll') },
+        { context: base.vendorDir, from: '**/*', to: path.resolve(base.buildDir, 'vendor') },
+        { context: base.staticDir, from: '**/*', to: path.resolve(base.buildDir, 'static') },
+        { context: base.dllDir, from: '**/*', to: path.resolve(base.buildDir, 'dll') },
     ]),
     new LodashModuleReplacementPlugin(),
     // dllReferencePlugin
 ];
 
+// htmls
+for (let item of base.htmls) {
+    plugins.push(new HtmlWebpackPlugin({
+        filename: item.filename,
+        template: item.template,
+        chunks: ['commons'].concat(item.chunks)
+    }));
+}
+
 module.exports = function(type = 'dev') {
-    console.log('Model: ' + type + ', Project: ' + dirs.project);
+    console.log('Model: ' + type + ', Project: ' + base.project);
     if (type === 'dev') {
         plugins.push(definePluginDev);
     } else if (type === 'production') {

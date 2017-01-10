@@ -90,6 +90,9 @@ $ npm run server
 
 
 ## 更新日志
+### 1.3.0 (2017-1-10)
+- NeRequest完善，NeDialog完善，webpack支持多页面输出
+
 ### 1.1.2 (2016-12-13)
 - angular组件整合
 

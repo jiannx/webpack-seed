@@ -1,15 +1,16 @@
 {
   "name": "web-seed",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "node npm-scripts/before-build.script.js && webpack --progress --colors --bail",
-    "dev": "node npm-scripts/before-build.script.js && webpack --progress --colors --config ./webpack.dev.config.js",
-    "watch": "node npm-scripts/before-build.script.js && webpack --progress --colors --watch --config ./webpack.dev.config.js",
-    "profile": "node npm-scripts/before-build.script.js && webpack --colors --profile --display-modules",
-    "dll": "node npm-scripts/before-build-dll.script.js && webpack --progress --colors --config ./webpack.dll.config.js",
-    "server": "node ./webpack.server.js",
+    "pre-build": "node npm-scripts/before-build.script.js",
+    "build": "npm run pre-build && webpack --progress --colors --bail --config ./webpack-config/webpack.config.js",
+    "dev": "npm run pre-build && webpack --progress --colors --config ./webpack-config/webpack.dev.config.js",
+    "watch": "npm run pre-build && webpack --progress --colors --watch --config ./webpack-config/webpack.dev.config.js",
+    "profile": "npm run pre-build && webpack --colors --profile --display-modules --config ./webpack-config/webpack.config.js",
+    "dll": "node npm-scripts/before-build-dll.script.js && webpack --progress --colors --config ./webpack-config/webpack.dll.config.js",
+    "server": "node ./webpack-config/webpack.server.js",
     "clean": "node npm-scripts/clean.js",
     "push": "npm run build && gulp push"
   },

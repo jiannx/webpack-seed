@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var CleanPlugin = require('clean-webpack-plugin');
-var dirs = require('./webpack-config/base.js');
+var dirs = require('./base.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -10,10 +10,10 @@ module.exports = {
         library: '[name]',
     },
     entry: {
-        dll: dirs.dlls,
+        dll: ['jquery'],
     },
-    resolve: require('./webpack-config/resolve.js'),
-    module: require('./webpack-config/module.js'),
+    resolve: require('./resolve.js'),
+    module: require('./module.js'),
     plugins: [
         new CleanPlugin([dirs.dllDir]),
         new webpack.DllPlugin({
