@@ -1,5 +1,4 @@
 // gulp用于webpack打包完成后，拷贝到服务器文件夹
-
 var gulp = require('gulp');
 var path = require('path');
 var dirs = require('./webpack-config/base.js');

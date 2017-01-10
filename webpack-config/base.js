@@ -21,20 +21,19 @@ base.pros = {
 };
 
 base.base = base.pros[base.project];
-base.rootDir = path.resolve(__dirname, '../'); // 项目根目录
-base.srcRootDir = path.resolve(base.rootDir, base.base.srcDir); // 项目业务代码根目录
-base.vendorDir = path.resolve(base.rootDir, './vendor'); // 存放所有不能用npm管理的第三方库
-base.dllDir = path.resolve(base.rootDir, '.tmp/dll'); // 存放由各种不常改变的js/css打包而来的dll
-base.buildDir = path.resolve(base.rootDir, './build'); // 生成文件目录
-base.staticDir = path.resolve(base.rootDir, './static'); // 静态文件目录，一些不需要打包的静态资源
-base.serverStaticDir = path.resolve(base.rootDir, base.base.serverDir); // 后端的静态目录，gulp发布时将拷贝到该目录
+base.rootDir = path.resolve(__dirname, '../');
+base.srcRootDir = path.resolve(base.rootDir, base.base.srcDir);
+base.vendorDir = path.resolve(base.rootDir, './vendor');
+base.dllDir = path.resolve(base.rootDir, '.tmp/dll');
+base.buildDir = path.resolve(base.rootDir, './build');
+base.staticDir = path.resolve(base.rootDir, './static');
+base.serverStaticDir = path.resolve(base.rootDir, base.base.serverDir);
 
 // 文件路径配置
 base.path = {
     react: path.resolve(base.rootDir, 'node_modules/react/dist/react.min.js'),
     validation: path.resolve(base.srcRootDir, 'components/angular-validation/angular-validation.min.js')
 };
-
 
 // 模块别名配置
 base.alias = {
