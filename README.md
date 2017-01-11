@@ -37,6 +37,7 @@ $ npm run server
 | npm run profile | 显示编译过程中每一项资源的耗时，用来调优的 |
 | npm run dll     | 生成Dll文件，每次升级第三方库时都需要重新执行一遍（暂时不使用，会生成一个全局变量替代window.jquery，导致一些插件问题） |
 | npm run clean   | 清除tmp及build文件夹 |
+| npm run push    | build生产环境代码然后拷贝到服务器目录 |
 | gulp watch      | 用于拷贝build文件夹(请新建一个控制台用于运行该命令) |
 
 

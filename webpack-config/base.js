@@ -2,8 +2,8 @@ const path = require('path');
 
 let base = {};
 
-// dirs.project = 'angular';
-base.project = 'pages';
+base.project = 'angular';
+// base.project = 'pages';
 
 base.pros = {
     angular: {
@@ -60,8 +60,8 @@ base.entry = {
 
 // 页面配置 直接支持ejs。filename输出文件名；template入口文件(路径相对于srcRoot)；chunks引入的js，对应entry中的key
 base.htmls = [
-    { filename: 'app.html', template: 'app.html', chunks: ['app'] },
-    { filename: 'home.html', template: 'home.html', chunks: ['home'] }
+    { filename: 'index.html', template: 'index.html', chunks: ['app'] },
+    // { filename: 'home.html', template: 'home.html', chunks: ['home'] }
 ];
 
 // 输出目录
@@ -69,7 +69,7 @@ base.output = {
     path: base.buildDir,
     filename: 'js/[name]-[chunkhash:8].js',
     chunkFilename: '[id]-[name].js',
-    // publicPath: '/static/',
+    publicPath: '/',
 };
 
 

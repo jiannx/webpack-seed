@@ -1,4 +1,12 @@
 @import "bootstrap/_bootstrap";
+$c-dark: #3B3A3F;
+$c-light: #01BB8D;
+$c-blue: #1D8BD8;
+$c-bg: #F1F1F2;
+$c-green: #66d354;
+$top-height: 60px;
+$menu-width: 180px;
+$footer-height: 30px;
 form {
   label {
     font-weight: normal;
@@ -12,3 +20,34 @@ form {
   }
 }
 
+// 面板 
+.panel {
+  padding-top: 36px;
+  position: relative;
+  .panel-heading {
+    width: 100%;
+    height: 36px;
+    padding: 0px 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 14px;
+    line-height: 36px;
+    .panel-title {
+      font-size: 14px;
+      line-height: 36px;
+    }
+  }
+  .panel-body {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+  }
+}
+
+.panel-primary {
+  .panel-heading {
+    background-color: $c-blue;
+  }
+}

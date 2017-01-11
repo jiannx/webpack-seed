@@ -1,0 +1,15 @@
+.auth-sel-list {
+  width: 260px;
+  height: 200px;
+  background-color: gray;
+    position: relative;
+  .name {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    background-color: $c-blue;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
