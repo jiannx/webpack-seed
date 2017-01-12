@@ -7,9 +7,62 @@ $c-green: #66d354;
 $top-height: 60px;
 $menu-width: 180px;
 $footer-height: 30px;
+$brand-primary: #1C84C6 !default;
+$brand-success: #1AB394 !default;
+$brand-info: #23C6C8 !default;
+$brand-warning: #F8AC59 !default;
+$brand-danger: #ED5565 !default;
 form {
   label {
     font-weight: normal;
+  }
+}
+
+*.text-danger {
+  color: $brand-danger;
+}
+
+*.text-success {
+  color: $brand-success;
+}
+
+*.text-primary {
+  color: $brand-primary;
+}
+
+*.text-info {
+  color: $brand-info;
+}
+
+*.text-warning {
+  color: $brand-warning;
+}
+
+*.important {
+  &:before {
+    color: $brand-danger;
+    content: '* ';
+  }
+}
+
+label.error-label {
+  text-align: left;
+  padding-top: 7px;
+}
+
+*.has-success {
+  border-color: lighten($brand-success, 5%);
+  &:focus {
+    border-color: lighten($brand-success, 5%);
+    box-shadow: 0 0 8px lighten($brand-success, 5%);
+  }
+}
+
+*.has-error {
+  border-color: lighten($brand-danger, 5%);
+  &:focus {
+    border-color: lighten($brand-danger, 5%);
+    box-shadow: 0 0 8px lighten($brand-danger, 5%);
   }
 }
 
@@ -19,7 +72,8 @@ form {
     width: 100px !important;
   }
 }
-.row{
+
+.row {
   padding-top: 6px;
   padding-bottom: 6px;
 }

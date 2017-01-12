@@ -27,11 +27,17 @@ app.config(($stateProvider) => {
 
 
 // 账户添加
-app.controller('accountAdd', function($scope, request, neDialog) {
-    $scope.newData = {};
+app.controller('accountAdd', function($scope, request, neDialog, $validation) {
+    $scope.newData = {
+        name: '',
+        account: '',
+        phone: '',
+        password: '',
+        role: ''
+    };
     $scope.identityList = [];
     $scope.onSubmit = function() {
-        console.log('submit');
+        console.log();
     };
 });
 
