@@ -110,7 +110,22 @@ app.factory('neDialog', function($compile, $controller, $rootScope) {
     let result = {
         confirm: function(opt) {
             return new NeDialog($compile, $controller, $rootScope).confirm(opt);
-        }
+        },
+        // 确认框，是否删除
+        ask: function(opt) {
+            Object.assign(opt, { icon: 0, type: 0, });
+            result.confirm(opt);
+        },
+        // 提示框
+        alert: function(opt) {
+            if (typeof opt === 'string') {
+                opt = {
+                    content: opt
+                };
+            }
+            Object.assign(opt, { icon: 0, type: 0, btn: ['确定'] });
+            result.confirm(opt);
+        },
     };
     return result;
 });
