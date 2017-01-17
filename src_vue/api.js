@@ -3,7 +3,7 @@ const host = '/app/?/api1.0';
 
 const api = {
     'demo': { method: 'get', url: '/api/demo', desc: 'demo' },
-    'foundIndex': { method: 'get', url: '/found/index/', desc: '发现首页' }
+    'foundIndex': { method: 'post', url: '/found/index/', desc: '发现首页' }
 };
 
 for (let key of Object.keys(api)) {

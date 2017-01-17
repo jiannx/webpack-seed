@@ -41,6 +41,9 @@
                     <li>
                         <a ui-sref="index.course.list" ui-sref-active="active">课程列表</a>
                     </li>
+                    <li>
+                        <a ui-sref="index.enter-name" ui-sref-active="active">报名查看</a>
+                    </li>
                 </ul>
             </li>
             <li ng-class="{active: $state.includes('operation')}">
@@ -63,6 +66,9 @@
                     </li>
                     <li>
                         <a ui-sref="index.operation.integral" ui-sref-active="active">积分管理</a>
+                    </li>
+                    <li>
+                        <a ui-sref="index.operation.suggest" ui-sref-active="active">意见反馈汇总</a>
                     </li>
                 </ul>
             </li>
@@ -90,13 +96,13 @@
                 <a><i class="fa fa-jpy icon" aria-hidden="true"></i>&nbsp;&nbsp;结算管理<i class="fa arrow"></i></a>
                 <ul class="second">
                     <li>
-                        <a ui-sref="index.settlement.course" ui-sref-active="active">课程结算</a>
+                        <a ui-sref="index.settlement.course" ui-sref-active="active">单次课程结算</a>
                     </li>
                     <li>
-                        <a ui-sref="index.settlement.gold" ui-sref-active="active">金币管理</a>
+                        <a ui-sref="index.settlement.gold" ui-sref-active="active">金币充值</a>
                     </li>
                     <li>
-                        <a ui-sref="index.settlement.overage" ui-sref-active="active">余额管理</a>
+                        <a ui-sref="index.settlement.overage" ui-sref-active="active">余额提现管理</a>
                     </li>
                     <li>
                         <a ui-sref="index.settlement.chart" ui-sref-active="active">营收报表</a>
@@ -111,7 +117,7 @@
         </div>
     </div>
     <div class="footer">
-        XX公司版权所有&nbsp;&nbsp;©&nbsp;2016&nbsp;&nbsp;&nbsp;浙ICP备00000000号
+        XX公司版权所有&nbsp;&nbsp;©&nbsp;2016-2017&nbsp;&nbsp;&nbsp;浙ICP备00000000号
     </div>
 </div>
 <script type="text/javascript">

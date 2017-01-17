@@ -5,6 +5,7 @@ import html from './header.html';
 
 console.log(request);
 request('foundIndex').success();
+request('demo').success();
 
 function login() {
     let data = {

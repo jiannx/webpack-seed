@@ -6,6 +6,13 @@ app.config(($stateProvider) => {
             url: 'order',
             abstract: true
         })
+        // 课程订单 详情
+        .state('index.order.detail', {
+            url: '/detail',
+            views: {
+                'console@index': { template: require('./order-detail.html') }
+            }
+        })
         // 课程订单 预付
         .state('index.order.course-advance', {
             url: '/course/advance',

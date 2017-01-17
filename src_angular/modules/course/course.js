@@ -27,6 +27,13 @@ app.config(($stateProvider) => {
             views: {
                 'console@index': { template: require('./course-detail.html') }
             }
+        })
+        // 报名查看
+        .state('index.enter-name', {
+            url: '/enter-name',
+            views: {
+                'console@index': { template: require('./enter-name.html') }
+            }
         });
 }).service('courseService', () => {
     this.name = 'courseService';

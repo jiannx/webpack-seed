@@ -50,6 +50,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable) {
 
     $scope.onSearch = function() {
         $scope.onEdit();
+        neDialog.alert('受到收到');
     };
 
     $scope.onReset = function() {
