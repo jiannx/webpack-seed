@@ -2,7 +2,8 @@ const path = require('path');
 
 let base = {};
 
-base.project = 'angular';
+// base.project = 'angular';
+base.project = 'vue';
 // base.project = 'pages';
 
 base.pros = {
@@ -38,6 +39,7 @@ base.path = {
 // 模块别名配置
 base.alias = {
     'app.config': path.resolve(base.srcRootDir, 'app.config.js'),
+    'app.components': path.resolve(base.srcRootDir, 'components/components.js'),
     vue$: 'vue/dist/vue.common.js'
 };
 

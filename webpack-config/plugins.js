@@ -69,7 +69,7 @@ plugins = [
         { context: base.staticDir, from: '**/*', to: path.resolve(base.buildDir, 'static') },
         { context: base.dllDir, from: '**/*', to: path.resolve(base.buildDir, 'dll') },
     ]),
-    new LodashModuleReplacementPlugin(),
+    // new LodashModuleReplacementPlugin(),
     // dllReferencePlugin
 ];
 

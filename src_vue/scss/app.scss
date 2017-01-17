@@ -7,6 +7,7 @@ $c-blue: #0d8ae7;
 @import "download.scss";
 @import "course.scss";
 @import "create.scss";
+@import "login.scss";
 body {
   font-family: "Microsoft YaHei", "Lantinghei", "Arial", "黑体", "宋体", sans-serif;
   color: #515151;
@@ -113,7 +114,7 @@ $menu-height: 56px;
 .header {
   width: 100%;
   height: 210px;
-  border-bottom: 4px solid #0e89e9;
+  border-bottom: 4px solid #333333;
   .content {
     height: 100%;
   }
@@ -170,16 +171,17 @@ $menu-height: 56px;
           line-height: $menu-height;
           text-decoration: none;
           color: #616161;
+          transition: 0.2s;
           &:hover {
             color: white;
-            background-color: $c-blue;
+            background-color: #333333;
           }
         }
         &.sel {
           a {
             color: white;
           }
-          background-color: $c-blue;
+          background-color: #333333;
         }
       }
     }
@@ -232,7 +234,7 @@ $menu-height: 56px;
         width: 100%;
         li {
           width: 100%;
-          background-color: $c-blue;
+          background-color: #333333;
           display: block;
           position: relative;
           padding: 0 10px;

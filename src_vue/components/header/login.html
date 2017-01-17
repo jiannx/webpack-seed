@@ -1,0 +1,31 @@
+<div class="login">
+    <div class="title" v-show="show == 'account' || show == 'code'">
+        <span v-bind:class="{ sel: show == 'account' }" v-on:click="onChangeShow('account')">账户登陆</span> | <span v-bind:class="{ sel: show == 'code' }" v-on:click="onChangeShow('code')">扫码登陆</span>
+    </div>
+    <form v-show="show == 'account'">
+        <div class="input-box">
+            <div class="icon">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+            </div>
+            <input type="text" placeholder="你的邮箱或手机号" v-model="login.account">
+        </div>
+        <div class="input-box">
+            <div class="icon">
+                <i class="fa fa-user-o" aria-hidden="true"></i>
+            </div>
+            <input type="text" placeholder="你的密码" v-model="login.password">
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-success btn-sm" v-on:click="onLogin">登陆</button>
+        </div>
+    </form>
+    <div v-show="show == 'code'">
+        <div class="code-img"></div>
+    </div>
+    <div v-show="show == 'success'">
+        登陆成功
+    </div>
+    <div v-show="show == 'fail'">
+        登陆失败
+    </div>
+</div>

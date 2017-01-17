@@ -1,4 +1,5 @@
 import html from './home.html';
+import { dialog } from '../../components/components.js';
 
 const page = {
     template: html,

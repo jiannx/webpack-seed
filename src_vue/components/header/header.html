@@ -8,19 +8,34 @@
         </div>
         <div class="menu">
             <ul class="nav-bar">
-                <li v-bind:class="{ sel: sel == 'home' }"><router-link to="/home">首页</router-link></li>
-                <li v-bind:class="{ sel: sel == 'discover' }"><router-link to="/discover">课程发现</router-link></li>
-                <li v-bind:class="{ sel: sel == 'create' }"><router-link to="/create">课程创建</router-link></li>
+                <li v-bind:class="{ sel: sel == 'home' }">
+                    <router-link to="/home">首页</router-link>
+                </li>
+                <li v-bind:class="{ sel: sel == 'discover' }">
+                    <router-link to="/discover">课程发现</router-link>
+                </li>
+                <li v-bind:class="{ sel: sel == 'create' }">
+                    <router-link to="/create">课程创建</router-link>
+                </li>
             </ul>
             <ul class="nav-right dropdown">
-                <li v-bind:class="{ sel: sel == 'download' }"><router-link class="download" to="/download">APP下载</router-link></li>
+                <li v-bind:class="{ sel: sel == 'download' }">
+                    <router-link class="download" to="/download">APP下载</router-link>
+                </li>
+                <li v-bind:class="{ sel: sel == 'user' }">
+                    <a v-on:click="onLogin">登陆</a>
+                </li>
                 <li v-bind:class="{ sel: sel == 'user' }">
                     <a class="user" id="dropdownMenu1" data-toggle="dropdown">
                         <div class="icon"></div> 潘盼盼 <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><router-link role="menuitem" tabindex="-1" to="/user/my">我的课程</router-link></li>
-                        <li role="presentation"><router-link role="menuitem" tabindex="-1" to="/user/growing">成长变化</router-link></li>
+                        <li role="presentation">
+                            <router-link role="menuitem" tabindex="-1" to="/user/my">我的课程</router-link>
+                        </li>
+                        <li role="presentation">
+                            <router-link role="menuitem" tabindex="-1" to="/user/growing">成长变化</router-link>
+                        </li>
                         <li role="presentation"><a role="menuitem" tabindex="-1" v-on:click="loginOut">退出登陆</a></li>
                     </ul>
                 </li>

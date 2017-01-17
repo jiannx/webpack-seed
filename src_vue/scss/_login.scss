@@ -1,0 +1,42 @@
+.login {
+  width: 480px;
+  height: 280px;
+  .title {
+    color: #848484;
+    height: 60px;
+    padding: 20px;
+    span.sel {
+      color: #000000;
+    }
+  }
+  .input-box {
+    height: 30px;
+    margin: 20px 50px;
+    border: 1px solid #c8c8c8;
+    padding: 3px 0 2px 40px;
+    position: relative;
+    .icon {
+      position: absolute;
+      left: 15px;
+      top: 4px;
+    }
+    input {
+      width: 100%;
+      border: 0;
+      outline: 0;
+    }
+  }
+  button.btn-success {
+    width: 120px;
+    height: 30px;
+    background-color: #66d354;
+    border: 0;
+    outline: none;
+  }
+  .code-img{
+    width: 150px;
+    height: 150px;
+    background-color: gray;
+    margin: auto;
+  }
+}
