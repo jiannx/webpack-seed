@@ -3,9 +3,8 @@ import layer from 'layer';
 import { request } from 'app.components';
 import html from './header.html';
 
-console.log(request);
-request('foundIndex').success();
-request('demo').success();
+// request('foundIndex').success();
+// request('demo').success();
 
 function login() {
     let data = {
@@ -19,6 +18,7 @@ function login() {
         title: false,
         type: 1,
         area: ['480px', '280px'],
+        closeBtn: 0,
         content: require('./login.html'),
         success: function(layero, index) {
             new Vue({
@@ -39,15 +39,16 @@ function login() {
         }
     });
 }
-login();
+
+let headerData = {
+    isLogin: false
+};
 
 const Header = {
     template: html,
     props: ['sel'],
     data: function() {
-        return {
-            hello: 'hello word'
-        };
+        return headerData;
     },
     methods: {
         onLogin: login,

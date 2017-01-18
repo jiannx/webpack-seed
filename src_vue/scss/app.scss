@@ -103,6 +103,28 @@ a.btn-tag {
   }
 }
 
+// 小图标按钮 登陆页
+button.btn-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #ff6d61;
+  border: none;
+  outline: none;
+  position: absolute;
+  color: white;
+  padding: 0;
+  text-align: center;
+  line-height: 24px;
+  box-shadow: 0 0 0;
+  &:focus,
+  &:visited,
+  &:active {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
 .content {
   width: $min-width;
   height: 100%;

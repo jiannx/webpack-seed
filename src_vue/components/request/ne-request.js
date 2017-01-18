@@ -190,6 +190,7 @@ class NeRequest {
             } else if (NeRequest.type.toUpperCase() === 'JQUERY') {
                 httpOpt.success = function(res, status, xhr) {
                     self.doneCount += 1;
+                    NeRequest.doingCount += -1;
                     self.resQueue[i] = {
                         data: res,
                         status: status,
@@ -201,6 +202,7 @@ class NeRequest {
                     self.doneCount += 1;
                     self.resQueue[i] = xhr;
                     self.errorIndex = i;
+                    NeRequest.doingCount += -1;
                     self._do();
                 };
                 if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {

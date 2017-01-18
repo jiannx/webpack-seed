@@ -22,10 +22,10 @@
                 <li v-bind:class="{ sel: sel == 'download' }">
                     <router-link class="download" to="/download">APP下载</router-link>
                 </li>
-                <li v-bind:class="{ sel: sel == 'user' }">
+                <li v-bind:class="{ sel: sel == 'user' }" v-if="!isLogin">
                     <a v-on:click="onLogin">登陆</a>
                 </li>
-                <li v-bind:class="{ sel: sel == 'user' }">
+                <li v-bind:class="{ sel: sel == 'user' }" v-if="isLogin">
                     <a class="user" id="dropdownMenu1" data-toggle="dropdown">
                         <div class="icon"></div> 潘盼盼 <span class="caret"></span>
                     </a>

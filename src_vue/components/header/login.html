@@ -2,6 +2,9 @@
     <div class="title" v-show="show == 'account' || show == 'code'">
         <span v-bind:class="{ sel: show == 'account' }" v-on:click="onChangeShow('account')">账户登陆</span> | <span v-bind:class="{ sel: show == 'code' }" v-on:click="onChangeShow('code')">扫码登陆</span>
     </div>
+    <button class="btn btn-icon btn-close" v-on:click="onClose">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
     <form v-show="show == 'account'">
         <div class="input-box">
             <div class="icon">

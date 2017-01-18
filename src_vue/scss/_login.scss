@@ -5,13 +5,15 @@
     color: #848484;
     height: 60px;
     padding: 20px;
+    font-size: 16px;
     span.sel {
+      font-weight: bold;
       color: #000000;
     }
   }
   .input-box {
     height: 30px;
-    margin: 20px 50px;
+    margin: 30px 50px;
     border: 1px solid #c8c8c8;
     padding: 3px 0 2px 40px;
     position: relative;
@@ -33,10 +35,17 @@
     border: 0;
     outline: none;
   }
-  .code-img{
+  .code-img {
     width: 150px;
     height: 150px;
     background-color: gray;
     margin: auto;
+  }
+  button.btn-close {
+    background-color: #ff6d61;
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    color: white;
   }
 }
