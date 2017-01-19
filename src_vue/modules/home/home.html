@@ -1,6 +1,9 @@
 <div class="body">
     <ne-header sel="home"></ne-header>
-    <div class="home-slide-panel">
+    <div class="home-slide-panel" id="theTarget">
+<!--         <div v-for="item in banners">
+            <img v-bind:src="item.titlepic" alt="">
+        </div> -->
     </div>
     <div class="home-step">
         <div class="content">
@@ -75,7 +78,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 text-center" style="margin: 50px auto;">
-                <router-link class="btn btn-big btn-blue" to="/">我要创建课程</router-link>
+                    <router-link class="btn btn-big btn-blue" to="/">我要创建课程</router-link>
                 </div>
             </div>
         </div>

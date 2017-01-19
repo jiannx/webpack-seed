@@ -205,6 +205,7 @@ class NeRequest {
                     NeRequest.doingCount += -1;
                     self._do();
                 };
+                httpOpt.dataType = 'json';
                 if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
                     httpOpt.data = httpOpt.params;
                 } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {

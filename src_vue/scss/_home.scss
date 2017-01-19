@@ -1,7 +1,15 @@
 .home-slide-panel {
   width: 100%;
+  min-width: 1200px;
   height: 620px;
   background-color: #185c99;
+  position: relative;
+  .img {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: 100%;
+  }
 }
 
 .home-step {
