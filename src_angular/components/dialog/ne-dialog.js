@@ -36,7 +36,6 @@ class NeDialog {
         this.$rootScope = $rootScope;
         this.index = null;
         this._def_opt = {
-            title: '提示',
             type: 1,
             // skin: 'layui-layer-molv',
             btn: ['确定', '取消'], // If the button is not needed, set to null
@@ -57,6 +56,7 @@ class NeDialog {
             setTimeout(() => {
                 if (scope) {
                     this.$compile(layero)(scope);
+                    scope.$apply();
                 }
                 if (controller) {
                     this.$controller(controller, {
