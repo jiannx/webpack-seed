@@ -1,7 +1,8 @@
 import html from './user.html';
 import my from './user-my';
-import myCourseDetail from './user-my-detail';
 import growing from './user-growing';
+import myCourseDetail from './user-my-detail';
+import myCourseDetailLink from './user-my-detail-link';
 
 const page = {
     template: html,
@@ -21,5 +22,6 @@ let routes = [{
 routes.push(my);
 routes.push(growing);
 routes.push(myCourseDetail);
+routes.push(myCourseDetailLink);
 
 export default routes;

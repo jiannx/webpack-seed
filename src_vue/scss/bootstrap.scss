@@ -1,4 +1,6 @@
 @import "bootstrap/_bootstrap";
+$min-width: 1200px;
+$c-blue: #0d8ae7;
 form {
   label {
     font-weight: normal;
@@ -12,6 +14,77 @@ form {
   }
 }
 
-.layui-layer{
-    border-radius: 10px !important;
+// layer样式重写
+.layui-layer {
+  border-radius: 10px !important;
+}
+// 表单样式
+// 
+form.mmt {
+  .title {
+    width: 100%;
+    padding: 30px 0 16px 10px;
+    border-bottom: 2px solid #888888;
+    color: $c-blue;
+    font-size: 22px;
+  }
+  .row {
+    width: 800px;
+    margin: 20px 0;
+    line-height: 30px;
+    .col-xs-2 {
+      width: 120px;
+    }
+  }
+  a.btn-sel {
+    width: 170px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid $c-blue;
+    border-radius: 0;
+    padding: 0;
+    line-height: 28px;
+    margin-right: 10px;
+    float: left;
+    &.selected {
+      background-color: $c-blue;
+      color: white;
+      &:hover {
+        color: white;
+      }
+    }
+    &:hover {
+      color: $c-blue;
+    }
+  }
+  select.form-control {
+    height: 30px;
+    border-radius: 0;
+  }
+  input.form-control {
+    height: 30px;
+    border-radius: 0;
+    padding: 0 10px;
+  }
+  textarea.large,
+  select.large,
+  input.large {
+    width: 690px;
+  }
+  select.small,
+  input.small {
+    width: 570px;
+  }
+  textarea.form-control {
+    border-radius: 0;
+  }
+  label {
+    margin: 0;
+  }
+  .input-group-addon {
+    border-radius: 0;
+  }
+  *.text-red {
+    color: red;
+  }
 }

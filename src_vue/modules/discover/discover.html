@@ -11,25 +11,99 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="discover-filter">
-                        <div class="each-btn sel">
-                            <img src="../../resource/topic2.png" alt="专题" class="normal" />
-                            <img src="../../resource/topic3.png" alt="专题" class="sel" /> 专题
+                        <div class="each-btn sel dropdown">
+                            <a data-toggle="dropdown">
+                                <img src="../../resource/topic2.png" alt="专题" class="normal" />
+                                <img src="../../resource/topic3.png" alt="专题" class="sel" /> 专题
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation"><a>字母</a></li>
+                                <li role="presentation"><a>音标</a></li>
+                                <li role="presentation"><a>单次</a></li>
+                                <li role="presentation"><a>词组</a></li>
+                                <li role="presentation"><a>句子</a></li>
+                                <li role="presentation"><a>段落</a></li>
+                                <li role="presentation"><a>文章</a></li>
+                                <li role="presentation"><a>综合</a></li>
+                                <li role="presentation"><a>活动</a></li>
+                                <li role="presentation"><a>语言文化</a></li>
+                                <li role="presentation"><a>经验分享</a></li>
+                            </ul>
+                        </div>
+                        <div class="each-btn dropdown">
+                            <a data-toggle="dropdown">
+                                <img src="../../resource/class2.png" alt="专题" class="normal" />
+                                <img src="../../resource/class3.png" alt="专题" class="sel" /> 年级
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation"><a>一年级</a></li>
+                                <li role="presentation"><a>二级年</a></li>
+                                <li role="presentation"><a>三年级</a></li>
+                                <li role="presentation"><a>四年级</a></li>
+                                <li role="presentation"><a>五年级</a></li>
+                                <li role="presentation"><a>六年级</a></li>
+                            </ul>
+                        </div>
+                        <div class="each-btn dropdown">
+                            <a data-toggle="dropdown">
+                                <img src="../../resource/difficulty2.png" alt="专题" class="normal" />
+                                <img src="../../resource/difficulty3.png" alt="专题" class="sel" /> 难易度
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation"><a>简单</a></li>
+                                <li role="presentation"><a>中等</a></li>
+                                <li role="presentation"><a>困难</a></li>
+                            </ul>
                         </div>
                         <div class="each-btn">
-                            <img src="../../resource/class2.png" alt="专题" class="normal" />
-                            <img src="../../resource/class3.png" alt="专题" class="sel" /> 年级
+                            <a v-on:click="onSelTime()">
+                                <img src="../../resource/date2.png" alt="专题" class="normal" />
+                                <img src="../../resource/date3.png" alt="专题" class="sel" />
+                                <input type="text" name="daterange" style="width: 0;height: 40px; border: none;">上课时间
+                            </a>
+                            <!--<div class="dropdown-menu">
+                                <form class="form-inline" style="width: 320px; padding: 0 10px;">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-sm" placeholder="选择时间" style="width: 200px;" name="daterange">
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-success" style="margin-top: 2px">确定</button>
+                                </form>
+                            </div> -->
                         </div>
-                        <div class="each-btn">
-                            <img src="../../resource/difficulty2.png" alt="专题" class="normal" />
-                            <img src="../../resource/difficulty3.png" alt="专题" class="sel" /> 难易度
-                        </div>
-                        <div class="each-btn">
-                            <img src="../../resource/date2.png" alt="专题" class="normal" />
-                            <img src="../../resource/date3.png" alt="专题" class="sel" /> 上课时间
-                        </div>
-                        <div class="each-btn sel">
-                            <img src="../../resource/place2.png" alt="专题" class="normal" />
-                            <img src="../../resource/place3.png" alt="专题" class="sel" /> 地区
+                        <div class="each-btn sel dropdown">
+                            <a data-toggle="dropdown">
+                                <img src="../../resource/place2.png" alt="专题" class="normal" />
+                                <img src="../../resource/place3.png" alt="专题" class="sel" /> 地区
+                            </a>
+                            <div class="dropdown-menu ">
+                                <form class="form-inline" style="width: 380px; padding: 0 10px;">
+                                    <div class="form-group">
+                                        <select class="form-control input-sm" v-model="filter.province" v-on:change="onChinaChange('province')" style="width: 100px;">
+                                            <option value="">- 省 -</option>
+                                            <option v-for="option in provinceList" v-bind:value="option.name">
+                                                {{ option.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control input-sm" v-model="filter.city" v-on:change="onChinaChange('city')" style="width: 100px;">
+                                            <option value="">- 市 -</option>
+                                            <option v-for="option in cityList" v-bind:value="option.name">
+                                                {{ option.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control input-sm" v-model="filter.area" v-on:change="onChinaChange('area')" style="width: 100px;">
+                                            <option value="">- 区/县 -</option>
+                                            <option v-for="option in areaList" v-bind:value="option">
+                                                {{ option }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-success" style="margin-top: 2px">确定</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="clearfix"></div>
                     </div>

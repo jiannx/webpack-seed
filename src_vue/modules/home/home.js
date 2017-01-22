@@ -20,6 +20,7 @@ function init() {
     }).success(() => {
 
     });
+
     // banner
     request('indexBanner').success((res) => {
         // homeData.banners = res.rsm.banner_list; // [{titlepic, weburl}]
@@ -33,7 +34,18 @@ function init() {
             $('#theTarget').append(`<div class="img" style="background-image: url(${item.titlepic})"></div>`);
         });
         setTimeout(function() {
-            $('#theTarget').nivoSlider();
+            $('#theTarget').skippr({
+                transition: 'fade',
+                speed: 1000,
+                easing: 'easeOutQuart',
+                navType: 'bubble',
+                childrenElementType: 'div',
+                arrows: false,
+                autoPlay: true,
+                autoPlayDuration: 4000,
+                keyboardOnAlways: true,
+                hidePrevious: false
+            });
         }, 200);
     });
 }

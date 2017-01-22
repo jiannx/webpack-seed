@@ -41,7 +41,7 @@ function login() {
 }
 
 let headerData = {
-    isLogin: false
+    isLogin: true
 };
 
 const Header = {

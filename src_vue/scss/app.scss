@@ -6,7 +6,6 @@ $c-blue: #0d8ae7;
 @import "discover.scss";
 @import "download.scss";
 @import "course.scss";
-@import "create.scss";
 @import "login.scss";
 body {
   font-family: "Microsoft YaHei", "Lantinghei", "Arial", "黑体", "宋体", sans-serif;
@@ -310,5 +309,32 @@ $menu-height: 56px;
     float: right;
     padding-top: 140px;
     line-height: 20px;
+  }
+}
+
+// 返回按钮加标题
+.content-nav {
+  height: 90px;
+  border-bottom: 1px solid #888888;
+  padding: 30px 10px;
+  line-height: 30px;
+  font-size: 24px;
+  color: #343434;
+  margin-bottom: 20px;
+  a.back {
+    display: block;
+    width: 60px;
+    padding: 0 10px;
+    float: left;
+    margin-right: 20px;
+    border-right: 1px solid #888888;
+    background: url('../resource/back.png') no-repeat;
+  }
+  .back {
+    width: 60px;
+    padding: 0 10px;
+    float: left;
+    margin-right: 20px;
+    border-right: 1px solid #888888;
   }
 }

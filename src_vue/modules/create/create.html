@@ -1,6 +1,6 @@
 <div class="body ">
     <ne-header sel="create"></ne-header>
-    <form class="create">
+    <form class="mmt">
         <div class="content">
             <div class="title">
                 <img src="../../resource/difficulty2.png" />&nbsp;&nbsp;课程信息</div>
@@ -8,63 +8,64 @@
         <div class="content">
             <div class="row">
                 <div class="col-xs-2">选择课程模式：</div>
-                <div class="col-xs-10"><a class="btn btn-sel selected" style="width: 275px; margin-right: 20px;">线上</a><a class="btn btn-sel" style="width: 275px;">线下</a></div>
+                <div class="col-xs-10">
+                    <a class="btn btn-sel" style="width: 275px; margin-right: 20px;" v-bind:class="{ selected: newCourse.typesid == 1 }" v-on:click="newCourse.typesid = 1">线上</a>
+                    <a class="btn btn-sel" style="width: 275px;" v-bind:class="{ selected: newCourse.typesid == 2 }" v-on:click="newCourse.typesid = 2">线下</a></div>
             </div>
             <div class="row">
                 <div class="col-xs-2">课程专题：</div>
                 <div class="col-xs-10">
-                    <select class="form-control small"></select>
+                    <select class="form-control small" v-model="newCourse.course_cate_id"></select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <input type="text" class="form-control large" placeholder="请输入课程名称">
+                    <input type="text" class="form-control large" placeholder="请输入课程名称" v-model="newCourse.title">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <input type="text" class="form-control large" placeholder="课程主要解决问题">
+                    <input type="text" class="form-control large" placeholder="课程主要解决问题" v-model="newCourse.solve_problem">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <input type="text" class="form-control large" placeholder="课程目标">
+                    <input type="text" class="form-control large" placeholder="课程目标" v-model="newCourse.target">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <textarea rows="5" class="form-control large" placeholder="课程涉及内容"></textarea>
+                    <textarea rows="5" class="form-control large" placeholder="课程涉及内容" v-model="newCourse.related_content"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <textarea rows="3" class="form-control large" placeholder="课程对未来意义"></textarea>
+                    <textarea rows="3" class="form-control large" placeholder="课程对未来意义" v-model="newCourse.future_significance"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">难易度：</div>
                 <div class="col-xs-10">
-                    <a class="btn btn-sel selected" style="width: 180px; margin-right: 15px;">简单</a>
-                    <a class="btn btn-sel" style="width: 180px; margin-right: 15px;">一般</a>
-                    <a class="btn btn-sel" style="width: 180px;">难</a>
+                    <a class="btn btn-sel" v-bind:class="{ selected: newCourse.facility == 3 }" v-on:click="newCourse.facility = 3" style="width: 180px; margin-right: 15px;">简单</a>
+                    <a class="btn btn-sel" v-bind:class="{ selected: newCourse.facility == 2 }" v-on:click="newCourse.facility = 2" style="width: 180px; margin-right: 15px;">适中</a>
+                    <a class="btn btn-sel" v-bind:class="{ selected: newCourse.facility == 1 }" v-on:click="newCourse.facility = 1" style="width: 180px;">困难</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">适用年级：</div>
                 <div class="col-xs-10">
-                    <select class="form-control small"></select>
+                    <select class="form-control small" ng-model="newCourse.grade"></select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">上课人数：</div>
                 <div class="col-xs-10">
-                    <select class="form-control small"></select>
+                    <select class="form-control small" ng-model="newCourse.lectures_num"></select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <input class="form-control large" placeholder="使用教材版本">
-                    </select>
+                    <input class="form-control large" placeholder="使用教材版本" ng-model="newCourse.textbook_version">
                 </div>
             </div>
             <div class="row">
@@ -83,7 +84,7 @@
             <div class="row">
                 <div class="col-xs-2">嘉宾账号：</div>
                 <div class="col-xs-10">
-                    <input type="text" class="form-control small">
+                    <input type="text" class="form-control small" v-model="newCourse.guest_crowd">
                 </div>
             </div>
         </div>
@@ -95,49 +96,45 @@
             <div class="row">
                 <div class="col-xs-2">上课日期：</div>
                 <div class="col-xs-10">
-                    <input type="text" class="form-control small">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-2"></div>
-                <div class="col-xs-10">
-                    <input type="text" class="form-control small">
+                    <div v-for="item in newCourse.course_date" style="margin-bottom: 10px;">
+                        <input type="text" v-model="item" class="form-control small">
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">上课时间：</div>
                 <div class="col-xs-10">
-                    <input type="text" class="form-control small">
+                    <input type="text" class="form-control small" v-model="newCourse.course_times">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2" style="width: 140px;">是否有结业考核：</div>
-                <div class="col-xs-4">
+                <div class="col-xs-1">
                     <label>
-                        <input type="radio"> 是
+                        <input type="radio" name="is_graduation" v-model="newCourse.is_graduation" value="1"> 是
                     </label>
                 </div>
                 <div class="col-xs-1">
                     <label>
-                        <input type="radio"> 否
+                        <input type="radio" name="is_graduation" v-model="newCourse.is_graduation" value="=0"> 否
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <textarea rows="5" class="form-control large" placeholder="请输入结业考核形式"></textarea>
+                    <textarea rows="5" class="form-control large" placeholder="请输入结业考核形式" v-model="newCourse.examination_form"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">结业考核日期：</div>
                 <div class="col-xs-10">
-                    <input class="form-control small">
+                    <input class="form-control small" v-model="newCourse.examination_date">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">结业考核时间：</div>
                 <div class="col-xs-10">
-                    <input class="form-control small">
+                    <input class="form-control small" v-model="newCourse.examination_times">
                 </div>
             </div>
         </div>
@@ -149,32 +146,35 @@
             <div class="row">
                 <div class="col-xs-2">计费标准：</div>
                 <div class="col-xs-10">
-                    <input type="text" class="form-control small" placeholder="元/人/次">
+                    <input type="text" class="form-control small" placeholder="元/人/次" v-model="newCourse.charging_one">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2">课程总费用：</div>
                 <div class="col-xs-10">
-                    <input type="text" class="form-control small" placeholder="元/人">
+                    <input type="text" class="form-control small" placeholder="元/人" v-model="newCourse.charging_all">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-2"><span class="text-red">*</span>付费方式：</div>
                 <div class="col-xs-2">
                     <label>
-                        <input type="radio"> 课前全额预付
+                        <input type="radio" v-model="newCourse.charging_types" name="charging_types" value="1"> 课前全额预付
                     </label>
                 </div>
                 <div class="col-xs-2">
                     <label>
-                        <input type="radio"> 课后单次付费
+                        <input type="radio" v-model="newCourse.charging_types" name="charging_types" value="2"> 课后单次付费
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12" style="width: 200px">审核人员与您的沟通时间：</div>
                 <div class="col-xs-12">
-                    <input type="text" class="form-control large">
+                    <input type="text" class="form-control large" v-model="newCourse.communicate_date">
+                </div>
+                <div class="col-xs-12">
+                    <input type="text" class="form-control large" v-model="newCourse.communicate_times">
                 </div>
             </div>
             <div class="row">
@@ -187,7 +187,7 @@
         <div class="content">
             <div class="row" style="padding-bottom: 100px;">
                 <div class="col-xs-12 col-xs-offset-2">
-                    <a class="btn btn-normal btn-blue">提交</a>
+                    <a class="btn btn-normal btn-blue" v-on:click="onSubmit()">提交</a>
                 </div>
             </div>
         </div>
