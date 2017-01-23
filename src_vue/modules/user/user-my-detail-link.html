@@ -1,43 +1,82 @@
 <div class="body">
     <ne-header sel="user"></ne-header>
-    <div class="content">
+    <div class="content course-detail">
         <div class="content-nav">
-            <div class="back">
-                <img src="../../resource/difficulty2.png" />
-            </div>
+            <a class="back"></a>
             环节新建
         </div>
-        <div class="course-detail">
-            <div class="content">
-                <form class="mmt">
-                    <div class="row" style="width: 400px;">
-                        <div class="col-xs-4">选择对应环节：</div>
-                        <div class="col-xs-8">
-                            <select class="form-control"></select>
-                        </div>
+        <form class="mmt">
+            <div class="row" style="width: 400px;">
+                <div class="col-xs-4">选择对应环节：</div>
+                <div class="col-xs-8">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row" style="width: 400px;">
+                <div class="col-xs-4">请选择目的：</div>
+                <div class="col-xs-8">
+                    <select class="form-control"></select>
+                </div>
+            </div>
+            <div class="row" style="width: 400px;">
+                <div class="col-xs-12">
+                    <input type="text" class="form-control" placeholder="请输入环节形式">
+                </div>
+            </div>
+            <div class="row" style="width: 400px;">
+                <div class="col-xs-12">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <a class="btn btn-normal btn-blue" v-on:click="onSubmit()">确认发布</a>
+                </div>
+            </div>
+        </form>
+        <div class="course-detail-link" style="margin-bottom: 100px;">
+            <div class="title">
+                已发布环节
+            </div>
+            <div style="margin-top: 30px;">
+                <div class="course-detail-link-time">
+                    课程时间
+                </div>
+                <div class="course-detail-link-step">
+                    <a class="edit clean"><img src="../../resource/edit.png" alt=""> 修改</a>
+                    <div class="title">第一环节</div>
+                    <div class="info">
+                        <p>形式：口语对话</p>
+                        <p>内容：</p>
                     </div>
-                    <div class="row" style="width: 400px;">
-                        <div class="col-xs-4">请选择目的：</div>
-                        <div class="col-xs-8">
-                            <select class="form-control"></select>
-                        </div>
+                </div>
+                <div class="course-detail-link-step">
+                    <div class="title">第一环节</div>
+                    <div class="info">
+                        <p>形式：口语对话</p>
+                        <p>内容：</p>
                     </div>
-                    <div class="row" style="width: 400px;">
-                        <div class="col-xs-12">
-                            <input type="text" class="form-control" placeholder="请输入环节形式">
-                        </div>
+                </div>
+            </div>
+            <div style="margin-top: 30px;">
+                <div class="course-detail-link-time">
+                    课程时间
+                </div>
+                <div class="course-detail-link-step">
+                    <a class="edit clean"><img src="../../resource/edit.png" alt=""> 修改</a>
+                    <div class="title">第一环节</div>
+                    <div class="info">
+                        <p>形式：口语对话</p>
+                        <p>内容：</p>
                     </div>
-                    <div class="row" style="width: 400px;">
-                        <div class="col-xs-12">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
+                </div>
+                <div class="course-detail-link-step">
+                    <div class="title">第一环节</div>
+                    <div class="info">
+                        <p>形式：口语对话</p>
+                        <p>内容：</p>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <a class="btn btn-normal btn-blue" v-on:click="onSubmit()">确认发布</a>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

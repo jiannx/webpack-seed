@@ -13,8 +13,9 @@ body {
 }
 
 a.clean {
-  color: #515151;
+  // color: #515151;
   text-decoration: none;
+  cursor: pointer;
 }
 
 a.btn-normal {
@@ -316,19 +317,24 @@ $menu-height: 56px;
 .content-nav {
   height: 90px;
   border-bottom: 1px solid #888888;
-  padding: 30px 10px;
+  padding: 30px 10px 0 80px;
   line-height: 30px;
   font-size: 24px;
   color: #343434;
   margin-bottom: 20px;
+  position: relative;
   a.back {
     display: block;
     width: 60px;
+    height: 40px;
     padding: 0 10px;
     float: left;
-    margin-right: 20px;
+    position: absolute;
+    left: 0;
+    top: 25px;
+    cursor: pointer;
     border-right: 1px solid #888888;
-    background: url('../resource/back.png') no-repeat;
+    background: url('../resource/back.png') no-repeat center;
   }
   .back {
     width: 60px;
