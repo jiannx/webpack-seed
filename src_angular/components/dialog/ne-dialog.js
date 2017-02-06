@@ -49,6 +49,7 @@ class NeDialog {
         } else {
             scope = scope.$new();
         }
+        this.scope = scope;
         opt.success = (layero, index) => {
             if (opt.btn != null) {
                 // layero[0].style.height = 'auto';
