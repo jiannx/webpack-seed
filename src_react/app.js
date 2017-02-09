@@ -1,6 +1,7 @@
-import app from 'app.config';
+import cfg from 'app.config';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 
 // 样式引入
 require('./scss/bootstrap.scss');

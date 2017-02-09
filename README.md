@@ -114,6 +114,7 @@ $ npm run server
 
 //sublime eslint配置 需要.eslintrc文件
 npm install eslint -g
+eslint --init
 package install SublimeLinter-contrib-eslint和 SublimeLinter 插件
 
 //一些插件
@@ -124,13 +125,13 @@ Angularjs
 ConvertToUTF8
 DocBlockr
 SideBarEnhancements
-SublimeLinter
-SublimeLinter-contrib-eslint
 AutoFileName
 HTML-CSS-JS Prettify //设置 "e4x": true 支持jsx
 SideBarEnhancements
 Theme - Afterglow
 Theme - SpaceGray
+SublimeLinter
+SublimeLinter-contrib-eslint
 Babel View->Syntax->Babel->JavaScript(Babel).让eslint支持jsx语法校验
 ```
 
