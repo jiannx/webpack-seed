@@ -1,1 +1,32 @@
 @import "bootstrap/_bootstrap";
+$c-purple: #346afe;
+label {
+  font-weight: normal;
+}
+
+a {
+  cursor: pointer;
+  color: $c-purple;
+  &:hover {
+    color: darken($c-purple, 10%);
+  }
+}
+
+//紫色线条按钮
+button.btn-purple {
+  color: $c-purple;
+  border-color: $c-purple;
+  background-color: white;
+  transition: 0.2s;
+  &:hover {
+    color: white;
+    background-color: $c-purple;
+  }
+  &:active {
+    background-color: darken($c-purple, 5%);
+  }
+}
+
+input[readonly] {
+  cursor: pointer !important;
+}

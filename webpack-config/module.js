@@ -11,7 +11,6 @@ module.exports = {
     noParse: [], // 不需要解析的文件
     loaders: [{
             test: /\.css$/,
-            exclude: /(node_modules|bower_components|bootstrap)/,
             loader: ExtractTextPlugin.extract('css?minimize&-autoprefixer!postcss'),
         }, {
             test: /\.jsx?$/,

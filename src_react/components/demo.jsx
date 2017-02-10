@@ -26,11 +26,9 @@ class HelloMessage extends React.Component {
     clearInterval(this.timerID);
   }
 
-  componentWillUpdate() {
-  }
+  componentWillUpdate() {}
 
-  componentDidUpdate() {
-  }
+  componentDidUpdate() {}
 
   // 自定义函数
   tick() {

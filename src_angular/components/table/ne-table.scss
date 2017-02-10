@@ -1,10 +1,13 @@
 ﻿@charset "utf-8";
-$c-green: #0091ea;
+$c-green: #CCCCCC;
 $ui-grid-row-height: 36px;
 $ui-grid-bottom-h: 40px;
 $ui-grid-header-c: #F6F6F6;
 $ui-grid-header-h: 36px;
 $ui-grid-border-c: #F0F0F0;
+$s-header: 50px;
+$s-header-middle: 40px;
+$s-header-small: 32px;
 //列表
 .ui-grid {
   width: 100%;
@@ -15,6 +18,13 @@ $ui-grid-border-c: #F0F0F0;
   font-size: 12px;
   border: 1px solid $ui-grid-border-c;
   box-sizing: border-box;
+  color: #5F5F5F;
+  &.with-bottom {
+    padding-bottom: $ui-grid-bottom-h;
+    .ui-grid-bottom {
+      display: block;
+    }
+  }
   &:before {
     display: block;
     width: 100%;
@@ -22,22 +32,17 @@ $ui-grid-border-c: #F0F0F0;
     position: absolute;
     left: 0;
     top: 0;
-    background-color: $ui-grid-header-c;
+    background-color: #F7F7F7;
     content: '';
-  }
-  &.with-bottom {
-    padding-bottom: $ui-grid-bottom-h;
-    .ui-grid-bottom {
-      display: block;
-    }
   }
   .ui-grid-header {
     width: 100%;
     height: $ui-grid-header-h;
+    line-height: $ui-grid-header-h;
     position: absolute;
     left: 0;
     top: 0;
-    line-height: $ui-grid-header-h;
+    font-weight: bolder;
     .ui-grid-header-cell {
       height: 100%;
       text-align: center;
@@ -49,12 +54,12 @@ $ui-grid-border-c: #F0F0F0;
       position: relative;
       &:after {
         display: block;
-        position: absolute;
-        right: 0;
-        top: 45%;
         border-right: 4px solid transparent;
         border-left: 4px solid transparent;
         border-bottom: 4px dashed;
+        position: absolute;
+        right: 0;
+        top: 45%;
         content: "";
       }
     }
@@ -72,57 +77,35 @@ $ui-grid-border-c: #F0F0F0;
   }
   .ui-grid-check {
     position: absolute;
-    width: 80px;
+    width: 20px;
     height: 100%;
-    padding: 5px 0 0 20px;
+    padding: 2px 0 0 20px;
     left: 0;
     top: 0;
-    .checkAll {
-      top: 8px
-    }
-    .divAll {
-      position: absolute;
-      right: 15px;
-      top: 0
-    }
-    input {
-      position: absolute;
-      left: 20px;
-    }
   }
   .ui-grid-bottom {
     width: 100%;
     height: $ui-grid-bottom-h;
     background-color: #F6F7FB;
-    border-top: 1px solid #eee;
     position: absolute;
     left: 0;
     bottom: 0;
-    padding: 0 10px;
+    padding: 0 20px;
     display: none;
     .ui-grid-bottom-info {
       float: left;
       line-height: $ui-grid-bottom-h;
     }
     .ui-grid-bottom-page {
-      height: 30px;
-      margin-top: 5px;
+      height: $ui-grid-bottom-h;
+      line-height: $ui-grid-bottom-h;
       float: right;
-      // border: 1px solid #DDDDDD;
-      // background-color:white;
       a.page {
-        display: inline-block;
-        line-height: 30px;
         padding: 0 5px;
         min-width: 20px;
         text-align: center;
         color: gray;
-        height: 100%;
         cursor: pointer;
-        // border-left: 1px solid #DDDDDD;
-        &:first-child {
-          border-left: 0px;
-        }
         &.sel {
           text-decoration: underline;
         }
@@ -140,9 +123,9 @@ $ui-grid-border-c: #F0F0F0;
       background-color: #ffffff;
       position: relative;
       border-top: 1px solid #eee;
-      transition: 0.1s;
+      transition: 0.3s;
       .ui-grid-row-cell {
-        // min-height: $ui-grid-row-height;
+        min-height: $ui-grid-row-height;
         height: 100%;
         text-align: center;
         float: left;
@@ -152,17 +135,13 @@ $ui-grid-border-c: #F0F0F0;
         text-overflow: ellipsis;
       }
       &:hover {
-        background-color: lighten($c-green, 30%);
+        background-color: #ECF6FD;
       }
     }
     .ui-grid-row-select {
-      background-color: lighten($c-green, 5%);
-      color: #ffffff;
+      background-color: #ECF6FD;
       &:hover {
-        background-color: lighten($c-green, 5%);
-      }
-      a {
-        color: white;
+        background-color: #ECF6FD;
       }
     }
   }
@@ -175,4 +154,47 @@ $ui-grid-border-c: #F0F0F0;
   background-color: white;
   overflow: hidden;
   color: black;
+}
+
+.ui-table-theme-ant {
+  border-width: 0px;
+  padding-top: 50px;
+  &:before {
+    height: 50px;
+    background-color: #F7F7F7;
+  }
+  .ui-grid-header {
+    height: 50px;
+    line-height: 50px;
+  }
+  .ui-grid-bottom {
+    height: 50px;
+    background-color: #F6F7FB;
+    .ui-grid-bottom-info {
+      float: left;
+      line-height: 50px;
+    }
+    .ui-grid-bottom-page {
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+  .ui-grid-list {
+    .ui-grid-row {
+      min-height: 50px;
+      line-height: 50px;
+      border-top-width: 0px;
+      border-bottom: 1px solid #E9E9E9;
+      transition: 0.5s;
+      &:hover {
+        background-color: #ECF6FD;
+      }
+    }
+    .ui-grid-row-select {
+      background-color: #ECF6FD;
+      &:hover {
+        background-color: #ECF6FD;
+      }
+    }
+  }
 }

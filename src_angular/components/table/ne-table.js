@@ -308,7 +308,7 @@ class Table {
                 this.scope.rowSelect[i] = (i !== index) ? false : !this.scope.rowSelect[i];
             });
             this.scope.rowSelectAll = (this.scope.rowSelect.length === 1) ? this.scope.rowSelect[index] : false;
-            this.opts.onSelect && this.opts.onSelect(this.getSelect());
+            this.opts.onSelect && this.opts.onSelect.call(this, this.getSelect());
             let slidePanelIds = [];
             this.opts.columnDefs.forEach((colum, columIndex) => {
                 slidePanelIds.push(this.getSlidePanelCellId(index, columIndex));
@@ -369,9 +369,11 @@ class Table {
 
     createHeader() {
         this.$header.empty();
+        
         let equalWidth = ((1 / this.scope.columnDefs.length) * 100) + '%';
         let cellWidth = (this.scope.columnDefs[0].width) ? '{{col.width}}%' : equalWidth;
-        this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs" ng-click="SortAscDesc(col, $index)" style="width: ${cellWidth}">{{col.display}}</div>`);
+        this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs track by $index" ng-click="SortAscDesc(col, $index)" style="width: ${cellWidth}">{{col.display}}</div>`);
+        
         // 添加全选按钮
         if (this.opts.withCheckBox === true) {
             this.$header.addClass('ui-grid-hasCheck');
@@ -404,7 +406,7 @@ class Table {
         this.$gridBottom.empty();
         this.scope.isShow = !this.opts.onlyInfoPage;
 
-        let $numBtns = $('<div class="ui-grid-bottom-page"><a class="page" ng-repeat="num in pageList" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a></div>');
+        let $numBtns = $('<div class="ui-grid-bottom-page"><a class="page" ng-repeat="num in pageList track by $index" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a></div>');
         let $pageInfo = $('<div class="ui-grid-bottom-info">共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>');
         this.scope.pageList = ['上一页'];
         let sNum = this.scope.curPage - LENGTH;
@@ -475,12 +477,13 @@ class Table {
 
     // 获取选中行
     getSelect() {
-        var res = [];
-        for (let item of this.scope.rowSelect) {
-            if (item === true) {
-                res.push(item);
+        let res = [];
+        let self = this;
+        this.scope.rowSelect.forEach(function(item, i) {
+            if (item) {
+                res.push(self.scope.gridData[i]);
             }
-        }
+        });
         return res;
     }
 

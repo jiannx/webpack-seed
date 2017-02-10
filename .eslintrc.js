@@ -24,6 +24,9 @@ module.exports = {
     "import/no-extraneous-dependencies": 0,
     "import/no-unresolved": 0,
     "react/sort-comp": 0,
+    "react/prop-types": 0,
+    "react/prefer-stateless-function": 0,
+    "import/extensions": 0,
 
     "no-console": 0,
     "no-underscore-dangle": 0,
