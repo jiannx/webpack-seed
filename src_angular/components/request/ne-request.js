@@ -1,11 +1,11 @@
-import layer from 'layer';
+﻿import layer from 'layer';
 import $ from 'jQuery';
 
 let loadingIndex = null;
 
 const showLoading = function() {
     if (!loadingIndex) {
-        loadingIndex = layer.load(1);
+        loadingIndex = layer.load(2);
     }
 };
 
@@ -44,8 +44,12 @@ class NeRequest {
         this.reqQueue = []; // {req, reqData, type, successCall}
         this.resQueue = [];
         this.errorCall = null;
-
+        this.config(cfg);
         this.async(req, reqData, successCall, errorCall, cfg);
+    }
+    config(cfg) {
+        this.cfg = Object.assign({}, DEF_CFG, cfg || {});
+        return this;
     }
     data(reqData) {
         if (this.doingIndex !== 0 && this.doneCount < this.reqQueue.length) {
@@ -173,7 +177,9 @@ class NeRequest {
             // 执行请求
             this.doingIndex += 1;
             NeRequest.doingCount += 1;
-            showLoading();
+            if (this.cfg.showLoading) {
+                showLoading();
+            }
             if (NeRequest.type.toUpperCase() === 'ANGULAR') {
                 NeRequest.http(httpOpt).then((res) => {
                     self.doneCount += 1;

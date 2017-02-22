@@ -233,7 +233,7 @@ class Table {
                 if (typeof colum.field === 'string') {
                     $cell.append(rowData[colum.field]);
                 } else if (typeof colum.field === 'function') {
-                    $cell.append(colum.field(rowData, this.scope.data));
+                    $cell.append(colum.field(rowData, index, this.scope.data));
                 }
                 if (angular.isDefined(colum.isTitle) === true) {
                     if (angular.isFunction(colum.isTitle) === true) {
@@ -369,11 +369,11 @@ class Table {
 
     createHeader() {
         this.$header.empty();
-        
+
         let equalWidth = ((1 / this.scope.columnDefs.length) * 100) + '%';
         let cellWidth = (this.scope.columnDefs[0].width) ? '{{col.width}}%' : equalWidth;
         this.$header.append(`<div class="ui-grid-header-cell" ng-repeat="col in columnDefs track by $index" ng-click="SortAscDesc(col, $index)" style="width: ${cellWidth}">{{col.display}}</div>`);
-        
+
         // 添加全选按钮
         if (this.opts.withCheckBox === true) {
             this.$header.addClass('ui-grid-hasCheck');
@@ -445,8 +445,9 @@ class Table {
     getData() {
         var scope = this.scope;
         var that = this;
-
-        scope.http.data(scope.httpData).success(function(data) {
+        this.$grid.addClass('blur');
+        scope.http.config({ showLoading: false }).data(scope.httpData).success(function(data) {
+            that.$grid.removeClass('blur');
             if (that.opts.onResHandler) {
                 scope.data = that.opts.onResHandler(data);
             } else {
@@ -458,6 +459,8 @@ class Table {
             scope.curPage = scope.data[KEY.curPage];
             scope.totalCount = scope.data[KEY.totalCount];
             that.refreshGrid();
+        }).error(() => {
+            that.$grid.removeClass('blur');
         });
     }
     setData(data) {

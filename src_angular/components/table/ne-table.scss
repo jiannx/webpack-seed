@@ -19,6 +19,9 @@ $s-header-small: 32px;
   border: 1px solid $ui-grid-border-c;
   box-sizing: border-box;
   color: #5F5F5F;
+  &.blur {
+    filter: blur(1px);
+  }
   &.with-bottom {
     padding-bottom: $ui-grid-bottom-h;
     .ui-grid-bottom {
