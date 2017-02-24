@@ -3,8 +3,8 @@ const path = require('path');
 let base = {};
 
 // base.project = 'angular';
-base.project = 'react';
-// base.project = 'vue';
+// base.project = 'react';
+base.project = 'vue';
 // base.project = 'pages';
 
 base.pros = {
@@ -76,7 +76,7 @@ base.output = {
   path: base.buildDir,
   filename: 'js/[name]-[chunkhash:8].js',
   chunkFilename: '[id]-[name].js',
-  publicPath: '/',
+  // publicPath: '/',
 };
 
 

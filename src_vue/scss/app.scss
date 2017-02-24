@@ -310,6 +310,12 @@ $menu-height: 56px;
     float: right;
     padding-top: 140px;
     line-height: 20px;
+    a{
+      color: #babfc5;
+      &:hover{
+        text-decoration: none;
+      }
+    }
   }
 }
 

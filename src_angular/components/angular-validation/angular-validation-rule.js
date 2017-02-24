@@ -59,3 +59,5 @@
             $validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
         }]);
 }).call(this);
+
+// input上必须添加name属性
