@@ -6,14 +6,14 @@ var del = require('del');
 
 
 gulp.task('clean:server', function() {
-    return del(dirs.serverStaticDir, { force: true });
+  return del(dirs.serverStaticDir, { force: true });
 });
 
 gulp.task('push', ['clean:server'], function() {
-    gulp.src([path.join(dirs.buildDir, '**/*')])
-        .pipe(gulp.dest(dirs.serverStaticDir));
+  gulp.src([path.join(dirs.buildDir, '**/*')])
+    .pipe(gulp.dest(dirs.serverStaticDir));
 });
 
 gulp.task('watch', ['push'], function() {
-    gulp.watch(path.join(dirs.buildDir, '**/*'), ['push']);
+  gulp.watch(path.join(dirs.buildDir, '**/*'), ['push']);
 });

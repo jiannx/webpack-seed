@@ -1,6 +1,6 @@
 {
-    "presets": ["es2016"],
-    "plugins": [
-        ["import", { libraryName: "antd", style: "css" }]
-    ]
+  "presets": ["es2016"],
+  "plugins": [
+    ["import", { libraryName: "antd", style: "css" }]
+  ]
 }

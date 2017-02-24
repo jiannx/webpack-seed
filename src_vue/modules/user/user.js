@@ -5,18 +5,18 @@ import myCourseDetail from './user-my-detail';
 import myCourseDetailLink from './user-my-detail-link';
 
 const page = {
-    template: html,
-    created: function() {},
-    data: function() {
-        return {
-            name: 'user',
-        };
-    }
+  template: html,
+  created: function() {},
+  data: function() {
+    return {
+      name: 'user',
+    };
+  }
 };
 
 let routes = [{
-    path: '/user',
-    component: page
+  path: '/user',
+  component: page
 }];
 
 routes.push(my);

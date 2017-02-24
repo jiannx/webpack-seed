@@ -16,7 +16,7 @@ import './scss/animate.css';
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', redirect: '/home' },
+  { path: '/', redirect: '/home' },
 ];
 
 routes.push(...home);
@@ -26,14 +26,14 @@ routes.push(...download);
 routes.push(...user);
 
 const router = new VueRouter({
-    routes
+  routes
 });
 
 router.afterEach((to, from, next) => {});
 
 new Vue({
-    router,
-    data: {
-        message: 'Hello Vue!'
-    }
+  router,
+  data: {
+    message: 'Hello Vue!'
+  }
 }).$mount('#app');
