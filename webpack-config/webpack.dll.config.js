@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var CleanPlugin = require('clean-webpack-plugin');
-var dirs = require('./base.js');
+const webpack = require('webpack');
+const CleanPlugin = require('clean-webpack-plugin');
+const dirs = require('./base.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {

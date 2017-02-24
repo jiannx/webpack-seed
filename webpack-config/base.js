@@ -3,8 +3,8 @@ const path = require('path');
 let base = {};
 
 // base.project = 'angular';
-// base.project = 'react';
-base.project = 'vue';
+base.project = 'react';
+// base.project = 'vue';
 // base.project = 'pages';
 
 base.pros = {
@@ -55,7 +55,6 @@ base.externals = {
   jQuery: 'window.$',
   layer: 'window.layer',
   moment: 'window.moment',
-  'angular-ui-router': true
 };
 
 
