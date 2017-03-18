@@ -17,52 +17,52 @@
  date-picker-start-date="datePickerStart" date-picker-end-date="datePickerEnd">
  */
 angular.module('app').directive('datePicker', ['$filter', function($filter) {
-    return {
-        restrict: 'A',
-        scope: {
-            datePicker: '@',
-            datePickerStartDate: '=',
-            datePickerEndDate: '=',
-            datePickerConfig: '@'
-        },
-        link: function(scope, elm, attrs, ctrl) {
-            var config = {
-                language: 'zh-CN',
-                format: 'yyyy-mm-dd hh:ii',
-                autoclose: true,
-                fontAwesome: true
-            };
+  return {
+    restrict: 'A',
+    scope: {
+      datePicker: '@',
+      datePickerStartDate: '=',
+      datePickerEndDate: '=',
+      datePickerConfig: '@'
+    },
+    link: function(scope, elm, attrs, ctrl) {
+      var config = {
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd hh:ii',
+        autoclose: true,
+        fontAwesome: true
+      };
 
-            //时间选择和日期选择 默认时间选择
-            if (angular.isDefined(scope.datePicker) && scope.datePicker == 'day') {
-                config.format = 'yyyy-mm-dd';
-                config.minView = 'month';
-            } else {
-                config.format = 'yyyy-mm-dd hh:ii';
-                config.minView = 'hour';
-            }
-            //更多配置
-            if (angular.isDefined(scope.datePickerConfig)) {
-                var moreCfg = eval('(' + scope.datePickerConfig + ')');
-                for (var i in moreCfg) {
-                    config[i] = moreCfg[i];
-                }
-            }
-            elm.datetimepicker(config);
-
-            //设置日历开始时间
-            if (angular.isDefined(scope.datePickerStartDate)) {
-                scope.$watch('datePickerStartDate', function() {
-                    elm.datetimepicker('setStartDate', scope.datePickerStartDate);
-                })
-            }
-            //设置日历结束时间
-            if (angular.isDefined(scope.datePickerEndDate)) {
-                scope.$watch('datePickerEndDate', function() {
-                    elm.datetimepicker('setEndDate', scope.datePickerEndDate);
-                })
-            }
-
+      //时间选择和日期选择 默认时间选择
+      if (angular.isDefined(scope.datePicker) && scope.datePicker == 'day') {
+        config.format = 'yyyy-mm-dd';
+        config.minView = 'month';
+      } else {
+        config.format = 'yyyy-mm-dd hh:ii';
+        config.minView = 'hour';
+      }
+      //更多配置
+      if (angular.isDefined(scope.datePickerConfig)) {
+        var moreCfg = eval('(' + scope.datePickerConfig + ')');
+        for (var i in moreCfg) {
+          config[i] = moreCfg[i];
         }
-    };
+      }
+      elm.datetimepicker(config);
+
+      //设置日历开始时间
+      if (angular.isDefined(scope.datePickerStartDate)) {
+        scope.$watch('datePickerStartDate', function() {
+          elm.datetimepicker('setStartDate', scope.datePickerStartDate);
+        })
+      }
+      //设置日历结束时间
+      if (angular.isDefined(scope.datePickerEndDate)) {
+        scope.$watch('datePickerEndDate', function() {
+          elm.datetimepicker('setEndDate', scope.datePickerEndDate);
+        })
+      }
+
+    }
+  };
 }]);

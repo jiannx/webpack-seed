@@ -2,9 +2,9 @@ const path = require('path');
 
 let base = {};
 
-// base.project = 'angular';
+base.project = 'angular';
 // base.project = 'react';
-base.project = 'vue';
+// base.project = 'vue';
 // base.project = 'pages';
 
 base.pros = {

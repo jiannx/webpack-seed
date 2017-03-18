@@ -1,9 +1,9 @@
 import app from 'app.config';
 
 export default class AppCtrl {
-    constructor() {
-        this.name = '';
-    }
+  constructor() {
+    this.name = '';
+  }
 }
 AppCtrl.$inject = [];
 

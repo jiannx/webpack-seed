@@ -1,0 +1,57 @@
+// 向下展开滑动渐入
+.slide-in-down {
+  animation-name: slideInDown;
+  animation-duration: .2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: scaleY(0.9) translateY(-4px);
+    transform-origin: 0% 0%;
+  }
+  to {
+    opacity: 100;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+// 向上滑动渐入 大
+.slide-in-up {
+  animation-fill-mode: both;
+  animation-name: slideInUp;
+  animation-duration: .4s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    transform-origin: 0% 100%;
+  }
+  to {
+    opacity: 100;
+    transform: translateY(0);
+  }
+}
+
+// 向上滑动渐入 小
+.slide-in-up-small {
+  animation-name: slideInUpSmall;
+  animation-duration: .2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slideInUpSmall {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+    transform-origin: 0% 100%;
+  }
+  to {
+    opacity: 100;
+    transform: translateY(0);
+  }
+}

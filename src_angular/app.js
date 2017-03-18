@@ -19,39 +19,39 @@ import './modules/order/order'; // 订单管理
 import './modules/settlement/settlement'; // 结算管理
 
 app.run(($rootScope, $state, $stateParams, appService) => {
-    console.info('App start success!');
+  console.info('App start success!');
 
-    $rootScope.$state = $state;
-    $rootScope.$stateParams = $stateParams;
+  $rootScope.$state = $state;
+  $rootScope.$stateParams = $stateParams;
 
-    // 初始化数据
-    $rootScope.appData = {
-        isLogin: false
-    };
+  // 初始化数据
+  $rootScope.appData = {
+    isLogin: false
+  };
 
-    // 验证登陆状态，如果已登录，广播登陆；未登录则进行跳转
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (!toState.name.includes('login')) {
-            appService.checkLogin(() => {
-                $rootScope.$broadcast('login.success', {});
-            }, () => {
-                $state.go('login.in');
-            });
-        }
-    });
+  // 验证登陆状态，如果已登录，广播登陆；未登录则进行跳转
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    if (!toState.name.includes('login')) {
+      appService.checkLogin(() => {
+        $rootScope.$broadcast('login.success', {});
+      }, () => {
+        $state.go('login.in');
+      });
+    }
+  });
 
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+  $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 
-    });
+  });
 
-    // if error, redirect to 404
-    $rootScope.$on('$stateChangeError', function() {
-        $state.go('404');
-    });
+  // if error, redirect to 404
+  $rootScope.$on('$stateChangeError', function() {
+    $state.go('404');
+  });
 }).config(($stateProvider, $urlRouterProvider) => {
-    $urlRouterProvider.otherwise('/');
-    $stateProvider.state('index', {
-        url: '/',
-        template: require('./modules/console.html'),
-    });
+  $urlRouterProvider.otherwise('/');
+  $stateProvider.state('index', {
+    url: '/',
+    template: require('./modules/console.html'),
+  });
 });

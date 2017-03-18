@@ -1,0 +1,25 @@
+*.ne-dialog{
+    padding: 16px 16px 6px 16px;
+    min-width: 260px;
+}
+
+.layui-layer {
+  a.layui-layer-btn0 {
+    border-color: #0776fe;
+    background-color: #2084fe;
+    border-radius: 0;
+    transition: .4s;
+    &:hover {
+      background-color: #016aea;
+    }
+  }
+  a.layui-layer-btn1 {
+    border-color: #adadad;
+    background-color: white;
+    border-radius: 0;
+    transition: .4s;
+    &:hover {
+      background-color: #e6e6e6;
+    }
+  }
+}

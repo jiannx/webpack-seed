@@ -1,4 +1,5 @@
-import './request/request';
-import './dialog/ne-dialog.js';
-import './table/ne-table.js';
-import './angular-validation/angular-validation-rule.js';
+import './request';
+import './animate';
+import './dialog';
+import './table';
+import './angular-validation';

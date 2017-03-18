@@ -1,0 +1,68 @@
+$color: #5C5C5C;
+.ne-tip {
+  max-width: 300px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100000;
+  color: white;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 22px;
+  &:after {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: $color;
+    content: '';
+    z-index: -1;
+    border-radius: 4px;
+    box-shadow: 0 0 4px lighten($color, 10%);
+  }
+  &.top {
+    &:before {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 9px solid $color;
+      content: '';
+      position: absolute;
+      left: 50%;
+      margin-left: -3px;
+      bottom: -5px;
+      z-index: -1;
+    }
+  }
+  &.right {
+    &:before {
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-right: 9px solid $color;
+      content: '';
+      position: absolute;
+      left: -5px;
+      top: 6px;
+      z-index: -1;
+    }
+  }
+  &.bottom {
+    &:before {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 9px solid $color;
+      content: '';
+      position: absolute;
+      left: 50%;
+      margin-left: -5px;
+      top: -5px;
+      z-index: -1;
+    }
+  }
+}
