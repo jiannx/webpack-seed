@@ -28,9 +28,9 @@ app.config(($stateProvider) => {
   $scope.errorMessage = '';
 
   $scope.loginData = {
-    username: '',
-    password: '',
-    seccode_verify: ''
+    username: 'admin',
+    password: 'admin',
+    seccode_verify: '123'
   };
 
   const errorMessage = {
@@ -59,6 +59,9 @@ app.config(($stateProvider) => {
   $scope.onInputChange = function() {
     $scope.errorMessage = '';
   };
+  $.post('http://127.0.0.1:9021/admin/api/login/index/', {"username":"admin","password":"admin","seccode_verify":"123"}, function(){
+
+  });
 
   $scope.onLoginIn = function() {
     if (!validate()) {
