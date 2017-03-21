@@ -28,9 +28,9 @@ app.config(($stateProvider) => {
   $scope.errorMessage = '';
 
   $scope.loginData = {
-    username: 'admin',
-    password: 'admin',
-    seccode_verify: '123'
+    username: '',
+    password: '',
+    seccode_verify: ''
   };
 
   const errorMessage = {
@@ -59,18 +59,16 @@ app.config(($stateProvider) => {
   $scope.onInputChange = function() {
     $scope.errorMessage = '';
   };
-  $.post('http://127.0.0.1:9021/admin/api/login/index/', {"username":"admin","password":"admin","seccode_verify":"123"}, function(){
-
-  });
 
   $scope.onLoginIn = function() {
     if (!validate()) {
       return;
     }
-    request('loginIn', $scope.loginData).success(()=>{
-
+    console.log('do logining');
+    request('loginIn', $scope.loginData).success((res) => {
+      if (res.errno === 1) {
+        $state.go('index');
+      }
     });
-    console.log('do login');
-    // $state.go('index');
   };
 });

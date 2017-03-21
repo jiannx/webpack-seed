@@ -3,19 +3,9 @@ import layer from 'layer';
 import NeRequest from './ne-request';
 import api from '../../app.api';
 
-/*
-request('getList').success((res)=>{});
-request('getList', {}).success((res)=>{}).error(()=>{});
-request('getList', {}).async('getList', {}).async('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
-request('getList', {}).sync('getList', {}).sync('getList', {}).success((res1, res2, res3)=>{}).error(()=>{});
-request({method, url}, {}).success();
-request({method, url}).data({}).success();
-*/
-
-let loginDialog = null;
 let loadingIndex = $('#loading');
 
-app.factory('request', function($http, neDialog) {
+app.factory('request', function($http, $state, neDialog) {
   NeRequest.set('type', 'Angular');
   NeRequest.set('showLoading', function() {
     loadingIndex.show();
@@ -34,6 +24,11 @@ app.factory('request', function($http, neDialog) {
   NeRequest.set('afterSuccessRequset', function(...args) {
     if (args[0].errno === -1) {
       neDialog.alert(`错误信息: ${args[0].err}, Code: ${args[0].errno}`, { icon: 2, title: '数据请求失败' });
+      return false;
+    }
+    if (args[0].errno === -2) {
+      // $state.go('login.in');
+      console.log('need login');
       return false;
     }
     return true;

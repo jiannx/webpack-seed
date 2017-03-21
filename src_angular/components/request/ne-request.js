@@ -9,7 +9,7 @@ const HTTP_OPTION = {
   url: null,
   timeout: 60000,
   headers: {
-    'Content-Type': 'text/plain;charset=UTF-8'
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   }
 };
 
@@ -172,7 +172,7 @@ class NeRequest {
       if (this.reqQueue[i].req.method.toUpperCase() === 'GET') {
         httpOpt.params = Object.assign({}, this.reqQueue[i].reqData, lastReqResult);
       } else if (this.reqQueue[i].req.method.toUpperCase() === 'POST') {
-        httpOpt.data = Object.assign({}, this.reqQueue[i].reqData, lastReqResult);
+        httpOpt.data = $.param(Object.assign({}, this.reqQueue[i].reqData, lastReqResult));
       }
 
       // 执行请求

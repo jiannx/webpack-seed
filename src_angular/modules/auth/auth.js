@@ -1,4 +1,5 @@
 import app from 'app.config';
+import angular from 'angular';
 
 // 权限管理模块
 app.config(($stateProvider) => {
@@ -27,43 +28,54 @@ app.config(($stateProvider) => {
 
 
 // 账户添加
-app.controller('accountAdd', function($scope, request, neDialog, $validation) {
+app.controller('accountAdd', function($scope, $state, request, neDialog, $validation) {
   $scope.newData = {
-    name: '',
+    nickname: '',
     account: '',
-    phone: '',
+    mobile: '',
     password: '',
-    role: ''
+    group_name: '',
+    group_name2: ''
   };
   $scope.identityList = [];
   $scope.onSubmit = function() {
-    console.log();
+    let data = angular.copy($scope.newData);
+    if (data.group_name === '其他') {
+      data.group_name = data.group_name2;
+    }
+    delete data.group_name2;
+    request('accountAdd', data).success(() => {
+      $state.go('index.auth.account-list');
+    });
   };
 });
 
 // 权限列表
-app.controller('accountListCtrl', function($scope, request, neDialog, neTable) {
+app.controller('accountListCtrl', function($scope, request, neDialog, neTable, appService) {
   let grid = null;
-  $scope.gridList = [];
-  $scope.gridSel = [];
-  $scope.filterOpt = {};
+  $scope.filterOpt = {
+    account: '',
+    nickname: '',
+    group_name: ''
+  };
 
   $scope.onSearch = function() {
-    $scope.onEdit();
+    grid.setHttpData($scope.filterOpt);
   };
 
   $scope.onReset = function() {
-
-  };
-
-  $scope.onAdd = function() {
-
+    $scope.filterOpt = {
+      account: '',
+      nickname: '',
+      group_name: ''
+    };
+    $scope.onSearch();
   };
 
   $scope.onDel = function() {
     neDialog.ask({
       content: '确定删除吗？',
-      yes: (scope, colse) => {
+      yes: (scope, close) => {
         close();
       }
     });
@@ -86,28 +98,42 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable) {
     scope: $scope,
     http: request('accountList'),
     httpData: {},
-    // isInit: false,
+    withCheckBox: false,
     columnDefs: [
       { display: 'ID', field: 'id' },
-      { display: '姓名', field: 'name' },
-      { display: '账号', field: 'name' },
-      { display: '角色', field: 'name' },
-      { display: '权限', field: 'name' }, {
+      { display: '账户', field: 'account' },
+      { display: '组名', field: 'group_name' },
+      { display: '昵称', field: 'nickname' }, {
         display: '操作',
         field: function(rowData) {
-          var id = rowData.id;
+          let id = rowData.id;
           return `<a class="btn-control" ng-click="onEdit($event, 0, ${id})" title="编辑" ><i class="fa fa-pencil-square-o"></i>&nbsp;</a>
-                        <a class="btn-control" ng-click="onOperateClick(onDel, 5, ${id})" title="删除" ><i class="fa fa-trash-o"></i>&nbsp;</a>`;
+          <a class="btn-control" ng-click="onDel(onDel, 5, ${id})" title="删除" ><i class="fa fa-trash-o"></i>&nbsp;</a>`;
         },
         sort: false
       },
     ],
-    resHandler: function(resData) {
-      $scope.gridList = resData.data.data;
-      return resData.data;
-    },
-    onSelect: function(array) {
-      $scope.gridSel = array;
+    onResHandler: function(resData) {
+      return resData.rsm;
     }
   });
+});
+
+// 密码修改
+app.controller('accountChangePasswordCtrl', function($scope, $state, request, neDialog, $validation) {
+  $scope.newData = {
+    old_password: '',
+    new_password: '',
+    again_password: '',
+  };
+  $scope.identityList = [];
+  $scope.onSubmit = function() {
+    if ($scope.newData.old_password === $scope.newData.new_password) {
+      neDialog.alert('原始密码与新密码重复');
+      return;
+    }
+    request('accountChangePassword', $scope.newData).success(() => {
+      $state.go('login.in');
+    });
+  };
 });

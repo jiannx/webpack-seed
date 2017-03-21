@@ -3,7 +3,7 @@ import angular from 'angular';
 // 项目变更需重新配置以下参数
 const KEY = {
   // 响应参数定义
-  list: 'data',
+  list: 'info',
   curPage: 'page_now',
   pageCount: 'page_total',
   totalCount: 'records',

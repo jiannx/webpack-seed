@@ -1,6 +1,6 @@
 <div class="content animated fadeIn" ng-controller="accountAdd">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>用户中心</span> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>权限管理</span> > <a>添加用户</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">账户添加</div>
@@ -9,39 +9,46 @@
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">姓名：</label>
                     <div class="col-xs-6">
-                        <input type="text" name="name" class="form-control" ng-model="newData.name" validator="required" message-id="acc-1">
+                        <input type="text" name="name" class="form-control" ng-model="newData.nickname" validator="required" message-id="acc-1">
                     </div>
                     <label class="col-xs-4 error-label" id="acc-1"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">账户：</label>
+                    <label class="col-xs-2 control-label important">账户：</label>
                     <div class="col-xs-6">
                         <input type="text" name="account" class="form-control" ng-model="newData.account" validator="required" message-id="acc-2">
                     </div>
                     <label class="col-xs-4 error-label" id="acc-2"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">手机号码：</label>
+                    <label class="col-xs-2 control-label important">手机号码：</label>
                     <div class="col-xs-6">
-                        <input type="text" name="phone" class="form-control" ng-model="newData.phone" validator="required" message-id="acc-3">
+                        <input type="text" name="phone" class="form-control" ng-model="newData.mobile" validator="required" message-id="acc-3">
                     </div>
                     <label class="col-xs-4 error-label" id="acc-3"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">初始密码：</label>
+                    <label class="col-xs-2 control-label important">初始密码：</label>
                     <div class="col-xs-6">
                         <input type="text" name="password" class="form-control" ng-model="newData.password" validator="required" message-id="acc-4">
                     </div>
                     <label class="col-xs-4 error-label" id="acc-4"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">角色：</label>
+                    <label class="col-xs-2 control-label important">角色：</label>
                     <div class="col-xs-6">
-                        <select class="form-control" ng-model="newData.role" name="role" validator="required" message-id="acc-5">
-                            <option value="1">1</option>
+                        <select class="form-control" ng-model="newData.group_name" name="group_name" validator="required" message-id="acc-5">
+                            <option ng-repeat="it in const.group" value="{{it.id}}">{{it.name}}</option>
                         </select>
                     </div>
                     <label class="col-xs-4 error-label" id="acc-5"></label>
+                </div>
+                <div class="form-group" ng-if="newData.group_name == '其他'">
+                    <label class="col-xs-2 control-label important">新建角色：</label>
+                    <div class="col-xs-6">
+                        <input type="text" name="password" class="form-control" ng-model="newData.group_name2" validator="required" message-id="acc-6">
+                    </div>
+                    <label class="col-xs-4 error-label" id="acc-6"></label>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-6">
