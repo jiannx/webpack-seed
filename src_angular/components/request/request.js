@@ -27,7 +27,7 @@ app.factory('request', function($http, $state, neDialog) {
       return false;
     }
     if (args[0].errno === -2) {
-      // $state.go('login.in');
+      $state.go('login.in');
       console.log('need login');
       return false;
     }

@@ -59,10 +59,10 @@ let ngAnnotate = new NgAnnotatePlugin({
 plugins = [
   providePlugin,
   new WebpackMd5Hash(),
-  new ExtractTextPlugin('css/[name]-[contenthash:8].css'),
+  new ExtractTextPlugin('[name]-[contenthash:8].css'),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'commons',
-    filename: 'js/[name]-[chunkhash:8].js',
+    filename: '[name]-[chunkhash:8].js',
   }),
   new CopyWebpackPlugin([
     { context: base.vendorDir, from: '**/*', to: path.resolve(base.buildDir, 'vendor') },

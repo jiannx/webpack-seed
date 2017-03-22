@@ -109,3 +109,34 @@ label.error-label {
     background-color: $c-blue;
   }
 }
+
+select.input-sm,input.input-sm{
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.form-group{
+  padding-right: 6px;
+}
+.input-group{
+  padding-left: 0;
+  padding-right: 6px;
+}
+
+.app-form{
+  line-height: 30px;
+  .row{
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .input-group.input-sm{
+    padding: 0 !important;
+  }
+  .radio{
+    line-height: 20px;
+    margin: 1px 0;
+    label{
+      padding-top: 2px;
+    }
+  }
+}

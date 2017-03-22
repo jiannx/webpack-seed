@@ -1,0 +1,13 @@
+.daterangepicker {
+  .ranges {
+    li {
+      border-radius: 0;
+    }
+  }
+  input.input-mini {
+    border-radius: 0 !important;
+  }
+  select {
+    border: 1px solid #ccc;
+  }
+}

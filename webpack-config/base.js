@@ -73,7 +73,7 @@ base.htmls = [
 // 输出目录
 base.output = {
   path: base.buildDir,
-  filename: 'js/[name]-[chunkhash:8].js',
+  filename: '[name]-[chunkhash:8].js',
   chunkFilename: '[id]-[name].js',
   // publicPath: '/',
 };

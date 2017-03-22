@@ -16,6 +16,7 @@ body {
 }
 
 @import 'auth.scss';
+@import 'daterangepicker.scss';
 
 .line {
   width: 100%;
@@ -191,7 +192,7 @@ body {
     height: 45px;
     position: absolute;
     left: 0;
-    top: 45px;
+    top: 40px;
   }
   &.with-2-tool {
     padding-top: 90px;

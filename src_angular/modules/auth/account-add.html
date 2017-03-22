@@ -38,7 +38,7 @@
                     <label class="col-xs-2 control-label important">角色：</label>
                     <div class="col-xs-6">
                         <select class="form-control" ng-model="newData.group_name" name="group_name" validator="required" message-id="acc-5">
-                            <option ng-repeat="it in const.group" value="{{it.id}}">{{it.name}}</option>
+                            <option ng-repeat="it in groupList" value="{{it.id}}">{{it.name}}</option>
                         </select>
                     </div>
                     <label class="col-xs-4 error-label" id="acc-5"></label>

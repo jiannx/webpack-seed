@@ -28,7 +28,18 @@ app.config(($stateProvider) => {
 
 
 // 账户添加
-app.controller('accountAdd', function($scope, $state, request, neDialog, $validation) {
+app.controller('accountAdd', function($scope, $state, $rootScope, request, neDialog, $validation) {
+  $scope.groupList = angular.copy($rootScope.const.group);
+  request('accountGroupList').success((res) => {
+    $scope.groupList = [];
+    for (let item of res.rsm.info) {
+      $scope.groupList.push({
+        id: item.id,
+        name: item.title
+      });
+    }
+    $scope.groupList.push({ id: '其他', name: '其他' });
+  });
   $scope.newData = {
     nickname: '',
     account: '',
@@ -102,7 +113,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
     columnDefs: [
       { display: 'ID', field: 'id' },
       { display: '账户', field: 'account' },
-      { display: '组名', field: 'group_name' },
+      { display: '组名', field: 'groupid' },
       { display: '昵称', field: 'nickname' }, {
         display: '操作',
         field: function(rowData) {

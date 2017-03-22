@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" ng-controller="studentDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户管理</a> > <a>学生详情</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -9,12 +9,84 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2">头像：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">学生ID：</div>
+                    <div class="col-xs-8">{{detail.id}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">学生ID：</div>
-                    <div class="col-xs-10">111111111</div>
+                    <div class="col-xs-3 text-right">妈妈托卡号：</div>
+                    <div class="col-xs-8">{{detail.card_id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">姓名：</div>
+                    <div class="col-xs-8">{{detail.real_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">头像：</div>
+                    <div class="col-xs-8">{{detail.avatar_file}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">性别：</div>
+                    <div class="col-xs-8">{{detail.sex}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">生日：</div>
+                    <div class="col-xs-8">{{detail.birthday}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">邮箱：</div>
+                    <div class="col-xs-8">{{detail.email}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">注册时间：</div>
+                    <div class="col-xs-8">{{detail.createtime}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">手机号码：</div>
+                    <div class="col-xs-8">{{detail.telphone}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地区：</div>
+                    <div class="col-xs-8">{{detail.province}} {{detail.city}} {{detail.area}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地址：</div>
+                    <div class="col-xs-8">{{detail.address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">实名认证：</div>
+                    <div class="col-xs-8">{{detail.card_number}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">积分：</div>
+                    <div class="col-xs-8">{{detail.integral}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">金币：</div>
+                    <div class="col-xs-8">{{detail.gold_coins}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">余额：</div>
+                    <div class="col-xs-8">{{detail.money_all}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">学校：</div>
+                    <div class="col-xs-8">{{detail.school}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">年级：</div>
+                    <div class="col-xs-8">{{detail.current_grade}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">活跃时长：</div>
+                    <div class="col-xs-8">{{detail.active_time}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">线上课的统计数量：</div>
+                    <div class="col-xs-8">{{detail.xian_shang}}</div>
+                </div>
+                                <div class="row">
+                    <div class="col-xs-3 text-right">线下课的统计数量：</div>
+                    <div class="col-xs-8">{{detail.xian_xia}}</div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" ng-controller="teacherDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户管理</a> > <a>教师详情</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -9,28 +9,194 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2">头像：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">教师ID：</div>
+                    <div class="col-xs-8">{{detail.id}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">教师ID：</div>
-                    <div class="col-xs-10">111111111</div>
+                    <div class="col-xs-3 text-right">妈妈托卡号：</div>
+                    <div class="col-xs-8">{{detail.card_id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">姓名：</div>
+                    <div class="col-xs-8">{{detail.real_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">头像：</div>
+                    <div class="col-xs-8">
+                        <img ng-src="{{detail.avatar_file}}" style="max-width: 100px">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">性别：</div>
+                    <div class="col-xs-8">{{detail.sex}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">生日：</div>
+                    <div class="col-xs-8">{{detail.birthday}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">邮箱：</div>
+                    <div class="col-xs-8">{{detail.email}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">注册时间：</div>
+                    <div class="col-xs-8">{{detail.createtime}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">手机号码：</div>
+                    <div class="col-xs-8">{{detail.telphone}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地区：</div>
+                    <div class="col-xs-8">{{detail.province}} {{detail.city}} {{detail.area}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地址：</div>
+                    <div class="col-xs-8">{{detail.address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">实名认证：</div>
+                    <div class="col-xs-8">{{detail.card_number}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">积分：</div>
+                    <div class="col-xs-8">{{detail.integral}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">金币：</div>
+                    <div class="col-xs-8">{{detail.gold_coins}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">余额：</div>
+                    <div class="col-xs-8">{{detail.money_all}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">星级：</div>
+                    <div class="col-xs-8">{{detail.teacher_star}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">用心度：</div>
+                    <div class="col-xs-8">{{detail.teacher_evaluation}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">星级审核情况：</div>
+                    <div class="col-xs-8">{{detail.teacher_star_apply}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">资质审核情况：</div>
+                    <div class="col-xs-8">{{detail.aptitude_apply}}</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="type == 1">
         <div class="panel-heading">
             资质审核
         </div>
-        <div class="panel-body">
+        <div class="panel-body app-form" style="width: 600px;">
+            <div class="row">
+                <div class="col-xs-3 text-right">状态：</div>
+                <div class="col-xs-8">{{detail.aptitude_apply}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">认证证件：</div>
+                <div class="col-xs-8" ng-if="detail.members_certify && detail.members_certify.img.length > 0">
+                    <img ng-src="{{img}}" alt="" ng-repeat="img in detail.members_certify.img" style="max-width: 500px;">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">工作经历：</div>
+                <div class="col-xs-8">{{detail.members_certify.work_experience}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">熟悉人群：</div>
+                <div class="col-xs-8">{{detail.members_certify.familiar_crowd}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-3">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="1" ng-model="aptitudeData.types"> 通过
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" value="2" ng-model="aptitudeData.types"> 拒绝
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-show="aptitudeData.types == 2">
+                <div class="col-xs-8 col-xs-offset-3">
+                    <textarea class="form-control" rows="3" placeholder="拒绝原因备注" ng-model="aptitudeData.refuse_note"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">
+                    <button type="button" class="btn btn-success btn-sm" ng-click="onAptitudeSubmit()" ng-disabled="!(aptitudeData.types == 1 ||(aptitudeData.types == 2 && aptitudeData.refuse_note !=''))">提交</button>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="type == 2">
         <div class="panel-heading">
             星级审核
         </div>
-        <div class="panel-body">
+        <div class="panel-body app-form" style="width: 600px;">
+            <div class="row">
+                <div class="col-xs-3 text-right">状态：</div>
+                <div class="col-xs-8">{{detail.teacher_star_apply}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">目前星级：</div>
+                <div class="col-xs-8">{{detail.teacher_star}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">评判指标：</div>
+                <div class="col-xs-3">发音、语音语调</div>
+                <div class="col-xs-3">
+                    <div class="input-group input-sm">
+                        <input type="text" class="form-control input-sm" ng-model="starApplyData.pronunciation" ng-change="onScoreChange()" placeholder="0-5">
+                        <span class="input-group-addon" id="basic-addon1">分</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">对教材熟练度</div>
+                <div class="col-xs-3">
+                    <div class="input-group input-sm">
+                        <input type="text" class="form-control input-sm" ng-model="starApplyData.teaching_material" ng-change="onScoreChange()" placeholder="0-5">
+                        <span class="input-group-addon" id="basic-addon1">分</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">对教育向往度</div>
+                <div class="col-xs-3">
+                    <div class="input-group input-sm">
+                        <input type="text" class="form-control input-sm" ng-model="starApplyData.yearning_degree" ng-change="onScoreChange()" placeholder="0-5">
+                        <span class="input-group-addon" id="basic-addon1">分</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">授课用心度</div>
+                <div class="col-xs-3">
+                    <div class="input-group input-sm">
+                        <input type="text" class="form-control input-sm" ng-model="starApplyData.intentions" ng-change="onScoreChange()" placeholder="0-5">
+                        <span class="input-group-addon" id="basic-addon1">分</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 text-right">评审后星级：</div>
+                <div class="col-xs-8">{{newScore}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">
+                    <button type="button" class="btn btn-success btn-sm" ng-click="onScoreSubmit()" ng-disabled="!newScore">提交</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

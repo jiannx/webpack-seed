@@ -379,9 +379,9 @@ class Table {
       }
 
       scope.gridData = scope.data[KEY.list];
-      scope.pageCount = scope.data[KEY.pageCount];
-      scope.curPage = scope.data[KEY.curPage];
-      scope.totalCount = scope.data[KEY.totalCount];
+      scope.pageCount = parseInt(scope.data[KEY.pageCount], 10);
+      scope.curPage = parseInt(scope.data[KEY.curPage], 10);
+      scope.totalCount = parseInt(scope.data[KEY.totalCount], 10);
       that.refreshGrid();
     }).error(() => {
       that.$grid.removeClass('blur');

@@ -1,7 +1,7 @@
 import app from 'app.config';
 import moment from 'moment';
 
-app.service('appService', function($rootScope) {
+app.service('appService', function($rootScope, request) {
   // 登陆校验
   this.checkLogin = function(successCall, faildCall) {
     let isLogin = true;
@@ -37,26 +37,58 @@ app.service('appService', function($rootScope) {
       monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
     }
   };
+  // 常量定义
+  this.constUpdate = function(type) {
+    if (type === 'group') {
+      request('accountGroupList').success((res) => {
+        $rootScope.const.group = [];
+        for (let item of res.rsm.info) {
+          $rootScope.const.group.push({
+            id: item.id, // 后台id无效
+            name: item.title
+          });
+        }
+        // $rootScope.const.group.push({ id: '', name: '其他' });
+      });
+    }
+  };
+  this.constUpdate('group');
+  $rootScope.dataRangePickerOpt = this.dataRangePickerOpt;
   $rootScope.const = {
-    group: [
-      { id: 'CEO', name: 'CEO' },
-      { id: 'CFO', name: 'CFO' },
-      { id: 'COO', name: 'COO' },
-      { id: '鉴课师', name: '鉴课师' },
-      { id: '运营主管', name: '运营主管' },
-      { id: '运营人员', name: '运营人员' },
-      { id: '客服人员', name: '客服人员' },
-      { id: '会计', name: '会计' },
-      { id: '出纳', name: '出纳' },
-      { id: '认证专员', name: '认证专员' },
-      { id: '其他', name: '其他' },
+    group: [ // 角色
     ],
-    teacherStar: [
+    teacherStar: [ // 教师星级
       { id: 0, name: '全部' },
       { id: 4, name: '4-5星' },
       { id: 3, name: '3-4星' },
       { id: 2, name: '2-3星' },
       { id: 1, name: '1-2星' },
+    ],
+    applyStatus: [ // 资质审核状态
+      { id: 0, name: '全部' },
+      { id: 1, name: '未提交' },
+      { id: 2, name: '待审核' },
+      { id: 3, name: '审核通过' },
+      { id: 4, name: '审核拒绝' },
+    ],
+    inviteStatus: [ // 邀请状态
+      { id: 0, name: '全部' },
+      { id: 1, name: '是' },
+      { id: 2, name: '否' }
+    ],
+    customerService: [ // 客服列表
+      { id: 0, name: '所有客服' }
+    ],
+    starApplyStatus: [ // 星级审核状态
+      { id: 0, name: '全部' },
+      { id: 1, name: '待审核' },
+      { id: 2, name: '升星' },
+      { id: 3, name: '降星' },
+    ],
+    realNameCertStatus: [ // 实名认证状态
+      { id: 0, name: '全部' },
+      { id: 1, name: '是' },
+      { id: 2, name: '否' },
     ]
   };
 });
