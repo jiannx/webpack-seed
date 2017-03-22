@@ -1,6 +1,6 @@
 <div class="ne-city-sel dropdown">
     <button class="btn btn-default btn-sm" data-toggle="dropdown" ng-if="sel.length == 0">选择地区</button>
-    <button class="btn btn-default btn-sm" data-toggle="dropdown" ng-if="sel.length != 0">{{sel[0]}} - {{sel[1]}} - {{sel[2]}}</button>
+    <button class="btn btn-default btn-sm" data-toggle="dropdown" ng-if="sel.length != 0">{{sel[0]}} {{sel[1]}} {{sel[2]}}</button>
     <div class="dropdown-menu slide-in-down">
         <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="provinceSel" ng-options="c as c.name for c in provinceData" ng-change="onChange('province')" style="width: 90px;">
             <option value="">选择省</option>
@@ -8,7 +8,7 @@
         <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="citySel" ng-options="c as c.name for c in cityData" ng-change="onChange('city')" style="width: 90px;">
             <option value="">选择市</option>
         </select>
-        <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="areaSel" ng-options="c as c for c in areaData" ng-change="onChange('area')" style="width: 100px;">
+        <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="areaSel" ng-options="c as c for c in areaData" ng-change="onChange('area')" style="width: 100px;" ng-disabled="!hasArea">
             <option value="">选择区/县</option>
         </select>
     </div>

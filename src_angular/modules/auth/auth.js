@@ -118,8 +118,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          return `<a class="btn-control" ng-click="onEdit($event, 0, ${id})" title="编辑" ><i class="fa fa-pencil-square-o"></i>&nbsp;</a>
-          <a class="btn-control" ng-click="onDel(onDel, 5, ${id})" title="删除" ><i class="fa fa-trash-o"></i>&nbsp;</a>`;
+          return `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">权限编辑</a>`;
         },
         sort: false
       },

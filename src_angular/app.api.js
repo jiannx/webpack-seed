@@ -24,10 +24,10 @@ let api = {
   'customerServiceAdd': { method: 'post', url: '/admin/api/users/kefu_insert/' }, // 客服管理 – 添加账号
 };
 
-if (PRODUCTION) {
-  for (let key of Object.keys(api)) {
-    api[key].url = domain + api[key].url;
-  }
-}
+// if (PRODUCTION) {
+//   for (let key of Object.keys(api)) {
+//     api[key].url = domain + api[key].url;
+//   }
+// }
 
 export default api;
