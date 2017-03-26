@@ -1,57 +1,61 @@
 <!-- 运营位管理 新增 -->
-<div class="content animated fadeIn">
+<div class="content animated fadeIn" ng-controller="operationBannerAdd">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>用户中心</span> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>运营管理</span> > <a>运营位管理</a> > <a>运营位添加</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">运营位图片新增</div>
         <div class="panel-body">
-            <form class="form-horizontal" style="width: 800px;" name="Account">
+            <form class="form-horizontal" style="width: 800px;" name="bannerAdd">
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">标题：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.title" name="title" validator="required">
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">发布时间：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" name="releaseTime" date-range-picker class="form-control date-picker input-sm" ng-model="releaseTime" options="createTimeOpt" validator="required">
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">位置：</label>
                     <div class="col-xs-6">
-                        <select class="form-control"></select>
+                        <select class="form-control" ng-options="x.id as x.name for x in typeList" name="typesid" ng-model="newData.typesid" validator="required"></select>
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">链接地址：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.weburl" name="weburl" validator="required">
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">本地图片：</label>
                     <div class="col-xs-6">
-                        <button class="btn btn-default btn-sm">点击上传</button>
+                        <!-- <button class="btn btn-default btn-sm">点击上传</button> -->
+                        <input type="file" name="image" id="upload" ng-show="!imgUrl">
+                        <img class="img-thumbnail" ng-src="{{imgUrl}}" ng-show="imgUrl">
+                        <button class="btn btn-default btn-sm" ng-show="imgUrl" style="margin-top: 4px;" ng-click="onReSel()">重新选择图片</button>
+                        <input type="text" hidden="" ng-model="newData.titlepic" name="titlepic" validator="required">
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">备注：</label>
+                    <label class="col-xs-2 control-label">备注：</label>
                     <div class="col-xs-6">
-                        <textarea type="text" class="form-control"></textarea>
+                        <textarea type="text" class="form-control" ng-model="newData.notes"></textarea>
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-6">
-                        <button class="btn btn-success" validation-submit="Account" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
+                        <button class="btn btn-success" validation-submit="bannerAdd" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
                     </div>
                 </div>
             </form>

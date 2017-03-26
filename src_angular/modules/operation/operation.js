@@ -1,5 +1,7 @@
 import app from 'app.config';
 import './operation.scss';
+import './operation-banner.js';
+import './operation-banner-add.js';
 
 // 运营管理模块
 app.config(($stateProvider) => {
@@ -16,7 +18,7 @@ app.config(($stateProvider) => {
         })
         // 运营位 添加
         .state('index.operation.banner.add', {
-            url: '/add',
+            url: '/add?id?type',
             views: {
                 'console@index': { template: require('./operation-banner-add.html') }
             }

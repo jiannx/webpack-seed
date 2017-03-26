@@ -1,10 +1,11 @@
-<div class="content" ng-controller="homeCtrl">
+<div class="content">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
     </div>
-    <div class="grid-box" id="grid" ng-controller="accountListCtrl">
+    <div class="grid-box" id="grid" ng-controller="serviceListCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
+                <a class="btn btn-primary btn-sm" ui-sref="index.user.service.add">添加客服</a>&nbsp;&nbsp;&nbsp;
                 <div class="form-group form-group-line">
                     <label>姓名：</label>
                     <input type="text" class="form-control input-sm">

@@ -23,9 +23,15 @@ app.directive('citySel', function() {
   return {
     require: '^ngModel',
     restrict: 'AE',
-    scope: {},
+    scope: {
+
+    },
+    replace: true,
     template: require('./tpls.html'),
     link: function(scope, element, attrs, ngModel) {
+      if (attrs.type === 'grid') {
+        scope.isGrid = true;
+      }
       scope.provinceData = chinaJson;
       scope.cityData = [];
       scope.areaData = [];

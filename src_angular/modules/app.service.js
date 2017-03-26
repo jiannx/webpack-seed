@@ -89,6 +89,35 @@ app.service('appService', function($rootScope, request) {
       { id: 0, name: '全部' },
       { id: 1, name: '是' },
       { id: 2, name: '否' },
+    ],
+    serviceGroup: [ // 服务人群
+      { id: 0, name: '全部' },
+      { id: 1, name: '学生' },
+      { id: 2, name: '老师' },
+    ],
+    sex: [
+      { id: 1, name: '男' },
+      { id: 2, name: '女' },
+    ],
+    courseType: [ // 课程模式
+      { id: 0, name: '全部' },
+      { id: 1, name: '线上课' },
+      { id: 2, name: '线下课' },
+    ],
+    courseStatus: [
+      { id: 0, name: '全部' },
+      { id: 1, name: '待审核' },
+      { id: 2, name: '审核通过' },
+      { id: 3, name: '审核拒绝' },
+      { id: 4, name: '待开课' },
+      { id: 5, name: '进行中' },
+      { id: 6, name: '已完成' },
+      { id: 7, name: '异常' }
+    ],
+    bannerTypeList: [ // banner类型
+      { id: 0, name: '全部' },
+      { id: 1, name: '发现广告页' },
+      { id: 2, name: 'web广告' },
     ]
   };
 });

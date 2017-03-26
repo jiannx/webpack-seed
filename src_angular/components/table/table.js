@@ -369,7 +369,7 @@ class Table {
   getData() {
     let scope = this.scope;
     let that = this;
-    this.$grid.addClass('blur');
+    // this.$grid.addClass('blur');
     scope.http.config({ showLoading: true }).data(scope.httpData).success(function(data) {
       that.$grid.removeClass('blur');
       if (that.opts.onResHandler) {

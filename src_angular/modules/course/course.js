@@ -1,5 +1,8 @@
 import app from 'app.config';
 
+import './course-list.js';
+import './course-detail.js';
+
 // 课程管理模块
 app.config(($stateProvider) => {
     $stateProvider.state('index.course', {
@@ -16,7 +19,7 @@ app.config(($stateProvider) => {
         })
         // 课程详情
         .state('index.course.detail', {
-            url: '/detail',
+            url: '/detail?id?type',
             views: {
                 'console@index': { template: require('./course-detail.html') }
             }

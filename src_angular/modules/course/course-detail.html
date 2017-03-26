@@ -1,23 +1,40 @@
-<div class="content" ng-controller="homeCtrl">
+<div class="content" ng-controller="courseDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>课程管理</a> > <a ng-show="type == 1">课程审核</a><a ng-show="type == 0">课程详情</a>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-show="type == 0">
         <div class="panel-heading">
             课程状态
         </div>
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2 text-success">审核通过</div>
+                    <div class="col-xs-3 text-right">状态:</div>
+                    <div class="col-xs-3 text-primary" ng-if="detail.status == 0">待审核</div>
+                    <div class="col-xs-3 text-success" ng-if="detail.status == 1">审核通过</div>
+                    <div class="col-xs-3 text-danger" ng-if="detail.status == 2">审核拒绝</div>
+                    <div class="col-xs-3 text-primary" ng-if="detail.status == 3">待开课</div>
+                    <div class="col-xs-3 text-primary" ng-if="detail.status == 4">进行中</div>
+                    <div class="col-xs-3 text-primary" ng-if="detail.status == 5">已完成</div>
+                    <div class="col-xs-3 text-danger" ng-if="detail.status == 6">异常</div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-2">审核人：</div>
-                    <div class="col-xs-10">XXXX 2017-01-01 15:00</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2">分成比例：</div>
-                    <div class="col-xs-10">5:5</div>
+                <div ng-show="detail.status != 0">
+                    <div class="row">
+                        <div class="col-xs-3 text-right">审核人:</div>
+                        <div class="col-xs-6">{{detail.nickname}} {{detail.examine_time}}</div>
+                    </div>
+                    <div class="row" ng-show="detail.status == 2">
+                        <div class="col-xs-3 text-right">拒绝原因:</div>
+                        <div class="col-xs-6">{{detail.examine_refuse}}</div>
+                    </div>
+                    <div class="row" ng-show="detail.status == 3 || detail.status == 4 || detail.status == 5">
+                        <div class="col-xs-3 text-right">课程进度:</div>
+                        <div class="col-xs-6">TODO</div>
+                    </div>
+                    <div class="row" ng-show="detail.status != 0 && detail.status != 2">
+                        <div class="col-xs-3 text-right">分成比例:</div>
+                        <div class="col-xs-6">{{detail.scale_web}} : {{detail.scale_teacher}} (平台 : 教师)</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,17 +46,173 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2">课程图片：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">课程ID:</div>
+                    <div class="col-xs-6">{{detail.id}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">课程ID：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">课程老师ID:</div>
+                    <div class="col-xs-6">{{detail.userid}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">上课模式：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">课程图片:</div>
+                    <div class="col-xs-6">
+                        <img ng-src="{{detail.course_img}}" style="width: 400px;">
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程类型:</div>
+                    <div class="col-xs-6">{{detail.typesid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程标题:</div>
+                    <div class="col-xs-6">{{detail.title}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程专题:</div>
+                    <div class="col-xs-6">{{detail.cate_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">主要解决问题:</div>
+                    <div class="col-xs-6">{{detail.solve_problem}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程目标:</div>
+                    <div class="col-xs-6">{{detail.target}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">教材版本:</div>
+                    <div class="col-xs-6">{{detail.textbook_version}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程涉及内容:</div>
+                    <div class="col-xs-6">{{detail.related_content}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程对未来的意义:</div>
+                    <div class="col-xs-6">{{detail.future_significance}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">实现目标关键指标:</div>
+                    <div class="col-xs-6">{{detail.key_index}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">难易度:</div>
+                    <div class="col-xs-6">{{detail.facility}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">适用年级:</div>
+                    <div class="col-xs-6">{{detail.grade}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">授课人数:</div>
+                    <div class="col-xs-6">{{detail.lectures_num}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程日期:</div>
+                    <div class="col-xs-6">
+                        <p ng-repeat="x in detail.course_date">{{x}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程时间:</div>
+                    <div class="col-xs-6">{{detail.course_times}} - {{detail.course_times_end}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">主持老师:</div>
+                    <div class="col-xs-6">{{detail.real_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">手机号码:</div>
+                    <div class="col-xs-6">{{detail.telphone}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">嘉宾名称:</div>
+                    <div class="col-xs-6">{{detail.guest_crowd}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">计费标准:</div>
+                    <div class="col-xs-6">{{detail.charging_one}} 元/人/次</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">计算标准:</div>
+                    <div class="col-xs-6">{{detail.charging_all}} 元/人</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">计算形式:</div>
+                    <div class="col-xs-6">{{detail.charging_types}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">考核形式:</div>
+                    <div class="col-xs-6">{{detail.examination_form}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">考核日期:</div>
+                    <div class="col-xs-6">{{detail.examination_date}} - {{detail.examination_times}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">沟通日期:</div>
+                    <div class="col-xs-6">{{detail.communicate_date}} - {{detail.communicate_times}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">工作经历:</div>
+                    <div class="col-xs-6">{{detail.work_experience}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">熟悉人群:</div>
+                    <div class="col-xs-6">{{detail.familiar_crowd}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程周期:</div>
+                    <div class="col-xs-6">{{detail.course_cycle}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程次数:</div>
+                    <div class="col-xs-6">{{detail.course_count}} 次</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程发布数量:</div>
+                    <div class="col-xs-6">{{detail.course_sum}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="type == 1">
+        <div class="panel-heading">
+            审核
+        </div>
+        <div class="panel-body">
+            <div style="width: 600px">
+                <form name="courseApply">
+                    <div class="row">
+                        <div class="col-xs-8 col-xs-offset-2">
+                            <div class="radio" ng-repeat="x in applyType">
+                                <label>
+                                    <input type="radio" value="1" ng-model="applyData.types" ng-value="x.id"> {{x.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="applyData.types == 2">
+                        <div class="col-xs-2 text-right important" style="line-height: 28px">拒绝原因:</div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control input-sm" ng-model="applyData.examine_refuse" placeholder="拒绝原因" validator="required" name="examine_refuse" message-id="acc-2">
+                        </div>
+                        <label class="col-xs-3 error-label" id="acc-2"></label>
+                    </div>
+                    <div class="row" ng-if="applyData.types == 1">
+                        <div class="col-xs-2 text-right important" style="line-height: 28px">分成比例:</div>
+                        <div class="col-xs-3">
+                            <input type="text" style="width: 50px; display: inline-block;" class="form-control input-sm" ng-model="applyData.scale_web" placeholder="平台" validator="required" message-id="acc-1" name="scale_web"> :
+                            <input type="text" style="width: 50px; display: inline-block;" class="form-control input-sm" ng-model="applyData.scale_teacher" placeholder="教师" validator="required" message-id="acc-1" name="scale_teacher">
+                        </div>
+                        <label class="col-xs-3 error-label" id="acc-1"></label>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 col-xs-offset-2">
+                            <button type="button" class="btn btn-success btn-sm" validation-submit="courseApply" ng-click="onApplySubmit()" ng-disabled="applyData.types == ''">提交</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
