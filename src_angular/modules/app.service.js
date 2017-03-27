@@ -17,7 +17,6 @@ app.service('appService', function($rootScope, request) {
   // 时间选择插件配置
   this.dataRangePickerOpt = {
     opens: 'right',
-    maxDate: new Date(),
     timePicker: true,
     timePicker24Hour: true,
     ranges: {

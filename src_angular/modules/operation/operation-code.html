@@ -1,32 +1,32 @@
 <div class="content" ng-controller="homeCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>运营管理</a> > <a>兑换码管理</a>
     </div>
-    <div class="grid-box" id="grid" ng-controller="accountListCtrl">
+    <div class="grid-box" id="grid" ng-controller="redeemCodeListCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
                     <label>兑换码：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.code_name">
                 </div>
                 <div class="form-group form-group-line">
                     <label>状态：</label>
-                    <input type="text" class="form-control input-sm">
+                    <select class="form-control input-sm" style="width: 60px;" ng-options="x.id as x.name for x in statusList" ng-model="filterOpt.status">
+                    </select>
                 </div>
                 <div class="form-group form-group-line">
                     <label>对应金币面额：</label>
-                    <select class="form-control input-sm" style="width: 100px;">
-                        <option>1</option>
+                    <select class="form-control input-sm" style="width: 60px;" ng-options="x.code_amount as x.code_amount for x in amountList" ng-model="filterOpt.code_amount">
                     </select>
                 </div>
                 <div class="form-group form-group-line">
                     <label>生成时间：</label>
-                    <input type="text" class="form-control input-sm" style="width: 250px !important">
+                    <input type="text" style="width: 200px !important" name="rangTime" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
                 </div>
-                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> 搜索</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
-                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-repeat"></i> 重置</button>
-                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-magic"></i> 生成新兑换码</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>
+                <a type="button" class="btn btn-default btn-sm" ui-sref="index.operation.code.add">生成新兑换码</a>
             </form>
         </div>
     </div>

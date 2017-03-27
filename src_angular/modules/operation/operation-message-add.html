@@ -1,36 +1,39 @@
 <!-- 添加活动消息 -->
-<div class="content animated fadeIn">
+<div class="content animated fadeIn" ng-controller="operationMessageAddCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>用户中心</span> > <a>添加用户</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">添加活动消息</div>
         <div class="panel-body">
-            <form class="form-horizontal" style="width: 800px;" name="Account">
+            <form class="form-horizontal" style="width: 800px;" name="messageAdd">
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">消息标题：</label>
+                    <label class="col-xs-2 control-label important">活动标题：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.title" name="title" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">消息内容：</label>
+                    <label class="col-xs-2 control-label important">网址：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.weburl" name="weburl" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">跳转链接：</label>
+                    <label class="col-xs-2 control-label important">内容：</label>
                     <div class="col-xs-6">
-                        <select class="form-control"></select>
+                        <input type="text" class="form-control" ng-model="newData.contents" name="contents" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
+<!--                 <div class="form-group">
+                    <label class="col-xs-2 control-label important">内容：</label>
+                    <div class="col-xs-10">
+                        <div id="wangEditor" style="max-height: 1000px; height: 400px;"></div>
+                    </div>
+                </div> -->
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-6">
-                        <button class="btn btn-success" validation-submit="Account" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
+                        <button class="btn btn-success" validation-submit="messageAdd" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
                     </div>
                 </div>
             </form>

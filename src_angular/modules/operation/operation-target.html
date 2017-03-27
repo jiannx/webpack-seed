@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" ng-controller="operationTargetCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>运营管理</a> > <a>指标管理</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">基础素养 - 行为</div>
@@ -8,7 +8,10 @@
             <p class="text-muted">提示：最多添加十项</p>
             <div class="row">
                 <div class="col-xs-12">
-                    <span class="bg-info operation-tag">勇于挑战&nbsp;&nbsp;<i class="fa fa-pencil"></i>&nbsp;<i class="fa fa-close"></i></span>
+                    <span class="bg-info operation-tag" ng-repeat="x in actionList" style="margin-right: 4px;">
+                    {{x.title}}&nbsp;&nbsp;<i class="fa fa-pencil" ng-click="onEdit(1, $index)"></i>&nbsp;<i class="fa fa-close" ng-click="onDel(1, $index)"></i>
+                    </span>
+                    <button class="btn btn-success" style="margin-top: -4px;" ng-click="onAdd(1)">添加</button>
                 </div>
             </div>
         </div>
@@ -19,11 +22,7 @@
             <p class="text-muted">提示：以下选项不可编辑</p>
             <div class="row">
                 <div class="col-xs-12">
-                    <span class="bg-info operation-tag">正常&nbsp;</span>
-                    <span class="bg-info operation-tag">迟到&nbsp;</span>
-                    <span class="bg-info operation-tag">旷课&nbsp;</span>
-                    <span class="bg-info operation-tag">早退&nbsp;</span>
-                    <span class="bg-info operation-tag">请假&nbsp;</span>
+                    <span class="bg-info operation-tag" ng-repeat="x in timeList" style="margin-right: 4px;">{{x.title}} ({{x.score}})&nbsp;</span>
                 </div>
             </div>
         </div>
@@ -34,10 +33,7 @@
             <p class="text-muted">提示：以下选项不可编辑</p>
             <div class="row">
                 <div class="col-xs-12">
-                    <span class="bg-info operation-tag">应用了解（0-100分）&nbsp;</span>
-                    <span class="bg-info operation-tag">提升训练（0-100分）&nbsp;</span>
-                    <span class="bg-info operation-tag">学习认知（0-100分）&nbsp;</span>
-                    <span class="bg-info operation-tag">综合应用（0-100分）&nbsp;</span>
+                    <span class="bg-info operation-tag" ng-repeat="x in timeList" style="margin-right: 4px;">{{x.title}} ({{x.score}})&nbsp;</span>
                 </div>
             </div>
         </div>

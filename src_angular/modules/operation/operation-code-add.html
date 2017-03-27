@@ -1,36 +1,33 @@
 <!-- 生成新兑换码 -->
-<div class="content animated fadeIn">
+<div class="content animated fadeIn" ng-controller="operationCodeAddCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>用户中心</span> > <a>添加用户</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">生成兑换码</div>
         <div class="panel-body">
-            <form class="form-horizontal" style="width: 800px;" name="Account">
+            <form class="form-horizontal" style="width: 800px;" name="addCode">
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">兑换码数量：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.code_sum" name="code_sum" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-2 control-label important">对应金币金额：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.code_amount" name="code_amount" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">用途备注：</label>
+                    <label class="col-xs-2 control-label">用途备注：</label>
                     <div class="col-xs-6">
-                        <select class="form-control"></select>
+                        <textarea rows="3" class="form-control" ng-model="newData.note"></textarea>
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-6">
-                        <button class="btn btn-success" validation-submit="Account" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
+                        <button class="btn btn-success" validation-submit="addCode" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
                     </div>
                 </div>
             </form>

@@ -1,25 +1,26 @@
-<div class="content" ng-controller="homeCtrl">
+<div class="content">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
     </div>
-    <div class="grid-box" id="grid" ng-controller="accountListCtrl">
+    <div class="grid-box" id="grid" ng-controller="messageListCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
+                <a type="button" class="btn btn-primary btn-sm" ui-sref="index.operation.message.add">添加</a>
                 <div class="form-group form-group-line">
                     <label>标题：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.title">
                 </div>
                 <div class="form-group form-group-line">
                     <label>内容：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.contents">
                 </div>
                 <div class="form-group form-group-line">
                     <label>链接：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.weburl">
                 </div>
-                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> 搜索</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
-                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-repeat"></i> 重置</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>
             </form>
         </div>
     </div>

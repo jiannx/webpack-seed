@@ -1,4 +1,5 @@
 import app from 'app.config';
+import 'babel-polyfill';
 import './modules/app.service';
 import './modules/app.ctrl';
 // 样式引入

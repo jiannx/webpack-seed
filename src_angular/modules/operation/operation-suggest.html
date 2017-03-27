@@ -2,32 +2,33 @@
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
     </div>
-    <div class="grid-box" id="grid" ng-controller="accountListCtrl">
+    <div class="grid-box" id="grid" ng-controller="operationSuggestCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
-                    <label>反馈用户信息：</label>
-                    <input type="text" class="form-control input-sm">
+                    <label>反馈人姓名：</label>
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.real_name">
                 </div>
                 <div class="form-group form-group-line">
                     <label>反馈人手机号：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.telephone">
                 </div>
                 <div class="form-group form-group-line">
-                    <label>处理状态：</label>
-                    <input type="text" class="form-control input-sm">
+                    <label>状态：</label>
+                    <select class="form-control input-sm" style="width: 100px;" ng-options="x.id as x.name for x in statusList" ng-model="filterOpt.status">
+                    </select>
                 </div>
                 <div class="form-group form-group-line">
                     <label>反馈日期：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" style="width: 200px !important" name="rangTime" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
                 </div>
                 <div class="form-group form-group-line">
                     <label>处理人：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.users_name">
                 </div>
-                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> 搜索</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
-                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-repeat"></i> 重置</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>
             </form>
         </div>
     </div>

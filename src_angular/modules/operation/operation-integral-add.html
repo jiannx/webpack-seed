@@ -1,5 +1,5 @@
 <!-- 积分活动添加 -->
-<div class="content animated fadeIn">
+<div class="content animated fadeIn" ng-controller="integralAddCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>用户中心</span> > <a>添加用户</a>
     </div>
@@ -8,18 +8,37 @@
         <div class="panel-body">
             <form class="form-horizontal" style="width: 800px;" name="Account">
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">活动标题：</label>
+                    <label class="col-xs-2 control-label important">标题：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.title" name="title" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label important">上线日期：</label>
+                    <label class="col-xs-2 control-label important">发布日期：</label>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control">
+                        <input type="text" name="createTime" date-range-picker class="form-control date-picker" ng-model="releaseTime" options="createTimeOpt" validator="required">
                     </div>
-                    <label class="col-xs-4 error-label"></label>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label important">图片：</label>
+                    <div class="col-xs-6">
+                        <input type="file" name="image" id="upload" ng-show="!imgUrl">
+                        <img class="img-thumbnail" ng-src="{{imgUrl}}" ng-show="imgUrl">
+                        <button class="btn btn-default btn-sm" ng-show="imgUrl" style="margin-top: 4px;" ng-click="onReSel()">重新选择图片</button>
+                        <input type="text" hidden="" ng-model="newData.img" name="img" validator="required">
+                    </div>
+                </div>
+                <!--                 <div class="form-group">
+                    <label class="col-xs-2 control-label important">内容：</label>
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control" ng-model="newData.contents" name="contents" validator="required">
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-xs-2 control-label important">内容：</label>
+                    <div class="col-xs-10">
+                        <div id="wangEditor" style="max-height: 1000px; height: 400px;"></div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-xs-6">

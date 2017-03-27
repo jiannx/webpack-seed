@@ -5,7 +5,8 @@
 const domain = 'http://api.mamatuo.com';
 
 let api = {
-  imgDomain: 'http://api.mamatuo.com', // 图片地址前缀
+  imgDomain: 'http://api.mamatuo.com/Uploads', // 图片地址前缀
+  upload: { method: 'post', url: '/admin/api/login/avatar_file/' }, // 图片上传
 
   'demo': { method: 'get', url: '/api/demo', desc: 'demo' },
   'loginIn': { method: 'post', url: '/admin/api/login/index/' }, // 登陆
@@ -40,7 +41,36 @@ let api = {
   'bannerAdd': { method: 'post', url: '/admin/api/operate/banner_insert/' }, // 运营位添加
   'bannerEditDetail': { method: 'get', url: '/admin/api/operate/banner_edit/' }, // 运营位 编辑
   'bannerEdit': { method: 'post', url: '/admin/api/operate/banner_edit_save/' }, // 运营位 编辑
-  'bannerChangeStatus': { method: 'get', url: '/admin/api/operate/banner_apply/' }, //运营位 上线下线
+  'bannerChangeStatus': { method: 'get', url: '/admin/api/operate/banner_apply/' }, // 运营位 上线下线
+
+  'indicatorsList': { method: 'get', url: '/admin/api/operate/indicators_list/' }, // 指标列表
+  'indicatorsAdd': { method: 'post', url: '/admin/api/operate/indicators_insert/' }, // 指标添加
+  'indicatorsEdit': { method: 'post', url: '/admin/api/operate/indicators_edit_save/' }, // 指标保存
+  'indicatorsDel': { method: 'get', url: '/admin/api/operate/indicators_del/' }, // 指标删除
+
+  'tagList': { method: 'get', url: '/admin/api/operate/friend_tag_list/' }, // 好友标签 列表
+  'tagAdd': { method: 'post', url: '/admin/api/operate/friend_tag_insert/' }, // 好友标签 添加
+  'tagEdit': { method: 'post', url: '' }, // 好友标签 编辑 TODO
+  'tagDel': { method: 'get', url: '' }, // 好友标签 删除 TODO
+
+  'redeemCodeList': { method: 'post', url: '/admin/api/operate/redeem_code_list/' }, // 兑换码
+  'redeemCodeListAmountList': { method: 'post', url: '/admin/api/operate/redeem_code_amount/' }, // 列表筛选 金币面额
+  'redeemCodeAdd': { method: 'post', url: '/admin/api/operate/redeem_code_insert/' }, // 添加
+  'redeemCodeDel': { method: 'get', url: '' },
+
+  'messageList': { method: 'post', url: '/admin/api/operate/activity_info_list/' }, // 活动消息
+  'messageAdd': { method: 'post', url: '/admin/api/operate/activity_info_insert/' },
+  'messageSend': { method: 'post', url: '/admin/api/operate/activity_info_save/' },
+
+  'integralList': { method: 'post', url: '/admin/api/operate/integral_info_list/' }, // 积分活动
+  'integralAdd': { method: 'post', url: '/admin/api/operate/integral_info_insert/' }, // 积分活动
+  'integralDetail': { method: 'post', url: '/admin/api/operate/integral_info_edit/' }, // 积分活动
+  'integralEdit': { method: 'post', url: '/admin/api/operate/integral_info_edit_save/' }, // 积分活动
+  'integralChangeStatus': { method: 'post', url: '/admin/api/operate/integral_info_apply' }, // 积分活动 上线 下线
+
+  'suggestList': { method: 'post', url: '/admin/api/operate/message_list/' }, // 意见反馈
+  'suggestDetail': { method: 'get', url: '/admin/api/operate/message_view/' },
+  'suggestApply': { method: 'post', url: '/admin/api/operate/message_save/' },
 };
 
 // if (PRODUCTION) {

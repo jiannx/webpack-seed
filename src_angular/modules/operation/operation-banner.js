@@ -51,7 +51,7 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
   };
 
   $scope.onEdit = function(event, type, id) {
-    // 0:详情 1:上线 2:下线
+    // 0:编辑 1:上线 2:下线
     if (type === 0) {
       $state.go('index.operation.banner.add', { id, type });
     }
