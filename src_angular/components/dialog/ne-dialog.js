@@ -28,6 +28,7 @@ neDialog.confirm({
 import angular from 'angular';
 import Dialog from './dialog.js';
 import app from 'app.config';
+import layer from 'layer';
 
 app.factory('neDialog', function($compile, $controller, $rootScope) {
   let result = {
@@ -48,6 +49,12 @@ app.factory('neDialog', function($compile, $controller, $rootScope) {
       }
       Object.assign(opt, { icon: 0, type: 0, btn: ['确定'] });
       return result.confirm(opt);
+    },
+    // 确认框，是否删除
+    msg: function(str, opt = {}) {
+      return layer.msg(str, Object.assign(opt, {
+        time: 3000,
+      }));
     },
   };
   return result;

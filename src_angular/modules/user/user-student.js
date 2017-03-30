@@ -54,6 +54,7 @@ app.controller('studentListCtrl', function($scope, $state, $stateParams, request
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
+    { display: 'ID', field: 'id', width: 5 },
       { display: '姓名', field: 'real_name', width: 10 },
       { display: '手机号', field: 'telphone', width: 10 }, {
         display: '所在地',
@@ -62,7 +63,7 @@ app.controller('studentListCtrl', function($scope, $state, $stateParams, request
         },
         width: 15
       },
-      { display: '邀请码', field: 'invite_userid', width: 10 },
+      { display: '邀请码', field: 'invite_userid', width: 5 },
       { display: '实名认证', field: 'card_number', width: 5 },
       { display: '客服', field: 'customer_service_id', width: 5 },
       { display: '积分', field: 'integral', width: 5 },
@@ -77,7 +78,7 @@ app.controller('studentListCtrl', function($scope, $state, $stateParams, request
           return tpl;
         },
         sort: false,
-        width: 10
+        width: 5
       },
     ],
     onResHandler: function(resData) {

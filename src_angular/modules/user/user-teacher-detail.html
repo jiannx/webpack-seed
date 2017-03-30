@@ -1,6 +1,6 @@
 <div class="content" ng-controller="teacherDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户管理</a> > <a>教师详情</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.user.teacher">教师管理</a> > <span ng-if="type == 0">教师详情</span><span ng-if="type == 1">资质审核</span><span ng-if="type == 2">星级审核</span>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -8,6 +8,12 @@
         </div>
         <div class="panel-body">
             <div style="width: 600px">
+                <div class="row">
+                    <div class="col-xs-3 text-right">头像：</div>
+                    <div class="col-xs-4">
+                        <img ng-src="{{detail.avatar_file}}" class="img-thumbnail">
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">教师ID：</div>
                     <div class="col-xs-8">{{detail.id}}</div>
@@ -19,12 +25,6 @@
                 <div class="row">
                     <div class="col-xs-3 text-right">姓名：</div>
                     <div class="col-xs-8">{{detail.real_name}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">头像：</div>
-                    <div class="col-xs-8">
-                        <img ng-src="{{detail.avatar_file}}" style="max-width: 100px">
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">性别：</div>
@@ -51,40 +51,50 @@
                     <div class="col-xs-8">{{detail.province}} {{detail.city}} {{detail.area}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3 text-right">地址：</div>
+                    <div class="col-xs-3 text-right">详细地址：</div>
                     <div class="col-xs-8">{{detail.address}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">实名认证：</div>
-                    <div class="col-xs-8">{{detail.card_number}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">积分：</div>
-                    <div class="col-xs-8">{{detail.integral}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">金币：</div>
-                    <div class="col-xs-8">{{detail.gold_coins}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">余额：</div>
-                    <div class="col-xs-8">{{detail.money_all}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">星级：</div>
                     <div class="col-xs-8">{{detail.teacher_star}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3 text-right">用心度：</div>
-                    <div class="col-xs-8">{{detail.teacher_evaluation}}</div>
+                    <div class="col-xs-3 text-right">是否实名认证：</div>
+                    <div class="col-xs-8">{{detail.card_number}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">星级审核情况：</div>
                     <div class="col-xs-8">{{detail.teacher_star_apply}}</div>
                 </div>
+                <div ng-show="type == 0">
+                    <div class="row">
+                        <div class="col-xs-3 text-right">资质审核状态：</div>
+                        <div class="col-xs-8">{{detail.aptitude_apply}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right">认证证件：</div>
+                        <div class="col-xs-8" ng-if="detail.members_certify && detail.members_certify.img.length > 0">
+                            <img ng-src="{{img}}" alt="" ng-repeat="img in detail.members_certify.img" style="max-width: 500px;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right">目前星级：</div>
+                        <div class="col-xs-8">
+                            <div stars="detail.teacher_star"></div> 【{{detail.teacher_star}}】</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right">评判指标：</div>
+                        <div class="col-xs-8">
+                            发音、语音语调{{pronunciation}} 对教材熟练度{{teaching_material}} 对教育向往度{{yearning_degree}} 授课用心度{{intentions}}
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
-                    <div class="col-xs-3 text-right">资质审核情况：</div>
-                    <div class="col-xs-8">{{detail.aptitude_apply}}</div>
+                    <div class="col-xs-3 text-right">积分：</div>
+                    <div class="col-xs-2" style="width: 8.5%;">{{detail.integral}}</div>
+                    <div class="col-xs-2">金币：{{detail.gold_coins}}</div>
+                    <div class="col-xs-2">余额：{{detail.money_all}}</div>
+                    <div class="col-xs-2">用心度：{{detail.teacher_evaluation}}</div>
                 </div>
             </div>
         </div>
@@ -149,7 +159,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-3 text-right">目前星级：</div>
-                <div class="col-xs-8">{{detail.teacher_star}}</div>
+                <div class="col-xs-8">
+                    <div stars="detail.teacher_star"></div> <span>【{{detail.teacher_star}}】</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-3 text-right">评判指标：</div>
@@ -190,7 +202,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-3 text-right">评审后星级：</div>
-                <div class="col-xs-8">{{newScore}}</div>
+                <div class="col-xs-8">
+                    <div stars="newScore"></div> <span ng-show="newScore">【{{newScore}}星】</span>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-3 col-xs-offset-3">

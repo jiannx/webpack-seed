@@ -1,8 +1,8 @@
 <!-- 运营位管理 新增 -->
 <div class="content animated fadeIn" ng-controller="operationBannerAdd">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>运营管理</span> > <a>运营位管理</a> >
-        <a ng-if="!type">运营位添加</a><a ng-if="type">运营位编辑</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.operation.banner">运营位管理</a> >
+        <span ng-if="!type">运营位添加</span><span ng-if="type">运营位编辑</span>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">运营位图片新增</div>
@@ -19,13 +19,6 @@
                     <label class="col-xs-2 control-label important">发布时间：</label>
                     <div class="col-xs-6">
                         <input type="text" name="releaseTime" date-range-picker class="form-control date-picker" ng-model="releaseTime" options="createTimeOpt" validator="required">
-                    </div>
-                    <label class="col-xs-4 error-label"></label>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-2 control-label important">测试：</label>
-                    <div class="col-xs-6">
-                        <div date-picker options="createTimeOpt"></div>
                     </div>
                     <label class="col-xs-4 error-label"></label>
                 </div>

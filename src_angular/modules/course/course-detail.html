@@ -1,6 +1,6 @@
 <div class="content" ng-controller="courseDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>课程管理</a> > <a ng-show="type == 1">课程审核</a><a ng-show="type == 0">课程详情</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.course.list">课程列表</a> > <span ng-show="type == 1">课程审核</span><span ng-show="type == 0">课程详情</span>
     </div>
     <div class="panel panel-default" ng-show="type == 0">
         <div class="panel-heading">
@@ -46,18 +46,18 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
+                    <div class="col-xs-3 text-right">课程图片:</div>
+                    <div class="col-xs-8">
+                        <img ng-src="{{detail.course_img}}" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-3 text-right">课程ID:</div>
                     <div class="col-xs-6">{{detail.id}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">课程老师ID:</div>
                     <div class="col-xs-6">{{detail.userid}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">课程图片:</div>
-                    <div class="col-xs-6">
-                        <img ng-src="{{detail.course_img}}" style="width: 400px;">
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">课程类型:</div>
@@ -187,7 +187,7 @@
                         <div class="col-xs-8 col-xs-offset-2">
                             <div class="radio" ng-repeat="x in applyType">
                                 <label>
-                                    <input type="radio" value="1" ng-model="applyData.types" ng-value="x.id"> {{x.name}}
+                                    <input type="radio" ng-model="applyData.types" ng-value="x.id"> {{x.name}}
                                 </label>
                             </div>
                         </div>

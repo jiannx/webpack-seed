@@ -24,7 +24,7 @@ app.directive('citySel', function() {
     require: '^ngModel',
     restrict: 'AE',
     scope: {
-
+      ngModel: '='
     },
     replace: true,
     template: require('./tpls.html'),
@@ -41,6 +41,9 @@ app.directive('citySel', function() {
       scope.sel = ngModel.$viewValue;
       scope.hasArea = true;
       setTimeout(function() {
+        scope.sel = ngModel.$viewValue;
+      });
+      scope.$watch('ngModel', function() {
         scope.sel = ngModel.$viewValue;
       });
       scope.onChange = function(type) {

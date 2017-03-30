@@ -56,6 +56,7 @@ app.controller('accountAdd', function($scope, $state, $rootScope, request, neDia
     }
     delete data.group_name2;
     request('accountAdd', data).success(() => {
+      neDialog.msg('提交成功！请进入权限分配菜单配置用户权限');
       $state.go('index.auth.account-list');
     });
   };
@@ -113,8 +114,13 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
     columnDefs: [
       { display: 'ID', field: 'id' },
       { display: '账户', field: 'account' },
-      { display: '组名', field: 'groupid' },
+      { display: '角色', field: 'groupid' },
       { display: '昵称', field: 'nickname' }, {
+        display: '拥有权限',
+        field: function() {
+          return '';
+        }
+      }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;

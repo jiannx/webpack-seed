@@ -2,6 +2,7 @@ import app from 'app.config';
 
 import './course-list.js';
 import './course-detail.js';
+import './enter-name.js';
 
 // 课程管理模块
 app.config(($stateProvider) => {
@@ -33,7 +34,7 @@ app.config(($stateProvider) => {
         })
         // 报名查看
         .state('index.enter-name', {
-            url: '/enter-name',
+            url: 'enter-name',
             views: {
                 'console@index': { template: require('./enter-name.html') }
             }

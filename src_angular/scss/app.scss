@@ -56,7 +56,7 @@ body {
       position: absolute;
       left: 20px;
       top: 0;
-      color: $c-blue;
+      color: #3B3A3F;
       a {
         cursor: pointer;
       }
@@ -169,6 +169,7 @@ body {
   position: absolute;
   left: 0;
   bottom: 0;
+  font-size: 12px;
   background-color: #EDEEF2;
   padding-left: $menu-width;
   z-index: 80;
@@ -192,7 +193,7 @@ body {
     height: 45px;
     position: absolute;
     left: 0;
-    top: 45px;
+    top: 40px;
   }
   &.with-2-tool {
     padding-top: 90px;

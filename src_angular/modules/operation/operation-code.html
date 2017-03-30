@@ -1,10 +1,11 @@
 <div class="content" ng-controller="homeCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>运营管理</a> > <a>兑换码管理</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>兑换码管理</span>
     </div>
     <div class="grid-box" id="grid" ng-controller="redeemCodeListCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
+                <a type="button" class="btn btn-primary btn-sm" ui-sref="index.operation.code.add">生成新兑换码</a>
                 <div class="form-group form-group-line">
                     <label>兑换码：</label>
                     <input type="text" class="form-control input-sm" ng-model="filterOpt.code_name">
@@ -26,7 +27,6 @@
                 <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
                 <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>
-                <a type="button" class="btn btn-default btn-sm" ui-sref="index.operation.code.add">生成新兑换码</a>
             </form>
         </div>
     </div>

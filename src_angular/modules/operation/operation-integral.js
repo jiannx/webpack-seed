@@ -19,7 +19,7 @@ app.controller('integralListCtrl', function($scope, $state, $rootScope, request,
   ];
 
   $scope.onSearch = function() {
-    if ($scope.rangTime.startDate !== '') {
+    if ($scope.rangTime.startDate) {
       angular.extend($scope.filterOpt, {
         createtime_s: $scope.rangTime.startDate.format('YYYY-MM-DD HH:mm'),
         createtime_e: $scope.rangTime.endDate.format('YYYY-MM-DD HH:mm'),

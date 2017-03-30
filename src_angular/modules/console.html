@@ -1,11 +1,11 @@
-<div class="body-box animated fadeIn">
+<div class="body-box animated fadeIn" ng-controller="appCtrl">
     <div class="nav-top">
         <div class="logo"></div>
         <div class="title">MMT</div>
         <div class="right-box">
             <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>&nbsp;&nbsp;欢迎您，XXX&nbsp;&nbsp;
             <a ui-sref="login.in">安全退出</a>
-            <a ui-sref="index.auth.change-password">修改密码</a>
+            <a ng-click="onChangePassword()">修改密码</a>
         </div>
     </div>
     <div class="nav-menu metismenu">
@@ -65,7 +65,7 @@
                         <a ui-sref="index.operation.message" ui-sref-active="active">活动消息管理</a>
                     </li>
                     <li>
-                        <a ui-sref="index.operation.integral" ui-sref-active="active">积分管理</a>
+                        <a ui-sref="index.operation.integral" ui-sref-active="active">积分活动管理</a>
                     </li>
                     <li>
                         <a ui-sref="index.operation.suggest" ui-sref-active="active">意见反馈汇总</a>
@@ -117,7 +117,7 @@
         </div>
     </div>
     <div class="footer">
-        XX公司版权所有&nbsp;&nbsp;©&nbsp;2016-2017&nbsp;&nbsp;&nbsp;浙ICP备00000000号
+        版权所有&nbsp;&nbsp;©&nbsp;2016-2017&nbsp;&nbsp;&nbsp;浙ICP备17002579号
     </div>
 </div>
 <script type="text/javascript">

@@ -1,6 +1,6 @@
 <div class="content" ng-controller="operationTargetCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>运营管理</a> > <a>指标管理</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>指标管理</span>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">基础素养 - 行为</div>
@@ -9,9 +9,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <span class="bg-info operation-tag" ng-repeat="x in actionList" style="margin-right: 4px;">
-                    {{x.title}}&nbsp;&nbsp;<i class="fa fa-pencil" ng-click="onEdit(1, $index)"></i>&nbsp;<i class="fa fa-close" ng-click="onDel(1, $index)"></i>
+                    {{x.title}}&nbsp;
+                    <i class="fa fa-pencil" ng-click="onEdit(1, $index)" style="display: none;"></i>
+                    <i class="fa fa-close" ng-click="onDel(1, $index)"></i>
                     </span>
-                    <button class="btn btn-success" style="margin-top: -4px;" ng-click="onAdd(1)">添加</button>
+                    <button class="btn btn-success" style="margin-top: -4px;" ng-click="onAdd(1)" ng-disabled="actionList.length == 10">
+                        <i class="fa fa-plus"></i> 添加
+                    </button>
                 </div>
             </div>
         </div>
@@ -33,7 +37,7 @@
             <p class="text-muted">提示：以下选项不可编辑</p>
             <div class="row">
                 <div class="col-xs-12">
-                    <span class="bg-info operation-tag" ng-repeat="x in timeList" style="margin-right: 4px;">{{x.title}} ({{x.score}})&nbsp;</span>
+                    <span class="bg-info operation-tag" ng-repeat="x in specialList" style="margin-right: 4px;">{{x.title}} ({{x.score}})&nbsp;</span>
                 </div>
             </div>
         </div>

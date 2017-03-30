@@ -34,7 +34,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
         area: $scope.citySel[2],
       });
     }
-    if ($scope.rangTime.startDate !== '') {
+    if ($scope.rangTime.startDate) {
       angular.extend($scope.filterOpt, {
         communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
         communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
@@ -64,7 +64,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
   $scope.onEdit = function(event, type, id) {
     // 0:详情 1:资质审核 2:星级审核
     if (angular.isDefined(type) && angular.isDefined(id)) {
-      $state.go('index.user.teacher.detail', { id, type });
+      $state.go('index.user.service.detail', { id, type });
     }
   };
 
@@ -75,6 +75,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
+    { display: 'ID', field: 'id', width: 5 },
       { display: '姓名', field: 'real_name', width: 20 },
       { display: '手机号', field: 'telphone', width: 20 }, {
         display: '所在地',
@@ -83,9 +84,18 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
         },
         width: 20
       },
-      { display: '服务人群', field: 'service_groups', width: 20 },
+      { display: '服务人群', field: 'service_groups', width: 10 },
       { display: '实名认证', field: 'card_number', width: 10 },
-      { display: '服务人数', field: 'service_count', width: 10 },
+      { display: '服务人数', field: 'service_count', width: 10 }, {
+        display: '操作',
+        field: function(rowData) {
+          let id = rowData.id;
+          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
+          return tpl;
+        },
+        sort: false,
+        width: 5
+      },
     ],
     onResHandler: function(resData) {
       return resData.rsm;
@@ -99,9 +109,9 @@ app.controller('serviceDetailCtrl', function($scope, $state, $stateParams, reque
   let id = $stateParams.id;
   $scope.detail = {};
 
-  request('studentDetail', { id }).success((res) => {
-    $scope.detail = res.rsm.info;
-  });
+  // request('customerServiceDetail', { id }).success((res) => {
+  //   $scope.detail = res.rsm.info;
+  // });
 });
 
 // 客服添加

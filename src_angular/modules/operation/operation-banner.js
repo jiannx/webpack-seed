@@ -16,7 +16,7 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
   $scope.rangTime = { startDate: '', endDate: '' };
 
   $scope.onSearch = function() {
-    if ($scope.rangTime.startDate && $scope.rangTime.startDate !== '') {
+    if ($scope.rangTime.startDate) {
       angular.extend($scope.filterOpt, {
         createtime_s: $scope.rangTime.startDate.format('YYYY-MM-DD HH:mm'),
         createtime_e: $scope.rangTime.endDate.format('YYYY-MM-DD HH:mm'),
@@ -86,18 +86,21 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
-      { display: 'id', field: 'id' }, { display: '标题', field: 'title' }, {
+      { display: 'id', field: 'id', width: 5 },
+      { display: '标题', field: 'title', width: 10 }, {
         display: '图片',
         field: function(row) {
           return `<a href="${api.imgDomain + row.titlepic}" target="_blank">${row.titlepic}</a>`;
-        }
+        },
+        width: 25
       }, {
         display: '链接地址',
         field: function(row) {
           return `<a href="${row.weburl}" target="_blank">${row.weburl}</a>`;
-        }
+        },
+        width: 25
       },
-      { display: '发布时间', field: 'release_time' }, {
+      { display: '发布时间', field: 'release_time', width: 20 }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;

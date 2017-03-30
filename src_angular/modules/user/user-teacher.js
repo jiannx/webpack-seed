@@ -38,7 +38,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
         area: $scope.citySel[2],
       });
     }
-    if ($scope.rangTime.startDate !== '') {
+    if ($scope.rangTime.startDate) {
       angular.extend($scope.filterOpt, {
         communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
         communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
@@ -79,6 +79,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
+      { display: 'ID', field: 'id', width: 5 },
       { display: '姓名', field: 'real_name', width: 10 },
       { display: '手机号', field: 'telphone', width: 10 }, {
         display: '所在地',
@@ -90,7 +91,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
       { display: '星级', field: 'teacher_star', width: 5 },
       { display: '邀请码', field: 'invite_userid', width: 10 },
       { display: '实名认证', field: 'card_number', width: 5 },
-      { display: '星级审核', field: 'teacher_star_apply', width: 10 },
+      { display: '星级审核', field: 'teacher_star_apply', width: 5},
       { display: '客服', field: 'customer_service_id', width: 5 },
       { display: '用心度', field: 'teacher_evaluation', width: 5 },
       { display: '积分', field: 'integral', width: 5 },

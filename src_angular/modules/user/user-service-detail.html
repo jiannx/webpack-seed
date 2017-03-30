@@ -1,6 +1,6 @@
-<div class="content">
+<div class="content" ng-controller="serviceDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.user.service">客服列表</a> > <span>客服详情</span>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -9,12 +9,84 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2">头像：</div>
-                    <div class="col-xs-10"></div>
+                    <div class="col-xs-3 text-right">头像：</div>
+                    <div class="col-xs-4">
+                        <img ng-src="{{detail.avatar_file}}" class="img-thumbnail">
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">客服ID：</div>
-                    <div class="col-xs-10">111111111</div>
+                    <div class="col-xs-3 text-right">ID：</div>
+                    <div class="col-xs-8">{{detail.id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">姓名：</div>
+                    <div class="col-xs-8">{{detail.real_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">性别：</div>
+                    <div class="col-xs-8">{{detail.sex}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">生日：</div>
+                    <div class="col-xs-8">{{detail.birthday}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">邮箱：</div>
+                    <div class="col-xs-8">{{detail.email}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">注册时间：</div>
+                    <div class="col-xs-8">{{detail.createtime}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">手机号码：</div>
+                    <div class="col-xs-8">{{detail.telphone}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地区：</div>
+                    <div class="col-xs-8">{{detail.province}} {{detail.city}} {{detail.area}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">地址：</div>
+                    <div class="col-xs-8">{{detail.address}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">实名认证：</div>
+                    <div class="col-xs-8">{{detail.card_number}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">服务人群：</div>
+                    <div class="col-xs-8">{{detail.school}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">服务人数：</div>
+                    <div class="col-xs-8">{{detail.current_grade}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">总体贡献：</div>
+                    <div class="col-xs-8">{{detail.active_time}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">本月贡献：</div>
+                    <div class="col-xs-8">{{detail.xian_shang}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">积分：</div>
+                    <div class="col-xs-2" style="width: 8.5%">{{detail.integral}}</div>
+                    <div class="col-xs-2">金币：{{detail.gold_coins}}</div>
+                    <div class="col-xs-2">余额：{{detail.money_all}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">妈妈托学号：</div>
+                    <div class="col-xs-8">{{detail.card_id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">学校：</div>
+                    <div class="col-xs-8">{{detail.card_id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">年纪：</div>
+                    <div class="col-xs-8">{{detail.card_id}}</div>
                 </div>
             </div>
         </div>
@@ -24,6 +96,16 @@
             相关已结算（总计：xx条，xx元）
         </div>
         <div class="panel-body">
+            <table class="table">
+                <tr>
+                    <th>编号</th>
+                    <th>支付形式</th>
+                    <th>结算金额</th>
+                    <th>结算时间</th>
+                    <th>下单账号</th>
+                </tr>
+                <tr></tr>
+            </table>
         </div>
     </div>
 </div>

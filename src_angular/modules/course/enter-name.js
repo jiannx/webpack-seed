@@ -2,7 +2,7 @@ import app from 'app.config';
 import angular from 'angular';
 import moment from 'moment';
 
-app.controller('courseListCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
+app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
   let grid = null;
   let def = {
     real_name: '',
@@ -95,6 +95,7 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
       $state.go('index.course.detail', { id, type });
     }
   };
+  return false;
 
   grid = neTable.create({
     parent: '#grid',

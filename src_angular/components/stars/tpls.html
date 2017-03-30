@@ -1,0 +1,7 @@
+<div style="float: left; margin-top: -2px;">
+    <span ng-repeat="item in list track by $index">
+    	<img src="./star2.png" ng-if="item === 0"/>
+    	<img src="./star1.png" ng-if="item === 1"/>
+    	<img src="./star3.png" ng-if="item > 0 && item < 1"/>
+    </span>
+</div>
