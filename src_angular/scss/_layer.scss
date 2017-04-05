@@ -1,0 +1,25 @@
+.layui-layer-title {
+  background-color: #208cca !important;
+  height: 48px !important;
+  line-height: 48px !important;
+  text-align: center !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: white !important;
+}
+
+.layui-layer {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+span.layui-layer-setwin {
+	top: 12px !important;
+	right: 5px !important;
+}
+
+a.layui-layer-close {
+  width: 30px !important;
+  height: 30px !important;
+  background: url('../resource/close2.png') no-repeat !important;
+}

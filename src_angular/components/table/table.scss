@@ -1,10 +1,10 @@
 @charset "utf-8";
 $c-green: #CCCCCC;
 $ui-grid-row-height: 36px;
-$ui-grid-bottom-h: 40px;
+$ui-grid-bottom-h: 54px;
 $ui-grid-header-c: #F6F6F6;
 $ui-grid-header-h: 36px;
-$ui-grid-border-c: #F0F0F0;
+$ui-grid-border-c: #e9eaec;
 $s-header: 50px;
 $s-header-middle: 40px;
 $s-header-small: 32px;
@@ -46,12 +46,18 @@ $s-header-small: 32px;
     left: 0;
     top: 0;
     font-weight: bolder;
+    background-color: #1D8BD8;
     .ui-grid-header-cell {
       height: 100%;
       text-align: center;
       float: left;
       cursor: pointer;
       overflow: hidden;
+      color: white;
+      border-right: 1px solid #e6e6e6;
+      &:nth-last-child(1) {
+        border-right: 1px solid #1D8BD8;
+      }
     }
     .ui-grid-up {
       position: relative;
@@ -89,12 +95,14 @@ $s-header-small: 32px;
   .ui-grid-bottom {
     width: 100%;
     height: $ui-grid-bottom-h;
-    background-color: #F6F7FB;
+    background-color: #eff2f7;
     position: absolute;
     left: 0;
     bottom: 0;
     padding: 0 20px;
     display: none;
+    border-top: 1px solid #e9eaec;
+    color: gray;
     .ui-grid-bottom-info {
       float: left;
       line-height: $ui-grid-bottom-h;
@@ -106,11 +114,12 @@ $s-header-small: 32px;
       a.page {
         padding: 0 5px;
         min-width: 20px;
+        margin: 0 4px;
         text-align: center;
         color: gray;
         cursor: pointer;
         &.sel {
-          text-decoration: underline;
+          text-decoration: none;
         }
       }
       a.page-num {
@@ -119,8 +128,12 @@ $s-header-small: 32px;
         text-align: center;
         color: gray;
         cursor: pointer;
+        border: 1px solid #c5c8cd;
         &.sel {
-          text-decoration: underline;
+          text-decoration: none;
+          background-color: #1a8adc;
+          border-color: #1a8adc;
+          color: white;
         }
       }
     }
@@ -139,8 +152,11 @@ $s-header-small: 32px;
       line-height: $ui-grid-row-height;
       background-color: #ffffff;
       position: relative;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #e6e6e6;
       transition: 0.3s;
+      &:last-child {
+        border-bottom: 1px solid #e6e6e6;
+      }
       .ui-grid-row-cell {
         min-height: $ui-grid-row-height;
         height: 100%;
@@ -150,6 +166,10 @@ $s-header-small: 32px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        border-right: 1px solid #e6e6e6;
+        &:nth-last-child(2) {
+          border-right: 0px;
+        }
       }
       &:hover {
         background-color: #ECF6FD;

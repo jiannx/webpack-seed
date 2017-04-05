@@ -56,7 +56,8 @@ const OPTIONS = {
   onSelect: null,
   // 选填。单行点击事件 function(rowData, rowIndex, slidePanelId, slidePanelCellIds) {}
   // 回调参数：rowData当前行数据，rowIndex当前行序号，slidePanelId当前行下拉面板id，slidePanelCellIds当前下拉面板中cell id的数组集合
-  onRowClick: null
+  onRowClick: null,
+  btns: '' // 底部按钮html
 };
 
 class Table {
@@ -326,12 +327,12 @@ class Table {
     this.$gridBottom.empty();
     this.scope.isShow = !this.opts.onlyInfoPage;
 
-    let $numBtns = angular.element('<div class="ui-grid-bottom-page">' +
+    let $numBtns = angular.element('<div class="ui-grid-bottom-page">共&nbsp{{totalCount}}&nbsp条记录，{{pageCount}}页' +
       '<a class="page" ng-click="pageTo(\'上一页\')">上一页</a>' +
       '<a class="page-num" ng-repeat="num in pageList track by $index" ng-class="{sel:curPage == num}" ng-click="pageTo(num)">{{num}}</a>' +
       '<a class="page" ng-click="pageTo(\'下一页\')">下一页</a>' +
       '</div>');
-    let $pageInfo = angular.element('<div class="ui-grid-bottom-info">共&nbsp{{totalCount}}&nbsp条，{{pageCount}}页</div>');
+    let $pageInfo = angular.element('<div class="ui-grid-bottom-info">'+ this.opts.btns +'</div>');
     this.scope.pageList = [];
     let sNum = this.scope.curPage - LENGTH;
     let eNum = this.scope.curPage + LENGTH;

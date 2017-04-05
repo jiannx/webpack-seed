@@ -1,4 +1,5 @@
 @import "bootstrap/_bootstrap";
+@import "mixins.scss";
 $c-dark: #3B3A3F;
 $c-light: #01BB8D;
 $c-blue: #1D8BD8;
@@ -73,6 +74,16 @@ label.error-label {
   }
 }
 
+.btn {
+  border-width: 0px;
+  min-width: 80px;
+}
+
+input,
+select {
+  border-radius: 0 !important;
+}
+
 .row {
   padding-top: 6px;
   padding-bottom: 6px;
@@ -82,6 +93,7 @@ label.error-label {
 .panel {
   padding-top: 36px;
   position: relative;
+  border-radius: 0;
   .panel-heading {
     width: 100%;
     height: 36px;
@@ -91,6 +103,7 @@ label.error-label {
     top: 0;
     font-size: 14px;
     line-height: 36px;
+    @include GradientTwoColor(#ffffff, #e5e5e5);
     .panel-title {
       font-size: 14px;
       line-height: 36px;
@@ -110,32 +123,34 @@ label.error-label {
   }
 }
 
-select.input-sm,input.input-sm{
+select.input-sm,
+input.input-sm {
   padding-left: 6px;
   padding-right: 6px;
 }
 
-.form-group{
+.form-group {
   padding-right: 6px;
 }
-.input-group{
+
+.input-group {
   padding-left: 0;
   padding-right: 6px;
 }
 
-.app-form{
+.app-form {
   line-height: 30px;
-  .row{
+  .row {
     padding-top: 2px;
     padding-bottom: 2px;
   }
-  .input-group.input-sm{
+  .input-group.input-sm {
     padding: 0 !important;
   }
-  .radio{
+  .radio {
     line-height: 20px;
     margin: 1px 0;
-    label{
+    label {
       padding-top: 2px;
     }
   }

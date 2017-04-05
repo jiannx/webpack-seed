@@ -104,18 +104,20 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
       }
     });
   };
+  $scope.onDel = function() {
+  };
 
   grid = neTable.create({
     parent: '#grid',
     scope: $scope,
     http: request('accountList'),
     httpData: {},
-    withCheckBox: false,
+    withCheckBox: true,
     columnDefs: [
       { display: 'ID', field: 'id' },
+      { display: '姓名', field: 'nickname' },
       { display: '账户', field: 'account' },
-      { display: '角色', field: 'groupid' },
-      { display: '昵称', field: 'nickname' }, {
+      { display: '角色', field: 'groupid' }, {
         display: '拥有权限',
         field: function() {
           return '';
@@ -131,7 +133,12 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
     ],
     onResHandler: function(resData) {
       return resData.rsm;
-    }
+    },
+    onSelect: function(list){
+      $scope.selList = list;
+    },
+    btns: `<button class="btn btn-danger btn-sm" ng-click="onDel()"><i class="fa fa-trash-o"></i> 删除</button>
+          <button class="btn btn-primary btn-sm" ng-click="onEdit($event, 0)"><i class="fa fa-pencil"></i> 权限编辑</button>`
   });
 });
 
