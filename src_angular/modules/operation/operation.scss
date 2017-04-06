@@ -1,11 +1,14 @@
 .operation-tag {
+  display: block;
+  float: left;
   padding: 7px 5px 7px 10px;
   margin-right: 4px;
+  margin-bottom: 4px;
   i {
     color: gray;
     cursor: pointer;
-    &:hover{
-        color: #333333;
+    &:hover {
+      color: #333333;
     }
   }
 }

@@ -122,14 +122,15 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
         field: function() {
           return '';
         }
-      }, {
-        display: '操作',
-        field: function(rowData) {
-          let id = rowData.id;
-          return `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">权限编辑</a>`;
-        },
-        sort: false
-      },
+      }, 
+      // {
+      //   display: '操作',
+      //   field: function(rowData) {
+      //     let id = rowData.id;
+      //     return `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">权限编辑</a>`;
+      //   },
+      //   sort: false
+      // },
     ],
     onResHandler: function(resData) {
       return resData.rsm;

@@ -49,7 +49,7 @@ app.controller('messageListCtrl', function($scope, $state, $rootScope, request, 
         display: '操作',
         field: function(row) {
           if (row.status === '发送') {
-            return `<a ng-click="onEdit(${row.id})">发送</a>`;
+            return `<a class="bg-primary" ng-click="onEdit(${row.id})">发送</a>`;
           }
         },
         width: 15

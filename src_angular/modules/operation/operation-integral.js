@@ -70,12 +70,12 @@ app.controller('integralListCtrl', function($scope, $state, $rootScope, request,
       { display: '状态', field: 'status', width: 20 }, {
         display: '操作',
         field: function(row) {
-          let t = `<a ng-click="onEdit(0, ${row.id})">编辑</a> `;
+          let t = `<a class="bg-primary" ng-click="onEdit(0, ${row.id})">编辑</a> `;
           if (true) {
-            t += `<a ng-click="onEdit(1, ${row.id})">上线</a> `;
+            t += `<a class="bg-success" ng-click="onEdit(1, ${row.id})">上线</a> `;
           }
           if (true) {
-            t += `<a ng-click="onEdit(2, ${row.id})">下线</a>`
+            t += `<a class="bg-warning" ng-click="onEdit(2, ${row.id})">下线</a>`;
           }
           return t;
         },

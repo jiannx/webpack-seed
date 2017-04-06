@@ -15,6 +15,31 @@ body {
   font-family: "Microsoft YaHei", "Lantinghei", "Arial", "黑体", "宋体", sans-serif;
 }
 
+a.bg-primary {
+  background-color: #66a5ce;
+  color: white;
+  padding: 0 2px;
+  margin: 0 1px;
+  &:hover {
+    background-color: #66a5ce;
+  }
+}
+a.bg-warning{
+  @extend a.bg-primary;
+  background-color: #feb652;
+  &:hover{
+    background-color: #feb652;
+  }
+}
+a.bg-success{
+  @extend a.bg-primary;
+  background-color: #64d551;
+  &:hover{
+    background-color: #64d551;
+  }
+}
+
+
 @import 'auth.scss';
 @import 'daterangepicker.scss';
 @import 'layer.scss';

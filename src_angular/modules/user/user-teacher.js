@@ -99,12 +99,12 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
+          let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
           if (rowData.aptitude_apply === '待审核') {
-            tpl += `<a class="btn-control" ng-click="onEdit(onDel, 1, ${id})">资质审核</a>`;
+            tpl += `<a class="bg-primary" ng-click="onEdit(onDel, 1, ${id})">资质审核</a>`;
           }
           if (rowData.teacher_star_apply === '待审核') {
-            tpl += `<a class="btn-control" ng-click="onEdit(onDel, 2, ${id})">星级审核</a>`;
+            tpl += `<a class="bg-warning" ng-click="onEdit(onDel, 2, ${id})">星级审核</a>`;
           }
           return tpl;
         },

@@ -72,6 +72,10 @@ let api = {
   'suggestList': { method: 'post', url: '/admin/api/operate/message_list/' }, // 意见反馈
   'suggestDetail': { method: 'get', url: '/admin/api/operate/message_view/' },
   'suggestApply': { method: 'post', url: '/admin/api/operate/message_save/' },
+
+  'orderMindList': { method: 'post', url: '/admin/api/order/index/' }, // 感谢订单
+  'orderRechargeList': { method: 'post', url: '/admin/api/order/gold_balance/' }, // 充值订单 金币充值订单、余额充值订单
+  'orderRechargeDetail': { method: 'post', url: '/admin/api/order/gold_balance_view/' }, // 充值订单 详情
 };
 
 // if (PRODUCTION) {

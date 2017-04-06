@@ -74,11 +74,11 @@ app.controller('studentListCtrl', function($scope, $state, $stateParams, request
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
+          let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
           return tpl;
         },
         sort: false,
-        width: 5
+        width: 10
       },
     ],
     onResHandler: function(resData) {

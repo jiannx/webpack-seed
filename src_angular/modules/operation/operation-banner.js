@@ -104,12 +104,12 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">编辑 </a> `;
+          let tpl = `<a class="bg-primary" ng-click="onEdit($event, 0, ${id})">编辑 </a> `;
           if (true) {
-            tpl += `<a class="btn-control" ng-click="onEdit($event, 1, ${id})">上线 </a>`;
+            tpl += `<a class="bg-success" ng-click="onEdit($event, 1, ${id})">上线 </a>`;
           }
           if (true) {
-            tpl += `<a class="btn-control" ng-click="onEdit($event, 2, ${id})">下线 </a>`;
+            tpl += `<a class="bg-warning" ng-click="onEdit($event, 2, ${id})">下线 </a>`;
           }
           return tpl;
         },

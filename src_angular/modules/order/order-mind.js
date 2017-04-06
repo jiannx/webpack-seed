@@ -2,15 +2,18 @@ import app from 'app.config';
 import angular from 'angular';
 import moment from 'moment';
 
-app.controller('operationSuggestCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
+app.controller('orderMindCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
   let grid = null;
   let def = {
+    order_id: '',
     real_name: '',
-    telephone: '',
-    status: 0, // 状态0=全部 1未处理 2=已处理
+    telphone: '',
+    status: 0,
     createtime_s: '',
     createtime_e: '',
-    users_name: ''
+    t_real_name: '',
+    t_telphone: '',
+    typesid: 0,
   };
   $scope.filterOpt = angular.copy(def);
   $scope.rangTime = { startDate: '', endDate: '' };
@@ -19,15 +22,23 @@ app.controller('operationSuggestCtrl', function($scope, $state, $rootScope, requ
     { id: 1, name: '未处理' },
     { id: 2, name: '已处理' },
   ];
+  $scope.createTime = { startDate: '', endDate: '' };
+  $scope.createTimeOpt = $.extend(true, {}, $rootScope.dataRangePickerOpt, {
+    timePicker: false,
+    timePicker24Hour: false,
+    locale: {
+      format: 'YYYY-MM-DD',
+    }
+  });
   request('redeemCodeListAmountList').success((res) => {
     $scope.amountList = res.rsm.info || [];
   });
 
   $scope.onSearch = function() {
-    if ($scope.rangTime.startDate) {
+    if ($scope.createTime.startDate) {
       angular.extend($scope.filterOpt, {
-        createtime_s: $scope.rangTime.startDate.format('YYYY-MM-DD HH:mm'),
-        createtime_e: $scope.rangTime.endDate.format('YYYY-MM-DD HH:mm'),
+        createtime_s: $scope.createTime.startDate.format('YYYY-MM-DD'),
+        createtime_e: $scope.createTime.endDate.format('YYYY-MM-DD'),
       });
     }
     grid.setHttpData($scope.filterOpt);
@@ -55,27 +66,19 @@ app.controller('operationSuggestCtrl', function($scope, $state, $rootScope, requ
   grid = neTable.create({
     parent: '#grid',
     scope: $scope,
-    http: request('suggestList'),
+    http: request('orderMindList'),
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
-      { display: 'ID', field: 'id', width: 10 },
-      { display: '反馈人姓名', field: 'real_name', width: 10 },
-      { display: '反馈人手机号', field: 'telphone', width: 10 },
-      { display: '反馈内容', field: 'content', width: 15 },
-      { display: '反馈时间', field: 'createtime', width: 15 },
-      { display: '状态', field: 'status', width: 15 },
-      { display: '处理人姓名', field: 'user_name', width: 15 }, {
-        display: '处理',
-        field: function(row) {
-          let t = `<a class="bg-success" ng-click="onEdit(0, ${row.id})">详情</a> `;
-          if (row.status === '未处理') {
-            t += `<a class="bg-primary" ng-click="onEdit(1, ${row.id})">处理</a>`;
-          }
-          return t;
-        },
-        width: 10
-      },
+      { display: '订单号', field: 'order_id', width: 15, isTitle: true },
+      { display: '老师姓名', field: 't_real_name', width: 10 },
+      { display: '老师手机号码', field: 't_telphone', width: 10 },
+      { display: '金额', field: 'all_amount', width: 10 },
+      { display: '下单人姓名', field: 'real_name', width: 10 },
+      { display: '下单手机号码', field: 'telphone', width: 15 },
+      { display: '时间', field: 'createtime', width: 10 },
+      { display: '状态', field: 'status', width: 10 },
+      { display: '上课模式', field: 'typesid', width: 10 }
     ],
     onResHandler: function(resData) {
       return resData.rsm;

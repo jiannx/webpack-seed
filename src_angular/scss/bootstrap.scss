@@ -68,13 +68,14 @@ label.error-label {
 }
 
 .form-group-line {
-  padding-right: 15px;
+  padding-right: 10px !important;
   input {
     width: 100px !important;
   }
 }
 
-.btn {
+.btn-primary,
+.btn-success {
   border-width: 0px;
   min-width: 80px;
 }

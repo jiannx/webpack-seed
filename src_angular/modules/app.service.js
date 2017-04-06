@@ -117,6 +117,12 @@ app.service('appService', function($rootScope, request) {
       { id: 0, name: '全部' },
       { id: 1, name: '发现广告页' },
       { id: 2, name: 'web广告' },
-    ]
+    ],
+    orderStatus: [
+      { id: 0, name: '全部' },
+      { id: 1, name: '未支付' },
+      { id: 2, name: '已支付' },
+      { id: 3, name: '支付超时' },
+    ],
   };
 });

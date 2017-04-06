@@ -2,7 +2,7 @@
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>学生管理</span>
     </div>
-    <div class="grid-box" id="grid" ng-controller="studentListCtrl">
+    <div class="grid-box with-2-tool" id="grid" ng-controller="studentListCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
@@ -31,6 +31,10 @@
                     <select class="form-control input-sm" style="width: 80px;" ng-model="filterOpt.card_number" ng-options="s.id as s.name for s in const.realNameCertStatus">
                     </select>
                 </div>
+            </form>
+        </div>
+        <div class="tool-bar-2">
+            <form class="form-inline" role="form">
                 <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
                 <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>

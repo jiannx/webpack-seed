@@ -2,7 +2,7 @@
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>意见反馈管理</span>
     </div>
-    <div class="grid-box" id="grid" ng-controller="operationSuggestCtrl">
+    <div class="grid-box with-2-tool" id="grid" ng-controller="operationSuggestCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
@@ -22,6 +22,10 @@
                     <label>反馈日期：</label>
                     <input type="text" style="width: 200px !important" name="rangTime" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
                 </div>
+            </form>
+        </div>
+        <div class="tool-bar-2">
+            <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
                     <label>处理人：</label>
                     <input type="text" class="form-control input-sm" ng-model="filterOpt.users_name">

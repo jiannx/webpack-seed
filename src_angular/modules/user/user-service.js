@@ -76,8 +76,8 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     withCheckBox: false,
     columnDefs: [
     { display: 'ID', field: 'id', width: 5 },
-      { display: '姓名', field: 'real_name', width: 20 },
-      { display: '手机号', field: 'telphone', width: 20 }, {
+      { display: '姓名', field: 'real_name', width: 15 },
+      { display: '手机号', field: 'telphone', width: 15 }, {
         display: '所在地',
         field: function(row) {
           return `${row.province} ${row.city} ${row.area}`;
@@ -90,11 +90,11 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
+          let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
           return tpl;
         },
         sort: false,
-        width: 5
+        width: 15
       },
     ],
     onResHandler: function(resData) {

@@ -117,19 +117,19 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
       { display: '负责客服', field: 'service_name', width: 5 },
       { display: '提交时间', field: 'createtime', width: 10 },
       { display: '状态', field: 'status', width: 5 },
-      { display: '上课模式', field: 'typesid', width: 10 },
+      { display: '上课模式', field: 'typesid', width: 8 },
       { display: '审核人', field: 'nickname', width: 5 }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
+          let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
           if (rowData.status === '未审核') {
-            tpl += `<a class="btn-control" ng-click="onEdit($event, 1, ${id})">审核</a>`;
+            tpl += `<a class="bg-primary" ng-click="onEdit($event, 1, ${id})">课程审核</a>`;
           }
           return tpl;
         },
         sort: false,
-        width: 10
+        width: 12
       },
     ],
     onResHandler: function(resData) {
