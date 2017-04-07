@@ -76,6 +76,15 @@ let api = {
   'orderMindList': { method: 'post', url: '/admin/api/order/index/' }, // 感谢订单
   'orderRechargeList': { method: 'post', url: '/admin/api/order/gold_balance/' }, // 充值订单 金币充值订单、余额充值订单
   'orderRechargeDetail': { method: 'post', url: '/admin/api/order/gold_balance_view/' }, // 充值订单 详情
+  'orderRechargeRefund': { method: 'post', url: '' }, // 充值订单 退款
+
+  'orderCourseAdvanceList': { method: 'post', url: '/admin/api/order/course_pre/' }, // 课前预付订单 列表
+  'orderCourseAdvanceDetail': { method: 'get', url: '/admin/api/order/course_pre_view/' }, // 课前预付订单 详情
+  'orderCourseAdvanceRefund': { method: 'post', url: '/admin/api/order/course_pre_refund_save/' }, // 课前预付订单 退款
+
+  'orderCourseNextList': { method: 'post', url: '' }, // 课前次付订单 列表
+  'orderCourseNextDetail': { method: 'get', url: '' }, // 课前次付订单 详情
+  'orderCourseNextRefund': { method: 'post', url: '' }, // 课前次付订单 退款
 };
 
 // if (PRODUCTION) {

@@ -38,10 +38,7 @@ app.controller('orderRechargeGoldCtrl', function($scope, $state, $rootScope, req
       format: 'YYYY-MM-DD',
     }
   });
-  request('redeemCodeListAmountList').success((res) => {
-    $scope.amountList = res.rsm.info || [];
-  });
-
+  
   $scope.onSearch = function() {
     if ($scope.createTime.startDate) {
       angular.extend($scope.filterOpt, {

@@ -30,35 +30,63 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-2">订单号：</div>
+                    <div class="col-xs-2 text-right">订单号：</div>
                     <div class="col-xs-10">{{detail.createtime}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">金额：</div>
+                    <div class="col-xs-2 text-right">金额：</div>
                     <div class="col-xs-10">{{detail.amount}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">充值账号：</div>
-                    <div class="col-xs-10">{{detail.telphone}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2">下单时间：</div>
+                    <div class="col-xs-2 text-right">下单时间：</div>
                     <div class="col-xs-10">{{detail.createtime}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">支付方式：</div>
+                    <div class="col-xs-2 text-right">支付方式：</div>
                     <div class="col-xs-10">{{detail.types}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-2">支付时间：</div>
+                    <div class="col-xs-2 text-right">支付时间：</div>
                     <div class="col-xs-10">{{detail.types_times}}</div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-2">金币数量：</div>
-                    <div class="col-xs-10">{{detail.gold_sum}}</div>
+                <div ng-if="type == 'gold'">
+                    <div class="row">
+                        <div class="col-xs-2  text-right">金币数量：</div>
+                        <div class="col-xs-10">{{detail.gold_sum}}</div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-6">
+                        <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
+                    </div>
                 </div>
-                <div class="col-xs-offset-2 col-xs-6">
-                    <button class="btn btn-danger btn-sm">退款</button>
+                <div ng-if="type == 'money'">
+                    <div class="row">
+                        <div class="col-xs-2 text-right">充值账号：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-6">
+                        <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
+                    </div>
+                </div>
+                <div ng-if="type == 'courseAdvance'">
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程编号：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">专题：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程进度：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程节数：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="col-xs-offset-2 col-xs-6">
+                        <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
+                    </div>
                 </div>
             </div>
         </div>

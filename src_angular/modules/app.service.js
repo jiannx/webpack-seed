@@ -124,5 +124,13 @@ app.service('appService', function($rootScope, request) {
       { id: 2, name: '已支付' },
       { id: 3, name: '支付超时' },
     ],
+    orderCourseStatus: [
+      { id: 0, name: '全部' },
+      { id: 1, name: '未支付' },
+      { id: 2, name: '已支付' },
+      { id: 3, name: '已完成' },
+      { id: 4, name: '待退款' },
+      { id: 5, name: '已退款' },
+    ],
   };
 });

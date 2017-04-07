@@ -34,9 +34,6 @@ app.controller('orderRechargeMoneyCtrl', function($scope, $state, $rootScope, re
       format: 'YYYY-MM-DD',
     }
   });
-  request('redeemCodeListAmountList').success((res) => {
-    $scope.amountList = res.rsm.info || [];
-  });
 
   $scope.onSearch = function() {
     if ($scope.createTime.startDate) {
