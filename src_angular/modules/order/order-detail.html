@@ -70,22 +70,86 @@
                 <div ng-if="type == 'courseAdvance'">
                     <div class="row">
                         <div class="col-xs-2 text-right">课程编号：</div>
-                        <div class="col-xs-10">{{detail.telphone}}</div>
+                        <div class="col-xs-10">{{detail.course_id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程模式：</div>
+                        <div class="col-xs-10">{{detail.typesid}}</div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2 text-right">专题：</div>
-                        <div class="col-xs-10">{{detail.telphone}}</div>
+                        <div class="col-xs-10">{{detail.cate_name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程名称：</div>
+                        <div class="col-xs-10">{{detail.title}}</div>
                     </div>
                     <div class="row">
                         <div class="col-xs-2 text-right">课程进度：</div>
-                        <div class="col-xs-10">{{detail.telphone}}</div>
+                        <div class="col-xs-10">{{detail.course_date}}</div>
+                    </div>
+                    <div ng-show="detail.status =='待退款' || detail.status =='已退款'">
+                        <div class="row">
+                            <div class="col-xs-2 text-right">申请退款时间：</div>
+                            <div class="col-xs-10">{{detail.refund_time}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-2 text-right">退款金额：</div>
+                            <div class="col-xs-10">{{detail.refund_amount}}</div>
+                        </div>
+                        <div ng-show="detail.status =='已退款'">
+                            <div class="row">
+                                <div class="col-xs-2 text-right">退款原因：</div>
+                                <div class="col-xs-10">{{detail.refund_reason}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2 text-right">退款操作人：</div>
+                                <div class="col-xs-10">{{detail.operation_name}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2 text-right">退款操作时间：</div>
+                                <div class="col-xs-10">{{detail.refund_createtime}}</div>
+                            </div>
+                        </div>
+                        <div ng-show="detail.status =='待退款'">
+                            <div class="row">
+                                <div class="col-xs-2 text-right">退款金额：</div>
+                                <div class="col-xs-4">
+                                    <input type="text" class="form-control" ng-model="refundData.amount">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2 text-right">退款原因：</div>
+                                <div class="col-xs-10">
+                                    <textarea rows="3" class="form-control" ng-model="refundData.refund_reason"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-xs-offset-2 col-xs-6">
+                                <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="type == 'courseNext'">
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程编号：</div>
+                        <div class="col-xs-10">{{detail.course_id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程节数：</div>
-                        <div class="col-xs-10">{{detail.telphone}}</div>
+                        <div class="col-xs-2 text-right">上课模式：</div>
+                        <div class="col-xs-10">{{detail.typesid}}</div>
                     </div>
-                    <div class="col-xs-offset-2 col-xs-6">
-                        <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">专题：</div>
+                        <div class="col-xs-10">{{detail.cate_name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程名称：</div>
+                        <div class="col-xs-10">{{detail.title}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程进度：</div>
+                        <div class="col-xs-10">{{detail.course_date}}</div>
                     </div>
                 </div>
             </div>

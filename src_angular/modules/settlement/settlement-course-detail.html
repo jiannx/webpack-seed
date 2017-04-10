@@ -1,0 +1,156 @@
+<!-- 订单详情 -->
+<div class="content" ng-controller="settleCourseDetailCtrl">
+    <div class="loaction">
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>单次课程结算详情</a>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            结算状态
+        </div>
+        <div class="panel-body">
+            <div style="width: 600px">
+                <div class="row">
+                    <div class="col-xs-10">{{detail.status}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            课程信息
+        </div>
+        <div class="panel-body">
+            <div style="width: 600px">
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程图片:</div>
+                    <div class="col-xs-8">
+                        <img ng-src="{{detail.course_img}}" class="img-thumbnail">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程ID:</div>
+                    <div class="col-xs-6">{{detail.course_id}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程模式:</div>
+                    <div class="col-xs-6">{{detail.typesid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程标题:</div>
+                    <div class="col-xs-6">{{detail.title}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程专题:</div>
+                    <div class="col-xs-6">{{detail.cate_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">主要解决问题:</div>
+                    <div class="col-xs-6">{{detail.solve_problem}}</div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-3 text-right">报名对象:</div>
+                    <div class="col-xs-6">{{detail.grade}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">报名人数设定:</div>
+                    <div class="col-xs-6">{{detail.lectures_num}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程周期:</div>
+                    <div class="col-xs-6">
+                        <p ng-repeat="x in detail.course_date">{{x}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">上课时间:</div>
+                    <div class="col-xs-6">{{detail.course_times}} - {{detail.course_times_end}}</div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程周期:</div>
+                    <div class="col-xs-6">{{detail.course_cycle}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程次数:</div>
+                    <div class="col-xs-6">{{detail.course_count}} 次</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">计费标准:</div>
+                    <div class="col-xs-6">{{detail.charging_one}} 元/人/次</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程总费用:</div>
+                    <div class="col-xs-6">{{detail.charging_all}} 元/人</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">计算形式:</div>
+                    <div class="col-xs-6">{{detail.charging_types}}</div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-3 text-right">老师ID:</div>
+                    <div class="col-xs-6">{{detail.userid}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">老师:</div>
+                    <div class="col-xs-6">{{detail.real_name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">手机号码:</div>
+                    <div class="col-xs-6">{{detail.telphone}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">感谢金币总计:</div>
+                    <div class="col-xs-6">{{detail.course_thanks_all}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">待结算感谢金币:</div>
+                    <div class="col-xs-6">{{detail.course_thanks_un}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">课程进度:</div>
+                    <div class="col-xs-6">{{detail.course_pre}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">上次结算进度:</div>
+                    <div class="col-xs-6">{{detail.balance_speed}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-3 text-right">每期有效计费人数:</div>
+                    <div class="col-xs-6">
+                        <p ng-repeat="x in detail.balance_each">{{x.student_number}}</p>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-xs-3 text-right">应结算金额:</div>
+                    <div class="col-xs-6">{{detail.teacher_amount}}
+                        <button class="btn btn-primary btn-xs" ng-click="onEditAmount()">修改</button>
+                    </div>
+                </div>
+                <form name="changeAcount" ng-if="isEdit">
+                    <div class="row">
+                        <div class="col-xs-3 text-right"></div>
+                        <div class="col-xs-6">
+                            <input type="text" name="teacher_amount" class="form-control" ng-model="editData.amount" validator="required" placeholder="应结算金额">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right"></div>
+                        <div class="col-xs-6">
+                            <textarea rows="3" class="form-control" ng-model="editData.reason" placeholder="修改原因"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right"></div>
+                        <div class="col-xs-6">
+                            <button class="btn btn-success" validation-submit="changeAcount" ng-click="onSubmit()"><i class="fa fa-plus"></i> 提交</button>
+                            <button class="btn btn-default" ng-click="onCancel()"><i class="fa fa-plus"></i> 取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

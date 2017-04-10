@@ -2,7 +2,7 @@
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>运营位管理</span>
     </div>
-    <div class="grid-box" id="grid" ng-controller="operationBannerCtrl">
+    <div class="grid-box with-2-tool" id="grid" ng-controller="operationBannerCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
@@ -21,6 +21,10 @@
                     <select class="form-control input-sm" style="width: 100px;" ng-model="filterOpt.typesid" ng-options="x.id as x.name for x in const.bannerTypeList">
                     </select>
                 </div>
+            </form>
+        </div>
+        <div class="tool-bar-2">
+            <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
                     <label>发布时间：</label>
                     <input type="text" style="width: 240px !important" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">

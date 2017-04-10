@@ -82,9 +82,20 @@ let api = {
   'orderCourseAdvanceDetail': { method: 'get', url: '/admin/api/order/course_pre_view/' }, // 课前预付订单 详情
   'orderCourseAdvanceRefund': { method: 'post', url: '/admin/api/order/course_pre_refund_save/' }, // 课前预付订单 退款
 
-  'orderCourseNextList': { method: 'post', url: '' }, // 课前次付订单 列表
-  'orderCourseNextDetail': { method: 'get', url: '' }, // 课前次付订单 详情
+  'orderCourseNextList': { method: 'post', url: '/admin/api/order/course_after/' }, // 课前次付订单 列表
+  'orderCourseNextDetail': { method: 'get', url: '/admin/api/order/course_after_view/' }, // 课前次付订单 详情
   'orderCourseNextRefund': { method: 'post', url: '' }, // 课前次付订单 退款
+
+
+  'settlementCourseList': { method: 'post', url: '/admin/api/balance/index/' }, // 结算管理 - 单次课程结算 - 列表
+  'settlementCourseSetError': { method: 'get', url: '/admin/api/balance/abnormal/' }, // 单次课程结算 -标记结算异常
+  'settlementCourseDetail': { method: 'post', url: '/admin/api/balance/view/' }, // 单次课程结算 - 详情
+  'settlementCourseChangeAmount': { method: 'post', url: '/admin/api/balance/modify_amount/' }, // 单次课程结算 - 修改结算金额
+  'settlementGoldRecharge': { method: 'post', url: '/admin/api/balance/gold_insert/' }, // 结算管理 -金币充值 - 单个
+  'settlementOverageList': { method: 'post', url: '/admin/api/balance/deposit_record/' }, // 余额提现管理 - 列表
+  'settlementOverageCheck': { method: 'post', url: '/admin/api/balance/deposit_save/' }, // 余额提现管理 -保存
+  'settlementOverageDetail': { method: 'get', url: '/admin/api/balance/deposit_view/' }, // 余额提现管理 - 列表
+  // 'settlement': { method: 'post', url: '' }, // 课前次付订单 退款
 };
 
 // if (PRODUCTION) {

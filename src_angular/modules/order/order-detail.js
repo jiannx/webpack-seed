@@ -7,6 +7,12 @@ app.controller('orderDetailCtrl', function($scope, $state, $stateParams, $rootSc
   let type = $stateParams.type;
   $scope.type = type;
 
+  $scope.refundData = {
+    id: id,
+    amount: '', // 退款金额
+    refund_reason: ''
+  };
+
   function getData() {
     if (type === 'gold' || type === 'money') {
       request('orderRechargeDetail', { id }).success((res) => {
@@ -29,7 +35,7 @@ app.controller('orderDetailCtrl', function($scope, $state, $stateParams, $rootSc
         getData();
       });
     } else if (type === 'courseAdvance') {
-      request('orderCourseAdvanceRefund', { id }).success((res) => {
+      request('orderCourseAdvanceRefund', $scope.refundData).success((res) => {
         getData();
       });
     } else if (type === 'courseNext') {

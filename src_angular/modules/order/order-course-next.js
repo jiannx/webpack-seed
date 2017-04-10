@@ -12,6 +12,7 @@ app.controller('orderCourseNextCtrl', function($scope, $state, $rootScope, reque
     createtime_s: '',
     createtime_e: '',
     course_id: '',
+    typesid: 0
   };
   $scope.filterOpt = angular.copy(def);
   $scope.rangTime = { startDate: '', endDate: '' };
@@ -55,14 +56,10 @@ app.controller('orderCourseNextCtrl', function($scope, $state, $rootScope, reque
     // });
   };
 
-  $scope.onEdit = function(type, id) {
-    $state.go('index.operation.suggest.detail', { type, id });
-  };
-
   grid = neTable.create({
     parent: '#grid',
     scope: $scope,
-    http: request('orderCourseAdvanceList'),
+    http: request('orderCourseNextList'),
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
@@ -78,7 +75,7 @@ app.controller('orderCourseNextCtrl', function($scope, $state, $rootScope, reque
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="bg-success" ui-sref="index.order.detail({id:${id}, type: 'courseAdvance'})">查看详情</a> `;
+          let tpl = `<a class="bg-success" ui-sref="index.order.detail({id:${id}, type: 'courseNext'})">查看详情</a> `;
           return tpl;
         },
         sort: false,

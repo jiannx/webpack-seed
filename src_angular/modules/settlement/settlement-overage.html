@@ -1,22 +1,21 @@
 <div class="content" ng-controller="homeCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>余额提现管理</span>
     </div>
-    <div class="grid-box with-2-tool" id="grid" ng-controller="accountListCtrl">
+    <div class="grid-box with-2-tool" id="grid" ng-controller="settleOverageCtrl">
         <div class="tool-bar">
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
                     <label>账户所有人：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.real_name">
                 </div>
                 <div class="form-group form-group-line">
                     <label>手机号：</label>
-                    <input type="text" class="form-control input-sm">
+                    <input type="text" class="form-control input-sm" ng-model="filterOpt.real_name">
                 </div>
                 <div class="form-group form-group-line">
                     <label>负责客服：</label>
-                    <select class="form-control input-sm" style="width: 100px;">
-                        <option>1</option>
+                    <select class="form-control input-sm" style="width: 90px;" ng-model="filterOpt.customer_service_id" ng-options="s.id as s.real_name for s in serviceList">
                     </select>
                 </div>
                 <div class="form-group form-group-line">
@@ -27,8 +26,7 @@
                 </div>
                 <div class="form-group form-group-line">
                     <label>提现状态：</label>
-                    <select class="form-control input-sm" style="width: 100px;">
-                        <option>1</option>
+                    <select class="form-control input-sm" style="width: 100px;" ng-model="filterOpt.status" ng-options="x.id as x.name for x in statusList">
                     </select>
                 </div>
             </form>
@@ -37,13 +35,11 @@
             <form class="form-inline" role="form">
                 <div class="form-group form-group-line">
                     <label>申请时间：</label>
-                    <select class="form-control input-sm" style="width: 100px;">
-                        <option>1</option>
-                    </select>
+                    <input type="text" style="width: 150px !important" name="createTime" date-range-picker class="form-control date-picker input-sm" ng-model="createTime" options="createTimeOpt">
                 </div>
-                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> 搜索</button>
+                <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;
-                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-repeat"></i> 重置</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="onReset()"><i class="fa fa-repeat"></i> 重置</button>
             </form>
         </div>
     </div>

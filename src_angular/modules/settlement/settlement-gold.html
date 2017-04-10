@@ -1,32 +1,34 @@
-<div class="content" ng-controller="homeCtrl">
+<div class="content" ng-controller="settleGoldCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>用户中心</a> > <a>添加用户</a>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">手动充值金币</div>
         <div class="panel-body">
-            <form class="form-horizontal" style="width: 600px;">
+            <form class="form-horizontal" style="width: 600px;" name="goldRecharge">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">充值手机号：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.telphone" name="goldRechargetelphone" validator="required">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">充值金额：</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" ng-model="newData.amount" name="goldRechargeamount" validator="required">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"></label>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-success" validation-submit="goldRecharge" ng-click="onSubmit()"><i class="fa fa-plus"></i> 充值</button>
+                    </div>
+                </div>
+                <br/>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">批量导入账户：</label>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> 充值</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-4">
-                        <button type="button" class="btn btn-success"><i class="fa fa-plus"></i> 充值</button>
+                        <button type="button" class="btn btn-primary" ng-click="onUpload()"><i class="fa fa-plus"></i> 上传</button>
                     </div>
                 </div>
             </form>
