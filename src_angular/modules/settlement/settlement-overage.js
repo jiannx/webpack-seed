@@ -37,6 +37,10 @@ app.controller('settleOverageCtrl', function($scope, $state, $rootScope, request
     $scope.serviceList = res.rsm.info;
     $scope.serviceList.unshift({ id: 0, real_name: '所有客服' });
   });
+  request('courseExamine').success((res) => {
+    $scope.examineList = res.rsm.info;
+  });
+  
 
   $scope.onSearch = function() {
     if ($scope.createTime.startDate) {
