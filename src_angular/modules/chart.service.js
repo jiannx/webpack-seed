@@ -73,7 +73,10 @@ const LINE_OPTION = {
     type: 'value',
     name: '',
     axisLine: {
-      show: false
+      lineStyle: {
+        color: '#999999'
+      }
+        // show: false
     },
     axisLabel: {
       textStyle: {
