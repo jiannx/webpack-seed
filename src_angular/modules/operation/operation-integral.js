@@ -84,6 +84,7 @@ app.controller('integralListCtrl', function($scope, $state, $rootScope, request,
     ],
     onResHandler: function(resData) {
       return resData.rsm;
-    }
+    },
+    btns: '<a type="button" class="btn btn-primary btn-sm" ui-sref="index.operation.integral.add">添加</a>'
   });
 });

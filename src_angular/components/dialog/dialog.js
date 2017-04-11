@@ -37,7 +37,7 @@ class Dialog {
         });
       }
       // });
-      success && success(layero, index);
+      success && success(layero, index, scope);
     };
     if (yes && scope) {
       opt.yes = (index, layero) => {

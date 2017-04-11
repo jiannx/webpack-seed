@@ -11,11 +11,29 @@
 .layui-layer {
   border-radius: 10px !important;
   overflow: hidden;
+  a.layui-layer-btn0 {
+    border-color: #0776fe !important;
+    background-color: #1D8BD8 !important;
+    border-radius: 4px !important;
+    transition: .4s !important;
+    &:hover {
+      background-color: darken(#1D8BD8, 10%) !important;
+    }
+  }
+  a.layui-layer-btn1 {
+    border-color: #adadad !important;
+    background-color: white !important;
+    border-radius: 4px !important;
+    transition: .4s !important;
+    &:hover {
+      background-color: #e6e6e6 !important;
+    }
+  }
 }
 
 span.layui-layer-setwin {
-	top: 12px !important;
-	right: 5px !important;
+  top: 12px !important;
+  right: 5px !important;
 }
 
 a.layui-layer-close {

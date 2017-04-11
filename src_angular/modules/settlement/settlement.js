@@ -52,6 +52,11 @@ app.config(($stateProvider) => {
       url: '/chart',
       views: {
         'console@index': { template: require('./settlement-chart.html') }
+      },
+      resolve: {
+        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load('./static/echarts/echarts.min.js');
+        }]
       }
     });
 }).service('settlementService', () => {

@@ -38,6 +38,9 @@ let api = {
   'courseApplyDetail': { method: 'get', url: '/admin/api/course/apply/' }, // 审核详情
   'courseApply': { method: 'post', url: '/admin/api/course/apply_save/' }, // 审核保存
 
+  'courseJoinList': { method: 'post', url: '/admin/api/course/join/' }, // 课程管理 –查看报名
+  'courseJoinDetail': { method: 'get', url: '/admin/api/course/join_view/' }, // 课程管理 –查看报名详情
+
   'bannerList': { method: 'post', url: '/admin/api/operate/index/' }, // 运营位列表
   'bannerAdd': { method: 'post', url: '/admin/api/operate/banner_insert/' }, // 运营位添加
   'bannerEditDetail': { method: 'get', url: '/admin/api/operate/banner_edit/' }, // 运营位 编辑
@@ -95,7 +98,9 @@ let api = {
   'settlementOverageList': { method: 'post', url: '/admin/api/balance/deposit_record/' }, // 余额提现管理 - 列表
   'settlementOverageCheck': { method: 'post', url: '/admin/api/balance/deposit_save/' }, // 余额提现管理 -保存
   'settlementOverageDetail': { method: 'get', url: '/admin/api/balance/deposit_view/' }, // 余额提现管理 - 列表
-  // 'settlement': { method: 'post', url: '' }, // 课前次付订单 退款
+  'settlementReportGoldAndMoney': { method: 'post', url: '/admin/api/balance/report_info/' }, // 营收报表 –金币与余额的统计
+  'settlementReportCourse': { method: 'post', url: '/admin/api/balance/advance_account/' }, // 营收报表 –金币与余额的统计
+  'settlementReportWeb': { method: 'post', url: '/admin/api/balance/web_deposit_save/' }, // 营收报表 –平台提现审核提交
 };
 
 // if (PRODUCTION) {

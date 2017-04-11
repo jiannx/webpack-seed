@@ -119,6 +119,7 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
     ],
     onResHandler: function(resData) {
       return resData.rsm;
-    }
+    },
+    btns: '<a class="btn btn-primary btn-sm" ui-sref="index.operation.banner.add">添加运营位</a>'
   });
 });

@@ -24,21 +24,22 @@ a.bg-primary {
     background-color: #66a5ce;
   }
 }
-a.bg-warning{
+
+a.bg-warning {
   @extend a.bg-primary;
   background-color: #feb652;
-  &:hover{
+  &:hover {
     background-color: #feb652;
   }
 }
-a.bg-success{
+
+a.bg-success {
   @extend a.bg-primary;
   background-color: #64d551;
-  &:hover{
+  &:hover {
     background-color: #64d551;
   }
 }
-
 
 @import 'auth.scss';
 @import 'daterangepicker.scss';
@@ -232,5 +233,19 @@ a.bg-success{
   }
   &.with-3-tool {
     padding-top: 135px;
+  }
+}
+
+table.chart {
+  td {
+    padding-left: 30px;
+  }
+  td.middle {
+    vertical-align: middle;
+  }
+  td.bg-blue {
+    color: white;
+    background-color: #1D8BD8;
+    vertical-align: middle;
   }
 }

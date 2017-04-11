@@ -1,0 +1,25 @@
+<div class="content" ng-controller="courseJoinDetailCtrl">
+    <div class="loaction">
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.course.join">报名查看</a> > <span>详情</span>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            报名详情
+        </div>
+        <div class="panel-body">
+            <p>共 {{detail.length}} 人</p>
+            <div class="course-join-item" ng-repeat="item in detail">
+                <div class="course-join-head">
+                    <img ng-src="{{item.avatar_file}}" alt="">
+                </div>
+                <div class="course-join-name">{{item.real_name}}</div>
+            </div>
+<!--             <div class="course-join-item">
+                <div class="course-join-head">
+                    <img src="http://yanxuan.nosdn.127.net/9aa91472995200acffb07e14e98ab3bb.jpg" alt="">
+                </div>
+                <div class="course-join-name">sdfsdf</div>
+            </div> -->
+        </div>
+    </div>
+</div>

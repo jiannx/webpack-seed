@@ -72,6 +72,7 @@ app.controller('redeemCodeListCtrl', function($scope, $state, $rootScope, reques
     ],
     onResHandler: function(resData) {
       return resData.rsm;
-    }
+    },
+    btns: '<a type="button" class="btn btn-primary btn-sm" ui-sref="index.operation.code.add">生成新兑换码</a>'
   });
 });

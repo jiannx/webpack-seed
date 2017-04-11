@@ -1,6 +1,81 @@
-<div class="content" ng-controller="homeCtrl">
+<div class="content" ng-controller="settleChartCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>营收报表</span>
     </div>
-    功能未上线
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            营收报表
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12" style="padding: 4px 50px;">
+                    <form class="form-inline" role="form">
+                        <div class="form-group form-group-line">
+                            <label>时间选择：</label>
+                            <input type="text" style="width: 200px !important" name="createTime" date-range-picker class="form-control date-picker input-sm" ng-model="createTime" options="createTimeOpt">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div style="padding-left: 50px;">
+                <p>（金币充值金额：总计{{detail.gold_count}} 用于消费：{{detail.gold_consume}}）</p>
+            </div>
+            <div style="height: 400px; width: 100%" id="chart1"></div>
+            <br/>
+            <div style="padding-left: 50px;">
+                <p>（余额充值：总计{{detail.balance_count}} 余额提现申请：{{detail.deposit_count}} （{{detail.deposit_count_end}}已提现）</p>
+            </div>
+            <div style="height: 400px; width: 100%" id="chart2"></div>
+            <br/>
+            <div style="padding: 0 50px;">
+                <table class="table table-bordered chart">
+                    <tr>
+                        <td rowspan="3" class="bg-blue" style="width: 20%;">预缴账户</td>
+                        <td style="width: 20%;">金币</td>
+                        <td>{{tableData.gold_coins}}</td>
+                    </tr>
+                    <tr>
+                        <td>余额</td>
+                        <td>{{tableData.money_all}}</td>
+                    </tr>
+                    <tr>
+                        <td>预缴课费</td>
+                        <td>{{tableData.course_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-blue">合计</td>
+                        <td colspan="2">{{tableData.all}}</td>
+                    </tr>
+                </table>
+            </div>
+            <br/>
+            <div style="padding: 0 50px;">
+                <table class="table table-bordered chart">
+                    <tr>
+                        <td rowspan="4" class="bg-blue" style="width: 20%;">课程相关收入</td>
+                        <td class="middle" style="width: 20%;" rowspan="2">待结算</td>
+                        <td style="width: 20%;">教师分成</td>
+                        <td>{{tableData.teacher_amount_un}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">平台分成</td>
+                        <td>{{tableData.web_amount_un}}</td>
+                    </tr>
+                    <tr>
+                        <td class="middle" style="width: 20%;" rowspan="2">已结算</td>
+                        <td style="width: 20%;">教师分成</td>
+                        <td>{{tableData.teacher_amount}}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%;">平台分成1
+                            <br/>(可提现金额)</td>
+                        <td>{{tableData.web_amount}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-success" ng-click="onTixian()">平台提现</button>
+        </div>
+    </div>
 </div>

@@ -1,0 +1,22 @@
+.course-join-item {
+  width: 100px;
+  height: 100px;
+  background-color: gray;
+  float: left;
+  .course-join-head {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .course-join-name {
+    padding: 10px 0;
+    text-align: center;
+  }
+}

@@ -2,7 +2,7 @@ import app from 'app.config';
 import angular from 'angular';
 import moment from 'moment';
 
-app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
+app.controller('courseJoinCtrl', function($scope, $state, $rootScope, request, neDialog, neTable) {
   let grid = null;
   let def = {
     real_name: '',
@@ -12,30 +12,17 @@ app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, reque
     city: '',
     area: '',
     typesid: 0, // (0=全部 1=线上课 2=线下课)
-    customer_service_id: '',
-    examine_id: '', // (审核人 0=全部 其他传相对应的审核人ID)
-    status: 0, // (状态 0=全部 1=待审核  2=审核通过  3=审核拒绝  4=待开课  5=进行中  6=已完成  7=异常)
     course_cate_id: 0, // (专题ID 0=全部 其他传相对应ID)
     createtime_s: '',
     createtime_e: '',
-    communicate_date_s: '',
-    communicate_date_e: '',
-    communicate_times_s: '',
-    communicate_times_e: '',
   };
   $scope.filterOpt = angular.copy(def);
-  $scope.rangTime = { startDate: '', endDate: '' };
   $scope.citySel = [];
-  request('customerServiceAll', { typesid: 0 }).success((res) => {
-    $scope.serviceList = res.rsm.info;
-    $scope.serviceList.unshift({ id: '', real_name: '所有客服' });
-  });
+
   request('courseCateList').success((res) => {
     $scope.cateList = res.rsm.info;
   });
-  request('courseExamine').success((res) => {
-    $scope.examineList = res.rsm.info;
-  });
+
   $scope.createTime = { startDate: '', endDate: '' };
   $scope.createTimeOpt = $.extend(true, {}, $rootScope.dataRangePickerOpt, {
     timePicker: false,
@@ -45,22 +32,12 @@ app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, reque
     }
   });
 
-  console.log($scope.createTimeOpt);
-
   $scope.onSearch = function() {
     if ($scope.citySel.length > 0) {
       angular.extend($scope.filterOpt, {
         province: $scope.citySel[0],
         city: $scope.citySel[1],
         area: $scope.citySel[2],
-      });
-    }
-    if ($scope.rangTime.startDate) {
-      angular.extend($scope.filterOpt, {
-        communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
-        communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
-        communicate_times_s: $scope.rangTime.startDate.format('HH:mm'),
-        communicate_times_e: $scope.rangTime.endDate.format('HH:mm'),
       });
     }
     if ($scope.createTime.startDate !== '') {
@@ -75,7 +52,6 @@ app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, reque
   $scope.onReset = function() {
     $scope.filterOpt = angular.copy(def);
     $scope.citySel = [];
-    $scope.rangTime = { startDate: '', endDate: '' };
     $scope.createTime = { startDate: '', endDate: '' };
     $scope.onSearch();
   };
@@ -92,15 +68,14 @@ app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, reque
   $scope.onEdit = function(event, type, id) {
     // 0:详情 1:审核
     if (angular.isDefined(type) && angular.isDefined(id)) {
-      $state.go('index.course.detail', { id, type });
+      $state.go('index.course.join.detail', { id });
     }
   };
-  return false;
 
   grid = neTable.create({
     parent: '#grid',
     scope: $scope,
-    http: request('courseList'),
+    http: request('courseJoinList'),
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
@@ -113,20 +88,17 @@ app.controller('courseEnterNameCtrl', function($scope, $state, $rootScope, reque
         },
         width: 15
       },
-      { display: '主题', field: 'cate_name', width: 5 },
+      { display: '专题', field: 'cate_name', width: 5 },
       { display: '标题', field: 'title', width: 10 },
-      { display: '负责客服', field: 'service_name', width: 5 },
-      { display: '提交时间', field: 'createtime', width: 10 },
-      { display: '状态', field: 'status', width: 5 },
-      { display: '上课模式', field: 'typesid', width: 10 },
-      { display: '审核人', field: 'nickname', width: 5 }, {
+      { display: '课程总费用', field: 'charging_all', width: 5 },
+      { display: '审核时间', field: 'examine_time', width: 10 },
+      { display: '上课模式', field: 'typesid', width: 5 },
+      { display: '已报名人数', field: 'have_sum', width: 10 },
+      { display: '课程进度', field: 'course_pre', width: 5 }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
           let tpl = `<a class="btn-control" ng-click="onEdit($event, 0, ${id})">详情</a> `;
-          if (rowData.status === '未审核') {
-            tpl += `<a class="btn-control" ng-click="onEdit($event, 1, ${id})">审核</a>`;
-          }
           return tpl;
         },
         sort: false,

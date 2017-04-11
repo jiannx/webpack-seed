@@ -18,6 +18,7 @@ import './modules/course/course'; // 课程管理
 import './modules/operation/operation'; // 运营管理
 import './modules/order/order'; // 订单管理
 import './modules/settlement/settlement'; // 结算管理
+import './modules/chart.service.js';
 
 app.run(($rootScope, $state, $stateParams, appService) => {
   console.info('App start success!');
