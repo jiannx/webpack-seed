@@ -17,9 +17,10 @@ class Dialog {
     let { success, yes, cancel, end, full, min, restore, scope, controller } = opt;
     if (!scope) {
       scope = this.$rootScope.$new();
-    } else {
-      scope = scope.$new();
-    }
+    } 
+    // else {
+    //   scope = scope.$new();
+    // }
     this.scope = scope;
     opt.success = (layero, index) => {
       if (opt.btn != null) {

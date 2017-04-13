@@ -1,40 +1,21 @@
 <div class="ne-dialog">
     <div class="row">
         <div class="col-xs-12">
-            姓名：账户：角色
+            姓名：{{selUser.nickname}} 账户：{{selUser.account}}
         </div>
     </div>
     <div class="line"></div>
     <div class="row">
         <div class="col-xs-6">
             <div class="panel panel-primary" style="height: 300px">
-                <div class="panel-heading">
+                <div class="panel-heading" style="background: #208cca; border-radius: 0">
                     已拥有权限
+                    <button class="btn btn-danger btn-xs" ng-click="onAuthDel()" style="float: right; margin-top: 6px;">删除</button>
                 </div>
                 <div class="panel-body">
-                    <div class="checkbox">
+                    <div class="checkbox" ng-repeat="item in ownAuth">
                         <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
+                            <input type="checkbox" ng-model="item.isDel"> {{item.name}}
                         </label>
                     </div>
                 </div>
@@ -42,18 +23,14 @@
         </div>
         <div class="col-xs-6">
             <div class="panel panel-primary" style="height: 300px">
-                <div class="panel-heading">
-                    <h5 class="panel-title">权限列表</h5>
+                <div class="panel-heading" style="background: #208cca; border-radius: 0">
+                    权限列表
+                    <button class="btn btn-success btn-xs" ng-click="onAuthAdd()" style="float: right; margin-top: 6px; min-width: 0; padding-bottom: 2px;">添加</button>
                 </div>
                 <div class="panel-body">
-                    <div class="checkbox">
+                    <div class="checkbox" ng-repeat="item in authList">
                         <label>
-                            <input type="checkbox"> Check me out
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Check me out
+                            <input type="checkbox" ng-model="item.isAdd"> {{item.name}}
                         </label>
                     </div>
                 </div>

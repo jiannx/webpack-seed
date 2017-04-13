@@ -15,6 +15,10 @@ let api = {
   'accountList': { method: 'post', url: '/admin/api/login/admin_account/' }, // 权限分配 – 列表
   'accountDel': { method: 'post', url: '/admin/api/login/admin_account_del/' }, // 权限分配 – 删除
   'accountGroupList': { method: 'post', url: '/admin/api/login/group_info/' }, // 角色列表
+  'accountAuthDetail': { method: 'post', url: '/admin/api/login/power_view/' }, // 角色列表
+  'accountAuthAdd': { method: 'post', url: '/admin/api/login/power_insert/' }, // 角色列表
+  'accountAuthDel': { method: 'post', url: '/admin/api/login/power_del/' }, // 角色列表
+
 
   'teacherList': { method: 'post', url: '/admin/api/users/teacher_list/' },
   'teacherDetail': { method: 'get', url: '/admin/api/users/teacher_view/' }, // 教师管理 –具体详情
