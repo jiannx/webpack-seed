@@ -11,12 +11,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     province: '',
     city: '',
     area: '',
-    teacher_star: 0,
-    customer_service_id: 0,
-    invite_userid: 0,
-    aptitude_apply: 0,
-    teacher_star_apply: 0,
-    card_number: 0,
+    service_groups: 0,
     communicate_date_s: '',
     communicate_date_e: '',
     communicate_times_s: '',
@@ -75,7 +70,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
-    { display: 'ID', field: 'id', width: 5 },
+      { display: 'ID', field: 'id', width: 5 },
       { display: '姓名', field: 'real_name', width: 15 },
       { display: '手机号', field: 'telphone', width: 15 }, {
         display: '所在地',
@@ -84,8 +79,8 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
         },
         width: 20
       },
-      { display: '服务人群', field: 'service_groups', width: 10 },
       { display: '实名认证', field: 'card_number', width: 10 },
+      { display: '服务人群', field: 'service_groups', width: 10 },
       { display: '服务人数', field: 'service_count', width: 10 }, {
         display: '操作',
         field: function(rowData) {

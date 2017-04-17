@@ -25,7 +25,7 @@ const authList = [
   { id: '06-002', name: '结算管理-金币充值' },
   { id: '06-003', name: '结算管理-余额提现管理' },
   { id: '06-004', name: '结算管理-营收报表' },
-]
+];
 
 // 权限管理模块
 app.config(($stateProvider) => {
@@ -64,23 +64,22 @@ app.controller('accountAdd', function($scope, $state, $rootScope, request, neDia
         name: item.title
       });
     }
-    $scope.groupList.push({ id: '其他', name: '其他' });
+    $scope.groupList.push({ id: -1, name: '其他' });
   });
   $scope.newData = {
     nickname: '',
     account: '',
     mobile: '',
     password: '',
+    groupid: '',
     group_name: '',
-    group_name2: ''
   };
   $scope.identityList = [];
   $scope.onSubmit = function() {
     let data = angular.copy($scope.newData);
-    if (data.group_name === '其他') {
-      data.group_name = data.group_name2;
+    if (data.groupid === -1) {
+      data.groupid = 0;
     }
-    delete data.group_name2;
     request('accountAdd', data).success(() => {
       neDialog.msg('提交成功！请进入权限分配菜单配置用户权限');
       $state.go('index.auth.account-list');
@@ -89,12 +88,12 @@ app.controller('accountAdd', function($scope, $state, $rootScope, request, neDia
 });
 
 // 权限列表
-app.controller('accountListCtrl', function($scope, request, neDialog, neTable, appService) {
+app.controller('accountListCtrl', function($scope, $rootScope, request, neDialog, neTable, appService) {
   let grid = null;
   $scope.filterOpt = {
     account: '',
     nickname: '',
-    group_name: ''
+    groupid: ''
   };
 
   $scope.onSearch = function() {
@@ -105,7 +104,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
     $scope.filterOpt = {
       account: '',
       nickname: '',
-      group_name: ''
+      groupid: ''
     };
     $scope.onSearch();
   };
@@ -118,6 +117,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
       }
     });
   };
+  appService.constUpdate();
 
   $scope.onEdit = function() {
     if (!$scope.selList || $scope.selList.length === 0) {
@@ -192,7 +192,7 @@ app.controller('accountListCtrl', function($scope, request, neDialog, neTable, a
         field: function(row) {
           let ids = [];
           let names = [];
-          row.power.forEach((x)=>{
+          row.power.forEach((x) => {
             ids.push(x.power);
             names.push(x.title);
           });

@@ -1,6 +1,17 @@
 import app from 'app.config';
 
-app.controller('appCtrl', function($scope, $state, neDialog, request, $validation) {
+app.controller('appCtrl', function($scope, $state, neDialog, request, $validation, appService) {
+  let auth = $.parseJSON(appService.getCookie('userAuth'));
+  console.log(auth);
+  $scope.auth = {};
+  // 生成权限列表
+  for (let item of auth) {
+    $scope.auth[item.power] = true;
+  }
+  console.log($scope.auth);
+  if (!auth) {
+    $state.go('login.in');
+  }
   $scope.onChangePassword = function() {
     $scope.newData = {
       old_password: '',

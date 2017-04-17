@@ -49,7 +49,7 @@ app.controller('integralListCtrl', function($scope, $state, $rootScope, request,
         $scope.onSearch();
       });
     } else if (type === 2) {
-      request('integralChangeStatus', { id, types: 2 }).success(() => {
+      request('integralChangeStatus', { id, types: 0 }).success(() => {
         $scope.onSearch();
       });
     } else if (type === 0) {

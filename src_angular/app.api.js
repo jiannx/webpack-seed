@@ -72,7 +72,7 @@ let api = {
 
   'integralList': { method: 'post', url: '/admin/api/operate/integral_info_list/' }, // 积分活动
   'integralAdd': { method: 'post', url: '/admin/api/operate/integral_info_insert/' }, // 积分活动
-  'integralDetail': { method: 'post', url: '/admin/api/operate/integral_info_edit/' }, // 积分活动
+  'integralDetail': { method: 'get', url: '/admin/api/operate/integral_info_edit/' }, // 积分活动
   'integralEdit': { method: 'post', url: '/admin/api/operate/integral_info_edit_save/' }, // 积分活动
   'integralChangeStatus': { method: 'post', url: '/admin/api/operate/integral_info_apply' }, // 积分活动 上线 下线
 

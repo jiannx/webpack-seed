@@ -92,15 +92,17 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
         field: function(row) {
           return `<a href="${api.imgDomain + row.titlepic}" target="_blank">${row.titlepic}</a>`;
         },
-        width: 25
+        width: 15
       }, {
         display: '链接地址',
         field: function(row) {
           return `<a href="${row.weburl}" target="_blank">${row.weburl}</a>`;
         },
-        width: 25
+        width: 20
       },
-      { display: '发布时间', field: 'release_time', width: 20 }, {
+      { display: '发布时间', field: 'release_time', width: 15 },
+      { display: '状态', field: 'status', width: 10 },
+      { display: '位置', field: 'typesid', width: 10 }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;

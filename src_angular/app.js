@@ -20,7 +20,7 @@ import './modules/order/order'; // 订单管理
 import './modules/settlement/settlement'; // 结算管理
 import './modules/chart.service.js';
 
-app.run(($rootScope, $state, $stateParams, appService) => {
+app.run(($rootScope, $state, $stateParams, appService, request) => {
   console.info('App start success!');
 
   $rootScope.$state = $state;
@@ -30,6 +30,9 @@ app.run(($rootScope, $state, $stateParams, appService) => {
   $rootScope.appData = {
     isLogin: false
   };
+  // request('accountAuthDetail', { userid: $scope.selUser.id }).success((res) => {
+  //   $scope.ownAuth = []; // 已拥有权限
+  // });
 
   // 验证登陆状态，如果已登录，广播登陆；未登录则进行跳转
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {

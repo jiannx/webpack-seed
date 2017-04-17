@@ -23,7 +23,7 @@ app.config(($stateProvider) => {
       '@': { template: require('./login.html') }
     }
   });
-}).controller('loginInCtrl', ($scope, $state, request) => {
+}).controller('loginInCtrl', ($scope, $state, request, appService) => {
   $scope.needCheckCode = true;
   $scope.errorMessage = '';
 
@@ -67,6 +67,8 @@ app.config(($stateProvider) => {
     console.log('do logining');
     request('loginIn', $scope.loginData).success((res) => {
       if (res.errno === 1) {
+        appService.setCookie('user_name', res.rsm.nickname);
+        appService.setCookie('userAuth', JSON.stringify(res.rsm.power));
         $state.go('index');
       }
     });

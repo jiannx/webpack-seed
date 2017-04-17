@@ -1,6 +1,7 @@
 <div class="content" ng-controller="teacherDetailCtrl">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.user.teacher">教师管理</a> > <span ng-if="type == 0">教师详情</span><span ng-if="type == 1">资质审核</span><span ng-if="type == 2">星级审核</span>
+        <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">

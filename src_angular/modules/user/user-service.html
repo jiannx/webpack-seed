@@ -1,6 +1,7 @@
 <div class="content">
     <div class="loaction">
         <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<span>客服管理</span>
+        <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
     </div>
     <div class="grid-box" id="grid" ng-controller="serviceListCtrl">
         <div class="tool-bar">
@@ -14,9 +15,14 @@
                     <label>手机号：</label>
                     <input type="text" class="form-control input-sm">
                 </div>
+                <div class="form-group form-group-line">
+                    <label>服务人群:</label>
+                    <select class="form-control input-sm" style="width: 60px;" ng-model="filterOpt.service_groups" ng-options="s.id as s.name for s in const.serviceGroup">
+                    </select>
+                </div>
                 <div class="input-group input-sm">
                     <span class="input-group-addon" id="basic-addon1">日期:</span>
-                    <input type="text" style="width: 240px" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
+                    <input type="text" style="width: 200px" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
                 </div>
                 <div class="form-group form-group-line">
                     <city-sel ng-model="citySel"></city-sel>

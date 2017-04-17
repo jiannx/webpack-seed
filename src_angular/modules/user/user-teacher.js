@@ -65,12 +65,25 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
     // });
   };
 
+  let list = [];
+
   $scope.onEdit = function(event, type, id) {
+    let data = list.find(x => parseInt(x.id, 10) === id);
+    // console.log(data);
+    if (type === 1 && data.aptitude_apply !== '待审核') {
+      neDialog.alert('非待审核状态，不可操作');
+      return;
+    }
+    if (type === 2 && data.teacher_star_apply !== '待审核') {
+      neDialog.alert('非待审核状态，不可操作');
+      return;
+    }
     // 0:详情 1:资质审核 2:星级审核
     if (angular.isDefined(type) && angular.isDefined(id)) {
       $state.go('index.user.teacher.detail', { id, type });
     }
   };
+
 
   grid = neTable.create({
     parent: '#grid',
@@ -91,7 +104,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
       { display: '星级', field: 'teacher_star', width: 5 },
       { display: '邀请码', field: 'invite_userid', width: 10 },
       { display: '实名认证', field: 'card_number', width: 5 },
-      { display: '星级审核', field: 'teacher_star_apply', width: 5},
+      { display: '星级审核', field: 'teacher_star_apply', width: 5 },
       { display: '客服', field: 'customer_service_id', width: 5 },
       { display: '用心度', field: 'teacher_evaluation', width: 5 },
       { display: '积分', field: 'integral', width: 5 },
@@ -100,12 +113,12 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
         field: function(rowData) {
           let id = rowData.id;
           let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
-          if (rowData.aptitude_apply === '待审核') {
+          // if (rowData.aptitude_apply === '待审核') {
             tpl += `<a class="bg-primary" ng-click="onEdit(onDel, 1, ${id})">资质审核</a>`;
-          }
-          if (rowData.teacher_star_apply === '待审核') {
+          // }
+          // if (rowData.teacher_star_apply === '待审核') {
             tpl += `<a class="bg-warning" ng-click="onEdit(onDel, 2, ${id})">星级审核</a>`;
-          }
+          // }
           return tpl;
         },
         sort: false,
@@ -113,6 +126,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
       },
     ],
     onResHandler: function(resData) {
+      list = resData.rsm.info;
       return resData.rsm;
     }
   });
