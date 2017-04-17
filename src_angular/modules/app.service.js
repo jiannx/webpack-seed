@@ -5,9 +5,7 @@ app.service('appService', function($rootScope, request, $interval) {
   // $interval(function(){
   //   console.log(1);
   // }, 1000);
-  var str = " 星期" + "日一二三四五六".charAt(new Date().getDay());
-  $rootScope.now = moment().format('今天是YYYY年MM月DD日') + str;
-  console.log($rootScope.now);
+  $rootScope.now = moment().format('今天是YYYY年MM月DD日') + ' 星期' + '日一二三四五六'.charAt(new Date().getDay());
   // 登陆校验
   this.checkLogin = function(successCall, faildCall) {
     let isLogin = true;
@@ -20,28 +18,27 @@ app.service('appService', function($rootScope, request, $interval) {
     });
   };
   this.setCookie = function(name, value) {
-    var Days = 30;
-    var exp = new Date();
+    let Days = 30;
+    let exp = new Date();
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
-    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    document.cookie = name + '=' + escape(value) + ';expires=' + exp.toGMTString();
   };
 
-  this.getCookie = function(cookie_name) {
-    var allcookies = document.cookie;
-    var cookie_pos = allcookies.indexOf(cookie_name); //索引的长度
-
+  this.getCookie = function(cookieName) {
+    let allcookies = document.cookie;
+    let cookiePos = allcookies.indexOf(cookieName); // 索引的长度
     // 如果找到了索引，就代表cookie存在，
     // 反之，就说明不存在。
-    if (cookie_pos != -1) {
+    let value = null;
+    if (cookiePos !== -1) {
       // 把cookie_pos放在值的开始，只要给值加1即可。
-      cookie_pos += cookie_name.length + 1; //这里容易出问题，所以请大家参考的时候自己好好研究一下
-      var cookie_end = allcookies.indexOf(";", cookie_pos);
+      cookiePos += cookieName.length + 1; // 这里容易出问题，所以请大家参考的时候自己好好研究一下
+      let cookieEnd = allcookies.indexOf(';', cookiePos);
 
-      if (cookie_end == -1) {
-        cookie_end = allcookies.length;
+      if (cookieEnd === -1) {
+        cookieEnd = allcookies.length;
       }
-
-      var value = unescape(allcookies.substring(cookie_pos, cookie_end)); //这里就可以得到你想要的cookie的值了。。。
+      value = unescape(allcookies.substring(cookiePos, cookieEnd)); // 这里就可以得到你想要的cookie的值了。。。
     }
     return value;
   };
@@ -49,7 +46,6 @@ app.service('appService', function($rootScope, request, $interval) {
   this.userInfo = {};
   this.userInfo.name = this.getCookie('user_name');
   $rootScope.userInfo = this.userInfo;
-  console.log(this.userInfo);
 
   // 时间选择插件配置
   this.dataRangePickerOpt = {

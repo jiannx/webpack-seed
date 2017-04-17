@@ -103,7 +103,7 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
     httpData: $scope.filterOpt,
     withCheckBox: false,
     columnDefs: [
-      { display: '课程编号', field: 'id', width: 5 },
+      { display: '编号', field: 'id', width: 5 },
       { display: '姓名', field: 'real_name', width: 10 },
       { display: '手机号', field: 'telphone', width: 10 }, {
         display: '所在地',

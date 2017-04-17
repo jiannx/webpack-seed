@@ -54,7 +54,7 @@ app.config(($stateProvider) => {
     })
     // 客服管理 详情
     .state('index.user.service.detail', {
-      url: '/detail',
+      url: '/detail/:id',
       views: {
         'console@index': { template: require('./user-service-detail.html') }
       }

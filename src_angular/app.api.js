@@ -32,7 +32,8 @@ let api = {
   'customerServiceAdd': { method: 'post', url: '/admin/api/users/kefu_insert/' }, // 客服管理 – 添加账号
   'customerServiceList': { method: 'post', url: '/admin/api/users/kefu_list/' }, // 客服列表
   'customerServiceAll': { method: 'get', url: '/admin/api/users/service_info/' }, // 所有客服，用于筛选
-  'customerServiceDetail': { method: 'post', url: '' }, // 所有客服详情
+  'customerServiceDetail': { method: 'get', url: '/admin/api/users/kefu_view/' }, // 所有客服详情
+  'customerServiceDetailSettlement': { method: 'get', url: '/admin/api/users/kefu_jiesuan/' }, // 所有客服详情
 
 
   'courseList': { method: 'post', url: '/admin/api/course/index/' }, // 课程列表

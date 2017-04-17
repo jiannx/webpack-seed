@@ -118,6 +118,12 @@
                     <div class="col-xs-3 text-right">课程时间:</div>
                     <div class="col-xs-6">{{detail.course_times}} - {{detail.course_times_end}}</div>
                 </div>
+                <div class="row" ng-show="detail.typesid == '线下课'">
+                    <div class="col-xs-3 text-right">上课地址:</div>
+                    <div class="col-xs-6">
+                        {{detail.course_area}} {{detail.course_address}}
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">主持老师:</div>
                     <div class="col-xs-6">{{detail.real_name}}</div>

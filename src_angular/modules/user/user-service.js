@@ -57,8 +57,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
   };
 
   $scope.onEdit = function(event, type, id) {
-    // 0:详情 1:资质审核 2:星级审核
-    if (angular.isDefined(type) && angular.isDefined(id)) {
+    if (type === 0 && angular.isDefined(id)) {
       $state.go('index.user.service.detail', { id, type });
     }
   };
@@ -100,13 +99,60 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
 
 
 // 客服详情
-app.controller('serviceDetailCtrl', function($scope, $state, $stateParams, request, neDialog, neTable) {
+app.controller('serviceDetailCtrl', function($scope, $state, $stateParams, request, neDialog, $rootScope, neTable) {
   let id = $stateParams.id;
+  let grid = null;
   $scope.detail = {};
 
-  // request('customerServiceDetail', { id }).success((res) => {
-  //   $scope.detail = res.rsm.info;
-  // });
+  $scope.createTime = { startDate: moment().subtract(7, 'day').hour(0).minute(0), endDate: moment().hour(0).minute(0) };
+  $scope.createTimeOpt = $.extend(true, {}, $rootScope.dataRangePickerOpt, {
+    timePicker: false,
+    timePicker24Hour: false,
+    opens: 'left',
+    // locale: {
+    //   format: 'YYYY-MM-DD',
+    // }
+  });
+
+  request('customerServiceDetail', { id }).success((res) => {
+    $scope.detail = res.rsm.info;
+  });
+
+  function getData() {
+    request('customerServiceDetailSettlement', {
+      id,
+      start_day: $scope.createTime.startDate.format('YYYY-MM-DD HH:mm'),
+      end_day: $scope.createTime.endDate.format('YYYY-MM-DD HH:mm')
+    }).success((res) => {
+      $scope.detailSettlement = res.rsm;
+      grid.setData({
+        page_total: 1,
+        records: res.rsm.info.length,
+        page_now: 1,
+        page_rows: 20,
+        info: res.rsm.info
+      });
+    });
+  }
+
+
+  $scope.$watch('createTime', function() {
+    getData();
+  });
+  grid = neTable.create({
+    parent: '#settlement-grid',
+    scope: $scope,
+    withCheckBox: false,
+    withPage: false,
+    isInit: false,
+    columnDefs: [
+      { display: 'ID', field: 'id', width: 20 },
+      { display: '课后单次付费', field: 'charging_types', width: 20 },
+      { display: '结算金额', field: 'amount', width: 20 },
+      { display: '下单账号', field: 'telphone', width: 20 },
+      { display: '结算时间', field: 'createtime', width: 20 },
+    ],
+  });
 });
 
 // 客服添加

@@ -57,19 +57,19 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">服务人群：</div>
-                    <div class="col-xs-8">{{detail.school}}</div>
+                    <div class="col-xs-8">{{detail.service_groups}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">服务人数：</div>
-                    <div class="col-xs-8">{{detail.current_grade}}</div>
+                    <div class="col-xs-8">{{detail.service_count}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">总体贡献：</div>
-                    <div class="col-xs-8">{{detail.active_time}}</div>
+                    <div class="col-xs-8">{{detail.gx_all_amount}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">本月贡献：</div>
-                    <div class="col-xs-8">{{detail.xian_shang}}</div>
+                    <div class="col-xs-8">{{detail.gx_month_amount}}</div>
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">积分：</div>
@@ -83,30 +83,26 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-3 text-right">学校：</div>
-                    <div class="col-xs-8">{{detail.card_id}}</div>
+                    <div class="col-xs-8">{{detail.school}}</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-3 text-right">年纪：</div>
-                    <div class="col-xs-8">{{detail.card_id}}</div>
+                    <div class="col-xs-3 text-right">年级：</div>
+                    <div class="col-xs-8">{{detail.current_grade}}</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">
-            相关已结算（总计：xx条，xx元）
+        <div class="panel-heading" style="height: 40px;">
+            相关已结算（总计：{{detailSettlement.all_sum}}条，{{detailSettlement.all_amount}}元）
+            <form class="form-inline" role="form" style="float: right;">
+                <!-- <div class="form-group form-group-line"> -->
+                    <!-- <label>时间选择：</label> -->
+                    <input type="text" style="width: 240px !important" name="createTime" date-range-picker class="form-control date-picker input-sm" ng-model="createTime" options="createTimeOpt">
+                <!-- </div> -->
+            </form>
         </div>
-        <div class="panel-body">
-            <table class="table">
-                <tr>
-                    <th>编号</th>
-                    <th>支付形式</th>
-                    <th>结算金额</th>
-                    <th>结算时间</th>
-                    <th>下单账号</th>
-                </tr>
-                <tr></tr>
-            </table>
+        <div class="panel-body" id="settlement-grid" style="width: 600px; height: 360px;">
         </div>
     </div>
 </div>
