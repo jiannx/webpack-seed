@@ -58,8 +58,7 @@
                     <input type="text" style="width: 150px !important" name="createTime" date-range-picker class="form-control date-picker input-sm" ng-model="createTime" options="createTimeOpt">
                 </div>
                 <div class="form-group form-group-line">
-                    <label>沟通时间：</label>
-                    <input type="text" style="width: 150px !important" name="rangTime" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
+                    <time-sel ng-model="timeSel" name="沟通时间"></time-sel>
                 </div>
                 <button type="button" class="btn btn-primary btn-sm" ng-click="onSearch()"><i class="fa fa-search"></i> 搜索</button>
                 &nbsp;

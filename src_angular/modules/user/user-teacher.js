@@ -51,8 +51,6 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
       angular.extend($scope.filterOpt, {
         communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
         communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
-        communicate_times_s: $scope.timeSel[0] || '',
-        communicate_times_e: $scope.timeSel[1] || '',
       });
     }
     angular.extend($scope.filterOpt, {

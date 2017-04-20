@@ -84,9 +84,24 @@
                             <div stars="detail.teacher_star"></div> 【{{detail.teacher_star}}】</div>
                     </div>
                     <div class="row">
+                        <div class="col-xs-3 text-right">工作经历：</div>
+                        <div class="col-xs-8">
+                            {{detail.members_certify.work_experience}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3 text-right">沟通时间：</div>
+                        <div class="col-xs-8">
+                            {{detail.members_certify.communicate_date}} {{detail.members_certify.communicate_times}}
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-3 text-right">评判指标：</div>
                         <div class="col-xs-8">
-                            发音、语音语调{{pronunciation}} 对教材熟练度{{teaching_material}} 对教育向往度{{yearning_degree}} 授课用心度{{intentions}}
+                            发音、语音语调 {{pronunciation}}
+                            <br/>对教材熟练度 {{teaching_material}}
+                            <br/>对教育向往度 {{yearning_degree}}
+                            <br/>授课用心度 {{intentions}}
                         </div>
                     </div>
                 </div>

@@ -36,6 +36,11 @@ app.config(($stateProvider) => {
       url: '/detail?id',
       views: {
         'console@index': { template: require('./user-student-detail.html') }
+      },
+      resolve: {
+        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+          return $ocLazyLoad.load('./static/echarts/echarts.min.js');
+        }]
       }
     })
     // 客服管理

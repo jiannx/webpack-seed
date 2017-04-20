@@ -28,6 +28,7 @@ let api = {
   'teacherStarApplyDetail': { method: 'get', url: '/admin/api/users/teacher_star_apply/' }, // 教师管理 –星级审核 – 详情
   'studentList': { method: 'post', url: '/admin/api/users/student_list/' }, // 学生管理 – 列表
   'studentDetail': { method: 'get', url: '/admin/api/users/student_view/' }, // 学生管理 – 列表
+  'studentDetailActive': { method: 'get', url: '/admin/api/users/student_active_time/' }, // 学生管理 – 在线时长
 
   'customerServiceAdd': { method: 'post', url: '/admin/api/users/kefu_insert/' }, // 客服管理 – 添加账号
   'customerServiceList': { method: 'post', url: '/admin/api/users/kefu_list/' }, // 客服列表

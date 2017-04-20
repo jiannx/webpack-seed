@@ -23,8 +23,8 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
     communicate_times_s: '',
     communicate_times_e: '',
   };
+  $scope.timeSel = [];
   $scope.filterOpt = angular.copy(def);
-  $scope.rangTime = { startDate: '', endDate: '' };
   $scope.citySel = [];
   request('customerServiceAll', { typesid: 0 }).success((res) => {
     $scope.serviceList = res.rsm.info;
@@ -55,28 +55,24 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
         area: $scope.citySel[2],
       });
     }
-    if ($scope.rangTime.startDate) {
-      angular.extend($scope.filterOpt, {
-        communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
-        communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
-        communicate_times_s: $scope.rangTime.startDate.format('HH:mm'),
-        communicate_times_e: $scope.rangTime.endDate.format('HH:mm'),
-      });
-    }
     if ($scope.createTime.startDate !== '') {
       angular.extend($scope.filterOpt, {
         createtime_s: $scope.createTime.startDate.format('YYYY-MM-DD'),
         createtime_e: $scope.createTime.endDate.format('YYYY-MM-DD'),
       });
     }
+    angular.extend($scope.filterOpt, {
+      communicate_times_s: $scope.timeSel[0] || '',
+      communicate_times_e: $scope.timeSel[1] || '',
+    });
     grid.setHttpData($scope.filterOpt);
   };
 
   $scope.onReset = function() {
     $scope.filterOpt = angular.copy(def);
     $scope.citySel = [];
-    $scope.rangTime = { startDate: '', endDate: '' };
     $scope.createTime = { startDate: '', endDate: '' };
+    $scope.timeSel = [];
     $scope.onSearch();
   };
 
