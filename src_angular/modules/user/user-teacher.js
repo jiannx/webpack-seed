@@ -3,7 +3,7 @@ import angular from 'angular';
 import moment from 'moment';
 
 // 教师列表
-app.controller('teacherListCtrl', function($scope, $state, request, neDialog, neTable) {
+app.controller('teacherListCtrl', function($scope, $state, request, neDialog, neTable, $rootScope) {
   let grid = null;
   let def = {
     real_name: '',
@@ -22,8 +22,16 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
     communicate_times_s: '',
     communicate_times_e: '',
   };
+  $scope.timeSel = [];
   $scope.filterOpt = angular.copy(def);
   $scope.rangTime = { startDate: '', endDate: '' };
+  $scope.createTimeOpt = $.extend(true, {}, $rootScope.dataRangePickerOpt, {
+    timePicker: false,
+    timePicker24Hour: false,
+    locale: {
+      format: 'YYYY-MM-DD',
+    }
+  });
   $scope.citySel = [];
   request('customerServiceAll', { typesid: 2 }).success((res) => {
     $scope.serviceList = res.rsm.info;
@@ -31,6 +39,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
   });
 
   $scope.onSearch = function() {
+    console.log($scope.timeSel);
     if ($scope.citySel.length > 0) {
       angular.extend($scope.filterOpt, {
         province: $scope.citySel[0],
@@ -42,10 +51,14 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
       angular.extend($scope.filterOpt, {
         communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
         communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
-        communicate_times_s: $scope.rangTime.startDate.format('HH:mm'),
-        communicate_times_e: $scope.rangTime.endDate.format('HH:mm'),
+        communicate_times_s: $scope.timeSel[0] || '',
+        communicate_times_e: $scope.timeSel[1] || '',
       });
     }
+    angular.extend($scope.filterOpt, {
+      communicate_times_s: $scope.timeSel[0] || '',
+      communicate_times_e: $scope.timeSel[1] || '',
+    });
     grid.setHttpData($scope.filterOpt);
   };
 
@@ -53,6 +66,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
     $scope.filterOpt = angular.copy(def);
     $scope.citySel = [];
     $scope.rangTime = { startDate: '', endDate: '' };
+    $scope.timeSel = [];
     $scope.onSearch();
   };
 
@@ -114,10 +128,10 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
           let id = rowData.id;
           let tpl = `<a class="bg-success" ng-click="onEdit($event, 0, ${id})">查看详情</a> `;
           // if (rowData.aptitude_apply === '待审核') {
-            tpl += `<a class="bg-primary" ng-click="onEdit(onDel, 1, ${id})">资质审核</a>`;
+          tpl += `<a class="bg-primary" ng-click="onEdit(onDel, 1, ${id})">资质审核</a>`;
           // }
           // if (rowData.teacher_star_apply === '待审核') {
-            tpl += `<a class="bg-warning" ng-click="onEdit(onDel, 2, ${id})">星级审核</a>`;
+          tpl += `<a class="bg-warning" ng-click="onEdit(onDel, 2, ${id})">星级审核</a>`;
           // }
           return tpl;
         },

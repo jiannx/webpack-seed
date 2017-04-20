@@ -18,6 +18,7 @@ app.controller('operationBannerAdd', function($scope, $state, $rootScope, $state
       Object.assign($scope.newData, res.rsm.info);
       $scope.imgUrl = api.imgDomain + $scope.newData.titlepic;
       $scope.releaseTime = $scope.newData.release_time;
+      $scope.newData.typesid = (parseInt($scope.newData.typesid, 10) === 0) ? -1 : $scope.newData.typesid;
     });
   }
   $scope.releaseTime = '';
@@ -25,17 +26,21 @@ app.controller('operationBannerAdd', function($scope, $state, $rootScope, $state
     opens: 'left',
     singleDatePicker: true,
   });
-  $scope.typeList = angular.copy($rootScope.const.bannerTypeList);
-  $scope.typeList.splice(0, 1);
+  $scope.typeList = angular.copy($rootScope.const.bannerTypeAdd);
+  $scope.typeList[0].id = -1;
 
   $scope.onSubmit = function() {
-    if ($scope.releaseTime !== '' && typeof $scope.releaseTime === 'Object') {
-      angular.extend($scope.newData, {
+    let data = angular.copy($scope.newData);
+    if (data.typesid === -1) {
+      data.typesid = 0;
+    }
+    if ($scope.releaseTime !== '' && typeof $scope.releaseTime === 'object') {
+      angular.extend(data, {
         release_time: $scope.releaseTime.format('YYYY-MM-DD HH:mm'),
       });
     }
     let url = $scope.type ? 'bannerEdit' : 'bannerAdd';
-    request(url, $scope.newData).success(() => {
+    request(url, data).success(() => {
       $state.go('index.operation.banner');
     });
   };

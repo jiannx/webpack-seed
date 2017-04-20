@@ -149,6 +149,10 @@ app.service('appService', function($rootScope, request, $interval) {
       { id: 1, name: '发现广告页' },
       { id: 2, name: 'web广告' },
     ],
+    bannerTypeAdd: [ // banner类型 用于添加
+      { id: 0, name: '发现广告页' },
+      { id: 1, name: 'web广告' },
+    ],
     orderStatus: [
       { id: 0, name: '全部' },
       { id: 1, name: '未支付' },

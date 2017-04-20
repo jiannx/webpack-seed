@@ -42,7 +42,10 @@
             <form class="form-inline" role="form">
                 <div class="input-group input-sm">
                     <span class="input-group-addon" id="basic-addon1">沟通日期:</span>
-                    <input type="text" style="width: 240px" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="dataRangePickerOpt">
+                    <input type="text" style="width: 180px" date-range-picker class="form-control date-picker input-sm" ng-model="rangTime" options="createTimeOpt">
+                </div>
+                <div class="form-group form-group-line">
+                    <time-sel ng-model="timeSel" name="沟通时间"></time-sel>
                 </div>
                 <div class="form-group form-group-line">
                     <label>是否有邀请码:</label>

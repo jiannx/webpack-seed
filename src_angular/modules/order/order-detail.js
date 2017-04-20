@@ -28,6 +28,7 @@ app.controller('orderDetailCtrl', function($scope, $state, $stateParams, $rootSc
       });
     }
   }
+  getData();
 
   $scope.onRefund = function() {
     if (type === 'gold' || type === 'money') {

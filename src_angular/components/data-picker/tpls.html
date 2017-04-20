@@ -1,0 +1,22 @@
+<div style="display: inline-block; width: 100%">
+    <div class="ne-city-sel dropdown">
+        <button class="btn btn-default btn-sm" data-toggle="dropdown">
+            <span ng-show="!sel || sel.length == 0">{{name}}</span>
+            <span ng-show="sel && sel.length > 0">{{sel[0]}} - {{sel[1]}}</span>
+        </button>
+        <div class="dropdown-menu slide-in-down" style="width: 380px;">
+            <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="startTime.h" ng-options="x for x in hourList" ng-change="onChange()" style="width: 50px; margin-right: 6px;">
+            </select>
+            <span style="line-height: 30px;">:</span>
+            <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="startTime.m" ng-options="c for c in minList" ng-change="onChange()" style="width: 50px; margin-right: 6px;">
+            </select>
+            <span style="line-height: 30px;">至</span>&nbsp;
+            <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="endTime.h" ng-options="x for x in hourList" ng-change="onChange()" style="width: 50px; margin-right: 6px;">
+            </select>
+            <span style="line-height: 30px;">:</span>
+            <select class="form-control input-sm" ng-click="stopPopo($event)" ng-model="endTime.m" ng-options="c for c in minList" ng-change="onChange()" style="width: 50px; margin-right: 6px;">
+            </select>
+            <button class="btn btn-success btn-sm" ng-click="onSubmit()" style="width: 40px">确定</button>
+        </div>
+    </div>
+</div>

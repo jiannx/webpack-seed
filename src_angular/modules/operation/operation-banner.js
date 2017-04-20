@@ -100,9 +100,25 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
         },
         width: 20
       },
-      { display: '发布时间', field: 'release_time', width: 15 },
-      { display: '状态', field: 'status', width: 10 },
-      { display: '位置', field: 'typesid', width: 10 }, {
+      { display: '发布时间', field: 'release_time', width: 15 }, {
+        display: '状态',
+        field: function(row) {
+          if (row.status === 1 || row.status === '1') {
+            return '上线';
+          }
+          return '下线';
+        },
+        width: 10
+      }, {
+        display: '位置',
+        field: function(row) {
+          if (row.status === 0 || row.status === '0') {
+            return '发现广告页';
+          }
+          return 'web广告';
+        },
+        width: 10
+      }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
