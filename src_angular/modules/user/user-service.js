@@ -70,17 +70,19 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     withCheckBox: false,
     columnDefs: [
       { display: 'ID', field: 'id', width: 5 },
-      { display: '姓名', field: 'real_name', width: 15 },
-      { display: '手机号', field: 'telphone', width: 15 }, {
+      { display: '姓名', field: 'real_name', width: 10 },
+      { display: '手机号', field: 'telphone', width: 10 }, {
         display: '所在地',
         field: function(row) {
           return `${row.province} ${row.city} ${row.area}`;
         },
-        width: 20
+        width: 15
       },
       { display: '实名认证', field: 'card_number', width: 10 },
       { display: '服务人群', field: 'service_groups', width: 10 },
-      { display: '服务人数', field: 'service_count', width: 10 }, {
+      { display: '服务人数', field: 'service_count', width: 10 },
+      { display: '本月贡献', field: 'gx_month_amount', width: 10 },
+      { display: '总贡献', field: 'gx_all_amount', width: 10 }, {
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
@@ -88,7 +90,7 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
           return tpl;
         },
         sort: false,
-        width: 15
+        width: 10
       },
     ],
     onResHandler: function(resData) {

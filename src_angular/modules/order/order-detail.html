@@ -197,7 +197,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel-footer" ng-if="type == 'courseAdvance' && detail.status !='待退款' && detail.status !='已退款'">
+        <div class="panel-footer" ng-if="type == 'courseAdvance' && detail.status =='已支付'">
             <button class="btn btn-danger btn-sm" ng-click="onRefund();">退款</button>
         </div>
     </div>
