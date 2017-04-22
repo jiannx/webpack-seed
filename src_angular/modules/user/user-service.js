@@ -3,7 +3,7 @@ import angular from 'angular';
 import moment from 'moment';
 
 // 客服列表
-app.controller('serviceListCtrl', function($scope, $state, request, neDialog, neTable) {
+app.controller('serviceListCtrl', function($scope, $state, request, neDialog, neTable, $rootScope) {
   let grid = null;
   let def = {
     real_name: '',
@@ -12,14 +12,25 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     city: '',
     area: '',
     service_groups: 0,
-    communicate_date_s: '',
-    communicate_date_e: '',
-    communicate_times_s: '',
-    communicate_times_e: '',
+    // communicate_date_s: '',
+    // communicate_date_e: '',
+    // communicate_times_s: '',
+    // communicate_times_e: '',
+    createtime_s: '',
+    createtime_e: '',
   };
   $scope.filterOpt = angular.copy(def);
   $scope.rangTime = { startDate: '', endDate: '' };
   $scope.citySel = [];
+  $scope.createTimeOpt = $.extend(true, {}, $rootScope.dataRangePickerOpt, {
+    opens: 'left',
+    timePicker: false,
+    timePicker24Hour: false,
+    locale: {
+      format: 'YYYY-MM-DD',
+    }
+  });
+
 
   $scope.onSearch = function() {
     if ($scope.citySel.length > 0) {
@@ -31,10 +42,8 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
     }
     if ($scope.rangTime.startDate) {
       angular.extend($scope.filterOpt, {
-        communicate_date_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
-        communicate_date_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
-        communicate_times_s: $scope.rangTime.startDate.format('HH:mm'),
-        communicate_times_e: $scope.rangTime.endDate.format('HH:mm'),
+        createtime_s: $scope.rangTime.startDate.format('YYYY-MM-DD'),
+        createtime_e: $scope.rangTime.endDate.format('YYYY-MM-DD'),
       });
     }
     grid.setHttpData($scope.filterOpt);
@@ -94,8 +103,10 @@ app.controller('serviceListCtrl', function($scope, $state, request, neDialog, ne
       },
     ],
     onResHandler: function(resData) {
+      $scope.allAmount = 'todo';
       return resData.rsm;
-    }
+    },
+    btns: '金额：{{allAmount}}'
   });
 });
 
