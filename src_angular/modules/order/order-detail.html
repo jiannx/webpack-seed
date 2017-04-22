@@ -1,25 +1,32 @@
 <!-- 订单详情 -->
 <div class="content" ng-controller="orderDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>订单详情</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：
+        <a ui-sref="index.order.course-advance" ng-if="type == 'courseAdvance'">课程订单-预付</a>
+        <a ui-sref="index.order.course-next" ng-if="type == 'courseNext'">课程订单-次付</a>
+        <a ui-sref="index.order.recharge-gold" ng-if="type == 'gold'">金币充值订单</a>
+        <a ui-sref="index.order.recharge-monney" ng-if="type == 'money'">余额充值订单</a> >
+        <span>订单详情</span>
         <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
     </div>
-    <div class="panel panel-default">
+    <div class="panel panel-default" ng-if="type == 'gold' || type == 'money' || type == 'courseAdvance'">
         <div class="panel-heading">
             订单状态
         </div>
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-10">{{detail.status}}</div>
+                    <div class="col-xs-2">
+                        <span ng-class="{'text-primary': detail.status == '已支付' || detail.status == '支付成功'}" style="font-size: 20px;">{{detail.status}}</span>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-2">下单时间：</div>
-                    <div class="col-xs-10">{{detail.createtime}}</div>
-                </div>
-                <div class="row">
+                <div class="row" ng-if="type == 'gold' || type == 'money'">
                     <div class="col-xs-2">支付时间：</div>
                     <div class="col-xs-10">{{detail.types_times}}</div>
+                </div>
+                <div class="row" ng-if="type == 'courseAdvance'">
+                    <div class="col-xs-2">支付时间：</div>
+                    <div class="col-xs-10">{{detail.pay_time}}</div>
                 </div>
             </div>
         </div>
@@ -30,63 +37,91 @@
         </div>
         <div class="panel-body">
             <div style="width: 600px">
-                <div class="row">
-                    <div class="col-xs-2 text-right">订单号：</div>
-                    <div class="col-xs-10">{{detail.createtime}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2 text-right">金额：</div>
-                    <div class="col-xs-10">{{detail.amount}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2 text-right">下单时间：</div>
-                    <div class="col-xs-10">{{detail.createtime}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2 text-right">支付方式：</div>
-                    <div class="col-xs-10">{{detail.types}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-2 text-right">支付时间：</div>
-                    <div class="col-xs-10">{{detail.types_times}}</div>
-                </div>
-                <div ng-if="type == 'gold'">
+                <div ng-if="type == 'gold' || type == 'money'">
+                    <div class="row">
+                        <div class="col-xs-2 text-right">订单号：</div>
+                        <div class="col-xs-10">{{detail.pay_order}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">金额：</div>
+                        <div class="col-xs-10">{{detail.amount}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">充值账户：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">下单时间：</div>
+                        <div class="col-xs-10">{{detail.createtime}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">状态：</div>
+                        <div class="col-xs-10">{{detail.status}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">支付方式：</div>
+                        <div class="col-xs-10">{{detail.types}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">支付时间：</div>
+                        <div class="col-xs-10">{{detail.types_times}}</div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-2  text-right">金币数量：</div>
                         <div class="col-xs-10">{{detail.gold_sum}}</div>
                     </div>
-                    <div class="col-xs-offset-2 col-xs-6">
-                        <!-- <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button> -->
-                    </div>
-                </div>
-                <div ng-if="type == 'money'">
-                    <div class="row">
-                        <div class="col-xs-2 text-right">充值账号：</div>
-                        <div class="col-xs-10">{{detail.telphone}}</div>
-                    </div>
-                    <div class="col-xs-offset-2 col-xs-6">
-                        <!-- <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button> -->
-                    </div>
                 </div>
                 <div ng-if="type == 'courseAdvance'">
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程编号：</div>
+                        <div class="col-xs-2 text-right">ID：</div>
+                        <div class="col-xs-10">{{detail.id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">订单号：</div>
+                        <div class="col-xs-10">{{detail.order_id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">课程ID：</div>
                         <div class="col-xs-10">{{detail.course_id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程模式：</div>
+                        <div class="col-xs-2  text-right">课程模式：</div>
                         <div class="col-xs-10">{{detail.typesid}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">专题：</div>
+                        <div class="col-xs-2  text-right">专题：</div>
                         <div class="col-xs-10">{{detail.cate_name}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程名称：</div>
+                        <div class="col-xs-2  text-right">课程名称：</div>
                         <div class="col-xs-10">{{detail.title}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程进度：</div>
+                        <div class="col-xs-2  text-right">课程进度：</div>
+                        <div class="col-xs-10">{{detail.course_date}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">订单金额：</div>
+                        <div class="col-xs-10">{{detail.order_amount}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">下单人手机：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">下单时间：</div>
+                        <div class="col-xs-10">{{detail.createtime}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">状态：</div>
+                        <div class="col-xs-10">{{detail.status}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">支付时间：</div>
+                        <div class="col-xs-10">{{detail.pay_time}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程节数：</div>
                         <div class="col-xs-10">{{detail.course_date}}</div>
                     </div>
                     <div ng-show="detail.status =='待退款' || detail.status =='已退款'">
@@ -113,47 +148,57 @@
                             </div>
                         </div>
                     </div>
-                    <div ng-show="detail.status !='待退款' && detail.status !='已退款'">
-                        <div class="row">
-                            <div class="col-xs-2 text-right">退款金额：</div>
-                            <div class="col-xs-4">
-                                <input type="text" class="form-control" ng-model="refundData.amount">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-2 text-right">退款原因：</div>
-                            <div class="col-xs-10">
-                                <textarea rows="3" class="form-control" ng-model="refundData.refund_reason"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-2 col-xs-6">
-                            <button class="btn btn-danger btn-sm" ng-click="onRefund()">退款</button>
-                        </div>
-                    </div>
                 </div>
                 <div ng-if="type == 'courseNext'">
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程编号：</div>
+                        <div class="col-xs-2 text-right">ID：</div>
+                        <div class="col-xs-10">{{detail.id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">订单号：</div>
+                        <div class="col-xs-10">{{detail.order_id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">课程ID：</div>
                         <div class="col-xs-10">{{detail.course_id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">上课模式：</div>
+                        <div class="col-xs-2  text-right">课程模式：</div>
                         <div class="col-xs-10">{{detail.typesid}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">专题：</div>
+                        <div class="col-xs-2  text-right">专题：</div>
                         <div class="col-xs-10">{{detail.cate_name}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程名称：</div>
+                        <div class="col-xs-2  text-right">课程名称：</div>
                         <div class="col-xs-10">{{detail.title}}</div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-2 text-right">课程进度：</div>
+                        <div class="col-xs-2  text-right">课程进度：</div>
                         <div class="col-xs-10">{{detail.course_date}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2  text-right">订单金额：</div>
+                        <div class="col-xs-10">{{detail.order_amount}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">下单人手机：</div>
+                        <div class="col-xs-10">{{detail.telphone}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">下单时间：</div>
+                        <div class="col-xs-10">{{detail.createtime}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 text-right">课程节数：</div>
+                        <div class="col-xs-10">{{detail.course_count}}</div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="panel-footer" ng-if="type == 'courseAdvance' && detail.status !='待退款' && detail.status !='已退款'">
+            <button class="btn btn-danger btn-sm" ng-click="onRefund();">退款</button>
         </div>
     </div>
 </div>

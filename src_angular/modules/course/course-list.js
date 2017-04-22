@@ -57,8 +57,8 @@ app.controller('courseListCtrl', function($scope, $state, $rootScope, request, n
     }
     if ($scope.createTime.startDate !== '') {
       angular.extend($scope.filterOpt, {
-        createtime_s: $scope.createTime.startDate.format('YYYY-MM-DD'),
-        createtime_e: $scope.createTime.endDate.format('YYYY-MM-DD'),
+        communicate_date_s: $scope.createTime.startDate.format('YYYY-MM-DD'),
+        communicate_date_e: $scope.createTime.endDate.format('YYYY-MM-DD'),
       });
     }
     angular.extend($scope.filterOpt, {

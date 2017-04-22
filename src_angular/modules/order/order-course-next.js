@@ -75,7 +75,7 @@ app.controller('orderCourseNextCtrl', function($scope, $state, $rootScope, reque
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="bg-success" ui-sref="index.order.detail({id:${id}, type: 'courseNext'})">查看详情</a> `;
+          let tpl = `<a class="bg-success" ui-sref="index.order.course-next.detail({id:${id}, type: 'courseNext'})">查看详情</a> `;
           return tpl;
         },
         sort: false,

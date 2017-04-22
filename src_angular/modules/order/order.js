@@ -53,6 +53,30 @@ app.config(($stateProvider) => {
       views: {
         'console@index': { template: require('./order-mind.html') }
       }
+    })
+    .state('index.order.course-advance.detail', {
+      url: '/detail/:id/:type',
+      views: {
+        'console@index': { template: require('./order-detail.html') }
+      }
+    })
+    .state('index.order.course-next.detail', {
+      url: '/detail/:id/:type',
+      views: {
+        'console@index': { template: require('./order-detail.html') }
+      }
+    })
+    .state('index.order.recharge-gold.detail', {
+      url: '/detail/:id/:type',
+      views: {
+        'console@index': { template: require('./order-detail.html') }
+      }
+    })
+    .state('index.order.recharge-monney.detail', {
+      url: '/detail/:id/:type',
+      views: {
+        'console@index': { template: require('./order-detail.html') }
+      }
     });
 }).service('orderService', () => {
   this.name = 'orderService';

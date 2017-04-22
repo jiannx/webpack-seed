@@ -78,7 +78,7 @@ app.controller('orderCourseAdvanceCtrl', function($scope, $state, $rootScope, re
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="bg-success" ui-sref="index.order.detail({id:${id}, type: 'courseAdvance'})">查看详情</a> `;
+          let tpl = `<a class="bg-success" ui-sref="index.order.course-advance.detail({id:${id}, type: 'courseAdvance'})">查看详情</a> `;
           return tpl;
         },
         sort: false,

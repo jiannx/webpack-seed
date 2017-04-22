@@ -30,19 +30,36 @@ app.controller('orderDetailCtrl', function($scope, $state, $stateParams, $rootSc
   }
   getData();
 
-  $scope.onRefund = function() {
+  let layer = null;
+  $scope.onRefundSubmit = function() {
     if (type === 'gold' || type === 'money') {
       request('orderRechargeRefund', { id }).success((res) => {
         getData();
+        layer.close();
       });
     } else if (type === 'courseAdvance') {
       request('orderCourseAdvanceRefund', $scope.refundData).success((res) => {
         getData();
+        layer.close();
       });
     } else if (type === 'courseNext') {
       request('orderCourseNextRefund', { id }).success((res) => {
         getData();
+        layer.close();
       });
     }
+  };
+
+  $scope.onRefund = function() {
+    layer = neDialog.confirm({
+      title: '退款',
+      content: require('./tpls/refund.html'),
+      scope: $scope,
+      area: ['500px', '300px'],
+      btn: null,
+      yes: function(scope, close) {
+        close();
+      }
+    });
   };
 });

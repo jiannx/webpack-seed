@@ -87,7 +87,7 @@ app.controller('orderRechargeGoldCtrl', function($scope, $state, $rootScope, req
         display: '操作',
         field: function(rowData) {
           let id = rowData.id;
-          let tpl = `<a class="bg-success" ui-sref="index.order.detail({id:${id}, type: 'gold'})">查看详情</a> `;
+          let tpl = `<a class="bg-success" ui-sref="index.order.recharge-gold.detail({id:${id}, type: 'gold'})">查看详情</a> `;
           return tpl;
         },
         sort: false,
