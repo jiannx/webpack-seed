@@ -112,7 +112,7 @@ app.controller('operationBannerCtrl', function($scope, $state, $rootScope, reque
       }, {
         display: '位置',
         field: function(row) {
-          if (row.status === 0 || row.status === '0') {
+          if (row.typesid === 0 || row.typesid === '0') {
             return '发现广告页';
           }
           return 'web广告';
