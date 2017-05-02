@@ -28,12 +28,13 @@ app.controller('teacherDetailCtrl', function($scope, $state, $stateParams, reque
     let d = [$scope.starApplyData.pronunciation, $scope.starApplyData.teaching_material, $scope.starApplyData.yearning_degree, $scope.starApplyData.intentions];
     if (d[0] !== '' && d[1] !== '' && d[2] !== '' && d[3] !== '' && !isNaN(d[0]) && !isNaN(d[1]) && !isNaN(d[2]) && !isNaN(d[3])) {
       d.map(function(key, i) {
-        d[i] = parseInt(d[i], 10);
+        d[i] = Number(d[i], 10);
       });
       if (d[0] <= 5 && d[1] <= 5 && d[2] <= 5 && d[3] <= 5) {
         $scope.newScore = ((d[0] + d[1] + d[2] + d[3]) / 4).toFixed(1);
       }
     }
+    console.log($scope.newScore);
   };
   $scope.onScoreSubmit = function() {
     request('teacherStarApply', $scope.starApplyData).success(() => {
