@@ -61,7 +61,7 @@ base.externals = {
 // 入口，可配置多个
 base.entry = {
   app: path.resolve(base.srcRootDir, 'app.js'),
-  // home: path.resolve(base.srcRootDir, 'home.js')
+  share: path.resolve(base.srcRootDir, 'share.js')
 };
 
 // 页面配置 直接支持ejs。filename输出文件名；template入口文件(路径相对于srcRoot)；chunks引入的js，对应entry中的key
@@ -69,6 +69,12 @@ base.htmls = [
   { filename: 'index.html', template: 'index.html', chunks: ['app'] },
   // { filename: 'home.html', template: 'home.html', chunks: ['home'] }
 ];
+if (base.project == 'angular') {
+  base.htmls = [
+    { filename: 'index.html', template: 'index.html', chunks: ['app'] },
+    { filename: 'share.html', template: 'share.html', chunks: ['share'] },
+  ];
+}
 
 // 输出目录
 base.output = {

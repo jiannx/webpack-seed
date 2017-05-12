@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>share</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+    body {
+        background-color: #EFEFF4;
+    }
+    
+    #content {
+        padding: 0 40px;
+    }
+    
+    .course .col-xs-4 {
+        font-size: 30px;
+    }
+    
+    .course .col-xs-12 {
+        font-size: 30px;
+        color: #888888;
+        padding-bottom: 20px;
+    }
+    
+    .code .code-num {
+        font-size: 40px;
+        width: 200px;
+        margin: 10px auto;
+        text-align: center;
+        padding: 10px;
+        background-color: white;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="content">
+        <div v-if="type === 'course'" class="course">
+            <div class="text-center">
+                <h1>课程名称</h1>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">ID: {{id}}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">专题:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">主要解决问题:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">课程目标:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">教材版本:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">课程涉及内容:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">课程对未来的意义:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">关键指标:</div>
+                <div class="col-xs-12">测试</div>
+            </div>
+        </div>
+        <div v-else-if="type === 'inviteCode'" class="code">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h1>邀请码</h1>
+                </div>
+            </div>
+            <div style="padding-top: 10px;" class="code-num">
+                <div class="code">{{code}}</div>
+            </div>
+        </div>
+        <div v-else>
+            ERROR: Not find this type, please check url
+        </div>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+</body>
+
+</html>
