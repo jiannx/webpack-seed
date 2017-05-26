@@ -16,6 +16,7 @@ app.controller('settleCourseDetailCtrl', function($scope, $state, $stateParams, 
       $scope.detail = res.rsm.info;
     });
   }
+  getData();
 
   $scope.onEditAmount = function() {
     $scope.isEdit = true;

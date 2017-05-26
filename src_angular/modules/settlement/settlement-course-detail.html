@@ -1,7 +1,7 @@
 <!-- 订单详情 -->
 <div class="content" ng-controller="settleCourseDetailCtrl">
     <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>单次课程结算详情</a>
+        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a ui-sref="index.settlement.course">单次课程结算</a> > <a>结算详情</a>
         <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
     </div>
     <div class="panel panel-default">
@@ -11,7 +11,10 @@
         <div class="panel-body">
             <div style="width: 600px">
                 <div class="row">
-                    <div class="col-xs-10">{{detail.status}}</div>
+                    <div class="col-xs-10">
+                        <span class="text-success" ng-if="detail.status == '已结算'">{{detail.status}}</span>
+                        <span class="text-warning" ng-if="detail.status != '已结算'">{{detail.status}}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -126,8 +129,9 @@
                 <br/>
                 <div class="row">
                     <div class="col-xs-3 text-right">应结算金额:</div>
-                    <div class="col-xs-6">{{detail.teacher_amount}}
-                        <button class="btn btn-primary btn-xs" ng-click="onEditAmount()">修改</button>
+                    <div class="col-xs-6">
+                        {{detail.teacher_amount}}&nbsp;&nbsp;
+                        <button class="btn btn-primary btn-sm" ng-click="onEditAmount()" style="margin-top: -4px;">修改</button>
                     </div>
                 </div>
                 <form name="changeAcount" ng-if="isEdit">

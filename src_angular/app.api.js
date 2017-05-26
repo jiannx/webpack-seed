@@ -98,7 +98,7 @@ let api = {
 
   'settlementCourseList': { method: 'post', url: '/admin/api/balance/index/' }, // 结算管理 - 单次课程结算 - 列表
   'settlementCourseSetError': { method: 'get', url: '/admin/api/balance/abnormal/' }, // 单次课程结算 -标记结算异常
-  'settlementCourseDetail': { method: 'post', url: '/admin/api/balance/view/' }, // 单次课程结算 - 详情
+  'settlementCourseDetail': { method: 'get', url: '/admin/api/balance/view/' }, // 单次课程结算 - 详情
   'settlementCourseChangeAmount': { method: 'post', url: '/admin/api/balance/modify_amount/' }, // 单次课程结算 - 修改结算金额
   'settlementGoldRecharge': { method: 'post', url: '/admin/api/balance/gold_insert/' }, // 结算管理 -金币充值 - 单个
   'settlementOverageList': { method: 'post', url: '/admin/api/balance/deposit_record/' }, // 余额提现管理 - 列表
