@@ -1,29 +1,20 @@
+import './scss/share.scss';
+
+
 function getQueryString(name) {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-  var r = window.location.search.substr(1).match(reg);
+  let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+  let r = window.location.search.substr(1).match(reg);
   if (r != null) return unescape(r[2]);
   return null;
 }
 
-function showCourse(id) {
-
-}
-
-function showInviteCode() {
-  document.title = '邀请码';
-  let html = '<div class="text-center"><h3>课程名称</h3></div>';
-  html += `<div class="row"><div class="col-xs-2">课程ID: </div><div class="col-xs-2">${id}</div></div>`;
-  $('#content').html(html);
-}
-
-
 let type = getQueryString('type');
 let id = getQueryString('id');
 let code = getQueryString('code');
-let data = { type, id, code };
+let data = { type, id, code, rsm: { name: 2 }, isSuccess: true, errMsg: '' };
 
 if (type === 'course') {
-  document.title = '课程分享';
+  document.title = '妈妈托 - 课程分享';
   data.type = 'course';
 }
 if (type === 'inviteCode') {
@@ -31,7 +22,23 @@ if (type === 'inviteCode') {
   data.type = 'inviteCode';
 }
 
-var vm = new Vue({
+let vm = new Vue({
   el: '#content',
-  data: data
+  data: function() {
+    return data;
+  },
+  created: function() {
+    let self = this;
+    this.rsm.name = 3;
+    if (type === 'course') {
+      $.get('/admin/api/course/share_view/', { id }, function(res) {
+        if (res.errno == -1) {
+          self.isSuccess = false;
+          self.errMsg = res.err
+        } else {
+          self.$set(data, 'rsm', res.rsm.info);
+        }
+      }, 'json');
+    }
+  }
 });
