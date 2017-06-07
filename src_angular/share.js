@@ -40,5 +40,22 @@ let vm = new Vue({
         }
       }, 'json');
     }
+  },
+  methods: {
+    open: function() {
+      console.log('open');
+      let ifr = document.createElement('iframe');
+      ifr.src = 'weixin://http://weixin.qq.com';
+      ifr.style.display = 'none';
+      document.body.appendChild(ifr);
+      window.setTimeout(function() {
+        console.log('222');
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        document.body.removeChild(ifr);
+        // window.location = 'http://www.baidu.com';
+      }, 1000);
+    }
   }
 });

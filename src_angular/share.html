@@ -2,126 +2,128 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>share</title>
-    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <style type="text/css">
-
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0,"/>
+  <title>share</title>
+  <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div id="content">
-        <div v-if="!isSuccess">
-            {{errMsg}}
-        </div>
-        <div v-else-if="type === 'course'" class="course">
-            <div class="banner">
-                <img :src="rsm.course_img" alt="">
-            </div>
-            <div class="ctx-block">
-                <h3>课程：{{rsm.title}}</h3>
-                <p>主要解决问题：{{rsm.solve_problem}}</p>
-            </div>
-            <div class="ctx-block with-icon">
-                <div class="user-icon">
-                    <img :src="rsm.avatar_file">
-                </div>
-                <h3 class="color-blue">教师：{{rsm.username}}</h3>
-                <h3>{{rsm.teacher_star}}星</h3>
-                <div class="right">
-                </div>
-            </div>
-            <div class="ctx-block">
-                <div class="user-icon">
-                    <img :src="rsm.guest_avatar_file">
-                </div>
-                <h3>嘉宾：{{rsm.guest_username}}</h3>
-            </div>
-            <div class="ctx-block">
-                <h3>上课时间</h3>
-                <div v-for="x in rsm.course_date">
-                    <div class="line"></div>
-                    <p>{{x}} {{rsm.course_times}}</p>
-                </div>
-            </div>
-            <div class="ctx-block">
-                <h3>地点：{{rsm.course_area}} {{rsm.course_address}}</h3>
-            </div>
-            <div class="ctx-block">
-                <h3>内容范围</h3>
-                <div class="line"></div>
-                <p>{{rsm.related_content}}</p>
-            </div>
-            <div class="ctx-block">
-                <h3>课程目标</h3>
-                <div class="line"></div>
-                <p>{{rsm.target}}</p>
-            </div>
-            <div class="ctx-block">
-                <h3>课程对未来影响</h3>
-                <div class="line"></div>
-                <p>{{rsm.future_significance}}</p>
-            </div>
-            <div class="ctx-block">
-                <h3>课程信息</h3>
-                <div class="line"></div>
-                <p>专题：{{rsm.course_cate_id}}</p>
-                <p>人群：{{rsm.grade}}</p>
-                <p>难易度：{{rsm.facility}}</p>
-                <p>教材版本：{{rsm.textbook_version}}</p>
-                <p>关键指标：{{rsm.key_index}}</p>
-                <p>结业考试形式：{{rsm.examination_form}}</p>
-                <p>考核时间：{{rsm.examination_date}} {{rsm.examination_times}}</p>
-            </div>
-            <div class="ctx-block" style="padding-bottom: 0">
-                <h3>已报人数</h3>
-                <h3 class="color-blue font-size-big">{{rsm.have_sum}}</h3>
-                <h3>人</h3>&nbsp;&nbsp;&nbsp;&nbsp;
-                <h3>还剩</h3>
-                <h3 class="color-red font-size-big">&nbsp;{{rsm.un_have_sum}}</h3>
-                <h3>人</h3>
-                <div class="line"></div>
-                <p>
-                    <div class="user-icon" v-for="x in rsm.join_usersall">
-                        <img :src="x.avatar_file">
-                    </div>
-                    <div class="clearfix"></div>
-                </p>
-            </div>
-            <div class="ctx-block">
-                <h3 class="color-blue font-size-big">{{rsm.charging_one}}</h3>
-                <h3 class="color-blue">金币/人/次</h3>
-                <div class="right">
-                    <h3>合计：</h3>
-                    <h3 class="color-blue font-size-big">{{rsm.charging_all}}</h3>
-                    <h3>金币/人</h3>
-                </div>
-                <div class="line"></div>
-                <p v-if="rsm.charging_types == 1">课前全额预付</p>
-                <p v-if="rsm.charging_types == 2">课后单次付费</p>
-            </div>
-            <div class="bottom-btn">
-                下载妈妈托报名参与
-                <a href="" class="btn">打开</a>
-            </div>
-        </div>
-        <div v-else-if="type === 'inviteCode'" class="code">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h1>邀请码</h1>
-                </div>
-            </div>
-            <div style="padding-top: 10px;" class="code-num">
-                <div class="code">{{code}}</div>
-            </div>
-        </div>
-        <div v-else>
-            ERROR: Not find this type, please check url
-        </div>
+  <div id="content">
+    <div v-if="!isSuccess">
+      {{errMsg}}
     </div>
-    <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+    <div v-else-if="type === 'course'" class="course">
+      <div class="banner">
+        <img :src="rsm.course_img" alt="">
+      </div>
+      <div class="ctx-block">
+        <h3>课程：{{rsm.title}}</h3>
+        <p>主要解决问题：{{rsm.solve_problem}}</p>
+      </div>
+      <div class="ctx-block with-icon">
+        <div class="user-icon">
+          <img :src="rsm.avatar_file">
+        </div>
+        <h3 class="color-blue">教师：{{rsm.username}}</h3>
+        <h3>{{rsm.teacher_star}}星</h3>
+        <div class="right">
+        </div>
+      </div>
+      <div class="ctx-block">
+        <div class="user-icon">
+          <img :src="rsm.guest_avatar_file">
+        </div>
+        <h3>嘉宾：{{rsm.guest_username}}</h3>
+      </div>
+      <div class="ctx-block">
+        <h3>上课时间</h3>
+        <div v-for="x in rsm.course_date">
+          <div class="line"></div>
+          <p>{{x}} {{rsm.course_times}}</p>
+        </div>
+      </div>
+      <div class="ctx-block">
+        <h3>地点：{{rsm.course_area}} {{rsm.course_address}}</h3>
+      </div>
+      <div class="ctx-block">
+        <h3>内容范围</h3>
+        <div class="line"></div>
+        <p>{{rsm.related_content}}</p>
+      </div>
+      <div class="ctx-block">
+        <h3>课程目标</h3>
+        <div class="line"></div>
+        <p>{{rsm.target}}</p>
+      </div>
+      <div class="ctx-block">
+        <h3>课程对未来影响</h3>
+        <div class="line"></div>
+        <p>{{rsm.future_significance}}</p>
+      </div>
+      <div class="ctx-block">
+        <h3>课程信息</h3>
+        <div class="line"></div>
+        <p>专题：{{rsm.course_cate_id}}</p>
+        <p>人群：{{rsm.grade}}</p>
+        <p>难易度：{{rsm.facility}}</p>
+        <p>教材版本：{{rsm.textbook_version}}</p>
+        <p>关键指标：{{rsm.key_index}}</p>
+        <p>结业考试形式：{{rsm.examination_form}}</p>
+        <p>考核时间：{{rsm.examination_date}} {{rsm.examination_times}}</p>
+      </div>
+      <div class="ctx-block" style="padding-bottom: 0">
+        <h3>已报人数</h3>
+        <h3 class="color-blue font-size-big">{{rsm.have_sum}}</h3>
+        <h3>人</h3>&nbsp;&nbsp;&nbsp;&nbsp;
+        <h3>还剩</h3>
+        <h3 class="color-red font-size-big">&nbsp;{{rsm.un_have_sum}}</h3>
+        <h3>人</h3>
+        <div class="line"></div>
+        <p>
+          <div class="user-icon" v-for="x in rsm.join_usersall">
+            <img :src="x.avatar_file">
+          </div>
+          <div class="clearfix"></div>
+        </p>
+      </div>
+      <div class="ctx-block">
+        <h3 class="color-blue font-size-big">{{rsm.charging_one}}</h3>
+        <h3 class="color-blue">金币/人/次</h3>
+        <div class="right">
+          <h3>合计：</h3>
+          <h3 class="color-blue font-size-big">{{rsm.charging_all}}</h3>
+          <h3>金币/人</h3>
+        </div>
+        <div class="line"></div>
+        <p v-if="rsm.charging_types == 1">课前全额预付</p>
+        <p v-if="rsm.charging_types == 2">课后单次付费</p>
+      </div>
+      <div class="bottom-btn">
+        下载妈妈托报名参与
+        <a class="btn" v-on:click="open">打开</a>
+      </div>
+    </div>
+    <div v-else-if="type === 'inviteCode'" class="code">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <h1>邀请码</h1>
+        </div>
+      </div>
+      <div style="padding-top: 10px;" class="code-num">
+        <div class="code">{{code}}</div>
+      </div>
+    </div>
+    <div v-else>
+      ERROR: Not find this type, please check url
+    </div>
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="http://cdn.bootcss.com/vue/2.3.2/vue.min.js"></script>
+  <script type="text/javascript">
+  var scale = 1 / devicePixelRatio;
+  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
+  </script>
 </body>
 
 </html>
