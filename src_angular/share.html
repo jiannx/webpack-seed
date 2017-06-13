@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0,"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0," />
   <title>share</title>
   <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -105,14 +105,55 @@
       </div>
     </div>
     <div v-else-if="type === 'inviteCode'" class="code">
+      <div class="code-num">
+        {{code}}
+      </div>
+      <div class="code-info">分享你的二维码</div>
+      <div class="code-desc">为好友提供金币，让他们免费试听课程
+        <br/>他们开始听课后，您也可以获得相应金币</div>
       <div class="row">
-        <div class="col-xs-12 text-center">
-          <h1>邀请码</h1>
+        <div class="col-xs-12" style="padding: 0 48px;">
+          <button class="btn btn-primary" v-on:click="linkToLogin">立即注册</button>
         </div>
       </div>
-      <div style="padding-top: 10px;" class="code-num">
-        <div class="code">{{code}}</div>
+    </div>
+    <div v-else-if="type === 'login'" class="login">
+      <div class="login-desc">注册成功后，你和你的邀请人可
+        <br/>各获得10个妈妈托听课金币</div>
+      <div class="login-logo"></div>
+      <div class="login-input">
+        <input type="text" placeholder="请输入手机号" v-model='login.data.telphone'>
       </div>
+      <div class="login-input-with-btn">
+        <div class="login-input">
+          <input type="text" placeholder="请输入验证码" v-model='login.data.validCode'>
+        </div>
+        <button type="button" class="btn btn-primary" v-on:click="getValidCode" :disabled="login.checkCodeStatus !== 0">{{validMsg}}</button>
+      </div>
+      <div class="login-input">
+        <input type="password" placeholder="请设置密码" v-model='login.data.password'>
+      </div>
+      <div class="login-input">
+        <input type="text" placeholder="使用邀请码" v-model='login.data.invite_code'>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" v-on:click="signUp" :disabled="login.data.agree_deal === 0">注册</button>
+      <div class="login-check" v-on:click="toggleAgree">
+        我已阅读并同意用户协议
+      </div>
+    </div>
+    <div v-else-if="type === 'loginSuccess'" class="login-res">
+      <div class="login-res-icon"></div>
+      <div class="login-res-title">注册成功</div>
+      <div class="login-res-info">下载APP开启学习之旅吧</div>
+      <div style="padding: 0 36px;">
+        <button type="button" class="btn btn-primary" style="margin-bottom: 24px;" v-on:click="download">iOS下载</button>
+        <button type="button" class="btn btn-primary" v-on:click="download">Android下载</button>
+      </div>
+    </div>
+    <div v-else-if="type === 'loginFail'" class="login-res">
+      <div class="login-res-icon"></div>
+      <div class="login-res-title">注册失败</div>
+      <div class="login-res-info">您已有妈妈托账户，建议直接登录</div>
     </div>
     <div v-else>
       ERROR: Not find this type, please check url
