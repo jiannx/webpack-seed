@@ -44,8 +44,10 @@ if (type === 'course') {
   data.type = 'course';
 }
 if (type === 'inviteCode') {
-  document.title = '妈妈托-邀请码';
-  data.type = 'inviteCode';
+  // document.title = '妈妈托-邀请码';
+  // data.type = 'inviteCode';
+  document.title = '妈妈托-注册';
+  data.type = 'login';
 }
 if (type === 'login') {
   document.title = '妈妈托-注册';
@@ -174,7 +176,11 @@ let vm = new Vue({
         dataType: 'json',
         success: function(res) {
           if (res.errno === -1) {
-            alert(res.err);
+            if (res.err === '你输入的手机号码已经存在') {
+              _this.linkToLoginFail();
+            } else {
+              alert(res.err);
+            }
           } else {
             _this.linkToLoginSuccess();
           }

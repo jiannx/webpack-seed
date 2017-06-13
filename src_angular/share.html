@@ -109,40 +109,48 @@
         {{code}}
       </div>
       <div class="code-info">分享你的二维码</div>
-      <div class="code-desc">为好友提供金币，让他们免费试听课程
-        <br/>他们开始听课后，您也可以获得相应金币</div>
+      <div class="code-desc">为好友提供金币，让他们免费试听课程。
+        <br/>他们开始听课后，您也可以获得相应金币。</div>
       <div class="row">
         <div class="col-xs-12" style="padding: 0 48px;">
-          <button class="btn btn-primary" v-on:click="linkToLogin">立即注册</button>
+          <button class="btn btn-primary" v-on:click="linkToLogin">添加我的邀请码</button>
         </div>
       </div>
     </div>
     <div v-else-if="type === 'login'" class="login">
       <div class="login-desc">注册成功后，你和你的邀请人可
         <br/>各获得10个妈妈托听课金币</div>
-      <div class="login-logo"></div>
+      <div class="login-logo">
+        <img src="resource/logo2.png" alt="">
+      </div>
       <div class="login-input">
+        <img src="resource/phone number2.png" alt="">
         <input type="text" placeholder="请输入手机号" v-model='login.data.telphone'>
       </div>
       <div class="login-input-with-btn">
         <div class="login-input">
+          <img src="resource/identifying code.png" alt="">
           <input type="text" placeholder="请输入验证码" v-model='login.data.validCode'>
         </div>
         <button type="button" class="btn btn-primary" v-on:click="getValidCode" :disabled="login.checkCodeStatus !== 0">{{validMsg}}</button>
       </div>
       <div class="login-input">
+        <img src="resource/password2.png" alt="">
         <input type="password" placeholder="请设置密码" v-model='login.data.password'>
       </div>
       <div class="login-input">
+        <img src="resource/invent.png" alt="">
         <input type="text" placeholder="使用邀请码" v-model='login.data.invite_code'>
       </div>
       <button type="button" class="btn btn-primary btn-block" v-on:click="signUp" :disabled="login.data.agree_deal === 0">注册</button>
-      <div class="login-check" v-on:click="toggleAgree">
+      <div class="login-check" v-on:click="toggleAgree" v-bind:class="{ sel: login.data.agree_deal === 1 }">
         我已阅读并同意用户协议
       </div>
     </div>
     <div v-else-if="type === 'loginSuccess'" class="login-res">
-      <div class="login-res-icon"></div>
+      <div class="login-res-icon">
+        <img src="resource/ok.png" alt="">
+      </div>
       <div class="login-res-title">注册成功</div>
       <div class="login-res-info">下载APP开启学习之旅吧</div>
       <div style="padding: 0 36px;">
@@ -151,7 +159,9 @@
       </div>
     </div>
     <div v-else-if="type === 'loginFail'" class="login-res">
-      <div class="login-res-icon"></div>
+      <div class="login-res-icon">
+        <img src="resource/lose.png" alt="">
+      </div>
       <div class="login-res-title">注册失败</div>
       <div class="login-res-info">您已有妈妈托账户，建议直接登录</div>
     </div>
