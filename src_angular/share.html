@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, maximum-scale=1.0," />
-  <title>share</title>
+  <title>妈妈托</title>
   <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -19,22 +19,33 @@
       </div>
       <div class="ctx-block">
         <h3>课程：{{rsm.title}}</h3>
-        <p>主要解决问题：{{rsm.solve_problem}}</p>
+        <p style="margin-top: 12px;">主要解决问题：{{rsm.solve_problem}}</p>
       </div>
       <div class="ctx-block with-icon">
-        <div class="user-icon">
+        <div class="head-icon">
           <img :src="rsm.avatar_file">
         </div>
         <h3 class="color-blue">教师：{{rsm.username}}</h3>
+        <div style="display: inline-block;">
+          <template v-for="x in teacherStar">
+            <img src="resource/star1.png" alt="" v-if="x===1">
+            <img src="resource/star2.png" alt="" v-else-if="x===0">
+            <img src="resource/star3.png" alt="" v-else>
+          </template>
+        </div>
         <h3>{{rsm.teacher_star}}星</h3>
         <div class="right">
         </div>
       </div>
-      <div class="ctx-block">
-        <div class="user-icon">
+      <div class="ctx-block with-icon">
+        <div class="head-icon">
           <img :src="rsm.guest_avatar_file">
         </div>
         <h3>嘉宾：{{rsm.guest_username}}</h3>
+        <div class="right">
+          人数：
+          <h3>{{rsm.guest_crowd}}</h3>
+        </div>
       </div>
       <div class="ctx-block">
         <h3>上课时间</h3>
@@ -44,6 +55,7 @@
         </div>
       </div>
       <div class="ctx-block">
+        <img src="resource/button_location.png" alt="">
         <h3>地点：{{rsm.course_area}} {{rsm.course_address}}</h3>
       </div>
       <div class="ctx-block">
@@ -73,12 +85,12 @@
         <p>考核时间：{{rsm.examination_date}} {{rsm.examination_times}}</p>
       </div>
       <div class="ctx-block" style="padding-bottom: 0">
-        <h3>已报人数</h3>
+        <h3 class="font-size-small">已报人数</h3>
         <h3 class="color-blue font-size-big">{{rsm.have_sum}}</h3>
-        <h3>人</h3>&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3>还剩</h3>
+        <h3 class="font-size-small">人</h3>&nbsp;&nbsp;&nbsp;&nbsp;
+        <h3 class="font-size-small">还剩</h3>
         <h3 class="color-red font-size-big">&nbsp;{{rsm.un_have_sum}}</h3>
-        <h3>人</h3>
+        <h3 class="font-size-small">人</h3>
         <div class="line"></div>
         <p>
           <div class="user-icon" v-for="x in rsm.join_usersall">
@@ -89,11 +101,11 @@
       </div>
       <div class="ctx-block">
         <h3 class="color-blue font-size-big">{{rsm.charging_one}}</h3>
-        <h3 class="color-blue">金币/人/次</h3>
+        <h3 class="color-blue" class="font-size-small">金币/人/次</h3>
         <div class="right">
-          <h3>合计：</h3>
-          <h3 class="color-blue font-size-big">{{rsm.charging_all}}</h3>
-          <h3>金币/人</h3>
+          <h3 class="font-size-small">合计：</h3>
+          <h3 class="color-blue font-size-big">{{rsm.charging_all}} 金币/人</h3>
+          <h3></h3>
         </div>
         <div class="line"></div>
         <p v-if="rsm.charging_types == 1">课前全额预付</p>

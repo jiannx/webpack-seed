@@ -196,6 +196,24 @@ let vm = new Vue({
     }
   },
   computed: {
+    teacherStar: function() {
+      if (data.rsm.teacher_star) {
+        let allNum = Math.floor(data.rsm.teacher_star);
+        let yu = data.rsm.teacher_star % allNum;
+        let res = [];
+        for (let i = 0; i < 5; i += 1) {
+          if (i < allNum) {
+            res.push(1);
+          } else if (yu !== 0 && i === allNum && yu > 0.0001) {
+            res.push(yu);
+          } else {
+            res.push(0);
+          }
+        }
+        return res;
+      }
+      return [];
+    },
     validMsg: function() {
       if (data.login.checkCodeStatus === 0) {
         return '获取验证码';

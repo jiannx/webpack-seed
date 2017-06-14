@@ -26,15 +26,15 @@ body {
     background-color: white;
     margin-bottom: 2.4rem;
     color: #333333;
-    padding: 3.2rem 2rem;
+    padding: 2rem 2rem;
     h3 {
       display: inline-block;
-      font-size: 4.0rem;
+      font-size: 3.4rem;
       font-weight: 600;
-      margin: 0 0 .6rem 0;
+      margin: 0;
     }
     p {
-      font-size: 3.0rem;
+      font-size: 2.8rem;
       color: #a9a9a9;
     }
     .line {
@@ -66,22 +66,35 @@ body {
       color: #fe3434;
     }
     .font-size-big {
-      font-size: 4.4rem;
+      font-size: 3.6rem;
+    }
+    .font-size-small {
+      font-size: 2.8rem;
     }
     .right {
       float: right;
     }
     &.with-icon {
       position: relative;
+      height: 9rem;
+      padding: 0 2rem;
+      line-height: 9rem;
       padding-left: 10rem;
       h3 {
-        margin-bottom: 0;
+        margin: 0;
       }
-      .user-icon {
+      .head-icon {
         position: absolute;
         left: 2rem;
-        top: 50%;
-        margin-top: -2.8rem;
+        top: 1.7rem;
+        width: 5.6rem;
+        height: 5.6rem;
+        background-color: gray;
+        border-radius: 50%;
+        overflow: hidden;
+        img: {
+          width: 100%;
+        }
       }
     }
   }
@@ -89,24 +102,25 @@ body {
     position: relative;
     margin-top: 4rem;
     width: 100%;
-    height: 12rem;
+    height: 9rem;
     background-color: white;
     padding-left: 2rem;
-    line-height: 12rem;
-    font-size: 4.6rem;
+    line-height: 9rem;
+    font-size: 3.8rem;
     a.btn {
       position: absolute;
       right: 0;
       top: 0.1rem;
-      width: 30%;
+      width: 20rem;
       height: 100%;
       border: 0;
-      font-size: 4.6rem;
-      line-height: 12rem;
+      font-size: 3.8rem;
+      line-height: 9rem;
       padding: 0;
       margin: 0;
       background-color: #0d89e8;
       color: white;
+      border-radius: 0;
     }
   }
 }
@@ -157,7 +171,7 @@ body {
     font-size: 28px;
     color: #333;
     margin: 20px 0;
-    line-height:50px;
+    line-height: 50px;
   }
   .login-logo {
     margin: auto;
