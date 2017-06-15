@@ -81,6 +81,9 @@ let vm = new Vue({
       }, 'json');
     }
   },
+  updated: function() {
+    document.getElementById('content').style.display = 'block';
+  },
   methods: {
     // 打开app
     open: function() {

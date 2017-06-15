@@ -1,66 +1,80 @@
 <!-- 订单详情 -->
 <div class="content" ng-controller="settleOverageDetailCtrl">
-    <div class="loaction">
-        <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>余额提现详情</a>
-        <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
+  <div class="loaction">
+    <i class="fa fa-home fa-lg" aria-hidden="true"></i>&nbsp;当前位置：<a>余额提现详情</a>
+    <span class="location-date"><i class="fa fa-clock-o" aria-hidden="true"></i> {{now}}</span>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      结算状态
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            结算状态
+    <div class="panel-body">
+      <div style="width: 600px">
+        <div class="row">
+          <div class="col-xs-10 text-info">{{detail.status}}: {{detail.amount}}</div>
         </div>
-        <div class="panel-body">
-            <div style="width: 600px">
-                <div class="row">
-                    <div class="col-xs-10 text-info">{{detail.status}}: {{detail.amount}}</div>
-                </div>
-                <div class="row" ng-show="detail.status != '已打款'">
-                    <div class="col-xs-12">
-                        <button class="btn btn-success" ng-click="onCheck(1)">到账确认</button>
-                        <button class="btn btn-warning" ng-click="onCheck(2)">标记为打款异常</button>
-                    </div>
-                </div>
-            </div>
+        <div class="row" ng-show="detail.status != '已打款'">
+          <div class="col-xs-12">
+            <button class="btn btn-success" ng-click="onCheck(1)">到账确认</button>
+            <button class="btn btn-warning" ng-click="onCheck(2)">标记为打款异常</button>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            账户信息
-        </div>
-        <div class="panel-body">
-            <div style="width: 600px">
-                <div class="row">
-                    <div class="col-xs-3 text-right">订单号:</div>
-                    <div class="col-xs-6">{{detail.order_no}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">账户所有人:</div>
-                    <div class="col-xs-6">{{detail.real_name}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">手机号:</div>
-                    <div class="col-xs-6">{{detail.telphone}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">账户余额:</div>
-                    <div class="col-xs-6">{{detail.account_balance}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">提现金额:</div>
-                    <div class="col-xs-6">{{detail.amount}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">提现申请日期:</div>
-                    <div class="col-xs-6">{{detail.createtime}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">提现操作人:</div>
-                    <div class="col-xs-6">{{detail.nickname}}</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-3 text-right">负责客服:</div>
-                    <div class="col-xs-6">{{detail.customer_service_name}}</div>
-                </div>
-            </div>
-        </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      账户信息
     </div>
+    <div class="panel-body">
+      <div style="width: 600px">
+        <div class="row">
+          <div class="col-xs-3 text-right">账户所有人:</div>
+          <div class="col-xs-6">{{detail.real_name}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 text-right">手机号:</div>
+          <div class="col-xs-6">{{detail.telphone}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 text-right">账户余额:</div>
+          <div class="col-xs-6">{{detail.account_balance}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 text-right">提现余额:</div>
+          <div class="col-xs-6">{{detail.amount}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 text-right">提现申请日期:</div>
+          <div class="col-xs-6">{{detail.createtime}}</div>
+        </div>
+        <div class="row" ng-if="detail.bank_types == '支付宝'">
+          <div class="col-xs-3 text-right">提现账户:</div>
+          <div class="col-xs-6">
+            <span>{{detail.alipay_info}} 【{{detail.bank_types}}】</span>
+          </div>
+        </div>
+        <div ng-if="detail.bank_types != '支付宝'">
+          <div class="row">
+            <div class="col-xs-3 text-right">提现账户:</div>
+            <div class="col-xs-6"> {{detail.bank_card}} 【{{detail.bank_name}}】</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 text-right">开户人:</div>
+            <div class="col-xs-6">{{detail.bank_username}}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3 text-right">开户行:</div>
+            <div class="col-xs-6">{{detail.bank_branch}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3 text-right">历史提现记录:</div>
+          <div class="col-xs-6">
+            <p ng-repeat="x in detail.history">{{x.amount}} 【{{x.createtime}}】</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

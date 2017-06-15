@@ -9,10 +9,11 @@
 </head>
 
 <body>
-  <div id="content">
+  <div id="content" style="display: none;">
     <div v-if="!isSuccess">
       {{errMsg}}
     </div>
+
     <div v-else-if="type === 'course'" class="course">
       <div class="banner">
         <img :src="rsm.course_img" alt="">
