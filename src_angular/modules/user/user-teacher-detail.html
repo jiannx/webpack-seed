@@ -98,10 +98,24 @@
                     <div class="row">
                         <div class="col-xs-3 text-right">评判指标：</div>
                         <div class="col-xs-8">
-                            发音、语音语调 {{pronunciation}}
-                            <br/>对教材熟练度 {{teaching_material}}
-                            <br/>对教育向往度 {{yearning_degree}}
-                            <br/>授课用心度 {{intentions}}
+                            <table>
+                                <tr>
+                                    <td style="width: 150px;">发音、语音语调</td>
+                                    <td>{{detail.members_teacher_star.pronunciation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>经验与教材</td>
+                                    <td>{{detail.members_teacher_star.teaching_material}}</td>
+                                </tr>
+                                <tr>
+                                    <td>课程定位清晰度</td>
+                                    <td>{{detail.members_teacher_star.yearning_degree}}</td>
+                                </tr>
+                                <tr>
+                                    <td>授课用心度</td>
+                                    <td>{{detail.members_teacher_star.intentions}}</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -190,7 +204,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-3 col-xs-offset-3">对教材熟练度</div>
+                <div class="col-xs-3 col-xs-offset-3">经验与教材</div>
                 <div class="col-xs-3">
                     <div class="input-group input-sm">
                         <input type="text" class="form-control input-sm" ng-model="starApplyData.teaching_material" ng-change="onScoreChange()" placeholder="0-5">
@@ -199,7 +213,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-3 col-xs-offset-3">对教育向往度</div>
+                <div class="col-xs-3 col-xs-offset-3">课程定位清晰度</div>
                 <div class="col-xs-3">
                     <div class="input-group input-sm">
                         <input type="text" class="form-control input-sm" ng-model="starApplyData.yearning_degree" ng-change="onScoreChange()" placeholder="0-5">
