@@ -80,8 +80,11 @@ let vm = new Vue({
         }
       }, 'json');
     }
+    document.getElementById('content').style.display = 'block';
+    // console.log('create');
   },
   updated: function() {
+    // console.log('show');
     document.getElementById('content').style.display = 'block';
   },
   methods: {

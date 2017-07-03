@@ -27,7 +27,7 @@
       账户信息
     </div>
     <div class="panel-body">
-      <div style="width: 600px">
+      <div style="width: 700px">
         <div class="row">
           <div class="col-xs-3 text-right">账户所有人:</div>
           <div class="col-xs-6">{{detail.real_name}}</div>
@@ -70,8 +70,8 @@
         </div>
         <div class="row">
           <div class="col-xs-3 text-right">历史提现记录:</div>
-          <div class="col-xs-6">
-            <p ng-repeat="x in detail.history">{{x.amount}} 【{{x.createtime}}】</p>
+          <div class="col-xs-9">
+            <p ng-repeat="x in detail.history">{{x.createtime}}&nbsp;&nbsp;&nbsp;&nbsp;金额：{{x.amount}}&nbsp;&nbsp;&nbsp;&nbsp;{{x.cash_account}}</p>
           </div>
         </div>
       </div>

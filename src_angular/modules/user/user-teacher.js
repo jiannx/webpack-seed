@@ -7,7 +7,7 @@ app.controller('teacherListCtrl', function($scope, $state, request, neDialog, ne
   let grid = null;
   let def = {
     real_name: '',
-    telephone: '',
+    telphone: '',
     province: '',
     city: '',
     area: '',
