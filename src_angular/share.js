@@ -89,7 +89,7 @@ let vm = new Vue({
     open: function() {
       let _this = this;
       if (!url) {
-        alert('url 为空');
+        alert('app url 为空');
         return;
       }
       let ifr = document.createElement('iframe');
@@ -97,7 +97,7 @@ let vm = new Vue({
       ifr.style.display = 'none';
       document.body.appendChild(ifr);
       window.setTimeout(function() {
-        alert('打开失败：' + ifr.src);
+        // alert('打开失败：' + ifr.src);
         document.body.removeChild(ifr);
         _this.download();
       }, 1000);
@@ -108,10 +108,10 @@ let vm = new Vue({
       let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; // android终端
       let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); // ios终端
       if (isAndroid) {
-        // window.location = 'http://www.baidu.com';
+        window.location = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.xupei.motherasked';
       }
       if (isiOS) {
-        // window.location = 'http://www.baidu.com';
+        window.location = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.xupei.motherasked';
       }
     },
     // 跳转到登陆页面
