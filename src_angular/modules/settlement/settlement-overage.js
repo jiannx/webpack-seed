@@ -40,7 +40,6 @@ app.controller('settleOverageCtrl', function($scope, $state, $rootScope, request
   request('courseExamine').success((res) => {
     $scope.examineList = res.rsm.info;
   });
-  
 
   $scope.onSearch = function() {
     if ($scope.createTime.startDate) {
